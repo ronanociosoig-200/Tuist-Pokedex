@@ -17,6 +17,9 @@ jobs:
           name: Install Tuist
           command: curl -Ls https://install.tuist.io | bash
       - run: 
+          name: Generate Project
+          command: tuist generate
+      - run: 
           name: Build Project
           command: xcodebuild -list
 
