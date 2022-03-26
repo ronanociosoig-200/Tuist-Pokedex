@@ -10,13 +10,13 @@ jobs:
     macos: 
       xcode: 13.2.1
 
-      steps: 
-        - checkout
-        - run: gem install cocoapods
-        - run: 
-            name: Install CocoaPods
-            command: pod install
-        - run: 
+    steps: 
+      - checkout
+      - run: gem install cocoapods
+      - run: 
+          name: Install Tuist
+          command: curl -Ls https://install.tuist.io | bash
+      - run: 
           name: Build Project
           command: xcodebuild -list
 
