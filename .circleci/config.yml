@@ -20,24 +20,7 @@ jobs:
           name: Build Project
           command: xcodebuild -list
 
-  install_tuist:
-    steps:
-      - run:
-          name: Create tuist checksum file
-          command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
-      - restore_cache:
-          name: Restore ~/.tuist
-          keys:
-            - cornershop-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
-            - cornershop-tuist-{{ checksum ".tuist-version" }}
-      - run:
-          name: Installing Tuist
-          command: |
-            bash <(curl -Ls https://install.tuist.io)
-
 workflows: 
   build-project:
-    jobs:
-      - install_tuist 
+    jobs: 
       - build
-
