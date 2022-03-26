@@ -1,0 +1,43 @@
+# .circleci/config.yml
+
+version: 2.1
+
+orbs:
+  macos: circleci/macos@2.1.0
+
+jobs: 
+  build: 
+    macos: 
+      xcode: 13.2.1
+
+      steps: 
+        - checkout
+        - run: gem install cocoapods
+        - run: 
+            name: Install CocoaPods
+            command: pod install
+        - run: 
+          name: Build Project
+          command: xcodebuild -list
+
+  install_tuist:
+    steps:
+      - run:
+          name: Create tuist checksum file
+          command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - cornershop-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+            - cornershop-tuist-{{ checksum ".tuist-version" }}
+      - run:
+          name: Installing Tuist
+          command: |
+            bash <(curl -Ls https://install.tuist.io)
+
+workflows: 
+  build-project:
+    jobs:
+      - install_tuist 
+      - build
+
