@@ -25,8 +25,11 @@ jobs:
           name: Tuist Build
           command: tuist build 
       - run: 
-          name: Tuist Test
-          command: tuist test --device "iPhone 11" --os 15.2
+          name: Tuist Test Backpack UI
+          command: tuist test BackpackUITests --device "iPhone 11" --os 15.2
+      - run:
+          name: Tuist Test Catch UI
+          command: tuist test CatchUITests --device "iPhone 11" --os 15.2   
 
 workflows: 
   build-project:
