@@ -39,6 +39,12 @@ jobs:
       - run:
           name: Run Tuist Test Home UI
           command: tuist test HomeUITests --device "iPhone 11" --os 15.2 
+      - run:
+          name: Run Tuist Test Common
+          command: tuist test CommonTests --device "iPhone 11" --os 15.2 
+      - run:
+          name: Run Tuist Test NetworkingKit
+          command: tuist test NetworkingKitTests --device "iPhone 11" --os 15.2    
       - run: 
           name: Run Tuist Pokedex Tests  
           command: tuist test Pokedex --device "iPhone 11" --os 15.2    
