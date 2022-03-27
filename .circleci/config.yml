@@ -26,7 +26,7 @@ jobs:
           command: tuist build 
       - run: 
           name: Tuist Test
-          command: tuist test
+          command: tuist test --device "iPhone 11" --os 15.2
 
 workflows: 
   build-project:
