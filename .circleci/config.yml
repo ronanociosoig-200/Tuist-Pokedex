@@ -24,7 +24,7 @@ jobs:
           command: tuist generate
       - run: 
           name: Build Project
-          command: xcodebuild -list
+          command: tuist build 
 
 workflows: 
   build-project:
