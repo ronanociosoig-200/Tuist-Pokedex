@@ -17,6 +17,9 @@ jobs:
           name: Install Tuist
           command: curl -Ls https://install.tuist.io | bash
       - run: 
+          name: Fetch Dependencies
+          command: tuist dependencies fetch   
+      - run: 
           name: Generate Project
           command: tuist generate
       - run: 
