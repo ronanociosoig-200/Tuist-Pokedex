@@ -12,7 +12,6 @@ jobs:
 
     steps: 
       - checkout
-      - run: gem install cocoapods
       - run: 
           name: Install Tuist
           command: curl -Ls https://install.tuist.io | bash
@@ -20,11 +19,14 @@ jobs:
           name: Fetch Dependencies
           command: tuist dependencies fetch   
       - run: 
-          name: Generate Project
+          name: Tuist Generate Project
           command: tuist generate
       - run: 
-          name: Build Project
+          name: Tuist Build
           command: tuist build 
+      - run: 
+          name: Tuist Test
+          command: tuist test --device "iPhone 11" --os 15.2
 
 workflows: 
   build-project:
