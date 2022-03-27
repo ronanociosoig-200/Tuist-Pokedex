@@ -10,34 +10,23 @@ jobs:
     macos: 
       xcode: 13.2.1
 
-      steps: 
-        - checkout
-        - run: gem install cocoapods
-        - run: 
-            name: Install CocoaPods
-            command: pod install
-        - run: 
+    steps: 
+      - checkout
+      - run: gem install cocoapods
+      - run: 
+          name: Install Tuist
+          command: curl -Ls https://install.tuist.io | bash
+      - run: 
+          name: Fetch Dependencies
+          command: tuist dependencies fetch   
+      - run: 
+          name: Generate Project
+          command: tuist generate
+      - run: 
           name: Build Project
-          command: xcodebuild -list
-
-  install_tuist:
-    steps:
-      - run:
-          name: Create tuist checksum file
-          command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
-      - restore_cache:
-          name: Restore ~/.tuist
-          keys:
-            - cornershop-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
-            - cornershop-tuist-{{ checksum ".tuist-version" }}
-      - run:
-          name: Installing Tuist
-          command: |
-            bash <(curl -Ls https://install.tuist.io)
+          command: tuist build 
 
 workflows: 
   build-project:
-    jobs:
-      - install_tuist 
+    jobs: 
       - build
-
