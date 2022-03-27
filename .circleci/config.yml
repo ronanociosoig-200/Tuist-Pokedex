@@ -26,10 +26,10 @@ jobs:
           command: tuist build 
       - run: 
           name: Run Tuist Test Backpack UI
-          command: tuist test BackpackUITests --device "iPhone 11" --os 15.2
+          command: tuist test BackpackUI --device "iPhone 11" --os 15.2
       - run:
           name: Run Tuist Test Catch UI
-          command: tuist test CatchUITests --device "iPhone 11" --os 15.2  
+          command: tuist test CatchUI --device "iPhone 11" --os 15.2  
       - run:
           name: Run Tuist Test Detail
           command: tuist test Detail --device "iPhone 11" --os 15.2 
@@ -38,13 +38,13 @@ jobs:
           command: tuist test Haneke --device "iPhone 11" --os 15.2 
       - run:
           name: Run Tuist Test Home UI
-          command: tuist test HomeUITests --device "iPhone 11" --os 15.2 
+          command: tuist test HomeUI --device "iPhone 11" --os 15.2 
       - run:
           name: Run Tuist Test Common
-          command: tuist test CommonTests --device "iPhone 11" --os 15.2 
+          command: tuist test Common --device "iPhone 11" --os 15.2 
       - run:
           name: Run Tuist Test NetworkingKit
-          command: tuist test NetworkingKitTests --device "iPhone 11" --os 15.2    
+          command: tuist test NetworkKit --device "iPhone 11" --os 15.2    
       - run: 
           name: Run Tuist Pokedex Tests  
           command: tuist test Pokedex --device "iPhone 11" --os 15.2    
