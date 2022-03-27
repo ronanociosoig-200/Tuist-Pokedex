@@ -5,7 +5,8 @@ import ProjectDescriptionHelpers
 
 // Creates our project using a helper function defined in ProjectDescriptionHelpers
 let project = Project.app(name: "Pokedex",
-                          platform: .iOS, externalDependencies: ["JGProgressHUD"],
+                          platform: .iOS,
+                          externalDependencies: ["JGProgressHUD"],
                           targetDependancies: [],
                           moduleTargets: [makeHanekeModule(),
                                           makeHomeModule(),
@@ -29,7 +30,7 @@ func makeHomeModule() -> Module {
     return Module(name: "HomeUI",
                   path: "Home",
                   frameworkDependancies: [.target(name: "Common")],
-                  exampleDependencies: [.package(product: "JGProgressHUD")],
+                  exampleDependencies: [.external(name: "JGProgressHUD")],
                   frameworkResources: ["Sources/**/*.storyboard", "Resources/**"],
                   exampleResources: ["Resources/**"],
                   testResources: [])
@@ -59,7 +60,7 @@ func makeCatchModule() -> Module {
     Module(name: "CatchUI",
            path: "Catch",
            frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
-           exampleDependencies: [.package(product: "JGProgressHUD"), .target(name: "NetworkKit")],
+           exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
            frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
            testResources: [])
