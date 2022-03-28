@@ -17,19 +17,40 @@ jobs:
           command: curl -Ls https://install.tuist.io | bash
       - run: 
           name: Fetch Dependencies
-          command: tuist dependencies fetch   
+          command: tuist dependencies fetch  
+      - run: 
+          name: Tuist Cache Warm
+          command: tuist cache warm 
       - run: 
           name: Tuist Generate Project
           command: tuist generate
       - run: 
-          name: Tuist Build
+          name: Run Tuist Build
           command: tuist build 
       - run: 
-          name: Tuist Test Backpack UI
-          command: tuist test BackpackUITests --device "iPhone 11" --os 15.2
+          name: Run Tuist Test Backpack UI
+          command: tuist test BackpackUI --device "iPhone 11" --os 15.2
       - run:
-          name: Tuist Test Catch UI
-          command: tuist test CatchUITests --device "iPhone 11" --os 15.2   
+          name: Run Tuist Test Catch UI
+          command: tuist test CatchUI --device "iPhone 11" --os 15.2  
+      - run:
+          name: Run Tuist Test Detail
+          command: tuist test Detail --device "iPhone 11" --os 15.2 
+      - run:
+          name: Run Tuist Test Haneke
+          command: tuist test Haneke --device "iPhone 11" --os 15.2 
+      - run:
+          name: Run Tuist Test Home UI
+          command: tuist test HomeUI --device "iPhone 11" --os 15.2 
+      - run:
+          name: Run Tuist Test Common
+          command: tuist test Common --device "iPhone 11" --os 15.2 
+      - run:
+          name: Run Tuist Test NetworkingKit
+          command: tuist test NetworkKit --device "iPhone 11" --os 15.2    
+      - run: 
+          name: Run Tuist Pokedex Tests  
+          command: tuist test Pokedex --device "iPhone 11" --os 15.2    
 
 workflows: 
   build-project:
