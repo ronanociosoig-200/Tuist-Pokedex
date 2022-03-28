@@ -2,8 +2,29 @@
 
 version: 2.1
 
+parameters:
+  xcode_version:
+    default: "13.2.1"
+    type: string
+  run-build-and-test-CatchUI:
+    type: boolean
+    default: false
+  run-build-and-test-BackpackUI:
+    type: boolean
+    default: false
+  run-build-and-test-DetailUI:
+    type: boolean
+    default: false
+  run-build-and-test-HomeUI:
+    type: boolean
+    default: false
+  run-build-and-test-Pokedex:
+    type: boolean
+    default: false
+
 orbs:
   macos: circleci/macos@2.1.0
+  path-filtering: circleci/path-filtering@0.1.1
 
 commands:
   prepare_source:
@@ -33,6 +54,13 @@ commands:
           name: Installing Tuist
           command: |
             bash <(curl -Ls https://install.tuist.io)
+      - save_cache:
+          name: Save ~/.tuist
+          key: cornershop-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+          paths:
+            - ~/.tuist/Cache
+            - ~/.tuist/Versions
+
   run_tests_for_each_module:
     steps: 
       - run: 
@@ -87,10 +115,12 @@ commands:
       - run: 
           name: Build Pokedex App
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+
+          
 jobs: 
   build: 
     macos: 
-      xcode: 13.2.1
+      xcode: <<pipeline.parameters.xcode_version>>
 
     steps: 
       - checkout
@@ -115,6 +145,17 @@ jobs:
       #    command: tuist build    
 
 workflows: 
+  # build-and-test-backpack: 
+  #  when: << pipeline.parameters.run-build-service-1-job >>
+  #    - jobs: version
+  #always_run:
+   # jobs: 
+  #    - path-filtering/filter:
+  #      name: check-updated-files
+  #      mapping: |
+  #        Features/Detail/.* run-build-and-test-DetailUI true
+  #        Features/Backpack/.* run-build-and-test-BackpackUI true
+          
   build-project:
     jobs: 
       - build
