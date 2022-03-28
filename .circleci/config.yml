@@ -69,7 +69,24 @@ commands:
       - run: 
           name: Build Catch UI Example App
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme CatchUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
-
+      - run:
+          name: Build Home UI Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme HomeUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build Backpack UI Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme BackpackUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build Haneke Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme HanekeExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build Detail Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme DetailExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build NetworkKit Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme NetworkKitExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build Pokedex App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
 jobs: 
   build: 
     macos: 
