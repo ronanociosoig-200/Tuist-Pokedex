@@ -5,28 +5,36 @@ version: 2.1
 orbs:
   macos: circleci/macos@2.1.0
 
-jobs: 
-  build: 
-    macos: 
-      xcode: 13.2.1
-
-    steps: 
+commands:
+  prepare_source:
+    description: "Checkout source using cache if available"
+    steps:
+      - restore_cache:
+          keys:
+            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - source-v1-{{ .Branch }}-
+            - source-v1-
       - checkout
-      - run: 
-          name: Install Tuist
-          command: curl -Ls https://install.tuist.io | bash
-      - run: 
-          name: Fetch Dependencies
-          command: tuist dependencies fetch  
-      - run: 
-          name: Tuist Cache Warm
-          command: tuist cache warm 
-      - run: 
-          name: Tuist Generate Project
-          command: tuist generate
-      - run: 
-          name: Run Tuist Build
-          command: tuist build 
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"  
+  install_tuist:
+    steps:
+      - run:
+          name: Create tuist checksum file
+          command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum ".tuist-version" }}
+      - run:
+          name: Installing Tuist
+          command: |
+            bash <(curl -Ls https://install.tuist.io)
+  run_tests_for_each_module:
+    steps: 
       - run: 
           name: Run Tuist Test Backpack UI
           command: tuist test BackpackUI --device "iPhone 11" --os 15.2
@@ -50,7 +58,44 @@ jobs:
           command: tuist test NetworkKit --device "iPhone 11" --os 15.2    
       - run: 
           name: Run Tuist Pokedex Tests  
-          command: tuist test Pokedex --device "iPhone 11" --os 15.2    
+          command: tuist test Pokedex --device "iPhone 11" --os 15.2  
+
+  run_tuist_tests: 
+    steps: 
+      - run: tuist test
+
+  build_example_apps:
+    steps:
+      - run: 
+          name: Build Catch UI Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme CatchUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+
+jobs: 
+  build: 
+    macos: 
+      xcode: 13.2.1
+
+    steps: 
+      - checkout
+      - install_tuist
+      #- run: 
+      #    name: Install Tuist
+      #    command: curl -Ls https://install.tuist.io | bash
+      - run: 
+          name: Fetch Dependencies
+          command: tuist dependencies fetch  
+      - run: 
+          name: Tuist Cache Warm
+          command: tuist cache warm 
+      - run: 
+          name: Tuist Generate Project
+          command: tuist generate
+
+      - build_example_apps
+
+      #- run: 
+      #    name: Run Tuist Build
+      #    command: tuist build    
 
 workflows: 
   build-project:
