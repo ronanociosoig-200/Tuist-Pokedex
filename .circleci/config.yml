@@ -42,7 +42,6 @@ commands:
             - ".git"  
   install_tuist:
     steps:
-      - checkout
       - run:
           name: Create tuist checksum file
           command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
@@ -140,6 +139,7 @@ jobs:
       xcode: <<pipeline.parameters.xcode_version>>
 
     steps: 
+      - checkout
       - install_tuist    
       - setup_tuist
       - build_example_apps 
