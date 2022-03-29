@@ -50,13 +50,25 @@ commands:
           keys:
             - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
             - source-tuist-{{ checksum ".tuist-version" }}
+      - checkout
       - run:
           name: Installing Tuist
           command: |
             bash <(curl -Ls https://install.tuist.io)
+  setup_tuist:
+    steps: 
+      - run: 
+          name: Fetch Dependencies
+          command: tuist dependencies fetch  
+      - run: 
+          name: Tuist Cache Warm
+          command: tuist cache warm 
+      - run: 
+          name: Tuist Generate Project
+          command: tuist generate
       - save_cache:
           name: Save ~/.tuist
-          key: cornershop-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+          key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
           paths:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
@@ -118,32 +130,24 @@ commands:
 
           
 jobs: 
+  tuist_install_cache: 
+    macos:
+      xcode: <<pipeline.parameters.xcode_version>>
+    steps: 
+      - install_tuist    
+      - setup_tuist
   build: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
 
     steps: 
-      - checkout
-      - install_tuist
-      #- run: 
-      #    name: Install Tuist
-      #    command: curl -Ls https://install.tuist.io | bash
-      - run: 
-          name: Fetch Dependencies
-          command: tuist dependencies fetch  
-      - run: 
-          name: Tuist Cache Warm
-          command: tuist cache warm 
-      - run: 
-          name: Tuist Generate Project
-          command: tuist generate
+      - build_example_apps 
 
-      - build_example_apps
-
-      #- run: 
-      #    name: Run Tuist Build
-      #    command: tuist build    
-
+  tuist_test_modules: 
+    macos: 
+      xcode: <<pipeline.parameters.xcode_version>>
+    steps: 
+      - run_tuist_tests
 workflows: 
   # build-and-test-backpack: 
   #  when: << pipeline.parameters.run-build-service-1-job >>
@@ -158,4 +162,6 @@ workflows:
           
   build-project:
     jobs: 
+      - tuist_install_cache
       - build
+      - tuist_test_modules
