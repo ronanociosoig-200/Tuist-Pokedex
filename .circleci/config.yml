@@ -128,7 +128,6 @@ commands:
           name: Build Pokedex App
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
 
-          
 jobs: 
   tuist_install_cache: 
     macos:
@@ -141,7 +140,10 @@ jobs:
       xcode: <<pipeline.parameters.xcode_version>>
 
     steps: 
+      - install_tuist    
+      - setup_tuist
       - build_example_apps 
+      - run_tuist_tests
 
   tuist_test_modules: 
     macos: 
@@ -160,8 +162,8 @@ workflows:
   #        Features/Detail/.* run-build-and-test-DetailUI true
   #        Features/Backpack/.* run-build-and-test-BackpackUI true
           
+          # - tuist_install_cache
+          # - tuist_test_modules
   build-project:
     jobs: 
-      - tuist_install_cache
       - build
-      - tuist_test_modules
