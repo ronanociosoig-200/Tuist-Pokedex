@@ -42,6 +42,7 @@ commands:
             - ".git"  
   install_tuist:
     steps:
+      - checkout
       - run:
           name: Create tuist checksum file
           command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
@@ -50,7 +51,6 @@ commands:
           keys:
             - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
             - source-tuist-{{ checksum ".tuist-version" }}
-      - checkout
       - run:
           name: Installing Tuist
           command: |
