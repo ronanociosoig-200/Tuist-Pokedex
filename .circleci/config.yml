@@ -2,19 +2,60 @@
 
 version: 2.1
 
+parameters:
+  xcode_version:
+    default: "13.2.1"
+    type: string
+  run-build-and-test-CatchUI:
+    type: boolean
+    default: false
+  run-build-and-test-BackpackUI:
+    type: boolean
+    default: false
+  run-build-and-test-DetailUI:
+    type: boolean
+    default: false
+  run-build-and-test-HomeUI:
+    type: boolean
+    default: false
+  run-build-and-test-Pokedex:
+    type: boolean
+    default: false
+
 orbs:
   macos: circleci/macos@2.1.0
+  path-filtering: circleci/path-filtering@0.1.1
 
-jobs: 
-  build: 
-    macos: 
-      xcode: 13.2.1
-
-    steps: 
+commands:
+  prepare_source:
+    description: "Checkout source using cache if available"
+    steps:
+      - restore_cache:
+          keys:
+            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - source-v1-{{ .Branch }}-
+            - source-v1-
       - checkout
-      - run: 
-          name: Install Tuist
-          command: curl -Ls https://install.tuist.io | bash
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"  
+  install_tuist:
+    steps:
+      - run:
+          name: Create tuist checksum file
+          command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum ".tuist-version" }}
+      - run:
+          name: Installing Tuist
+          command: |
+            bash <(curl -Ls https://install.tuist.io)
+  setup_tuist:
+    steps: 
       - run: 
           name: Fetch Dependencies
           command: tuist dependencies fetch  
@@ -24,9 +65,15 @@ jobs:
       - run: 
           name: Tuist Generate Project
           command: tuist generate
-      - run: 
-          name: Run Tuist Build
-          command: tuist build 
+      - save_cache:
+          name: Save ~/.tuist
+          key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+          paths:
+            - ~/.tuist/Cache
+            - ~/.tuist/Versions
+
+  run_tests_for_each_module:
+    steps: 
       - run: 
           name: Run Tuist Test Backpack UI
           command: tuist test BackpackUI --device "iPhone 11" --os 15.2
@@ -50,9 +97,74 @@ jobs:
           command: tuist test NetworkKit --device "iPhone 11" --os 15.2    
       - run: 
           name: Run Tuist Pokedex Tests  
-          command: tuist test Pokedex --device "iPhone 11" --os 15.2    
+          command: tuist test Pokedex --device "iPhone 11" --os 15.2  
 
+  run_tuist_tests: 
+    steps: 
+      - run: tuist test
+
+  build_example_apps:
+    steps:
+      - run: 
+          name: Build Catch UI Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme CatchUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run:
+          name: Build Home UI Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme HomeUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build Backpack UI Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme BackpackUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build Haneke Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme HanekeExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build Detail Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme DetailExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build NetworkKit Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme NetworkKitExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+      - run: 
+          name: Build Pokedex App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2'
+
+jobs: 
+  tuist_install_cache: 
+    macos:
+      xcode: <<pipeline.parameters.xcode_version>>
+    steps: 
+      - install_tuist    
+      - setup_tuist
+  build: 
+    macos: 
+      xcode: <<pipeline.parameters.xcode_version>>
+
+    steps: 
+      - checkout
+      - install_tuist    
+      - setup_tuist
+      - build_example_apps 
+      # - run_tuist_tests
+      - run_tests_for_each_module
+
+  tuist_test_modules: 
+    macos: 
+      xcode: <<pipeline.parameters.xcode_version>>
+    steps: 
+      - run_tuist_tests
 workflows: 
+  # build-and-test-backpack: 
+  #  when: << pipeline.parameters.run-build-service-1-job >>
+  #    - jobs: version
+  #always_run:
+   # jobs: 
+  #    - path-filtering/filter:
+  #      name: check-updated-files
+  #      mapping: |
+  #        Features/Detail/.* run-build-and-test-DetailUI true
+  #        Features/Backpack/.* run-build-and-test-BackpackUI true
+          
+          # - tuist_install_cache
+          # - tuist_test_modules
   build-project:
     jobs: 
       - build
