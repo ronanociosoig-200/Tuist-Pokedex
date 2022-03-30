@@ -75,11 +75,14 @@ commands:
   run_tests_for_each_module:
     steps: 
       - run: 
-          name: Tuist Generate 
-          command: tuist generate --no-open
+          name: Tuist Generate BackpackUI
+          command: tuist generate BackpackUI --no-open
       - run: 
           name: Run Tuist Test Backpack UI
           command: tuist test BackpackUI --device "iPhone 11" --os 15.2
+      - run: 
+          name: Tuist Generate CatchUI
+          command: tuist generate CatchUI --no-open
       - run:
           name: Run Tuist Test Catch UI
           command: tuist test CatchUI --device "iPhone 11" --os 15.2  
