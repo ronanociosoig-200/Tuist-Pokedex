@@ -143,8 +143,8 @@ jobs:
       - install_tuist    
       - setup_tuist
       - build_example_apps 
-      - run_tuist_tests
-      # - run_tests_for_each_module
+      # - run_tuist_tests
+      - run_tests_for_each_module
 
   tuist_test_modules: 
     macos: 
