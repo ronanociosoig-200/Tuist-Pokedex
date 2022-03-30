@@ -58,13 +58,13 @@ commands:
     steps: 
       - run: 
           name: Fetch Dependencies
-          command: tuist dependencies fetch  
+          command: tuist fetch  
       - run: 
           name: Tuist Cache Warm
-          command: tuist cache warm 
+          command: tuist cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: tuist generate
+          command: tuist generate -xn
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
@@ -134,7 +134,7 @@ jobs:
     steps: 
       - install_tuist    
       - setup_tuist
-  build: 
+  build_and_test_modules: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
 
@@ -143,8 +143,8 @@ jobs:
       - install_tuist    
       - setup_tuist
       - build_example_apps 
-      # - run_tuist_tests
-      - run_tests_for_each_module
+      - run_tuist_tests
+      # - run_tests_for_each_module
 
   tuist_test_modules: 
     macos: 
@@ -167,4 +167,4 @@ workflows:
           # - tuist_test_modules
   build-project:
     jobs: 
-      - build
+      - build_and_test_modules
