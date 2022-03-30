@@ -75,6 +75,9 @@ commands:
   run_tests_for_each_module:
     steps: 
       - run: 
+          name: Tuist Generate 
+          command: tuist generate --no-open
+      - run: 
           name: Run Tuist Test Backpack UI
           command: tuist test BackpackUI --device "iPhone 11" --os 15.2
       - run:
