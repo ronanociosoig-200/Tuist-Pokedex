@@ -56,8 +56,8 @@ commands:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
           paths:
-            - ~/.tuist/Cache
-            - ~/.tuist/Versions
+            - /Users/distiller/.tuist/Cache
+            - /Users/distiller/.tuist/Versions
 
   run_tests_for_each_module:
     steps: 
