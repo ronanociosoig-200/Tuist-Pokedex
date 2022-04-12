@@ -136,6 +136,8 @@ jobs:
             - ".tuist-version"
             - ".swiftlint.yml"
             - ".package.resolved"
+            - ~/.tuist/Cache
+            - ~/.tuist/Versions
 
   build_modules: 
     macos: 
