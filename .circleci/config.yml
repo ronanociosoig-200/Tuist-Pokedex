@@ -56,8 +56,8 @@ commands:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
           paths:
-            - /Users/distiller/.tuist/Cache
-            - /Users/distiller/.tuist/Versions
+            - ~/.tuist/Cache
+            - ~/.tuist/Versions
 
   run_tests_for_each_module:
     steps: 
@@ -118,7 +118,7 @@ jobs:
   tuist_install_cache: 
     macos:
       xcode: <<pipeline.parameters.xcode_version>>
-    working_directory: /Users/distiller/project
+    # working_directory: /Users/distiller/project
     steps: 
       - checkout
       - install_tuist    
@@ -136,13 +136,13 @@ jobs:
             - ".tuist-version"
             - ".swiftlint.yml"
             - ".package.resolved"
-            - "/Users/distiller/.tuist/Cache/*"
-            - "/Users/distiller/.tuist/Versions/*"
+            - ~/.tuist/Cache/
+            - ~/.tuist/Versions/
 
   build_modules: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    working_directory: /Users/distiller/project
+    # working_directory: /Users/distiller/project
     steps: 
       - attach_workspace:
           at: /tmp/workspace
@@ -159,7 +159,7 @@ jobs:
   test_modules: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    working_directory: /Users/distiller/project
+    # working_directory: /Users/distiller/project
     steps: 
       - attach_workspace:
           at: /tmp/workspace
