@@ -126,6 +126,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
+            - "Tuist.lock"
             - "Project.swift"
             - "Pokedex.xcodeproj/*"
             - "Pokedex.xcworkspace/*"
