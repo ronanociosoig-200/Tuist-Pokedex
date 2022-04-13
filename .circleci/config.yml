@@ -123,8 +123,6 @@ jobs:
       - checkout
       - install_tuist    
       - setup_tuist
-      - run: pwd
-      - run: ls -la
       - persist_to_workspace:
           root: .
           paths:
@@ -149,6 +147,11 @@ jobs:
       xcode: <<pipeline.parameters.xcode_version>>
     # working_directory: /Users/distiller/project
     steps: 
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum ".tuist-version" }}
       - attach_workspace:
           at: /tmp/workspace
       - run:
