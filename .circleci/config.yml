@@ -177,7 +177,8 @@ jobs:
       - install_tuist    
       - setup_tuist
       - build_example_apps
-      - run_tests_for_each_module
+      # - run_tests_for_each_module
+      - run_tuist_tests
 
 workflows: 
   build-and-test:
