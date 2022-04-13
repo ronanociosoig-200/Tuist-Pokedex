@@ -168,17 +168,30 @@ jobs:
           command: |
               mv /tmp/workspace/* .
       - run_tests_for_each_module
+      
+  build_test_all:
+    macos: 
+      xcode: <<pipeline.parameters.xcode_version>>
+    steps:
+      - checkout
+      - install_tuist    
+      - setup_tuist
+      - build_example_apps
+      - run_tests_for_each_module
 
 workflows: 
   build-and-test:
     jobs: 
-      - tuist_install_cache
-      - build_modules:
-          requires:
-            - tuist_install_cache
-      - test_modules:
-          requires:
-            - build_modules
+      - build_test_all
+      # - tuist_install_cache
+      # - build_modules:
+      #    requires:
+      #      - tuist_install_cache
+      # - test_modules:
+      #    requires:
+      #      - build_modules
+
+
   # build-and-test-backpack: 
   #  when: << pipeline.parameters.run-build-service-1-job >>
   #    - jobs: version
