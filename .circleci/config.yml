@@ -148,6 +148,9 @@ jobs:
       xcode: <<pipeline.parameters.xcode_version>>
     # working_directory: /Users/distiller/project
     steps: 
+      - run:
+          name: Create tuist checksum file
+          command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
       - restore_cache:
           name: Restore ~/.tuist
           keys:
