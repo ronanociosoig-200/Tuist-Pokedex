@@ -148,6 +148,12 @@ jobs:
       xcode: <<pipeline.parameters.xcode_version>>
     # working_directory: /Users/distiller/project
     steps: 
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Restore derivedData folder
+          command: |
+              mv /tmp/workspace/* .
       - run:
           name: Create tuist checksum file
           command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
@@ -156,12 +162,6 @@ jobs:
           keys:
             - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
             - source-tuist-{{ checksum ".tuist-version" }}
-      - attach_workspace:
-          at: /tmp/workspace
-      - run:
-          name: Restore derivedData folder
-          command: |
-              mv /tmp/workspace/* .
       - build_example_apps
       - run_tests_for_each_module
       - persist_to_workspace:
