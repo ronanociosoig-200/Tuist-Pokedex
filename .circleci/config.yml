@@ -138,8 +138,11 @@ jobs:
             - ".tuist-version"
             - ".swiftlint.yml"
             - ".package.resolved"
-            - ".tuist/Cache/*"
-            - ".tuist/Versions/*"
+      - save_cache:
+          name: Save ~/.tuist
+          key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+          paths:
+            - ~/.tuist/Cache
 
   build_modules: 
     macos: 
@@ -153,6 +156,7 @@ jobs:
           command: |
               mv /tmp/workspace/* .
       - build_example_apps
+      - run_tests_for_each_module
       - persist_to_workspace:
           root: .
           paths:
@@ -179,8 +183,8 @@ jobs:
       - install_tuist    
       - setup_tuist
       - build_example_apps
-      # - run_tests_for_each_module
-      - run: pwd
+      - run_tests_for_each_module
+      # - run: pwd
       # - run_tuist_tests
 
 workflows: 
