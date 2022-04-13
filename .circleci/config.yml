@@ -154,7 +154,10 @@ jobs:
           name: Restore derivedData folder
           command: |
               mv /tmp/workspace/* .
-      - run: ls -la
+      - run:
+          name: Installing Tuist
+          command: |
+            bash <(curl -Ls https://install.tuist.io)
       #- run:
       #    name: Create tuist checksum file
       #    command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
