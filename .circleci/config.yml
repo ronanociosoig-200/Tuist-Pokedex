@@ -124,6 +124,7 @@ jobs:
       - install_tuist    
       - setup_tuist
       - run: pwd
+      - run: ls -la
       - persist_to_workspace:
           root: .
           paths:
@@ -137,8 +138,8 @@ jobs:
             - ".tuist-version"
             - ".swiftlint.yml"
             - ".package.resolved"
-            - ../.tuist/Cache/
-            - ../.tuist/Versions/
+            - ".tuist/Cache/*"
+            - ".tuist/Versions/*"
 
   build_modules: 
     macos: 
