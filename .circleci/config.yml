@@ -118,7 +118,7 @@ jobs:
   tuist_install_cache: 
     macos:
       xcode: <<pipeline.parameters.xcode_version>>
-    # working_directory: /Users/distiller/project
+    working_directory: /Users/distiller/project
     steps: 
       - checkout
       - install_tuist    
@@ -137,8 +137,8 @@ jobs:
             - ".tuist-version"
             - ".swiftlint.yml"
             - ".package.resolved"
-            - ~/.tuist/Cache/
-            - ~/.tuist/Versions/
+            - ../.tuist/Cache/
+            - ../.tuist/Versions/
 
   build_modules: 
     macos: 
