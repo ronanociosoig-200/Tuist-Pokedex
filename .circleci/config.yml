@@ -35,7 +35,7 @@ commands:
       - restore_cache:
           name: Restore ~/.tuist
           keys:
-            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist-{{ checksum ".tuist-version" }}
       - run:
           name: Installing Tuist
@@ -54,7 +54,7 @@ commands:
           command: tuist generate -xn
       - save_cache:
           name: Save ~/.tuist
-          key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+          key: source-tuist-{{ checksum "Tuist.lock" }}
           paths:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
@@ -139,7 +139,7 @@ jobs:
             - ".package.resolved"
       - save_cache:
           name: Save ~/.tuist
-          key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+          key: source-tuist-{{ checksum "Tuist.lock" }}
           paths:
             - ~/.tuist/Cache
 
@@ -161,7 +161,7 @@ jobs:
       - restore_cache:
           name: Restore ~/.tuist
           keys:
-            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist-{{ checksum ".tuist-version" }}
       - build_example_apps
       - run_tests_for_each_module
