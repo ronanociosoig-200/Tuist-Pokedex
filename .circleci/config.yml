@@ -123,6 +123,7 @@ jobs:
       - checkout
       - install_tuist    
       - setup_tuist
+      - run: pwd
       - persist_to_workspace:
           root: .
           paths:
@@ -178,16 +179,17 @@ jobs:
       - setup_tuist
       - build_example_apps
       # - run_tests_for_each_module
-      - run_tuist_tests
+      - run: pwd
+      # - run_tuist_tests
 
 workflows: 
   build-and-test:
     jobs: 
-      - build_test_all
-      # - tuist_install_cache
-      # - build_modules:
-      #    requires:
-      #      - tuist_install_cache
+      #- build_test_all
+      - tuist_install_cache
+      - build_modules:
+         requires:
+            - tuist_install_cache
       # - test_modules:
       #    requires:
       #      - build_modules
