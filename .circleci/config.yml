@@ -123,6 +123,7 @@ jobs:
       - checkout
       - install_tuist    
       - setup_tuist
+      - run: which tuist
       - persist_to_workspace:
           root: .
           paths:
@@ -136,7 +137,6 @@ jobs:
             - "scripts/*"
             - ".tuist-version"
             - ".swiftlint.yml"
-            - ".package.resolved"
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum "Tuist.lock" }}
@@ -151,7 +151,7 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run:
-          name: Restore derivedData folder
+          name: Restore all persisted workspace files
           command: |
               mv /tmp/workspace/* .
       - run:
@@ -167,7 +167,8 @@ jobs:
             - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist-{{ checksum ".tuist-version" }}
       - build_example_apps
-      - run_tests_for_each_module
+      - run_tuist_tests
+      # - run_tests_for_each_module
       - persist_to_workspace:
           root: .
           paths:
