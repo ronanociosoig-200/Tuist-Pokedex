@@ -35,8 +35,8 @@ class NetworkKitTests: XCTestCase {
             }, receiveValue: { data in
                 let length = data.count
                 let response = String(data: data, encoding: .utf8)
-                print("Response:\(String(describing: response))")
-                print("We have some data.: \(length)")
+                // print("Response:\(String(describing: response))")
+                // print("We have some data.: \(length)")
                 expectation.fulfill()
             })
             .store(in: &cancellables)
