@@ -27,7 +27,7 @@ orbs:
   path-filtering: circleci/path-filtering@0.1.1
 
 commands:
-  install_tuist:
+  restore_tuist_cache:
     steps:
       - run:
           name: Create tuist checksum file
@@ -36,22 +36,22 @@ commands:
           name: Restore ~/.tuist
           keys:
             - source-tuist-{{ checksum "Tuist.lock" }}
-            - source-tuist-{{ checksum ".tuist-version" }}
-      - run:
-          name: Installing Tuist
-          command: |
-            bash <(curl -Ls https://install.tuist.io)
-  setup_tuist:
+            - source-tuist-
+      #- run:
+      #    name: Installing Tuist
+      #    command: |
+      #      bash <(curl -Ls https://install.tuist.io)
+  setup_tuist_cache:
     steps: 
       - run: 
           name: Fetch Dependencies
-          command: tuist fetch  
+          command: tuist-bin/tuist fetch  
       - run: 
           name: Tuist Cache Warm
-          command: tuist cache warm -x
+          command: tuist-bin/tuist cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: tuist generate -xn
+          command: tuist-bin/tuist generate -xn
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum "Tuist.lock" }}
@@ -88,7 +88,7 @@ commands:
 
   run_tuist_tests: 
     steps: 
-      - run: tuist test
+      - run: tuist-bin/tuist test
 
   build_example_apps:
     steps:
@@ -115,15 +115,15 @@ commands:
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
 
 jobs: 
-  tuist_install_cache: 
+  tuist_setup_and_cache: 
     macos:
       xcode: <<pipeline.parameters.xcode_version>>
     working_directory: /Users/distiller/project
     steps: 
       - checkout
-      - install_tuist    
-      - setup_tuist
-      - run: which tuist
+      - restore_tuist_cache    
+      - setup_tuist_cache
+      - run: mv ".tuist-version" "tuist-version"
       - persist_to_workspace:
           root: .
           paths:
@@ -135,8 +135,9 @@ jobs:
             - "Derived/*"
             - "Features/*"
             - "scripts/*"
-            - ".tuist-version"
-            - ".swiftlint.yml"
+            - "tuist-bin/*"
+            - "tuist-version"
+          
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum "Tuist.lock" }}
@@ -154,10 +155,11 @@ jobs:
           name: Restore all persisted workspace files
           command: |
               mv /tmp/workspace/* .
-      - run:
-          name: Installing Tuist
-          command: |
-            bash <(curl -Ls https://install.tuist.io)
+      - run: ls -la
+      #- run:
+      #    name: Installing Tuist
+      #    command: |
+      #      bash <(curl -Ls https://install.tuist.io)
       #- run:
       #    name: Create tuist checksum file
       #    command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
@@ -166,6 +168,7 @@ jobs:
           keys:
             - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist-{{ checksum ".tuist-version" }}
+      - run: which tuist 
       - build_example_apps
       - run_tuist_tests
       # - run_tests_for_each_module
@@ -192,8 +195,8 @@ jobs:
       xcode: <<pipeline.parameters.xcode_version>>
     steps:
       - checkout
-      - install_tuist    
-      - setup_tuist
+      - retore_tuist_cache    
+      - setup_tuist_cache
       - build_example_apps
       # - run_tests_for_each_module
       # - run: pwd
@@ -203,10 +206,10 @@ workflows:
   build-and-test:
     jobs: 
       #- build_test_all
-      - tuist_install_cache
+      - tuist_setup_and_cache
       - build_modules:
          requires:
-            - tuist_install_cache
+            - tuist_setup_and_cache
       # - test_modules:
       #    requires:
       #      - build_modules
