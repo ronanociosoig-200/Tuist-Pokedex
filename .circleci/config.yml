@@ -36,7 +36,7 @@ commands:
           name: Restore ~/.tuist
           keys:
             - source-tuist-{{ checksum "Tuist.lock" }}
-            - source-tuist-{{ checksum ".tuist-version" }}
+            - source-tuist-
       - run:
           name: Installing Tuist
           command: |
@@ -58,6 +58,7 @@ commands:
           paths:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
+            - /usr/local/bin/tuist
 
   run_tests_for_each_module:
     steps: 
@@ -137,6 +138,7 @@ jobs:
             - "scripts/*"
             - ".tuist-version"
             - ".swiftlint.yml"
+            - ./*
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum "Tuist.lock" }}
@@ -154,10 +156,11 @@ jobs:
           name: Restore all persisted workspace files
           command: |
               mv /tmp/workspace/* .
-      - run:
-          name: Installing Tuist
-          command: |
-            bash <(curl -Ls https://install.tuist.io)
+      
+      #- run:
+      #    name: Installing Tuist
+      #    command: |
+      #      bash <(curl -Ls https://install.tuist.io)
       #- run:
       #    name: Create tuist checksum file
       #    command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
