@@ -27,7 +27,7 @@ orbs:
   path-filtering: circleci/path-filtering@0.1.1
 
 commands:
-  install_tuist:
+  restore_tuist_cache:
     steps:
       - run:
           name: Create tuist checksum file
@@ -41,7 +41,7 @@ commands:
       #    name: Installing Tuist
       #    command: |
       #      bash <(curl -Ls https://install.tuist.io)
-  setup_tuist:
+  setup_tuist_cache:
     steps: 
       - run: 
           name: Fetch Dependencies
@@ -115,14 +115,14 @@ commands:
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
 
 jobs: 
-  tuist_install_cache: 
+  tuist_setup_and_cache: 
     macos:
       xcode: <<pipeline.parameters.xcode_version>>
     working_directory: /Users/distiller/project
     steps: 
       - checkout
-      - install_tuist    
-      - setup_tuist
+      - restore_tuist_cache    
+      - setup_tuist_cache
       - run: mv ".tuist-version" "tuist-version"
       - persist_to_workspace:
           root: .
@@ -195,8 +195,8 @@ jobs:
       xcode: <<pipeline.parameters.xcode_version>>
     steps:
       - checkout
-      - install_tuist    
-      - setup_tuist
+      - retore_tuist_cache    
+      - setup_tuist_cache
       - build_example_apps
       # - run_tests_for_each_module
       # - run: pwd
@@ -206,10 +206,10 @@ workflows:
   build-and-test:
     jobs: 
       #- build_test_all
-      - tuist_install_cache
+      - tuist_setup_and_cache
       - build_modules:
          requires:
-            - tuist_install_cache
+            - tuist_setup_and_cache
       # - test_modules:
       #    requires:
       #      - build_modules
