@@ -156,7 +156,7 @@ jobs:
           name: Restore all persisted workspace files
           command: |
               mv /tmp/workspace/* .
-      
+      - run: ls -la
       #- run:
       #    name: Installing Tuist
       #    command: |
@@ -169,6 +169,7 @@ jobs:
           keys:
             - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist-{{ checksum ".tuist-version" }}
+      - run: which tuist 
       - build_example_apps
       - run_tuist_tests
       # - run_tests_for_each_module
