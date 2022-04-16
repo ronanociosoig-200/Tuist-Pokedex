@@ -58,6 +58,9 @@ commands:
           paths:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
+            - ./.tuist-bin/
+            - ./.tuist-version
+            - ./.swiftlint.yml
 
   run_tests_for_each_module:
     steps: 
@@ -88,7 +91,7 @@ commands:
 
   run_tuist_tests: 
     steps: 
-      - run: tuist-bin/tuist test
+      - run: ./.tuist-bin/tuist test
 
   build_example_apps:
     steps:
@@ -135,8 +138,7 @@ jobs:
             - "Derived/*"
             - "Features/*"
             - "scripts/*"
-            - "tuist-bin/*"
-            - "tuist-version"
+            # - "tuist-bin/*"
           
       - save_cache:
           name: Save ~/.tuist
@@ -167,8 +169,7 @@ jobs:
           name: Restore ~/.tuist
           keys:
             - source-tuist-{{ checksum "Tuist.lock" }}
-            - source-tuist-{{ checksum ".tuist-version" }}
-      - run: which tuist 
+            - source-tuist- 
       - build_example_apps
       - run_tuist_tests
       # - run_tests_for_each_module
