@@ -91,7 +91,7 @@ commands:
 
   run_tuist_tests: 
     steps: 
-      - run: ./.tuist-bin/tuist test
+      - run: .tuist-bin/tuist test
 
   build_example_apps:
     steps:
@@ -126,7 +126,7 @@ jobs:
       - checkout
       - restore_tuist_cache    
       - setup_tuist_cache
-      - run: mv ".tuist-version" "tuist-version"
+      # - run: mv ".tuist-version" "tuist-version"
       - persist_to_workspace:
           root: .
           paths:
@@ -170,6 +170,7 @@ jobs:
           keys:
             - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist- 
+      - run: ls -la
       - build_example_apps
       - run_tuist_tests
       # - run_tests_for_each_module
