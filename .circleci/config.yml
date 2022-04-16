@@ -45,13 +45,13 @@ commands:
     steps: 
       - run: 
           name: Fetch Dependencies
-          command: tuist-bin/tuist fetch  
+          command: .tuist-bin/tuist fetch  
       - run: 
           name: Tuist Cache Warm
-          command: tuist-bin/tuist cache warm -x
+          command: .tuist-bin/tuist cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: tuist-bin/tuist generate -xn
+          command: .tuist-bin/tuist generate -xn
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum "Tuist.lock" }}
