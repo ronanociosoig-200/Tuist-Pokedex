@@ -61,6 +61,19 @@ commands:
           paths:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
+  restore_workspace:
+    steps: 
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Restore derivedData folder
+          command: |
+              mv /tmp/workspace/* .
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - source-tuist-{{ checksum "Tuist.lock" }}
+            - source-tuist- 
 
   build_example_apps:
     steps:
@@ -142,7 +155,6 @@ jobs:
             - "Features/*"
             - "swiftlint.yml"
             - "scripts/*"
-            #- "tuist-version"
           
       - save_cache:
           name: Save ~/.tuist
@@ -153,31 +165,11 @@ jobs:
   build_modules: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    # working_directory: /Users/distiller/project
+    working_directory: /Users/distiller/project
     steps: 
-      - attach_workspace:
-          at: /tmp/workspace
-      - run:
-          name: Restore all persisted workspace files
-          command: |
-              mv /tmp/workspace/* .
-      # - run: ls -la
-      #- run:
-      #    name: Installing Tuist
-      #    command: |
-      #      bash <(curl -Ls https://install.tuist.io)
-      #- run:
-      #    name: Create tuist checksum file
-      #    command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
-      - restore_cache:
-          name: Restore ~/.tuist
-          keys:
-            - source-tuist-{{ checksum "Tuist.lock" }}
-            - source-tuist- 
+      - restore_workspace
       - run: mv "swiftlint.yml" ".swiftlint.yml"
       - build_example_apps
-      - run_tuist_tests
-      # - run_tests_for_each_module
       - persist_to_workspace:
           root: .
           paths:
@@ -186,15 +178,10 @@ jobs:
   test_modules: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    # working_directory: /Users/distiller/project
+    working_directory: /Users/distiller/project
     steps: 
-      - attach_workspace:
-          at: /tmp/workspace
-      - run:
-          name: Restore derivedData folder
-          command: |
-              mv /tmp/workspace/* .
-      - run_tests_for_each_module
+      - restore_workspace
+      - run_tuist_tests
       
   build_test_all:
     macos: 
@@ -204,21 +191,18 @@ jobs:
       - retore_tuist_cache    
       - setup_tuist_cache
       - build_example_apps
-      # - run_tests_for_each_module
-      # - run: pwd
       - run_tuist_tests
 
 workflows: 
   build-and-test:
     jobs: 
-      #- build_test_all
       - tuist_setup_and_cache
       - build_modules:
          requires:
             - tuist_setup_and_cache
-      # - test_modules:
-      #    requires:
-      #      - build_modules
+      - test_modules:
+         requires:
+            - build_modules
 
 
   # build-and-test-backpack: 
