@@ -141,7 +141,7 @@ jobs:
             - "Derived/*"
             - "Features/*"
             - "swiftlint.yml"
-            # - "tuist-bin/*"
+            - "scripts/*"
             #- "tuist-version"
           
       - save_cache:
