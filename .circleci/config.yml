@@ -64,10 +64,10 @@ commands:
 
   build_example_apps:
     steps:
-      - run: which swiftlint
       - run: 
           name: Install SwiftLint
           command: brew install swiftlint
+      - run: which swiftlint
       - run: 
           name: Build Catch UI Example App
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme CatchUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
