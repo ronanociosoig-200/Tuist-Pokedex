@@ -64,6 +64,7 @@ commands:
 
   build_example_apps:
     steps:
+      - run: which swiftlint
       - run: 
           name: Install SwiftLint
           command: brew install swiftlint
