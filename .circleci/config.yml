@@ -3,6 +3,9 @@
 version: 2.1
 
 parameters:
+  tuist_path: 
+    default: "~/.tuist/Versions/3.2.0"
+    type: string
   xcode_version:
     default: "13.2.1"
     type: string
@@ -37,32 +40,70 @@ commands:
           keys:
             - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist-
-      #- run:
-      #    name: Installing Tuist
-      #    command: |
-      #      bash <(curl -Ls https://install.tuist.io)
+      - run:
+          name: Installing Tuist
+          command: |
+            bash <(curl -Ls https://install.tuist.io)
   setup_tuist_cache:
     steps: 
       - run: 
           name: Fetch Dependencies
-          command: tuist-bin/tuist fetch  
+          command: tuist fetch  
       - run: 
           name: Tuist Cache Warm
-          command: tuist-bin/tuist cache warm -x
+          command: tuist cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: tuist-bin/tuist generate -xn
+          command: tuist generate -xn
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum "Tuist.lock" }}
           paths:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
-            - ./.tuist-bin/
-            - ./.tuist-version
-            - ./.swiftlint.yml
+  restore_workspace:
+    steps: 
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Restore derivedData folder
+          command: |
+              mv /tmp/workspace/* .
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - source-tuist-{{ checksum "Tuist.lock" }}
+            - source-tuist- 
 
-  run_tests_for_each_module:
+  build_example_apps:
+    steps:
+      - run: 
+          name: Install SwiftLint
+          command: brew install swiftlint
+      - run: which swiftlint
+      - run: 
+          name: Build Catch UI Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme CatchUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
+      - run:
+          name: Build Home UI Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme HomeUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
+      - run: 
+          name: Build Backpack UI Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme BackpackUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
+      - run: 
+          name: Build Haneke Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme HanekeExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
+      - run: 
+          name: Build Detail Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme DetailExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
+      - run: 
+          name: Build NetworkKit Example App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme NetworkKitExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
+      - run: 
+          name: Build Pokedex App
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
+
+  tests_for_each_module:
     steps: 
       - run:
           name: Run Tuist Test Haneke
@@ -91,32 +132,7 @@ commands:
 
   run_tuist_tests: 
     steps: 
-      - run: ./.tuist-bin/tuist test
-
-  build_example_apps:
-    steps:
-      - run: 
-          name: Build Catch UI Example App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme CatchUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
-      - run:
-          name: Build Home UI Example App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme HomeUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
-      - run: 
-          name: Build Backpack UI Example App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme BackpackUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
-      - run: 
-          name: Build Haneke Example App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme HanekeExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
-      - run: 
-          name: Build Detail Example App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme DetailExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
-      - run: 
-          name: Build NetworkKit Example App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme NetworkKitExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
-      - run: 
-          name: Build Pokedex App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
-
+      - run: <<pipeline.parameters.tuist_path>>/tuist test
 jobs: 
   tuist_setup_and_cache: 
     macos:
@@ -124,9 +140,9 @@ jobs:
     working_directory: /Users/distiller/project
     steps: 
       - checkout
-      - restore_tuist_cache    
+      - run: mv ".swiftlint.yml" "swiftlint.yml"
+      - restore_tuist_cache   
       - setup_tuist_cache
-      - run: mv ".tuist-version" "tuist-version"
       - persist_to_workspace:
           root: .
           paths:
@@ -137,8 +153,8 @@ jobs:
             - "Tuist/*"
             - "Derived/*"
             - "Features/*"
+            - "swiftlint.yml"
             - "scripts/*"
-            # - "tuist-bin/*"
           
       - save_cache:
           name: Save ~/.tuist
@@ -149,30 +165,11 @@ jobs:
   build_modules: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    # working_directory: /Users/distiller/project
+    working_directory: /Users/distiller/project
     steps: 
-      - attach_workspace:
-          at: /tmp/workspace
-      - run:
-          name: Restore all persisted workspace files
-          command: |
-              mv /tmp/workspace/* .
-      - run: ls -la
-      #- run:
-      #    name: Installing Tuist
-      #    command: |
-      #      bash <(curl -Ls https://install.tuist.io)
-      #- run:
-      #    name: Create tuist checksum file
-      #    command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
-      - restore_cache:
-          name: Restore ~/.tuist
-          keys:
-            - source-tuist-{{ checksum "Tuist.lock" }}
-            - source-tuist- 
+      - restore_workspace
+      - run: mv "swiftlint.yml" ".swiftlint.yml"
       - build_example_apps
-      - run_tuist_tests
-      # - run_tests_for_each_module
       - persist_to_workspace:
           root: .
           paths:
@@ -181,15 +178,10 @@ jobs:
   test_modules: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    # working_directory: /Users/distiller/project
+    working_directory: /Users/distiller/project
     steps: 
-      - attach_workspace:
-          at: /tmp/workspace
-      - run:
-          name: Restore derivedData folder
-          command: |
-              mv /tmp/workspace/* .
-      - run_tests_for_each_module
+      - restore_workspace
+      - run_tuist_tests
       
   build_test_all:
     macos: 
@@ -199,21 +191,18 @@ jobs:
       - retore_tuist_cache    
       - setup_tuist_cache
       - build_example_apps
-      # - run_tests_for_each_module
-      # - run: pwd
       - run_tuist_tests
 
 workflows: 
   build-and-test:
     jobs: 
-      #- build_test_all
       - tuist_setup_and_cache
       - build_modules:
          requires:
             - tuist_setup_and_cache
-      # - test_modules:
-      #    requires:
-      #      - build_modules
+      - test_modules:
+         requires:
+            - build_modules
 
 
   # build-and-test-backpack: 
