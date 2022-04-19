@@ -127,7 +127,7 @@ jobs:
     working_directory: /Users/distiller/project
     steps: 
       - checkout
-      # - run: mv ".tuist-bin" "tuist-bin"
+      - run: mv ".swiftlint.yml" "swiftlint.yml"
       - restore_tuist_cache   
       - setup_tuist_cache
       - persist_to_workspace:
@@ -140,7 +140,7 @@ jobs:
             - "Tuist/*"
             - "Derived/*"
             - "Features/*"
-            # - "scripts/*"
+            - "swiftlint.yml"
             # - "tuist-bin/*"
             #- "tuist-version"
           
@@ -174,7 +174,7 @@ jobs:
           keys:
             - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist- 
-      # - run: ls -la
+      - run: mv "swiftlint.yml" ".swiftlint.yml"
       - build_example_apps
       - run_tuist_tests
       # - run_tests_for_each_module
