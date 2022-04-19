@@ -65,6 +65,9 @@ commands:
   build_example_apps:
     steps:
       - run: 
+          name: Install SwiftLint
+          command: brew install swiftlint
+      - run: 
           name: Build Catch UI Example App
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme CatchUIExampleApp -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
       - run:
@@ -86,7 +89,7 @@ commands:
           name: Build Pokedex App
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -derivedDataPath ./derivedData
 
-  run_tests_for_each_module:
+  tests_for_each_module:
     steps: 
       - run:
           name: Run Tuist Test Haneke
