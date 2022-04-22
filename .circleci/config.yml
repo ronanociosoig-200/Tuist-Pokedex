@@ -188,7 +188,7 @@ jobs:
       xcode: <<pipeline.parameters.xcode_version>>
     steps:
       - checkout
-      - retore_tuist_cache    
+      - restore_tuist_cache    
       - setup_tuist_cache
       - build_example_apps
       - run_tuist_tests
@@ -196,13 +196,14 @@ jobs:
 workflows: 
   build-and-test:
     jobs: 
-      - tuist_setup_and_cache
-      - build_modules:
-         requires:
-            - tuist_setup_and_cache
-      - test_modules:
-         requires:
-            - build_modules
+      - build_test_all
+      #- tuist_setup_and_cache
+      #- build_modules:
+      #   requires:
+      #      - tuist_setup_and_cache
+      #- test_modules:
+      #   requires:
+      #      - build_modules
 
 
   # build-and-test-backpack: 
