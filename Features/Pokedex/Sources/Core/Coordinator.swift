@@ -14,6 +14,7 @@ import BackpackUI
 import CatchUI
 import HomeUI
 import Detail
+import os.log
 
 class Coordinator: Coordinating {
     let window: UIWindow
@@ -40,6 +41,8 @@ class Coordinator: Coordinating {
         HomeWireframe.prepare(viewController, actions: actions as HomeActions, dataProvider: dataProvider as HomeDataProvider)
         
         window.rootViewController = viewController
+        
+        os_log("Info: %s", log: Log.general, type: .info, "showHomeScene")
     }
     
     func showCatchScene() {
