@@ -192,7 +192,7 @@ jobs:
       - setup_tuist_cache
       - build_example_apps
       - run_tuist_tests
-
+      - run: tuist test
 workflows: 
   build-and-test:
     jobs: 
