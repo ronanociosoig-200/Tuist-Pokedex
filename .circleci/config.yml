@@ -43,11 +43,11 @@ commands:
       - run:
           name: Tuist check if installed
           command: |
-            [ ! -f ~/.tuist/Versions/3.2.0/tuisted ] && echo "Tuist is not installed"
+            [ ! -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Tuist is not installed"
       - run:
           name: Installing Tuist if not installed
           command: |
-            [ ! -f ~/.tuist/Versions/3.2.0/tuisted ] && bash <(curl -Ls https://install.tuist.io)
+            [ ! -f ~/.tuist/Versions/3.2.0/tuist ] && bash <(curl -Ls https://install.tuist.io)
   setup_tuist_cache:
     steps: 
       - run: 
