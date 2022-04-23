@@ -38,7 +38,7 @@ commands:
       - restore_cache:
           name: Restore ~/.tuist
           keys:
-            - source-tuist-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum "Tuist.lock" }}-
             - source-tuist-
       - run: ls -la ~/.tuist/Cache
       - run:
@@ -71,6 +71,7 @@ commands:
           key: source-tuist-{{ checksum "Tuist.lock" }}-{{ checksum "date" }}
           paths:
             - ~/.tuist/Cache
+            - ~/.tuist/Versions
   restore_workspace:
     steps: 
       - attach_workspace:
