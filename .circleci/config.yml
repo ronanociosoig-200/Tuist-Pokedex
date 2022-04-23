@@ -194,6 +194,7 @@ jobs:
       - restore_tuist_cache    
       - setup_tuist_cache
       - build_example_apps
+      - run: ls -la ~/.tuist/Caches/TestsCache/
       - run_tuist_tests
       - save_tuist_cache
       - run_tuist_tests
