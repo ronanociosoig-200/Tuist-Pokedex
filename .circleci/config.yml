@@ -41,9 +41,13 @@ commands:
             - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist-
       - run:
-          name: Installing Tuist
+          name: Tuist check if installed
           command: |
-            bash <(curl -Ls https://install.tuist.io)
+            [ ! -f ~/.tuist/Versions/3.2.0/tuisted ] && echo "Tuist is not installed"
+      - run:
+          name: Installing Tuist if not installed
+          command: |
+            [ ! -f ~/.tuist/Versions/3.2.0/tuisted ] && bash <(curl -Ls https://install.tuist.io)
   setup_tuist_cache:
     steps: 
       - run: 
