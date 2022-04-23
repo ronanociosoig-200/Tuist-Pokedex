@@ -40,11 +40,6 @@ commands:
           keys:
             - source-tuist-{{ checksum "Tuist.lock" }}
             - source-tuist-
-      - run: ls -la ~/.tuist/Versions/3.2.0
-      - run:
-          name: Tuist check if installed
-          command: |
-            [ ! -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Tuist is not installed" || echo "Tuist is installed"
       - run:
           name: Installing Tuist if not installed
           command: |
@@ -53,13 +48,13 @@ commands:
     steps: 
       - run: 
           name: Fetch Dependencies
-          command: tuist fetch  
+          command: <<pipeline.parameters.tuist_path>>/tuist fetch  
       - run: 
           name: Tuist Cache Warm
-          command: tuist cache warm -x
+          command: <<pipeline.parameters.tuist_path>>/tuist cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: tuist generate -xn
+          command: <<pipeline.parameters.tuist_path>>/tuist generate -xn
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum "Tuist.lock" }}
