@@ -196,7 +196,7 @@ jobs:
       - build_example_apps
       - run_tuist_tests
       - save_tuist_cache
-      - run: <<pipeline.parameters.tuist_path>>/tuist test
+      - run_tuist_tests
 workflows: 
   build-and-test:
     jobs: 
