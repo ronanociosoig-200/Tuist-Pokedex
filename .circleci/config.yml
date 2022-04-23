@@ -3,6 +3,9 @@
 version: 2.1
 
 parameters:
+  tuist_version:
+    default: "3.2.0"
+    type: string
   tuist_path: 
     default: "~/.tuist/Versions/3.2.0"
     type: string
@@ -44,19 +47,18 @@ commands:
       - run:
           name: Installing Tuist if not installed
           command: |
-            bash <(curl -Ls https://install.tuist.io)
-         #  [ ! -f ~/.tuist/Versions/3.2.0/tuist ] && bash <(curl -Ls https://install.tuist.io) || echo "Skip install tuist"
+            [ ! -f ~/.tuist/Versions/3.2.0/tuist ] && bash <(curl -Ls https://install.tuist.io) || echo "Skip install tuist"
   setup_tuist_cache:
     steps: 
       - run: 
           name: Fetch Dependencies
-          command: tuist fetch  
+          command: <<pipeline.parameters.tuist_path>>/tuist fetch  
       - run: 
           name: Tuist Cache Warm
-          command: tuist cache warm -x
+          command: <<pipeline.parameters.tuist_path>>/tuist cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: tuist generate -xn
+          command: <<pipeline.parameters.tuist_path>>/tuist generate -xn
       - run: date +%s > date
       - save_cache:
           name: Save ~/.tuist
