@@ -192,6 +192,11 @@ jobs:
       - setup_tuist_cache
       - build_example_apps
       - run_tuist_tests
+      - save_cache:
+          name: Save ~/.tuist
+          key: source-tuist-{{ checksum "Tuist.lock" }}
+          paths:
+            - ~/.tuist/Cache
       - run: <<pipeline.parameters.tuist_path>>/tuist test
 workflows: 
   build-and-test:
