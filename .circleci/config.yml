@@ -50,13 +50,13 @@ commands:
     steps: 
       - run: 
           name: Fetch Dependencies
-          command: <<pipeline.parameters.tuist_path>>/tuist fetch  
+          command: tuist fetch  
       - run: 
           name: Tuist Cache Warm
-          command: <<pipeline.parameters.tuist_path>>/tuist cache warm -x
+          command: tuist cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: <<pipeline.parameters.tuist_path>>/tuist generate -xn
+          command: tuist generate -xn
       - run: date +%s > date
       - save_cache:
           name: Save ~/.tuist
@@ -84,7 +84,7 @@ commands:
       - restore_cache:
           name: Restore ~/.tuist
           keys:
-            - source-tuist-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum "Tuist.lock" }}-
             - source-tuist- 
 
   build_example_apps:
