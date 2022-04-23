@@ -56,17 +56,19 @@ commands:
       - run: 
           name: Tuist Generate Project
           command: <<pipeline.parameters.tuist_path>>/tuist generate -xn
+      - run: date +%s > date
       - save_cache:
           name: Save ~/.tuist
-          key: source-tuist-{{ checksum "Tuist.lock" }}
+          key: source-tuist-{{ checksum "Tuist.lock" }}-{{ checksum "date" }}
           paths:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
   save_tuist_cache:
     steps:
+      - run: date +%s > date
       - save_cache:
           name: Save ~/.tuist
-          key: source-tuist-{{ checksum "Tuist.lock" }}
+          key: source-tuist-{{ checksum "Tuist.lock" }}-{{ checksum "date" }}
           paths:
             - ~/.tuist/Cache
   restore_workspace:
