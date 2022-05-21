@@ -60,7 +60,7 @@ commands:
           command: tuist fetch  
       - run: 
           name: Tuist Cache Warm
-          command: TUIST_CONFIG_CLOUD_TOKEN="<<pipeline.parameters.tuist_cloud_token>>" tuist cache warm -x
+          command: tuist cache warm -x
       - run: 
           name: Tuist Generate Project
           command: tuist generate -xn
