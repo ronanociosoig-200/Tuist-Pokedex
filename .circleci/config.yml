@@ -52,7 +52,7 @@ commands:
           command: |
             [ ! -f ~/.tuist/Versions/3.2.0/tuist ] && bash <(curl -Ls https://install.tuist.io) || echo "Skip install tuist"
       - run: ls -la ~/
-      - run: which tuist
+      #- run: which tuist
   setup_tuist:
     steps: 
       - run: 
@@ -61,10 +61,12 @@ commands:
             [ -f ~/.tuist/Versions/3.2.0/tuist ] && <<pipeline.parameters.tuist_path>>/tuist fetch || tuist fetch
       - run: 
           name: Tuist Cache Warm
-          command: tuist cache warm -x
+          command: |
+            [ -f ~/.tuist/Versions/3.2.0/tuist ] && <<pipeline.parameters.tuist_path>>/tuist cache warm -x || tuist cache warm
       - run: 
           name: Tuist Generate Project
-          command: tuist generate -xn
+          command: |
+            [ -f ~/.tuist/Versions/3.2.0/tuist ] && <<pipeline.parameters.tuist_path>>/tuist generate -xn || tuist generate -xn
   save_tuist_cache:
     steps:
       - run: date +%s > date
