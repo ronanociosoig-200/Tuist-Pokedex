@@ -9,9 +9,6 @@ parameters:
   tuist_path: 
     default: "~/.tuist/Versions/3.2.0"
     type: string
-  tuist_cloud_token:
-    default: "vCQ1yj6X"
-    type: string
   xcode_version:
     default: "13.2.1"
     type: string
@@ -62,7 +59,7 @@ commands:
       - run: 
           name: Tuist Cache Warm
           command: |
-            [ -f ~/.tuist/Versions/3.2.0/tuist ] && <<pipeline.parameters.tuist_path>>/tuist cache warm -x || tuist cache warm
+            [ -f ~/.tuist/Versions/3.2.0/tuist ] && TUIST_CONFIG_CLOUD_TOKEN=${TUIST_CLOUD_TOKEN} <<pipeline.parameters.tuist_path>>/tuist cache warm -x || TUIST_CONFIG_CLOUD_TOKEN=${TUIST_CLOUD_TOKEN} tuist cache warm
       - run: 
           name: Tuist Generate Project
           command: |
