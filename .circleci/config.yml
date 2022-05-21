@@ -51,7 +51,7 @@ commands:
           name: Installing Tuist if not installed
           command: |
             [ ! -f ~/.tuist/Versions/3.2.0/tuist ] && bash <(curl -Ls https://install.tuist.io) || echo "Skip install tuist"
-      - run: ls -la ~/.tuist/Versions
+      - run: ls -la ~/
   setup_tuist:
     steps: 
       - run: 
