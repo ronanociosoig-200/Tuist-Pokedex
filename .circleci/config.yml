@@ -6,21 +6,31 @@ orbs:
   macos: circleci/macos@2.2.0
 
 commands:
-  setup_tuist:
+  install_tuist:
     steps:
       - run:
-          name: Installing Tuist if not installed
+          name: Create tuist checksum file
+          command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum ".tuist-version" }}
+      - run:
+          name: Installing Tuist
           command: |
-            bash <(curl -Ls https://install.tuist.io) 
+            bash <(curl -Ls https://install.tuist.io)
+  setup_tuist:
+    steps: 
       - run: 
           name: Fetch Dependencies
-          command: tuist fetch
+          command: tuist fetch  
       - run: 
           name: Tuist Cache Warm
-          command: tuist cache warm
+          command: tuist cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: tuist generate -n
+          command: tuist generate -xn
   build_project:
     steps:
       - run: 
@@ -29,18 +39,27 @@ commands:
   run_tests:
     steps:
       - run: 
-          name: Tuist test
+          name: Run Tuist Pokedex Tests  
           command: tuist test
-
+  save_tuist_cache: 
+    steps: 
+      - save_cache:
+          name: Save ~/.tuist
+          key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+          paths:
+            - ~/.tuist/Cache
+            - ~/.tuist/Versions
 jobs:    
   build_and_test:
     macos: 
       xcode: 13.3.1
     steps:
-      - checkout   
+      - checkout  
+      - install_tuist 
       - setup_tuist
       - build_project
       - run_tests
+      - save_tuist_cache
 
 workflows: 
   build_and_test_workflow:
