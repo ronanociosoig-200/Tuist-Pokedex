@@ -6,6 +6,11 @@ orbs:
   macos: circleci/macos@2.2.0
 
 commands:
+  install_swiftlint:
+    steps:
+      - run:
+          name: Install SwiftLint
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew install swiftlint 
   install_tuist:
     steps:
       - run:
@@ -55,6 +60,7 @@ jobs:
       xcode: 13.3.1
     steps:
       - checkout  
+      - install_swiftlint
       - install_tuist 
       - setup_tuist
       - build_project
