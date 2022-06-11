@@ -27,9 +27,11 @@ commands:
             bash <(curl -Ls https://install.tuist.io)
   setup_tuist:
     steps: 
+      - run: ls -l Tuist/Dependencies
       - run: 
           name: Fetch Dependencies
           command: tuist fetch  
+      - run: ls -l Tuist/Dependencies
       - run: 
           name: Tuist Cache Warm
           command: tuist cache warm -x
