@@ -27,13 +27,13 @@ commands:
             bash <(curl -Ls https://install.tuist.io)
   setup_tuist:
     steps: 
-      - run: ls -l Tuist/Dependencies/SwiftPackageManager
-      - run: ls -l Tuist/Dependencies/Lockfiles
+      - run: ls -la Tuist/Dependencies/SwiftPackageManager
+      - run: ls -la Tuist/Dependencies/Lockfiles
       - run: 
           name: Fetch Dependencies
           command: tuist fetch  
-      - run: ls -l Tuist/Dependencies/SwiftPackageManager
-      - run: ls -l Tuist/Dependencies/Lockfiles
+      - run: ls -la Tuist/Dependencies/SwiftPackageManager
+      - run: ls -la Tuist/Dependencies/Lockfiles
       - run: 
           name: Tuist Cache Warm
           command: tuist cache warm -x
