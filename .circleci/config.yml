@@ -54,6 +54,20 @@ commands:
           paths:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
+  save_dependencies_cache:
+    steps:
+      - save_cache:
+          name: Save Dependencies
+          key: dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}-{{ checksum "Tuist/Dependencies/Lockfiles/Package.resolved" }}
+          paths: 
+            - Tuist/Dependencies
+  restore_dependencies_cache:
+    steps:
+      - restore_cache:
+          name: Restore Dependencies
+          keys: 
+            - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}-{{ checksum "Tuist/Dependencies/Lockfiles/Package.resolved" }}
+            - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}-
 jobs:    
   build_and_test:
     macos: 
@@ -62,7 +76,9 @@ jobs:
       - checkout  
       - install_swiftlint
       - install_tuist 
+      - restore_dependencies_cache
       - setup_tuist
+      - save_dependencies_cache
       - build_project
       - run_tests
       - save_tuist_cache
