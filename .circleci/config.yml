@@ -28,12 +28,12 @@ commands:
   setup_tuist:
     steps: 
       - run: ls -la Tuist/Dependencies/SwiftPackageManager
-      - run: ls -la Tuist/Dependencies/Lockfiles
+      - run: ls -la Tuist/Dependencies/SwiftPackageManager/.build
       - run: 
           name: Fetch Dependencies
           command: tuist fetch  
       - run: ls -la Tuist/Dependencies/SwiftPackageManager
-      - run: ls -la Tuist/Dependencies/Lockfiles
+      - run: ls -la Tuist/Dependencies/SwiftPackageManager/.build
       - run: 
           name: Tuist Cache Warm
           command: tuist cache warm -x
