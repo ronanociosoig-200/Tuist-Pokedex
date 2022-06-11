@@ -58,7 +58,7 @@ commands:
     steps:
       - save_cache:
           name: Save Dependencies
-          key: dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}-{{ checksum "Tuist/Dependencies/Lockfiles/Package.resolved" }}
+          key: dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
           paths: 
             - Tuist/Dependencies
   restore_dependencies_cache:
@@ -66,8 +66,8 @@ commands:
       - restore_cache:
           name: Restore Dependencies
           keys: 
-            - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}-{{ checksum "Tuist/Dependencies/Lockfiles/Package.resolved" }}
-            - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}-
+            - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
+            - dependencies-tuist-
 jobs:    
   build_and_test:
     macos: 
