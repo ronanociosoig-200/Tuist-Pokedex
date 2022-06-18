@@ -27,19 +27,10 @@ commands:
             bash <(curl -Ls https://install.tuist.io)
   setup_tuist:
     steps: 
-      - run: ls -la Tuist/Dependencies/SwiftPackageManager
-      - run: ls -la Tuist/Dependencies/SwiftPackageManager/.build
-      - run: 
-          name: Folder Size of .build
-          command: du -sh Tuist/Dependencies/SwiftPackageManager/.build
       - run: 
           name: Fetch Dependencies
-          command: tuist fetch  
-      - run: ls -la Tuist/Dependencies/SwiftPackageManager
-      - run: ls -la Tuist/Dependencies/SwiftPackageManager/.build
-      - run: 
-          name: Folder Size of .build
-          command: du -sh Tuist/Dependencies/SwiftPackageManager/.build
+          command: |
+            [ ! -f Tuist/Dependencies/SwiftPackageManager/.build ] && tuist fetch || echo "Skipping fetch" 
       - run: 
           name: Tuist Cache Warm
           command: tuist cache warm -x
