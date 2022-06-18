@@ -5,12 +5,25 @@ version: 2.1
 orbs:
   macos: circleci/macos@2.2.0
 
+parameters:
+  xcode_version:
+    type: string
+    default: "13.3.1"
+  tuist: 
+    type: string
+    default: "~/.tuist/Versions/3.2.0/tuist"
+
 commands:
   install_swiftlint:
     steps:
       - run:
           name: Install SwiftLint
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install swiftlint 
+  install_other:
+    steps: 
+      - run:
+          name: Test Echo
+          command: echo "Hello"
   install_tuist:
     steps:
       - run:
@@ -25,7 +38,11 @@ commands:
           name: Installing Tuist
           command: |
             [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
-  setup_tuist:
+      - run:
+          name: Install Tuist specific version
+          command: |
+            [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || tuist install 3.2.0
+  setup_tuist:          
     steps: 
       - run: 
           name: Fetch Dependencies
@@ -33,13 +50,13 @@ commands:
             [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run: 
           name: Tuist Cache Warm
-          command: tuist cache warm -x
+          command: <<pipeline.parameters.tuist>> cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: tuist generate -xn
+          command: <<pipeline.parameters.tuist>> generate -xn
       - run: 
           name: Fetch Dependencies 2nd time
-          command: tuist fetch    
+          command: <<pipeline.parameters.tuist>> fetch    
 
   build_project:
     steps:
@@ -50,7 +67,7 @@ commands:
     steps:
       - run: 
           name: Run Tuist Pokedex Tests  
-          command: tuist test
+          command: <<pipeline.parameters.tuist>> test
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -76,7 +93,7 @@ commands:
 jobs:    
   build_and_test:
     macos: 
-      xcode: 13.3.1
+      xcode: <<pipeline.parameters.xcode_version>>
     steps:
       - checkout  
       - install_swiftlint
