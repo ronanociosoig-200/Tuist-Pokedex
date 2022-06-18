@@ -101,7 +101,7 @@ jobs:
       - restore_dependencies_cache
       - setup_tuist
       - save_dependencies_cache
-      - build_project
+      # - build_project
       - run_tests
       - save_tuist_cache
 
