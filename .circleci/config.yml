@@ -54,10 +54,7 @@ commands:
       - run: 
           name: Tuist Generate Project
           command: <<pipeline.parameters.tuist>> generate -xn
-      - run: 
-          name: Fetch Dependencies 2nd time
-          command: <<pipeline.parameters.tuist>> fetch    
-
+ 
   build_project:
     steps:
       - run: 
