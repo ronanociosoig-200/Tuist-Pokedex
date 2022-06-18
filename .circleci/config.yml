@@ -24,13 +24,13 @@ commands:
       - run:
           name: Installing Tuist
           command: |
-            bash <(curl -Ls https://install.tuist.io)
+            [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
   setup_tuist:
     steps: 
       - run: 
           name: Fetch Dependencies
           command: |
-            [ ! -f Tuist/Dependencies/SwiftPackageManager/.build ] && tuist fetch || echo "Skipping fetch" 
+            [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run: 
           name: Tuist Cache Warm
           command: tuist cache warm -x
