@@ -14,9 +14,13 @@ commands:
 
   install_tuist:
     steps:
+      - run: 
+          name: Create test hashes file
+          command: |
+            [ -d ~/.tuist/Cache/TestsCache ] && ~/.tuist/Cache/TestsCache > test_hashes.txt || touch test_hashes.txt
       - run:
           name: Create tuist checksum file
-          command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
+          command: find Project.swift Tuist test_hashes.txt -type f | xargs -P 2 shasum > Tuist.lock
       - restore_cache:
           name: Restore ~/.tuist
           keys:
