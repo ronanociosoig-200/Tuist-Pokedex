@@ -29,7 +29,7 @@ commands:
       - run:
           name: Install Tuist specific version
           command: |
-            [ -f ~/.tuist/Versions/3.2.0/tuist ] && tuist install 3.2.0 || echo "Skipping tuist install version"
+            [ ! -f ~/.tuist/Versions/3.2.0/tuist ] && tuist install 3.2.0 || echo "Skipping tuist install version"
             
   setup_tuist:          
     steps: 
