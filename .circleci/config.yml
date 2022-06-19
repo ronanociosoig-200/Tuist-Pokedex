@@ -36,7 +36,7 @@ commands:
       - run: 
           name: Fetch Dependencies
           command: |
-            [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
+            ~/.tuist/Versions/3.2.0/tuist fetch 
       - run: 
           name: Tuist Cache Warm
           command: ~/.tuist/Versions/3.2.0/tuist cache warm -x
