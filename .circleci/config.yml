@@ -5,25 +5,13 @@ version: 2.1
 orbs:
   macos: circleci/macos@2.2.0
 
-parameters:
-  xcode_version:
-    type: string
-    default: "13.3.1"
-  tuist: 
-    type: string
-    default: "~/.tuist/Versions/3.2.0/tuist"
-
 commands:
   install_swiftlint:
     steps:
       - run:
           name: Install SwiftLint
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install swiftlint 
-  install_other:
-    steps: 
-      - run:
-          name: Test Echo
-          command: echo "Hello"
+
   install_tuist:
     steps:
       - run:
@@ -37,11 +25,12 @@ commands:
       - run:
           name: Installing Tuist
           command: |
-            [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
+            [ ! -f ~/.tuist/Versions/3.2.0/tuist ] && bash <(curl -Ls https://install.tuist.io) || echo "Skipping tuist install"
       - run:
           name: Install Tuist specific version
           command: |
-            [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || tuist install 3.2.0
+            [ -f ~/.tuist/Versions/3.2.0/tuist ] && tuist install 3.2.0 || echo "Skipping tuist install version"
+            
   setup_tuist:          
     steps: 
       - run: 
@@ -50,21 +39,23 @@ commands:
             [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run: 
           name: Tuist Cache Warm
-          command: <<pipeline.parameters.tuist>> cache warm -x
+          command: ~/.tuist/Versions/3.2.0/tuist cache warm -x
       - run: 
           name: Tuist Generate Project
-          command: <<pipeline.parameters.tuist>> generate -xn
+          command: ~/.tuist/Versions/3.2.0/tuist generate -xn
  
   build_project:
     steps:
       - run: 
           name: Build Pokedex App
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.4'
+          
   run_tests:
     steps:
       - run: 
           name: Run Tuist Pokedex Tests  
-          command: <<pipeline.parameters.tuist>> test
+          command: ~/.tuist/Versions/3.2.0/tuist test
+          
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -73,32 +64,17 @@ commands:
           paths:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
-  save_dependencies_cache:
-    steps:
-      - save_cache:
-          name: Save Dependencies
-          key: dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
-          paths: 
-            - Tuist/Dependencies
-  restore_dependencies_cache:
-    steps:
-      - restore_cache:
-          name: Restore Dependencies
-          keys: 
-            - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
-            - dependencies-tuist-
+            
 jobs:    
   build_and_test:
     macos: 
-      xcode: <<pipeline.parameters.xcode_version>>
+      xcode: 13.3.1
     steps:
       - checkout  
       - install_swiftlint
       - install_tuist 
-      - restore_dependencies_cache
       - setup_tuist
-      - save_dependencies_cache
-      # - build_project
+      - build_project
       - run_tests
       - save_tuist_cache
 
