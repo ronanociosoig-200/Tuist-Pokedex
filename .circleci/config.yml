@@ -85,7 +85,7 @@ jobs:
       - install_swiftlint
       - install_tuist 
       - setup_tuist
-      - build_project
+      # - build_project
       - run_tests
       - save_tuist_cache
 
