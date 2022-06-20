@@ -15,7 +15,6 @@ protocol AppControlling {
 
 class AppController: AppControlling {
     var coordinator: Coordinating?
-    int i = 0
     
     func start() {
         let dataProvider = DataProvider()
