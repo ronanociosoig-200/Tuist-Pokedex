@@ -62,6 +62,13 @@ commands:
           
   save_tuist_cache: 
     steps: 
+      - run: 
+          name: Create test hashes file
+          command: |
+            [ -d ~/.tuist/Cache/TestsCache ] && ~/.tuist/Cache/TestsCache > test_hashes.txt || touch test_hashes.txt
+      - run:
+          name: Create tuist checksum file
+          command: find Project.swift Tuist test_hashes.txt -type f | xargs -P 2 shasum > Tuist.lock
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
