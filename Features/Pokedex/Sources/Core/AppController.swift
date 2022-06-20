@@ -32,4 +32,8 @@ class AppController: AppControlling {
         
         dataProvider.notifier = coordinator as? Notifier
     }
+    
+    func dummyToTriggerCI() {
+        print("Test Circle CI")
+    }
 }
