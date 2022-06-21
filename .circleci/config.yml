@@ -6,7 +6,14 @@ orbs:
   macos: circleci/macos@2.2.0
 
 commands:
-  
+  restore_tuist_cache: 
+    steps:
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - sources-{{ .Branch }}-{{ .Revision }}
+            - sources-{{ .Branch }}-
+            - sources-
   install_swiftlint:
     steps:
       - run:
@@ -15,12 +22,6 @@ commands:
 
   install_tuist:
     steps:
-      - restore_cache:
-          name: Restore ~/.tuist
-          keys:
-            - sources-{{ .Branch }}-{{ .Revision }}
-            - sources-{{ .Branch }}-
-            - sources-
       #- run: 
       #    name: Create test hashes file
       #    command: |
@@ -46,13 +47,7 @@ commands:
       - run: 
           name: Tuist Generate Project
           command: ~/.tuist/Versions/3.2.0/tuist generate -xn
- 
-  build_project:
-    steps:
-      - run: 
-          name: Build Pokedex App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.4'
-          
+
   run_tests:
     steps:
       - run: 
@@ -88,11 +83,11 @@ jobs:
     macos: 
       xcode: 13.3.1
     steps:
+      - restore_tuist_cache
       - checkout  
       - install_swiftlint
       - install_tuist 
       - setup_tuist
-      # - build_project
       - run_tests
       - save_tuist_cache
 
