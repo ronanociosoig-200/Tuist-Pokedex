@@ -14,20 +14,14 @@ commands:
 
   install_tuist:
     steps:
-      - run: 
-          name: Create test hashes file
-          command: |
-            [ -d ~/.tuist/Cache/TestsCache ] && ls ~/.tuist/Cache/TestsCache > test_hashes.txt || touch test_hashes.txt
-      - run: ls ~/.tuist/Cache/TestsCache
-      - run: find test_hashes.txt -type f | xargs -P 2 shasum 
-      - run:
-          name: Create tuist checksum file
-          command: find Project.swift Tuist test_hashes.txt -type f | xargs -P 2 shasum > Tuist.lock
       - restore_cache:
           name: Restore ~/.tuist
           keys:
-            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
             - source-tuist-{{ checksum ".tuist-version" }}
+      - run: 
+          name: Create test hashes file
+          command: |
+            [ -d ~/.tuist/Cache/TestsCache ] && ls ~/.tuist/Cache/TestsCache > test_hashes_1.txt || touch test_hashes_1.txt
       - run:
           name: Installing Tuist
           command: |
@@ -67,12 +61,17 @@ commands:
       - run: 
           name: Create test hashes file
           command: |
-            [ -d ~/.tuist/Cache/TestsCache ] && ls ~/.tuist/Cache/TestsCache > test_hashes.txt || touch test_hashes.txt
+            [ -d ~/.tuist/Cache/TestsCache ] && ls ~/.tuist/Cache/TestsCache > test_hashes_2.txt || touch test_hashes_2.txt
       - run: ls ~/.tuist/Cache/TestsCache
-      - run: find test_hashes.txt -type f | xargs -P 2 shasum 
+      - run: 
+          name: SHA sum of hashes before running tests
+          command: find test_hashes_1.txt -type f | xargs -P 2 shasum
+      - run: 
+          name: SHA sum of hashes after running tests
+          command: find test_hashes_2.txt -type f | xargs -P 2 shasum
       - run:
           name: Create tuist checksum file
-          command: find Project.swift Tuist test_hashes.txt -type f | xargs -P 2 shasum > Tuist.lock
+          command: find Project.swift Tuist test_hashes_2.txt -type f | xargs -P 2 shasum > Tuist.lock
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
