@@ -36,7 +36,7 @@ commands:
       - run: 
           name: Fetch Dependencies
           command: |
-            ~/.tuist/Versions/3.2.0/tuist fetch 
+            [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || ~/.tuist/Versions/3.2.0/tuist fetch 
       - run: 
           name: Tuist Cache Warm
           command: ~/.tuist/Versions/3.2.0/tuist cache warm -x
@@ -56,6 +56,22 @@ commands:
             - ~/.tuist/Cache
             - ~/.tuist/Versions
             - ".git"
+  
+  save_dependencies_cache:
+    steps:
+      - save_cache:
+          name: Save Dependencies
+          key: dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
+          paths: 
+            - Tuist/Dependencies
+
+  restore_dependencies_cache:
+    steps:
+      - restore_cache:
+          name: Restore Dependencies
+          keys: 
+            - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
+            - dependencies-tuist-
             
 jobs:    
   build_and_test:
@@ -63,14 +79,16 @@ jobs:
       xcode: 13.3.1
     steps:
       - restore_tuist_cache
+      - restore_dependencies_cache
       - checkout  
       - install_swiftlint
       - install_tuist 
       - setup_tuist
+      - save_dependencies_cache
       - run_tests
       - save_tuist_cache
 
 workflows: 
-  build_and_test_workflow:
+  test_workflow:
     jobs: 
       - build_and_test
