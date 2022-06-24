@@ -22,10 +22,6 @@ commands:
 
   install_tuist:
     steps:
-      #- run: 
-      #    name: Create test hashes file
-      #    command: |
-      #      [ -d ~/.tuist/Cache/TestsCache ] && ls ~/.tuist/Cache/TestsCache > test_hashes_1.txt || touch test_hashes_1.txt
       - run:
           name: Installing Tuist
           command: |
@@ -44,9 +40,6 @@ commands:
       - run: 
           name: Tuist Cache Warm
           command: ~/.tuist/Versions/3.2.0/tuist cache warm -x
-      - run: 
-          name: Tuist Generate Project
-          command: ~/.tuist/Versions/3.2.0/tuist generate -xn
 
   run_tests:
     steps:
@@ -56,20 +49,6 @@ commands:
           
   save_tuist_cache: 
     steps: 
-      #- run: 
-      #    name: Create test hashes file
-      #    command: |
-      #      [ -d ~/.tuist/Cache/TestsCache ] && ls ~/.tuist/Cache/TestsCache > test_hashes_2.txt || touch test_hashes_2.txt
-      #- run: ls ~/.tuist/Cache/TestsCache
-      #- run: 
-      #    name: SHA sum of hashes before running tests
-      #    command: find test_hashes_1.txt -type f | xargs -P 2 shasum
-      #- run: 
-      #    name: SHA sum of hashes after running tests
-      #    command: find test_hashes_2.txt -type f | xargs -P 2 shasum
-      #- run:
-      #    name: Create tuist checksum file
-      #    command: find Project.swift Tuist test_hashes_2.txt -type f | xargs -P 2 shasum > Tuist.lock
       - save_cache:
           name: Save ~/.tuist
           key: sources-{{ .Branch }}-{{ .Revision }}
