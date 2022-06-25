@@ -22,7 +22,6 @@ public class HomePresenter: HomePresenting {
     private weak var view: HomeView?
     private var actions: HomeActions
     private var dataProvider: HomeDataProvider
-    private let circleCIDemo = "trigger"
     
     // MARK: Typealias
     
