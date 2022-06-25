@@ -78,15 +78,15 @@ jobs:
     macos: 
       xcode: 13.3.1
     steps:
-      #- restore_tuist_cache
+      - restore_tuist_cache
       - checkout  
-      #- restore_dependencies_cache
+      - restore_dependencies_cache
       - install_swiftlint
       - install_tuist 
       - setup_tuist
       - run_tests
-      #- save_dependencies_cache
-      #- save_tuist_cache
+      - save_dependencies_cache
+      - save_tuist_cache
 
 workflows: 
   test_workflow:
