@@ -78,7 +78,7 @@ commands:
     steps:
       - run:
           name: Find build
-          command: ls -latrp ~/
+          command: ls -latrp ~/Library
 
 jobs:    
   build_and_test:
