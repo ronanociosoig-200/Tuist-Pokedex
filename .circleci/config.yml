@@ -78,7 +78,7 @@ commands:
     steps:
       - run:
           name: Find build
-          command: ls -latrp ~/Library/Developer/
+          command: ls -latrp ~/Library/Developer/CoreSimulator/
 
 jobs:    
   build_and_test:
