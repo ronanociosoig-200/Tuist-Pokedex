@@ -78,7 +78,7 @@ commands:
     steps:
       - run:
           name: Find build
-          command: ls -latrp ~/Library
+          command: ls -latrp ~/Library/Developer/Xcode
 
 jobs:    
   build_and_test:
