@@ -46,9 +46,6 @@ commands:
       - run: 
           name: Run Tuist Pokedex Tests  
           command: ~/.tuist/Versions/3.2.0/tuist test
-      - run:
-          name: Find build
-          command: ls -latrp
           
   save_tuist_cache: 
     steps: 
@@ -76,6 +73,12 @@ commands:
             - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}-{{ checksum "Tuist/Dependencies/Lockfiles/Package.resolved" }}
             - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
             - dependencies-tuist-
+
+  find_builds:
+    steps:
+      - run:
+          name: Find build
+          command: ls -latrp
             
 jobs:    
   build_and_test:
@@ -91,6 +94,7 @@ jobs:
       - run_tests
       - save_dependencies_cache
       - save_tuist_cache
+      - find_builds
 
 workflows: 
   test_workflow:
