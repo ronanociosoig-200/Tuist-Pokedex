@@ -46,6 +46,9 @@ commands:
       - run: 
           name: Run Tuist Pokedex Tests  
           command: ~/.tuist/Versions/3.2.0/tuist test
+      - run:
+          name: Find build
+          command: ls -latrp
           
   save_tuist_cache: 
     steps: 
