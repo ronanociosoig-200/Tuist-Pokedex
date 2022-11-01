@@ -78,8 +78,8 @@ commands:
     steps:
       - run:
           name: Find build
-          command: ls -latrp
-            
+          command: ls -latrp ~/Library/Developer/Xcode/DerivedData
+
 jobs:    
   build_and_test:
     macos: 
