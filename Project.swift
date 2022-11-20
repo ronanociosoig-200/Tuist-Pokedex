@@ -27,7 +27,7 @@ func makeHanekeModule() -> Module {
 }
 
 func makeHomeModule() -> Module {
-    return Module(name: "HomeUI",
+    return Module(name: "Home",
                   path: "Home",
                   frameworkDependancies: [.target(name: "Common")],
                   exampleDependencies: [.external(name: "JGProgressHUD")],
@@ -37,7 +37,7 @@ func makeHomeModule() -> Module {
 }
 
 func makeBackpackModule() -> Module {
-    return Module(name: "BackpackUI",
+    return Module(name: "Backpack",
            path: "Backpack",
            frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
            exampleDependencies: [.target(name: "Detail")],
@@ -57,7 +57,7 @@ func makeDetailModule() -> Module {
 }
 
 func makeCatchModule() -> Module {
-    Module(name: "CatchUI",
+    Module(name: "Catch",
            path: "Catch",
            frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
            exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
