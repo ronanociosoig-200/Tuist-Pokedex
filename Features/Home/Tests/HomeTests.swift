@@ -1,8 +1,8 @@
 import Foundation
 import XCTest
 
-final class HomeUITests: XCTestCase {
+final class HomeTests: XCTestCase {
     func test_example() {
-        XCTAssertEqual("HomeUI", "HomeUI")
+        XCTAssertEqual("Home", "Home")
     }
 }
