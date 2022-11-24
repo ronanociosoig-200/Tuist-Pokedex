@@ -1,15 +1,16 @@
 import Foundation
 import XCTest
+
 @testable import Backpack
 @testable import Common
 
-final class BackpackTests: XCTestCase {
+final class BackpackWireframeTests: XCTestCase {
     func testViewControllerHasInjectedStructure() {
         let vc = BackpackWireframe.makeViewController()
         
         XCTAssertNotNil(vc, "ViewController should not be nil")
         
-        BackpackWireframe.prepare(vc, actions: MockActions(), dataProvider: MockDataProvider())
+        BackpackWireframe.prepare(vc, actions: MockBackpackActions(), dataProvider: MockBackpackDataProvider())
         
         let presenter = vc.presenter
         
@@ -24,17 +25,5 @@ final class BackpackTests: XCTestCase {
         let navController = BackpackWireframe.makeNavigationController()
         
         XCTAssertNotNil(navController, "NavigationController should not be nil")
-    }
-}
-
-struct MockActions: BackpackActions {
-    func selectItem(at index: Int) {
-        
-    }
-}
-
-struct MockDataProvider: BackpackDataProvider {
-    func pokemons() -> [Common.LocalPokemon] {
-        return []
     }
 }
