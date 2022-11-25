@@ -35,7 +35,9 @@ public class CatchPresenter: CatchPresenting, Updatable {
     typealias DataProvider = CatchDataProvider
     typealias View = CatchView
     
-    required init(view: CatchView, actions: CatchActions, dataProvider: CatchDataProvider) {
+    required init(view: CatchView?,
+                  actions: CatchActions,
+                  dataProvider: CatchDataProvider) {
         self.view = view
         self.actions = actions
         self.dataProvider = dataProvider
