@@ -9,7 +9,7 @@
 import Foundation
 import JGProgressHUD
 import Common
-import HomeUI
+import Home
 
 class Coordinator: Coordinating {
     let window: UIWindow
