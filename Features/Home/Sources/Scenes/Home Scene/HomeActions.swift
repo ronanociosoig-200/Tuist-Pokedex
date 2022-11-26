@@ -22,9 +22,3 @@ extension Actions: HomeActions {
         coordinator.showBackpackScene()
     }
 }
-
-import SwiftUI
-
-public protocol HomeUIScenes {
-    func mainView() -> AnyView
-}
