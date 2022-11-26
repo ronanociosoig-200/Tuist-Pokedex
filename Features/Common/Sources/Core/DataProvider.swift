@@ -26,7 +26,7 @@ public class DataProvider: DataProviding {
     
     public func catchPokemon() {
         guard let pokemon = appData.pokemon else { return }
-        let localPokemon = PokemonParser.parse(pokemon: pokemon)
+        let localPokemon = PokemonParser.convert(pokemon: pokemon)
         appData.pokemons.append(localPokemon)
         appData.sortByOrder()
         appData.save()

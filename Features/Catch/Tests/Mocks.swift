@@ -49,7 +49,7 @@ class MockCatchActions: CatchActions {
 
 class MockCatchDataProvider: CatchDataProvider {
     func pokemon() -> Common.ScreenPokemon? {
-        MockDataFactory.makeScreenPokemon()
+        MockPokemonFactory.makeScreenPokemon()
     }
     
     func newSpecies() -> Bool {
@@ -70,51 +70,11 @@ class MockEmptyCatchDataProvider: CatchDataProvider {
 class MockCatchPresenter: CatchPresenting {
     var catchPokemonActionCalled = false
     func pokemon() -> Common.ScreenPokemon? {
-        MockDataFactory.makeScreenPokemon()
+        MockPokemonFactory.makeScreenPokemon()
     }
     
     func catchPokemonAction() {
         catchPokemonActionCalled = true
-    }
-}
-
-struct MockDataFactory {
-    static func makeScreenPokemon() -> ScreenPokemon {
-        ScreenPokemon(name: "cascoon",
-                             weight: 115,
-                             height: 7,
-                             iconPath: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/5.png")
-    }
-    
-    static func makeLocalPokemon() -> LocalPokemon {
-        LocalPokemon(name: "cascoon",
-                                    weight: 115,
-                                    height: 7,
-                                    order: 350,
-                                    spriteUrlString: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/268.png",
-                                    date: Date(),
-                                    species: "cascoon",
-                                    baseExperience: 72,
-                                    types: ["bug"])
-    }
-    
-    static func makePokemon() -> Pokemon {
-        Pokemon(baseExperience: 100,
-                height: 7,
-                id: 420,
-                name: "cascoon",
-                order: 1,
-                species: Species(name: "cascoon", url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/268.png"),
-                sprites: Sprites(backDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/5.png",
-                                 backFemale: nil,
-                                 backShiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/5.png",
-                                 backShinyFemale: nil,
-                                 frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
-                                 frontFemale: nil,
-                                 frontShiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/5.png",
-                                 frontShinyFemale: nil),
-                types: [typeElement],
-                weight: 115)
     }
 }
 

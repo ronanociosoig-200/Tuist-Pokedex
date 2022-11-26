@@ -13,7 +13,7 @@ import XCTest
 
 final class CatchDataProviderTests: XCTestCase {
     func testDataProviderPokemon() {
-        let pokemon = MockDataFactory.makePokemon()
+        let pokemon = MockPokemonFactory.makePokemon()
         let dataProvider = DataProvider()
         dataProvider.appData.pokemon = pokemon
         let screenPokemon = dataProvider.pokemon()
