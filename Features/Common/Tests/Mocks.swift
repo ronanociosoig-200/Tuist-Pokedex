@@ -25,5 +25,41 @@ class MockFileStorage: Storable {
     
     func remove(_ fileName: String, from directory: Common.Directory) {
         <#code#>
+
+class MockCoordinator: Coordinating {
+    var showPokemonDetailSceneCalled = false
+    
+    var dataProvider: Common.DataProvider?
+    
+    func start() {
+        
+    }
+    
+    func showLoading() {
+        
+    }
+    
+    func dismissLoading() {
+        
+    }
+    
+    func showHomeScene() {
+        
+    }
+    
+    func showCatchScene() {
+        
+    }
+    
+    func showBackpackScene() {
+        
+    }
+    
+    func showPokemonDetailScene(pokemon: Common.LocalPokemon) {
+        showPokemonDetailSceneCalled = true
+    }
+    
+    func showAlert(with errorMessage: String) {
+        
     }
 }

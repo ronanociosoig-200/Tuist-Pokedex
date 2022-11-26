@@ -35,11 +35,15 @@ public class AppData {
     }
     
     func load() {
-        pokemons = storage.load(AppData.pokemonFile, from: directory(), as: [LocalPokemon].self) ?? [LocalPokemon]()
+        pokemons = storage.load(AppData.pokemonFile,
+                                from: directory(),
+                                as: [LocalPokemon].self) ?? [LocalPokemon]()
     }
     
     func save() {
-        storage.save(pokemons, to: directory(), as: AppData.pokemonFile)
+        storage.save(pokemons,
+                     to: directory(),
+                     as: AppData.pokemonFile)
     }
     
     public func directory() -> Directory {

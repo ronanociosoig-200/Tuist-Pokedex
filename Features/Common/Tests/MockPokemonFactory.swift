@@ -32,12 +32,34 @@ struct MockPokemonFactory {
                                     types: ["bug"])
     }
     
+    static func makeOtherLocalPokemon() -> LocalPokemon {
+        LocalPokemon(name: "cranidos",
+                                    weight: 315,
+                                    height: 9,
+                                    order: 519,
+                                    spriteUrlString: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/408.png",
+                                    date: Date(),
+                                    species: "cranidos",
+                                    baseExperience: 70,
+                                    types: ["rock"])
+    }
+    
+    static func makeLocalPokemons() -> [LocalPokemon] {
+        return [makeLocalPokemon(),
+                makeOtherLocalPokemon()]
+    }
+    
+    static func makeOutOfOrderLocalPokemons() -> [LocalPokemon] {
+        return [makeOtherLocalPokemon(),
+                makeLocalPokemon()]
+    }
+    
     static func makePokemon() -> Pokemon {
         Pokemon(baseExperience: 100,
                 height: 7,
                 id: 420,
                 name: "cascoon",
-                order: 1,
+                order: 350,
                 species: Species(name: "cascoon", url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/268.png"),
                 sprites: Sprites(backDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/5.png",
                                  backFemale: nil,

@@ -35,7 +35,7 @@ final class AppDataTests: XCTestCase {
         XCTAssertFalse(appData.newSpecies())
     }
     
-    func testAppDataSaveAnLoad() {
+    func testSaveAndLoad() {
         let storage = FileStorage()
         let appData = AppData(storage: storage)
         
@@ -47,5 +47,28 @@ final class AppDataTests: XCTestCase {
         XCTAssertTrue(appData.pokemons.count == 0)
         appData.load()
         XCTAssertTrue(appData.pokemons.count == 1)
+        
+        if Storage.fileExists(AppData.pokemonFile, in: .documents) {
+            Storage.remove(AppData.pokemonFile, from: .documents)
+        }
+    }
+    
+    func testSorting() {
+        let expectedName = "cascoon"
+        let storage = FileStorage()
+        let appData = AppData(storage: storage)
+        
+        let unsortedPokemons = MockPokemonFactory.makeOutOfOrderLocalPokemons()
+        let firstUnsortedPokemon = unsortedPokemons.first
+        
+        XCTAssertNotEqual(firstUnsortedPokemon?.name, expectedName)
+        
+        appData.pokemons.append(contentsOf: unsortedPokemons)
+        
+        appData.sortByOrder()
+        
+        let firstPokemon = appData.pokemons.first
+        
+        XCTAssertEqual(firstPokemon?.name, expectedName)
     }
 }
