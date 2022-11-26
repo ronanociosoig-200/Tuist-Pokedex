@@ -26,7 +26,7 @@ class AppDataTests: XCTestCase {
         let pokemon12 = loadPokemon(identifier: .pokemon12)
         
         appData.pokemon = pokemon5
-        let localPokemon = PokemonParser.parse(pokemon: pokemon5)
+        let localPokemon = PokemonConverter.convert(pokemon: pokemon5)
         appData.pokemons.append(localPokemon)
         
         var newSpecies = appData.newSpecies()
@@ -60,8 +60,8 @@ class AppDataTests: XCTestCase {
         let appData = AppData(storage: FileStorage())
         let pokemon5 = loadPokemon(identifier: .pokemon5)
         let pokemon12 = loadPokemon(identifier: .pokemon12)
-        let localPokemon5 = PokemonParser.parse(pokemon: pokemon5)
-        let localPokemon12 = PokemonParser.parse(pokemon: pokemon12)
+        let localPokemon5 = PokemonConverter.convert(pokemon: pokemon5)
+        let localPokemon12 = PokemonConverter.convert(pokemon: pokemon12)
         appData.pokemons.append(localPokemon5)
         appData.pokemons.append(localPokemon12)
         
