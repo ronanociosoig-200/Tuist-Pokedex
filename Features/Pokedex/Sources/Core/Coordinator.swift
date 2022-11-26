@@ -10,9 +10,9 @@ import Foundation
 import JGProgressHUD
 import Common
 import NetworkKit
-import BackpackUI
-import CatchUI
-import HomeUI
+import Backpack
+import Catch
+import Home
 import Detail
 import os.log
 

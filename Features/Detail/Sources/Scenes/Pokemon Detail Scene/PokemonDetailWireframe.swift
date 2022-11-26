@@ -20,5 +20,4 @@ public class PokemonDetailWireframe {
     	let presenter =  PokemonDetailPresenter(view: viewController, pokemon: pokemon)
         viewController.presenter = presenter
     }
-    
 }
