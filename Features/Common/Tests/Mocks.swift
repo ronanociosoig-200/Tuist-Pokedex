@@ -10,21 +10,40 @@ import Foundation
 
 @testable import Common
 
-class MockFileStorage: Storable {
-    func fileExists(fileName: String, in directory: Common.Directory) -> Bool {
-        <#code#>
+class MockAppData: AppDataHandling {
+    var pokemon: Common.Pokemon?
+    var pokemons = [LocalPokemon]()
+    
+    var newSpeciesCalled = false
+    var loadCalled = false
+    var saveCalled = false
+    var sortByOrderCalled = false
+    
+    init() {
+        
     }
     
-    func save<T>(_ object: T, to directory: Common.Directory, as fileName: String) where T : Encodable {
-        <#code#>
+    func newSpecies() -> Bool {
+        newSpeciesCalled = true
+        return true
     }
     
-    func load<T>(_ fileName: String, from directory: Common.Directory, as type: T.Type) -> T? where T : Decodable {
-        <#code#>
+    func load() {
+        loadCalled = true
     }
     
-    func remove(_ fileName: String, from directory: Common.Directory) {
-        <#code#>
+    func save() {
+        saveCalled = true
+    }
+    
+    func directory() -> Common.Directory {
+        return .documents
+    }
+    
+    func sortByOrder() {
+        sortByOrderCalled = true
+    }
+}
 
 class MockCoordinator: Coordinating {
     var showPokemonDetailSceneCalled = false

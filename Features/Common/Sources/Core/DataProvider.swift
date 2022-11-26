@@ -11,7 +11,7 @@ import os.log
 import Combine
 
 public class DataProvider: DataProviding {
-    public let appData = AppData(storage: FileStorage())
+    public var appData: AppDataHandling = AppData(storage: FileStorage())
     public var notifier: Notifier?
     public var searchCancellable: AnyCancellable?
 

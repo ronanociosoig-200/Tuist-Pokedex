@@ -8,7 +8,18 @@
 
 import Foundation
 
-public class AppData {
+public protocol AppDataHandling {
+    var pokemon: Pokemon? { get set }
+    var pokemons: [LocalPokemon] { get set }
+    
+    func newSpecies() -> Bool
+    func load()
+    func save()
+    func directory() -> Directory
+    func sortByOrder()
+}
+
+public class AppData: AppDataHandling {
     public static let pokemonFile = "pokemons.json"
     
     public var pokemon: Pokemon?
@@ -34,13 +45,13 @@ public class AppData {
         return foundSpecies.isEmpty
     }
     
-    func load() {
+    public func load() {
         pokemons = storage.load(AppData.pokemonFile,
                                 from: directory(),
                                 as: [LocalPokemon].self) ?? [LocalPokemon]()
     }
     
-    func save() {
+    public func save() {
         storage.save(pokemons,
                      to: directory(),
                      as: AppData.pokemonFile)
