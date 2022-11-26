@@ -13,7 +13,7 @@ import XCTest
 
 final class CatchActionsTests: XCTestCase {
     func testActions() {
-        let pokemon = MockDataFactory.makePokemon()
+        let pokemon = MockPokemonFactory.makePokemon()
         let actions = Actions(coordinator: MockCoordinator())
         let dataProvider = DataProvider()
         actions.dataProvider = dataProvider
