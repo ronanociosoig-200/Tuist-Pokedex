@@ -35,11 +35,17 @@ final class AppDataTests: XCTestCase {
         XCTAssertFalse(appData.newSpecies())
     }
     
-    func testAppDataSave() {
+    func testAppDataSaveAnLoad() {
+        let storage = FileStorage()
+        let appData = AppData(storage: storage)
         
-    }
-    
-    func testAppDataLoad() {
-        
+        XCTAssertTrue(appData.pokemons.count == 0)
+        appData.pokemons.append(MockPokemonFactory.makeLocalPokemon())
+        XCTAssertTrue(appData.pokemons.count == 1)
+        appData.save()
+        appData.pokemons.removeLast()
+        XCTAssertTrue(appData.pokemons.count == 0)
+        appData.load()
+        XCTAssertTrue(appData.pokemons.count == 1)
     }
 }
