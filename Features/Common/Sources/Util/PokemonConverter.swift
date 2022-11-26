@@ -1,5 +1,5 @@
 //
-//  PokemonParser.swift
+//  PokemonConverter.swift
 //  Common
 //
 //  Created by Ronan on 10/05/2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct PokemonParser {
+public struct PokemonConverter {
     public static func convert(pokemon: Pokemon) -> LocalPokemon {
         let types = pokemon.types
         
