@@ -47,7 +47,7 @@ commands:
       - run: 
           name: Cloud Auth
           command: |
-            TUIST_CONFIG_CLOUD_TOKEN=${TUIST_CLOUD_TOKEN} <<pipeline.parameters.tuist>> cloud auth
+            TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cloud auth
       - run: 
           name: Fetch Dependencies
           command: |
