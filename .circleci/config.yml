@@ -45,6 +45,10 @@ commands:
   setup_tuist:          
     steps: 
       - run: 
+          name: Cloud Auth
+          command: |
+            <<pipeline.parameters.tuist>> cloud auth
+      - run: 
           name: Fetch Dependencies
           command: |
             [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
