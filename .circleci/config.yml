@@ -11,7 +11,7 @@ parameters:
     default: "13.3.1"
   tuist: 
     type: string
-    default: "~/.tuist/Versions/3.2.0/tuist"
+    default: "~/.tuist/Versions/3.14.0/tuist"
 
 commands:
   install_swiftlint:
@@ -37,11 +37,11 @@ commands:
       - run:
           name: Installing Tuist
           command: |
-            [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
+            [ -f ~/.tuist/Versions/3.14.0/tuist ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
       - run:
           name: Install Tuist specific version
           command: |
-            [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || tuist install 3.2.0
+            [ -f ~/.tuist/Versions/3.14.0/tuist ] && echo "Skipping tuist install" || tuist install 3.14.0
   setup_tuist:          
     steps: 
       #- run: 
