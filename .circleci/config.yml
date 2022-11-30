@@ -44,10 +44,10 @@ commands:
             [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || tuist install 3.2.0
   setup_tuist:          
     steps: 
-      - run: 
-          name: Cloud Auth
-          command: |
-            <<pipeline.parameters.tuist>> cloud auth
+      #- run: 
+      #    name: Cloud Auth
+      #    command: |
+      #      <<pipeline.parameters.tuist>> cloud auth
       - run: 
           name: Fetch Dependencies
           command: |
