@@ -45,12 +45,16 @@ commands:
   setup_tuist:          
     steps: 
       - run: 
+          name: Cloud Auth
+          command: |
+            <<pipeline.parameters.tuist>> cloud auth
+      - run: 
           name: Fetch Dependencies
           command: |
             [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run: 
           name: Tuist Cache Warm
-          command: <<pipeline.parameters.tuist>> cache warm -x
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
       - run: 
           name: Tuist Generate Project
           command: <<pipeline.parameters.tuist>> generate -xn
