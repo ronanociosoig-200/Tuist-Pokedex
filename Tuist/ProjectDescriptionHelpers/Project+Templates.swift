@@ -184,19 +184,19 @@ extension Project {
                 .target(name: "\(name)")
         ])
         
-        let uiTestTarget = Target(
-            name: "\(name)UITests",
-            platform: platform,
-            product: .uiTests,
-            bundleId: "\(reverseOrganizationName).\(name)UITests",
-            infoPlist: .default,
-            sources: ["\(featuresPath)/\(name)/UITests/**"],
-            resources: [],
-            dependencies: [
-                .target(name: "\(name)")
-        ])
+//        let uiTestTarget = Target(
+//            name: "\(name)UITests",
+//            platform: platform,
+//            product: .uiTests,
+//            bundleId: "\(reverseOrganizationName).\(name)UITests",
+//            infoPlist: .default,
+//            sources: ["\(featuresPath)/\(name)/UITests/**"],
+//            resources: [],
+//            dependencies: [
+//                .target(name: "\(name)")
+//        ])
 
-        return [mainTarget, testTarget, uiTestTarget]
+        return [mainTarget, testTarget] //, uiTestTarget]
     }
 
     public static func makeSchemes(targetName: String) -> [Scheme] {
