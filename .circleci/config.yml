@@ -12,6 +12,9 @@ parameters:
   tuist: 
     type: string
     default: "~/.tuist/Versions/3.14.0/tuist"
+  tuist_version:
+    type: string
+    default: "3.14.0"
 
 commands:
   install_swiftlint:
@@ -37,11 +40,11 @@ commands:
       - run:
           name: Installing Tuist
           command: |
-            [ -f ~/.tuist/Versions/3.14.0/tuist ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
+            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
       - run:
           name: Install Tuist specific version
           command: |
-            [ -f ~/.tuist/Versions/3.14.0/tuist ] && echo "Skipping tuist install" || tuist install 3.14.0
+            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
   setup_tuist:          
     steps: 
       #- run: 
