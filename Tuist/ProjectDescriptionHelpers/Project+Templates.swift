@@ -70,7 +70,9 @@ extension Project {
         
         targets += moduleTargets.flatMap({ makeFrameworkTargets(module: $0, platform: platform) })
         
-        let schemes = makeSchemes(targetName: name)
+        var schemes = makeSchemes(targetName: name)
+                
+        schemes += moduleTargets.flatMap({ makeSchemeWithCodeCoverage(targetName: $0.name) })
         
         return Project(name: name,
                        organizationName: organizationName,
@@ -193,7 +195,7 @@ extension Project {
 //            dependencies: [
 //                .target(name: "\(name)")
 //        ])
-//
+
         return [mainTarget, testTarget] //, uiTestTarget]
     }
 
@@ -252,4 +254,50 @@ extension Project {
         
         return [asyncTestingScheme, uiTestingScheme]
     }
+    
+    public static func makeSchemeWithCodeCoverage(targetName: String) -> [Scheme] {
+            let mainTargetReference = TargetReference(stringLiteral: targetName)
+            let debugConfiguration = ConfigurationName(stringLiteral: "Debug")
+            let buildAction = BuildAction(targets: [mainTargetReference])
+            let executable = mainTargetReference
+            let launchArguments = Arguments(launchArguments: [LaunchArgument(name: "Testing", isEnabled: true)])
+            
+            let target = TestableTarget(stringLiteral: "\(targetName)Tests")
+            let testActionOptions = TestActionOptions.options(language: SchemeLanguage.init(stringLiteral: "en-US"),
+                                                              region: "en-US",
+                                                              coverage: true,
+                                                              codeCoverageTargets: [])
+            
+            let testAction =
+            TestAction.targets([target],
+                               arguments: nil,
+                               configuration: debugConfiguration,
+                               attachDebugger: false,
+                               expandVariableFromTarget: nil,
+                               preActions: [],
+                               postActions: [],
+                               options: testActionOptions,
+                               diagnosticsOptions: [])
+            
+            let runActionOptions = RunActionOptions.options(language: nil,
+                                                            storeKitConfigurationPath: nil, simulatedLocation: nil)
+
+            let runAction = RunAction.runAction(configuration: debugConfiguration,
+                                                      attachDebugger: false,
+                                                      preActions: [],
+                                                      postActions: [],
+                                                      executable: executable,
+                                                      arguments: launchArguments,
+                                                      options: runActionOptions,
+                                                      diagnosticsOptions: [])
+            
+            let testingScheme = Scheme(
+                name: "\(targetName)WithCodeCoverage",
+                shared: false,
+                buildAction: buildAction,
+                testAction: testAction,
+                runAction: runAction)
+            
+            return [testingScheme]
+        }
 }

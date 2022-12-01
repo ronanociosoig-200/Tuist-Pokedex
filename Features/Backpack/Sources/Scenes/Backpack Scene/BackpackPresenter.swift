@@ -43,7 +43,9 @@ class BackpackPresenter: BackpackPresenting {
     typealias DataSource = BackpackDataSource
     typealias Delegate = BackpackDelegate
     
-    required init(actions: BackpackActions, dataProvider: BackpackDataProvider, view: BackpackView) {
+    required init(actions: BackpackActions,
+                  dataProvider: BackpackDataProvider,
+                  view: BackpackView) {
         self.view = view
         self.actions = actions
         self.dataProvider = dataProvider

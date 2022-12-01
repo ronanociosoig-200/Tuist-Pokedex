@@ -32,7 +32,7 @@ Tapping on the lower button opens the Backpack scene, which displays all the cau
 
 ## Tuist
 
-Run the code in this repo requires the prior installation of [tuist.io](https://tuist.io) version 1.52. It is not compatible with Tuist 2.x. Generate the project and workspace by running [`tuist generate`](https://tuist.io/docs/usage/get-started/), and then `tuist focus Pokedex` to open the project.
+Run the code in this repo requires the prior installation of [tuist.io](https://tuist.io) version 3.14.0. Generate the project and workspace by running [`tuist generate`](https://tuist.io/docs/usage/get-started/). It will automatically open the project in Xcode.
 
 ## Modular Approach
 										     
@@ -82,7 +82,7 @@ It also receives call backs from the data provider when a request has completed 
 
  
 ## Manual & Automated Testing
-The project has unit and UI tests. The unit tests are both at the feature level in some cases as well at the application level.
+The project has unit and UI tests. There are comprehensive unit tests both at the feature and at the application level.
 
 Run `tuist test` to execute all the tests, or `tuist test <feature_name>` for running the tests on specific modules.
 

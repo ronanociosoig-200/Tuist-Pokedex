@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 import Common
-import BackpackUI
+import Backpack
 import Detail
 
 class Coordinator: Coordinating {

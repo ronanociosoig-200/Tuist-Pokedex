@@ -50,10 +50,13 @@ public class Storage {
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(object)
-            if FileManager.default.fileExists(atPath: url.path) {
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: url.path) {
                 try FileManager.default.removeItem(at: url)
             }
-            FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
+            fileManager.createFile(atPath: url.path,
+                                           contents: data,
+                                           attributes: nil)
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -68,12 +71,13 @@ public class Storage {
     /// - Returns: decoded struct model(s) of data
     static func retrieve<T: Decodable>(_ fileName: String, from directory: Directory, as type: T.Type) -> T {
         let url = getURL(for: directory).appendingPathComponent(fileName, isDirectory: false)
+        let fileManager = FileManager.default
         
-        if !FileManager.default.fileExists(atPath: url.path) {
+        if !fileManager.fileExists(atPath: url.path) {
             fatalError("File at path \(url.path) does not exist!")
         }
         
-        if let data = FileManager.default.contents(atPath: url.path) {
+        if let data = fileManager.contents(atPath: url.path) {
             let decoder = JSONDecoder()
             do {
                 let model = try decoder.decode(type, from: data)
@@ -90,9 +94,10 @@ public class Storage {
     static func clear(_ directory: Directory) {
         let url = getURL(for: directory)
         do {
-            let contents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])
+            let fileManager = FileManager.default
+            let contents = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])
             for fileUrl in contents {
-                try FileManager.default.removeItem(at: fileUrl)
+                try fileManager.removeItem(at: fileUrl)
             }
         } catch {
             fatalError(error.localizedDescription)
@@ -102,9 +107,10 @@ public class Storage {
     /// Remove specified file from specified directory
     static func remove(_ fileName: String, from directory: Directory) {
         let url = getURL(for: directory).appendingPathComponent(fileName, isDirectory: false)
-        if FileManager.default.fileExists(atPath: url.path) {
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: url.path) {
             do {
-                try FileManager.default.removeItem(at: url)
+                try fileManager.removeItem(at: url)
             } catch {
                 fatalError(error.localizedDescription)
             }

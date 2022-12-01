@@ -13,15 +13,15 @@ import Common
 
 @testable import Pokedex
 
-class PokemonParserTests: XCTestCase {
-    func testParsing() {
+class PokemonConverterTests: XCTestCase {
+    func testConverting() {
         let data = try! MockData.loadResponse()
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         let pokemon = try! decoder.decode(Pokemon.self, from: data!)
         
-        let localPokemon = PokemonParser.parse(pokemon: pokemon)
+        let localPokemon = PokemonConverter.convert(pokemon: pokemon)
         
         XCTAssertNotNil(localPokemon)
         XCTAssertEqual(pokemon.name, localPokemon.name)

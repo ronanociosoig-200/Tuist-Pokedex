@@ -11,7 +11,10 @@ parameters:
     default: "13.3.1"
   tuist: 
     type: string
-    default: "~/.tuist/Versions/3.2.0/tuist"
+    default: "~/.tuist/Versions/3.14.0/tuist"
+  tuist_version:
+    type: string
+    default: "3.14.0"
 
 commands:
   install_swiftlint:
@@ -37,13 +40,17 @@ commands:
       - run:
           name: Installing Tuist
           command: |
-            [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
+            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
       - run:
           name: Install Tuist specific version
           command: |
-            [ -f ~/.tuist/Versions/3.2.0/tuist ] && echo "Skipping tuist install" || tuist install 3.2.0
+            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
   setup_tuist:          
     steps: 
+      #- run: 
+      #    name: Cloud Auth
+      #    command: |
+      #      <<pipeline.parameters.tuist>> cloud auth
       - run: 
           name: Fetch Dependencies
           command: |
@@ -51,10 +58,11 @@ commands:
       - run: 
           name: Tuist Cache Warm
           command: <<pipeline.parameters.tuist>> cache warm -x
+          # TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN 
+          # disable Tuist cloud because it is failing due to a config error
       - run: 
           name: Tuist Generate Project
           command: <<pipeline.parameters.tuist>> generate -xn
- 
   build_project:
     steps:
       - run: 

@@ -10,7 +10,7 @@ import Foundation
 import JGProgressHUD
 import Common
 import NetworkKit
-import CatchUI
+import Catch
 
 class Coordinator: Coordinating {
     let window: UIWindow

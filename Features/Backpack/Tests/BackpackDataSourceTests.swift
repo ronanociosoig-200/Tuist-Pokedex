@@ -1,0 +1,51 @@
+//
+//  BackpackDataSourceTests.swift
+//  BackpackTests
+//
+//  Created by Ronan O Ciosoig on 24/11/22.
+//  Copyright © 2022 Sonomos.com. All rights reserved.
+//
+
+import XCTest
+
+@testable import Backpack
+
+final class BackpackDataSourceTests: XCTestCase {
+    func testBackpackDataSourceNumberOfItems() {
+        let dataProvider = MockBackpackDataProvider()
+        let presenter = BackpackPresenter(actions: MockBackpackActions(),
+                                          dataProvider: dataProvider,
+                                          view: MockBackpackView())
+        
+        let dataSource = BackpackDataSource()
+        dataSource.presenter = presenter
+        
+        let layout = UICollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        dataSource.register(collectionView: collectionView)
+        let numberOfItems = dataSource.collectionView(collectionView,
+                                                      numberOfItemsInSection: 0)
+        
+        XCTAssertEqual(dataProvider.pokemons().count, numberOfItems)
+    }
+    
+    func testBackpackDataSourceCellForItemAtIndexPath() {
+        let dataProvider = MockBackpackDataProvider()
+        let firstPokemon = dataProvider.pokemons().first
+        let presenter = BackpackPresenter(actions: MockBackpackActions(),
+                                          dataProvider: dataProvider,
+                                          view: MockBackpackView())
+        
+        let dataSource = BackpackDataSource()
+        dataSource.presenter = presenter
+        let indexPath = IndexPath(item: 0, section: 0)
+        let layout = UICollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        dataSource.register(collectionView: collectionView)
+        
+        let cell = dataSource.collectionView(collectionView, cellForItemAt: indexPath) as! PokemonCollectionViewCell
+        let expectedName = firstPokemon!.name
+        let cellName = cell.name.text?.lowercased()
+        XCTAssertEqual(cellName, expectedName)
+    }
+}

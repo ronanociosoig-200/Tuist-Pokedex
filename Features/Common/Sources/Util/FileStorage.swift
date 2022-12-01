@@ -37,7 +37,7 @@ public class FileStorage: Storable {
     }
     
     public func fileExists(fileName: String, in directory: Directory) -> Bool {
-        return Storage.fileExists(AppData.pokemonFile, in: directoryAdaptor(directory: directory))
+        return Storage.fileExists(fileName, in: directoryAdaptor(directory: directory))
     }
     
     public func remove(_ fileName: String, from directory: Directory) {

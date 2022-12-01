@@ -12,19 +12,24 @@ import Common
 public class BackpackViewController: UIViewController {
     var presenter: BackpackPresenting?
     
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
+        
         guard let presenter = presenter else { return }
         presenter.viewDidLoad()
         
         title = Constants.Translations.BackpackScene.title
+        
+        setupCollectionView()
     }
     
     private func setupCollectionView() {
         guard let presenter = presenter else { return }
+        if collectionView == nil {
+            return
+        }
         collectionView.delegate = presenter.delegate
         collectionView.dataSource = presenter.dataSource
         collectionView.reloadData()
