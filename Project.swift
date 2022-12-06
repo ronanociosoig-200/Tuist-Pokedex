@@ -23,7 +23,7 @@ func makeHanekeModule() -> Module {
                   exampleDependencies: [],
                   frameworkResources: [],
                   exampleResources: ["Resources/**"],
-    testResources: [])
+                  testResources: [])
 }
 
 func makeHomeModule() -> Module {
@@ -33,7 +33,8 @@ func makeHomeModule() -> Module {
                   exampleDependencies: [.external(name: "JGProgressHUD")],
                   frameworkResources: ["Sources/**/*.storyboard", "Resources/**"],
                   exampleResources: ["Resources/**"],
-                  testResources: [])
+                  testResources: [],
+                  targets: [.framework, .unitTests, .uiTests, .exampleApp])
 }
 
 func makeBackpackModule() -> Module {
@@ -43,7 +44,8 @@ func makeBackpackModule() -> Module {
            exampleDependencies: [.target(name: "Detail")],
            frameworkResources: ["Resources/**", "Sources/**/*.xib", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
-                  testResources: [])
+                  testResources: [],
+                  targets: [.framework, .unitTests, .uiTests, .exampleApp])
 }
 
 func makeDetailModule() -> Module {
@@ -53,7 +55,8 @@ func makeDetailModule() -> Module {
                   exampleDependencies: [],
                   frameworkResources: ["Sources/**/*.storyboard"],
                   exampleResources: ["Resources/**"],
-                  testResources: [])
+                  testResources: [],
+                  targets: [.framework, .unitTests, .uiTests, .exampleApp])
 }
 
 func makeCatchModule() -> Module {
@@ -63,7 +66,8 @@ func makeCatchModule() -> Module {
            exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
            frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
-           testResources: [])
+           testResources: [],
+           targets: [.framework, .unitTests, .uiTests, .exampleApp])
 }
 
 func makeCommonModule() -> Module {
