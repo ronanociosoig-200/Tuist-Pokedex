@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="Sf8-0k-iHG">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="6JY-wC-gpp" customClass="HomeViewController" customModule="Wefox_Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="6JY-wC-gpp" customClass="HomeViewController" customModule="Home" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ywu-gT-m6t">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDu-GL-Qjf">
-                                <rect key="frame" x="112.5" y="128" width="150" height="150"/>
+                                <rect key="frame" x="112.5" y="108" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="T6u-aI-NvC"/>
                                     <constraint firstAttribute="height" constant="150" id="cgn-QP-qU2"/>
@@ -30,7 +28,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Catch a Pokemon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSl-yY-noe">
-                                <rect key="frame" x="92" y="286" width="191" height="21"/>
+                                <rect key="frame" x="92" y="266" width="191" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="191" id="QHG-T9-YWc"/>
                                     <constraint firstAttribute="height" constant="21" id="Xks-RG-kLo"/>
@@ -61,7 +59,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ODG-Sk-nvn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="CSl-yY-noe" firstAttribute="centerX" secondItem="Ywu-gT-m6t" secondAttribute="centerX" id="51x-jw-Hxq"/>
                             <constraint firstItem="hQ2-2d-wYR" firstAttribute="top" secondItem="Tud-bs-2fW" secondAttribute="bottom" constant="21" id="V33-Ys-zac"/>
@@ -72,7 +71,6 @@
                             <constraint firstItem="hDu-GL-Qjf" firstAttribute="centerX" secondItem="Ywu-gT-m6t" secondAttribute="centerX" id="oPn-6D-d3p"/>
                             <constraint firstItem="hDu-GL-Qjf" firstAttribute="top" secondItem="ODG-Sk-nvn" secondAttribute="top" constant="108" id="vG4-vQ-QOp"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ODG-Sk-nvn"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3d-JN-ISV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -83,5 +81,8 @@
     <resources>
         <image name="Backpack" width="1300" height="1300"/>
         <image name="Ball" width="600" height="600"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

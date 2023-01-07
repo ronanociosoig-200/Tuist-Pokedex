@@ -40,7 +40,7 @@ class Coordinator: Coordinating {
     
     func showCatchScene() {
         let viewController = makeViewController(with: "Mock Catch Scene")
-        viewController.view.backgroundColor = UIColor.white
+        viewController.view.backgroundColor = UIColor.systemBackground
         
         guard let topViewController = window.rootViewController else { return }
         
@@ -134,7 +134,7 @@ extension Coordinator {
         let viewController = UIViewController()
         let label = UILabel()
         
-        viewController.view.backgroundColor = UIColor.white
+        viewController.view.backgroundColor = UIColor.systemBackground
         
         label.text = text
         label.textAlignment = .center
