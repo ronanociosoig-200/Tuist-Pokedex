@@ -36,7 +36,9 @@ class Coordinator: Coordinating {
         
         PokemonDetailWireframe.prepare(viewController, pokemon: pokemon)
         
-        window.rootViewController = viewController
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
+        window.rootViewController = navigationController
     }
 
     func showCatchScene() {
