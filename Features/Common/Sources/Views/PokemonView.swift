@@ -18,4 +18,15 @@ public class PokemonView: UIView {
     @IBOutlet public weak var types: UILabel!
     @IBOutlet public weak var experience: UILabel!
     
+    public func assignIdentifiers() {
+        name.accessibilityIdentifier = PokemonViewIdentifiers.name
+        weight.accessibilityIdentifier = PokemonViewIdentifiers.weight
+        height.accessibilityIdentifier = PokemonViewIdentifiers.height
+        imageView.accessibilityIdentifier = PokemonViewIdentifiers.imageView
+        date.accessibilityIdentifier = PokemonViewIdentifiers.date
+        types.accessibilityIdentifier = PokemonViewIdentifiers.types
+        experience.accessibilityIdentifier = PokemonViewIdentifiers.experience
+        
+        self.accessibilityIdentifier = String(describing: self)
+    }
 }

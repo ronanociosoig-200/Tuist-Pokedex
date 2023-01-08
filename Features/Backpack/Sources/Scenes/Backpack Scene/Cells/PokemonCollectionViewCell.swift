@@ -11,4 +11,10 @@ import UIKit
 class PokemonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var name: UILabel!
+    
+    func assignIdentifiers() {
+        name.accessibilityIdentifier = PokemonCollectionViewCellIdentifiers.name
+        imageView.accessibilityIdentifier = PokemonCollectionViewCellIdentifiers.imageView
+        self.accessibilityIdentifier = PokemonCollectionViewCellIdentifiers.cell
+    }
 }
