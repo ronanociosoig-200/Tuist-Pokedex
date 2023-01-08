@@ -39,7 +39,7 @@ class Coordinator: Coordinating {
     }
     
     func showCatchScene() {
-        let viewController = makeViewController(with: "Mock Catch Scene")
+        let viewController = makeViewController(with: HomeExampleIdentifiers.mockCatchScene)
         viewController.view.backgroundColor = UIColor.systemBackground
         
         guard let topViewController = window.rootViewController else { return }
@@ -56,7 +56,7 @@ class Coordinator: Coordinating {
     }
     
     func showBackpackScene() {
-        let viewController = makeViewController(with: "Mock Backpack Scene")
+        let viewController = makeViewController(with: HomeExampleIdentifiers.mockBackpackScene)
         
         guard let topViewController = window.rootViewController else { return }
 
@@ -139,8 +139,10 @@ extension Coordinator {
         label.text = text
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        //label.accessibilityIdentifier = text
         
         viewController.view.addSubview(label)
+        viewController.view.accessibilityIdentifier = text
         
         guard let view = viewController.view else {
             return viewController

@@ -72,6 +72,10 @@
                             <constraint firstItem="hDu-GL-Qjf" firstAttribute="top" secondItem="ODG-Sk-nvn" secondAttribute="top" constant="108" id="vG4-vQ-QOp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backpackButton" destination="Tud-bs-2fW" id="rTb-dK-iED"/>
+                        <outlet property="catchButton" destination="hDu-GL-Qjf" id="FWU-6x-bVg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3d-JN-ISV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
