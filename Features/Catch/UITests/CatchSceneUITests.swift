@@ -14,6 +14,7 @@ struct LaunchArguments {
     static let uiTesting = "CatchUITesting"
     static let error401 = "Error_401"
     static let leaveIt = "LeaveIt"
+    static let disableAnimations = "DisableAnimations"
 }
 
 class CatchSceneUITests: XCTestCase {
@@ -26,7 +27,7 @@ class CatchSceneUITests: XCTestCase {
     }
     
     func testCatchPokemon() {
-        app.launchArguments += [LaunchArguments.uiTesting]
+        app.launchArguments += [LaunchArguments.uiTesting, LaunchArguments.disableAnimations]
         app.launch()
         
         print(app.debugDescription)
@@ -37,7 +38,7 @@ class CatchSceneUITests: XCTestCase {
     }
     
     func testLeavePokemon() {
-        app.launchArguments += [LaunchArguments.uiTesting]
+        app.launchArguments += [LaunchArguments.uiTesting, LaunchArguments.disableAnimations]
         app.launch()
         
         print(app.debugDescription)
@@ -48,7 +49,7 @@ class CatchSceneUITests: XCTestCase {
     }
     
     func testError401WhenCatchingPokemon() {
-        app.launchArguments += [LaunchArguments.error401]
+        app.launchArguments += [LaunchArguments.error401, LaunchArguments.disableAnimations]
         
         print(app.debugDescription)
         app.launch()
@@ -60,7 +61,7 @@ class CatchSceneUITests: XCTestCase {
     }
     
     func testCaseOfPokemonAlreadyCaught() {
-        app.launchArguments += [LaunchArguments.leaveIt]
+        app.launchArguments += [LaunchArguments.leaveIt, LaunchArguments.disableAnimations]
         
         print(app.debugDescription)
         app.launch()

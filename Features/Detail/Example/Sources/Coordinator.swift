@@ -41,7 +41,7 @@ class Coordinator: Coordinating {
         window.rootViewController = navigationController
     }
 
-    func showCatchScene() {
+    func showCatchScene(identifier: Int?) {
 
     }
 

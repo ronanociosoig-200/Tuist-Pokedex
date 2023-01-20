@@ -38,7 +38,7 @@ class Coordinator: Coordinating {
         window.rootViewController = viewController
     }
     
-    func showCatchScene() {
+    func showCatchScene(identifier: Int?) {
         let viewController = makeViewController(with: HomeExampleIdentifiers.mockCatchScene)
         viewController.view.backgroundColor = UIColor.systemBackground
         

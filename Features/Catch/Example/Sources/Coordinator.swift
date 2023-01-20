@@ -18,12 +18,6 @@ public struct TestCasePokemonIdentifiers {
     static let errorCase = 950
 }
 
-struct LaunchArguments {
-    static let uiTesting = "CatchUITesting"
-    static let error401 = "Error_401"
-    static let leaveIt = "LeaveIt"
-}
-
 class Coordinator: Coordinating {
     let window: UIWindow
     var dataProvider: DataProvider?

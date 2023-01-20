@@ -1,6 +1,13 @@
 import UIKit
 import Common
 
+struct LaunchArguments {
+    static let uiTesting = "CatchUITesting"
+    static let error401 = "Error_401"
+    static let leaveIt = "LeaveIt"
+    static let disableAnimations = "DisableAnimations"
+}
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,6 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func disableAnimations() {
         let arguments = ProcessInfo.processInfo.arguments
-        UIView.setAnimationsEnabled(!arguments.contains("CatchUITesting"))
+        UIView.setAnimationsEnabled(!arguments.contains(LaunchArguments.disableAnimations))
     }
 }
