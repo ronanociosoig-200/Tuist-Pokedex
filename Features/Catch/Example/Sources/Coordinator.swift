@@ -90,7 +90,7 @@ class Coordinator: Coordinating {
             pokemonIdentifier = TestCasePokemonIdentifiers.fixedCase
             dataProvider.addMockPokemon()
         } else {
-            if let identifier {
+            if let identifier = identifier {
                 pokemonIdentifier = identifier
             } else {
                 pokemonIdentifier = Generator.nextIdentifier()

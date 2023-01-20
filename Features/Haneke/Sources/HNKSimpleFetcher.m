@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "HNKSimpleFetcher.h"
+#import <HNKSimpleFetcher.h>
 
 @implementation HNKSimpleFetcher {
     NSString *_key;

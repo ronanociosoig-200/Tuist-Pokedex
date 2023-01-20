@@ -18,11 +18,11 @@
 //  limitations under the License.
 //
 
-#import "UIButton+Haneke.h"
-#import "UIView+Haneke.h"
-#import "HNKSimpleFetcher.h"
-#import "HNKDiskFetcher.h"
-#import "HNKNetworkFetcher.h"
+#import <UIButton+Haneke.h>
+#import <UIView+Haneke.h>
+#import <HNKSimpleFetcher.h>
+#import <HNKDiskFetcher.h>
+#import <HNKNetworkFetcher.h>
 #import <objc/runtime.h>
 
 @implementation UIButton (Haneke)
