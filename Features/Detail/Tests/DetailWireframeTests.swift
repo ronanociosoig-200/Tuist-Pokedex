@@ -14,7 +14,7 @@ final class DetailWireframeTests: XCTestCase {
     func testViewController() {
         let viewController = PokemonDetailWireframe.makeViewController()
         
-        XCTAssertNotNil(viewController
+        XCTAssertNotNil(viewController)
     }
     
     func testPrepare() {
