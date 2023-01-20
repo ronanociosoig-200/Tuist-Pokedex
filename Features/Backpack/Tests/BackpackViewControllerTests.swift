@@ -48,7 +48,7 @@ final class BackpackViewControllerTests: XCTestCase {
         let viewController = BackpackWireframe.makeViewController()
         let layout = UICollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        vc.collectionView = collectionView
+        viewController.collectionView = collectionView
         
         let dataSource = MockBackpackDataSource()
         
