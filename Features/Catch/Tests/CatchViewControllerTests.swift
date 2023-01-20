@@ -55,7 +55,7 @@ final class CatchViewControllerTests: XCTestCase {
         
         XCTAssertNotNil(leaveOrCatchAlert)
         
-        let errorAlert = vc.makeErrorAlert(message: "Error")
+        let errorAlert = viewController.makeErrorAlert(message: "Error")
         
         XCTAssertNotNil(errorAlert)
     }
