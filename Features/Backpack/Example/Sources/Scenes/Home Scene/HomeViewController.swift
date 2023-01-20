@@ -9,9 +9,13 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    @IBOutlet var button: UIButton!
+    
     var presenter: HomePresenting?
     
     @IBAction func backpackButtonAction() {
+        button.accessibilityIdentifier = "OpenBackpackButton"
+        
         guard let presenter = presenter else { return }
         presenter.backpackButtonAction()
     }

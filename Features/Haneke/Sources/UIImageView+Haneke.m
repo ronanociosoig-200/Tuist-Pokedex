@@ -18,11 +18,11 @@
 //  limitations under the License.
 //
 
-#import "UIImageView+Haneke.h"
-#import "HNKDiskFetcher.h"
-#import "HNKSimpleFetcher.h"
-#import "HNKNetworkFetcher.h"
-#import "UIView+Haneke.h"
+#import <UIImageView+Haneke.h>
+#import <HNKDiskFetcher.h>
+#import <HNKSimpleFetcher.h>
+#import <HNKNetworkFetcher.h>
+#import <UIView+Haneke.h>
 #import <objc/runtime.h>
 
 @implementation UIImageView (Haneke)

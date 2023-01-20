@@ -15,7 +15,7 @@ public protocol HomeActions {
 
 extension Actions: HomeActions {
     public func ballButtonAction() {
-        coordinator.showCatchScene()
+        coordinator.showCatchScene(identifier: nil)
     }
     
     public func backpackButtonAction() {

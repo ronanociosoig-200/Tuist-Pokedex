@@ -18,8 +18,8 @@
 //  limitations under the License.
 //
 
-#import "HNKCache.h"
-#import "HNKDiskCache.h"
+#import <HNKCache.h>
+#import <HNKDiskCache.h>
 
 NSString *const HNKErrorDomain = @"com.hpique.haneke";
 

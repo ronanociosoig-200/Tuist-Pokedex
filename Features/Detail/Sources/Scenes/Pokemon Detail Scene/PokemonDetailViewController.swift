@@ -37,7 +37,7 @@ public class PokemonDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         configurePokemonView()
     }
-    
+        
     private func configurePokemonView() {
         guard let presenter = presenter else { return }
         guard let pokemonView = pokemonView else { return }
@@ -55,11 +55,14 @@ public class PokemonDetailViewController: UIViewController {
         pokemonView.types.isHidden = false
         pokemonView.types.text = presenter.types()
         
+        pokemonView.assignIdentifiers()
+        
         title = presenter.name().capitalized
         
         guard let imagePath = presenter.imagePath() else { return }
         guard let imageURL = URL(string: imagePath) else { return }
         pokemonView.imageView.hnk_setImage(from: imageURL)
+        pokemonView.imageView.contentMode = .scaleAspectFit
     }
 }
 

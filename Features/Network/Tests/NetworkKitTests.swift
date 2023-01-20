@@ -33,8 +33,8 @@ class NetworkKitTests: XCTestCase {
                     print("All good")
                 }
             }, receiveValue: { data in
-                let length = data.count
-                let response = String(data: data, encoding: .utf8)
+                // let length = data.count
+                // let response = String(data: data, encoding: .utf8)
                 // print("Response:\(String(describing: response))")
                 // print("We have some data.: \(length)")
                 expectation.fulfill()

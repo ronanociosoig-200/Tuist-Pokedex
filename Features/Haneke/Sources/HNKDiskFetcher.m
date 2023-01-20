@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "HNKDiskFetcher.h"
+#import <HNKDiskFetcher.h>
 
 @implementation HNKDiskFetcher {
     NSString *_path;

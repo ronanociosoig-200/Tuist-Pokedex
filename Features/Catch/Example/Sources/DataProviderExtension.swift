@@ -15,6 +15,27 @@ public protocol DataSearchProviding {
     func search(identifier: Int, networkService: SearchService)
 }
 
+extension DataProvider {
+    func addMockPokemon() {
+        let pokemon = loadMockPokemon()
+        appData.pokemon = pokemon
+        let localPokemon = PokemonConverter.convert(pokemon: pokemon)
+        appData.pokemons.append(localPokemon)
+    }
+    
+    func loadMockPokemon() -> Pokemon {
+        let data = try! MockData.loadResponse()
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let pokemon = try! decoder.decode(Pokemon.self, from: data!)
+        return pokemon
+    }
+    
+    func clean() {
+        appData.pokemons.removeAll()
+    }
+}
+
 extension DataProvider: DataSearchProviding {
     public func search(identifier: Int, networkService: SearchService) {
         appData.pokemon = nil

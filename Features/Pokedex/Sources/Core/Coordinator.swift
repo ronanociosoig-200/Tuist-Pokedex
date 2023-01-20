@@ -45,7 +45,7 @@ class Coordinator: Coordinating {
         os_log("Info: %s", log: Log.general, type: .info, "showHomeScene")
     }
     
-    func showCatchScene() {
+    func showCatchScene(identifier: Int?) {
         guard let dataProvider = dataProvider else { return }
         let viewController = CatchWireframe.makeViewController()
         

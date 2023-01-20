@@ -14,10 +14,13 @@ protocol HomeView: AnyObject {
 
 protocol HomePresenting: AnyObject {
     func catchButtonAction()
+    func catchFixedButtonAction()
+    func catchErrorButtonAction()
+    func leaveItButtonAction()
 }
 
 class HomePresenter: HomePresenting {
-    
+
     // MARK: Properties
     
     private weak var view: HomeView?
@@ -38,5 +41,17 @@ class HomePresenter: HomePresenting {
 
     func catchButtonAction() {
         actions.catchButtonAction()
+    }
+    
+    func catchFixedButtonAction() {
+        actions.catchFixedbuttonAction()
+    }
+    
+    func catchErrorButtonAction() {
+        actions.catchErrorButtonAction()
+    }
+    
+    func leaveItButtonAction() {
+        actions.leaveItButtonAction()
     }
 }

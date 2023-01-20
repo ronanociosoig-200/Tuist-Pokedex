@@ -8,9 +8,15 @@
 
 import Foundation
 import JGProgressHUD
+import Catch
 import Common
 import NetworkKit
-import Catch
+
+public struct TestCasePokemonIdentifiers {
+    static let fixedCase = 5
+    static let leaveItCase = 0
+    static let errorCase = 950
+}
 
 class Coordinator: Coordinating {
     let window: UIWindow
@@ -39,7 +45,7 @@ class Coordinator: Coordinating {
         window.rootViewController = viewController
     }
     
-    func showCatchScene() {
+    func showCatchScene(identifier: Int?) {
         guard let dataProvider = dataProvider else { return }
         let viewController = CatchWireframe.makeViewController()
         
@@ -53,14 +59,46 @@ class Coordinator: Coordinating {
         
         currentViewController = viewController
         
-        searchNextPokemon()
+        searchNextPokemon(identifier: identifier)
         
         showLoading()
     }
     
-    func searchNextPokemon() {
+    func searchNextPokemon(identifier: Int?) {
         guard let dataProvider = dataProvider else { return }
-        dataProvider.search(identifier: Generator.nextIdentifier(), networkService: PokemonSearchService())
+        let searchService: SearchService
+        let arguments = ProcessInfo.processInfo.arguments
+        var pokemonIdentifier: Int
+        let externalIdentifier = identifier ?? 0
+        
+        dataProvider.clean()
+        
+        if arguments.contains(LaunchArguments.uiTesting)
+            || externalIdentifier == TestCasePokemonIdentifiers.fixedCase {
+            let session = URLSessionFactory.makeSession()
+            searchService = PokemonSearchService(session: session)
+            pokemonIdentifier = TestCasePokemonIdentifiers.fixedCase
+        } else if arguments.contains(LaunchArguments.error401)
+                    || externalIdentifier == TestCasePokemonIdentifiers.errorCase {
+            let session = URLSessionFactory.makeError401Session()
+            searchService = PokemonSearchService(session: session)
+            pokemonIdentifier = TestCasePokemonIdentifiers.errorCase
+        } else if arguments.contains(LaunchArguments.leaveIt)
+                    || externalIdentifier == TestCasePokemonIdentifiers.leaveItCase {
+            let session = URLSessionFactory.makeSession()
+            searchService = PokemonSearchService(session: session)
+            pokemonIdentifier = TestCasePokemonIdentifiers.fixedCase
+            dataProvider.addMockPokemon()
+        } else {
+            if let identifier = identifier {
+                pokemonIdentifier = identifier
+            } else {
+                pokemonIdentifier = Generator.nextIdentifier()
+            }
+            searchService = PokemonSearchService()
+        }
+        
+        dataProvider.search(identifier: pokemonIdentifier, networkService: searchService)
     }
     
     func showBackpackScene() {
@@ -128,5 +166,106 @@ extension Coordinator: Notifier {
                 self.presenter?.update()
             }
         }
+    }
+}
+
+struct URLSessionFactory {
+    static func makeError401Session() -> URLSession {
+        let identifier = TestCasePokemonIdentifiers.errorCase
+        let endpoint = PokemonSearchEndpoint.search(identifier: identifier)
+        let url = endpoint.makeURL()
+        return MockSessionFactory.make(url: url,
+                                              data: Data("".utf8),
+                                              statusCode: 401)
+    }
+    
+    static func makeSession() -> URLSession {
+        let identifier = TestCasePokemonIdentifiers.fixedCase
+        let endpoint = PokemonSearchEndpoint.search(identifier: identifier)
+        let url = endpoint.makeURL()
+        let data = try! MockData.loadResponse()
+        
+        return MockSessionFactory.make(url: url,
+                                              data: data!,
+                                              statusCode: 200)
+    }
+}
+
+struct MockSessionFactory {
+    static func make(url: URL, data: Data, statusCode: Int) -> URLSession {
+        
+        guard let response = HTTPURLResponse(url: url,
+                                       statusCode: statusCode,
+                                       httpVersion: nil,
+                                       headerFields: nil) else {
+            return URLSession.shared
+        }
+        
+        let mockResponse = MockResponse(response: response, url: url, data: data)
+
+        URLProtocolMock.testResponses = [url: mockResponse]
+        
+        // now setup a configuration to use our mock
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [URLProtocolMock.self]
+        
+        // and create the URLSession form that
+        return URLSession(configuration: config)
+    }
+}
+
+struct MockResponse {
+    let response: URLResponse
+    let url: URL
+    let data: Data?
+}
+
+class URLProtocolMock: URLProtocol {
+    // this dictionary maps URLs to mock responses containing data
+    static var testResponses = [URL: MockResponse]()
+    static var error: Error?
+
+    // say we want to handle all types of request
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+
+    // ignore this method; just send back what we were given
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    override func startLoading() {
+        if let url = request.url {
+            
+            // if we have a valid URL with a response…
+            if let response = URLProtocolMock.testResponses[url] {
+                
+                // …and if we have test data for that URL…
+                if url.absoluteString == response.url.absoluteString, let data = response.data {
+                    self.client?.urlProtocol(self, didLoad: data)
+                }
+                
+                // …and we return our response if defined…
+                self.client?.urlProtocol(self,
+                                         didReceive: response.response,
+                                         cacheStoragePolicy: .notAllowed)
+            } else {
+                print("Error: No response found for URL: \(url.absoluteString)")
+            }
+        }
+
+        // …and we return our error if defined…
+        if let error = URLProtocolMock.error {
+            self.client?.urlProtocol(self, didFailWithError: error)
+        }
+
+        // mark that we've finished
+        self.client?.urlProtocolDidFinishLoading(self)
+    }
+
+    // this method is required but doesn't need to do anything
+    override func stopLoading() {
+        
     }
 }

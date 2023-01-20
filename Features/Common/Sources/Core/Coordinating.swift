@@ -15,7 +15,7 @@ public protocol Coordinating {
     func showLoading()
     func dismissLoading()
     func showHomeScene()
-    func showCatchScene()
+    func showCatchScene(identifier: Int?)
     func showBackpackScene()
     func showPokemonDetailScene(pokemon: LocalPokemon)
     func showAlert(with errorMessage: String)

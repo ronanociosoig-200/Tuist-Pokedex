@@ -43,6 +43,10 @@ class MockAppData: AppDataHandling {
     func sortByOrder() {
         sortByOrderCalled = true
     }
+    
+    func clean() {
+        
+    }
 }
 
 class MockCoordinator: Coordinating {
@@ -66,7 +70,7 @@ class MockCoordinator: Coordinating {
         
     }
     
-    func showCatchScene() {
+    func showCatchScene(identifier: Int?) {
         
     }
     

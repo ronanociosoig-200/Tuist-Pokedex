@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "HNKDiskCache.h"
+#import <HNKDiskCache.h>
 #import <CommonCrypto/CommonDigest.h> // For hnk_MD5String
 #import <sys/xattr.h> // For hnk_setValue:forExtendedFileAttribute:
 

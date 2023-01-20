@@ -67,7 +67,7 @@ class MockCoordinator: Coordinating {
         
     }
     
-    func showCatchScene() {
+    func showCatchScene(identifier: Int?) {
         showCatchSceneCalled = true
     }
     

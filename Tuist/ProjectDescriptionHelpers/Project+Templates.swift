@@ -3,7 +3,7 @@ import ProjectDescription
 let reverseOrganizationName = "com.sonomos"
 
 let featuresPath = "Features"
-let exampleAppSuffix = "ExampleApp"
+let exampleAppSuffix = "Example"
 let examplePath = "Example"
 
 /// Project helpers are functions that simplify the way you define your project.
@@ -14,6 +14,7 @@ let examplePath = "Example"
 public enum uFeatureTarget {
     case framework
     case unitTests
+    case uiTests
     case exampleApp
 }
 
@@ -70,14 +71,39 @@ extension Project {
         
         targets += moduleTargets.flatMap({ makeFrameworkTargets(module: $0, platform: platform) })
         
-        var schemes = makeSchemes(targetName: name)
-                
-        schemes += moduleTargets.flatMap({ makeSchemeWithCodeCoverage(targetName: $0.name) })
+        /// These schemes were previously used for testing specific UI test cases but not needed now.
+        // let schemes = makeSchemes(targetName: name)
         
+        /// Add custom schemes with code coverage enabled
+        // schemes += moduleTargets.flatMap({ makeSchemeWithCodeCoverage(targetName: $0.name) })
+        
+        let automaticSchemesOptions = Options.AutomaticSchemesOptions.enabled(
+            targetSchemesGrouping: .byNameSuffix(build: ["Implementation",
+                                                         "Interface",
+                                                         "Mocks",
+                                                         "Testing"],
+                                                 test: ["Tests",
+                                                        "IntegrationTests",
+                                                        "UITests",
+                                                        "SnapshotTests"],
+                                                 run: ["App", "Example"]),
+            codeCoverageEnabled: true,
+            testingOptions: TestingOptions()
+        )
+        
+      let options = Project.Options.options(automaticSchemesOptions: automaticSchemesOptions,
+                                              developmentRegion: nil,
+                                              disableBundleAccessors: false,
+                                              disableShowEnvironmentVarsInScriptPhases: false,
+                                              disableSynthesizedResourceAccessors: false,
+                                              textSettings: Options.TextSettings.textSettings(),
+                                              xcodeProjectName: nil)
+
         return Project(name: name,
                        organizationName: organizationName,
+                       options: options,
                        targets: targets,
-                       schemes: schemes)
+                       schemes: [])
     }
     
     public static func makeAppInfoPlist() -> InfoPlist {
@@ -86,20 +112,26 @@ extension Project {
             "CFBundleVersion": "1",
             "UIMainStoryboardFile": "",
             "UILaunchStoryboardName": "LaunchScreen"
-            ]
+        ]
         
         return InfoPlist.extendingDefault(with: infoPlist)
     }
-
-    /// Helper function to create a framework target and an associated unit test target
+    
+    /// Helper function to create a framework target and an associated unit test target and example app
     public static func makeFrameworkTargets(module: Module, platform: Platform) -> [Target] {
         let frameworkPath = "\(featuresPath)/\(module.path)"
         
-        let frameworkResourceFilePaths = module.frameworkResources.map { ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/" + $0), tags: [])}
+        let frameworkResourceFilePaths = module.frameworkResources.map {
+            ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/" + $0), tags: [])
+        }
         
-        let exampleResourceFilePaths = module.exampleResources.map { ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/\(examplePath)/" + $0), tags: [])}
+        let exampleResourceFilePaths = module.exampleResources.map {
+            ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/\(examplePath)/" + $0), tags: [])
+        }
         
-        let testResourceFilePaths = module.testResources.map { ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/Tests/" + $0), tags: [])}
+        let testResourceFilePaths = module.testResources.map {
+            ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/Tests/" + $0), tags: [])
+        }
         
         var exampleAppDependancies = module.exampleDependencies
         exampleAppDependancies.append(.target(name: module.name))
@@ -108,52 +140,63 @@ extension Project {
         
         var targets = [Target]()
         
-        if module.targets.contains(.exampleApp) {
-            targets.append(Target(name: "\(module.name)\(exampleAppSuffix)",
-                    platform: platform,
-                    product: .app,
-                    bundleId: "\(reverseOrganizationName).\(module.name)\(exampleAppSuffix)",
-                    infoPlist: makeAppInfoPlist(),
-                    sources: ["\(exampleSourcesPath)/**"],
-                    resources: ResourceFileElements(resources: exampleResourceFilePaths),
-                    dependencies: exampleAppDependancies))
-        }
-    
+        let exampleAppName = "\(module.name)\(exampleAppSuffix)"
+        
         if module.targets.contains(.framework) {
             let headers = Headers.headers(public: ["\(frameworkPath)/Sources/**/*.h"])
             
             targets.append(Target(name: module.name,
-                    platform: platform,
-                    product: .framework,
-                    bundleId: "\(reverseOrganizationName).\(module.name)",
-                    infoPlist: .default,
-                    sources: ["\(frameworkPath)/Sources/**"],
-                    resources: ResourceFileElements(resources: frameworkResourceFilePaths),
+                                  platform: platform,
+                                  product: .framework,
+                                  bundleId: "\(reverseOrganizationName).\(module.name)",
+                                  infoPlist: .default,
+                                  sources: ["\(frameworkPath)/Sources/**"],
+                                  resources: ResourceFileElements(resources: frameworkResourceFilePaths),
                                   headers: headers,
-                    dependencies: module.frameworkDependancies))
+                                  dependencies: module.frameworkDependancies))
         }
-        
-        // Headers(public: ["\(frameworkPath)/Sources/**/*.h"])
 
         if module.targets.contains(.unitTests) {
             targets.append(Target(name: "\(module.name)Tests",
-                    platform: platform,
-                    product: .unitTests,
-                    bundleId: "\(reverseOrganizationName).\(module.name)Tests",
-                    infoPlist: .default,
-                    sources: ["\(frameworkPath)/Tests/**"],
-                    resources: ResourceFileElements(resources: testResourceFilePaths),
-                    dependencies: [.target(name: module.name)]))
+                                  platform: platform,
+                                  product: .unitTests,
+                                  bundleId: "\(reverseOrganizationName).\(module.name)Tests",
+                                  infoPlist: .default,
+                                  sources: ["\(frameworkPath)/Tests/**"],
+                                  resources: ResourceFileElements(resources: testResourceFilePaths),
+                                  dependencies: [.target(name: module.name)]))
         }
 
+        if module.targets.contains(.exampleApp) {
+            targets.append(Target(name: exampleAppName,
+                                  platform: platform,
+                                  product: .app,
+                                  bundleId: "\(reverseOrganizationName).\(module.name)\(exampleAppSuffix)",
+                                  infoPlist: makeAppInfoPlist(),
+                                  sources: ["\(exampleSourcesPath)/**"],
+                                  resources: ResourceFileElements(resources: exampleResourceFilePaths),
+                                  dependencies: exampleAppDependancies))
+        }
+
+        if module.targets.contains(.uiTests) {
+            targets.append(Target(name: "\(module.name)UITests",
+                                  platform: platform,
+                                  product: .uiTests,
+                                  bundleId: "\(reverseOrganizationName).\(module.name)UITests",
+                                  infoPlist: .default,
+                                  sources: ["\(frameworkPath)/UITests/**"],
+                                  resources: ResourceFileElements(resources: testResourceFilePaths),
+                                  dependencies: [.target(name: exampleAppName)]))
+        }
+        
         return targets
     }
-
+    
     /// Helper function to create the application target and the unit test target.
     public static func makeAppTargets(name: String,
                                       platform: Platform,
                                       dependencies: [TargetDependency]) -> [Target] {
-
+        
         let mainTarget = Target(
             name: name,
             platform: platform,
@@ -162,7 +205,7 @@ extension Project {
             infoPlist: makeAppInfoPlist(),
             sources: ["\(featuresPath)/\(name)/Sources/**"],
             resources: ["\(featuresPath)/\(name)/Resources/**"
-            ],
+                       ],
             scripts: [
                 .post(path: "scripts/swiftlint.sh",
                       arguments: ["$SRCROOT", "$TARGETNAME"],
@@ -170,7 +213,7 @@ extension Project {
             ],
             dependencies: dependencies
         )
-
+        
         let testTarget = Target(
             name: "\(name)Tests",
             platform: platform,
@@ -182,23 +225,23 @@ extension Project {
                         "\(featuresPath)/\(name)/Tests/**/*.png"],
             dependencies: [
                 .target(name: "\(name)")
-        ])
+            ])
         
-//        let uiTestTarget = Target(
-//            name: "\(name)UITests",
-//            platform: platform,
-//            product: .uiTests,
-//            bundleId: "\(reverseOrganizationName).\(name)UITests",
-//            infoPlist: .default,
-//            sources: ["\(featuresPath)/\(name)/UITests/**"],
-//            resources: [],
-//            dependencies: [
-//                .target(name: "\(name)")
-//        ])
-
-        return [mainTarget, testTarget] //, uiTestTarget]
+        let uiTestTarget = Target(
+            name: "\(name)UITests",
+            platform: platform,
+            product: .uiTests,
+            bundleId: "\(reverseOrganizationName).\(name)UITests",
+            infoPlist: .default,
+            sources: ["\(featuresPath)/\(name)/UITests/**"],
+            resources: [],
+            dependencies: [
+                .target(name: "\(name)")
+            ])
+        
+        return [mainTarget, testTarget, uiTestTarget]
     }
-
+    
     public static func makeSchemes(targetName: String) -> [Scheme] {
         let mainTargetReference = TargetReference(stringLiteral: targetName)
         let debugConfiguration = ConfigurationName(stringLiteral: "Debug")
@@ -206,7 +249,7 @@ extension Project {
         let executable = mainTargetReference
         let asyncTestingLaunchArguments = Arguments(launchArguments: [LaunchArgument(name: "AsyncTesting", isEnabled: true)])
         let uiTestingLaunchArguments = Arguments(launchArguments: [LaunchArgument(name: "UITesting", isEnabled: true)])
-        
+
         let target = TestableTarget(stringLiteral: "\(targetName)UITests")
         let testAction =
         TestAction.targets([target],
@@ -218,7 +261,7 @@ extension Project {
                            postActions: [],
                            options: TestActionOptions.options(),
                            diagnosticsOptions: [])
-        
+
         let runActionOptions = RunActionOptions.options(language: nil,
                                                         storeKitConfigurationPath: nil, simulatedLocation: nil)
         let asyncRunAction = RunAction.runAction(configuration: debugConfiguration,
@@ -229,13 +272,13 @@ extension Project {
                                                  arguments: asyncTestingLaunchArguments,
                                                  options: runActionOptions,
                                                  diagnosticsOptions: [])
-        
+
         let asyncTestingScheme = Scheme(
             name: "\(targetName)AsyncNetworkTesting",
             shared: false,
             buildAction: buildAction,
             runAction: asyncRunAction)
-        
+
         let uiTestRunAction = RunAction.runAction(configuration: debugConfiguration,
                                                   attachDebugger: false,
                                                   preActions: [],
@@ -244,60 +287,60 @@ extension Project {
                                                   arguments: uiTestingLaunchArguments,
                                                   options: runActionOptions,
                                                   diagnosticsOptions: [])
-        
+
         let uiTestingScheme = Scheme(
             name: "\(targetName)UITesting",
             shared: false,
             buildAction: buildAction,
             testAction: testAction,
             runAction: uiTestRunAction)
-        
+
         return [asyncTestingScheme, uiTestingScheme]
     }
     
     public static func makeSchemeWithCodeCoverage(targetName: String) -> [Scheme] {
-            let mainTargetReference = TargetReference(stringLiteral: targetName)
-            let debugConfiguration = ConfigurationName(stringLiteral: "Debug")
-            let buildAction = BuildAction(targets: [mainTargetReference])
-            let executable = mainTargetReference
-            let launchArguments = Arguments(launchArguments: [LaunchArgument(name: "Testing", isEnabled: true)])
-            
-            let target = TestableTarget(stringLiteral: "\(targetName)Tests")
-            let testActionOptions = TestActionOptions.options(language: SchemeLanguage.init(stringLiteral: "en-US"),
-                                                              region: "en-US",
-                                                              coverage: true,
-                                                              codeCoverageTargets: [])
-            
-            let testAction =
-            TestAction.targets([target],
-                               arguments: nil,
-                               configuration: debugConfiguration,
-                               attachDebugger: false,
-                               expandVariableFromTarget: nil,
-                               preActions: [],
-                               postActions: [],
-                               options: testActionOptions,
-                               diagnosticsOptions: [])
-            
-            let runActionOptions = RunActionOptions.options(language: nil,
-                                                            storeKitConfigurationPath: nil, simulatedLocation: nil)
-
-            let runAction = RunAction.runAction(configuration: debugConfiguration,
-                                                      attachDebugger: false,
-                                                      preActions: [],
-                                                      postActions: [],
-                                                      executable: executable,
-                                                      arguments: launchArguments,
-                                                      options: runActionOptions,
-                                                      diagnosticsOptions: [])
-            
-            let testingScheme = Scheme(
-                name: "\(targetName)WithCodeCoverage",
-                shared: false,
-                buildAction: buildAction,
-                testAction: testAction,
-                runAction: runAction)
-            
-            return [testingScheme]
-        }
+        let mainTargetReference = TargetReference(stringLiteral: targetName)
+        let debugConfiguration = ConfigurationName(stringLiteral: "Debug")
+        let buildAction = BuildAction(targets: [mainTargetReference])
+        let executable = mainTargetReference
+        let launchArguments = Arguments(launchArguments: [LaunchArgument(name: "Testing", isEnabled: true)])
+        
+        let target = TestableTarget(stringLiteral: "\(targetName)Tests")
+        let testActionOptions = TestActionOptions.options(language: SchemeLanguage.init(stringLiteral: "en-US"),
+                                                          region: "en-US",
+                                                          coverage: true,
+                                                          codeCoverageTargets: [])
+        
+        let testAction =
+        TestAction.targets([target],
+                           arguments: nil,
+                           configuration: debugConfiguration,
+                           attachDebugger: false,
+                           expandVariableFromTarget: nil,
+                           preActions: [],
+                           postActions: [],
+                           options: testActionOptions,
+                           diagnosticsOptions: [])
+        
+        let runActionOptions = RunActionOptions.options(language: nil,
+                                                        storeKitConfigurationPath: nil, simulatedLocation: nil)
+        
+        let runAction = RunAction.runAction(configuration: debugConfiguration,
+                                            attachDebugger: false,
+                                            preActions: [],
+                                            postActions: [],
+                                            executable: executable,
+                                            arguments: launchArguments,
+                                            options: runActionOptions,
+                                            diagnosticsOptions: [])
+        
+        let testingScheme = Scheme(
+            name: "\(targetName)WithCodeCoverage",
+            shared: false,
+            buildAction: buildAction,
+            testAction: testAction,
+            runAction: runAction)
+        
+        return [testingScheme]
+    }
 }

@@ -9,8 +9,8 @@
 import Foundation
 import Common
 
-struct MockDataFactory {
-    static func makePokemons() -> [LocalPokemon] {
+public struct MockDataFactory {
+    public static func makePokemons() -> [LocalPokemon] {
         
         let pokemon1 = LocalPokemon(name: "cascoon",
                                     weight: 115,

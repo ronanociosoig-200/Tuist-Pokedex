@@ -57,6 +57,7 @@ extension CatchViewController: CatchView {
                                        in: Bundle(for: CatchViewController.self), with: nil)
         
         pokemonView.imageView.hnk_setImage(from: imageURL, placeholder: placeholderImage)
+        pokemonView.imageView.contentMode = .scaleAspectFit
         pokemonView.backgroundColor = UIColor.clear
         pokemonView.center = view.center
     }
@@ -74,10 +75,12 @@ extension CatchViewController: CatchView {
     func makeLeaveOrCatchAlert() -> UIAlertController {
         let alertController = alert(with: Constants.Translations.CatchScene.leaveOrCatchAlertMessageTitle)
         let button = leaveButton(with: Constants.Translations.CatchScene.leaveItButtonTitle)
+        button.accessibilityIdentifier = CatchIdentifiers.leaveItButton
         let catchButton = alertButton(with: Constants.Translations.CatchScene.catchItButtonTitle)
-        
+        catchButton.accessibilityIdentifier = CatchIdentifiers.catchButton
         alertController.addAction(button)
         alertController.addAction(catchButton)
+        alertController.view.accessibilityIdentifier = CatchIdentifiers.alertTitle
         return alertController
     }
     
@@ -90,8 +93,9 @@ extension CatchViewController: CatchView {
     func makeLeaveItAlert() -> UIAlertController {
         let alertController = alert(with: Constants.Translations.CatchScene.alreadyHaveItAlertMessageTitle)
         let button = leaveButton(with: Constants.Translations.CatchScene.leaveItButtonTitle)
-        
+        button.accessibilityIdentifier = CatchIdentifiers.leaveItButton
         alertController.addAction(button)
+        alertController.view.accessibilityIdentifier = CatchIdentifiers.leaveItAlertTitle
         return alertController
     }
     
@@ -101,7 +105,7 @@ extension CatchViewController: CatchView {
     
     func showError(message: String) {
         let alertController = makeErrorAlert(message: message)
-        
+        alertController.view.accessibilityIdentifier = CatchIdentifiers.alertError
         present(alertController,
                 animated: true,
                 completion: nil)

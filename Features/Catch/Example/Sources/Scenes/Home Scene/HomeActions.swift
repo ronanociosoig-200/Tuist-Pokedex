@@ -11,10 +11,25 @@ import Common
 
 protocol HomeActions {
     func catchButtonAction()
+    func catchFixedbuttonAction()
+    func catchErrorButtonAction()
+    func leaveItButtonAction()
 }
 
 extension Actions: HomeActions {
     func catchButtonAction() {
-        coordinator.showCatchScene()
+        coordinator.showCatchScene(identifier: nil)
+    }
+    
+    func catchFixedbuttonAction() {
+        coordinator.showCatchScene(identifier: TestCasePokemonIdentifiers.fixedCase)
+    }
+    
+    func catchErrorButtonAction() {
+        coordinator.showCatchScene(identifier: TestCasePokemonIdentifiers.errorCase)
+    }
+    
+    func leaveItButtonAction() {
+        coordinator.showCatchScene(identifier: TestCasePokemonIdentifiers.leaveItCase)
     }
 }

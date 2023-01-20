@@ -18,8 +18,8 @@
 //  limitations under the License.
 //
 
-#import "UIView+Haneke.h"
-#import "HNKCache.h"
+#import <UIView+Haneke.h>
+#import <HNKCache.h>
 #import <objc/runtime.h>
 
 const CGFloat HNKViewFormatCompressionQuality = 0.75;
