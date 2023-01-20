@@ -25,9 +25,9 @@ class BackpackSceneUITests: XCTestCase {
         app/*@START_MENU_TOKEN@*/.staticTexts["Backpack"]/*[[".buttons[\"Backpack\"].staticTexts[\"Backpack\"]",".buttons[\"OpenBackpackButton\"].staticTexts[\"Backpack\"]",".staticTexts[\"Backpack\"]"],[[[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
         let pokemonCellsQuery = app.collectionViews.cells.matching(identifier: "Pokemon")
-        pokemonCellsQuery.otherElements.containing(.staticText, identifier:"Cascoon").images["Icon"].tap()
+        pokemonCellsQuery.otherElements.containing(.staticText, identifier: "Cascoon").images["Icon"].tap()
         app.navigationBars["Cascoon"].buttons["Backpack"].tap()
-        pokemonCellsQuery.otherElements.containing(.staticText, identifier:"Cranidos").images["Icon"].tap()
+        pokemonCellsQuery.otherElements.containing(.staticText, identifier: "Cranidos").images["Icon"].tap()
         app.navigationBars["Cranidos"].buttons["Backpack"].tap()
         app.navigationBars["Backpack"].buttons["Close"].tap()
     }

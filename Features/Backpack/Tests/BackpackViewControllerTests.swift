@@ -12,47 +12,47 @@ import XCTest
 
 final class BackpackViewControllerTests: XCTestCase {
     func testViewController() {
-        let vc = BackpackWireframe.makeViewController()
+        let viewController = BackpackWireframe.makeViewController()
         
         let presenter = MockBackpackPresenter(actions: MockBackpackActions(),
                                               dataProvider: MockBackpackDataProvider(),
                                               view: MockBackpackView())
         let layout = UICollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        vc.collectionView = collectionView
-        vc.presenter = presenter
-        vc.viewDidLoad()
+        viewController.collectionView = collectionView
+        viewController.presenter = presenter
+        viewController.viewDidLoad()
         
         XCTAssertTrue(presenter.viewDidLoadCalled)
     }
     
     func testViewControllerWithoutPresenter() {
-        let vc = BackpackWireframe.makeViewController()
-        vc.viewDidLoad()
+        let viewController = BackpackWireframe.makeViewController()
+        viewController.viewDidLoad()
         
-        XCTAssertNil(vc.collectionView)
+        XCTAssertNil(viewController.collectionView)
     }
     
     func testViewControllerWithoutCollectionView() {
-        let vc = BackpackWireframe.makeViewController()
+        let viewController = BackpackWireframe.makeViewController()
         let presenter = MockBackpackPresenter(actions: MockBackpackActions(),
                                               dataProvider: MockBackpackDataProvider(),
                                               view: MockBackpackView())
-        vc.presenter = presenter
-        vc.viewDidLoad()
+        viewController.presenter = presenter
+        viewController.viewDidLoad()
         
-        XCTAssertNil(vc.collectionView)
+        XCTAssertNil(viewController.collectionView)
     }
     
     func testSetDataSource() {
-        let vc = BackpackWireframe.makeViewController()
+        let viewController = BackpackWireframe.makeViewController()
         let layout = UICollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         vc.collectionView = collectionView
         
         let dataSource = MockBackpackDataSource()
         
-        vc.setDataSource(dataSource: dataSource)
+        viewController.setDataSource(dataSource: dataSource)
         
         XCTAssertTrue(dataSource.registerCalled)
     }

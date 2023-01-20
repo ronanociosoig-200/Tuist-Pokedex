@@ -5,6 +5,7 @@
 //  Created by Hermes Pique on 8/20/14.
 //  Copyright (c) 2014 Hermes Pique. All rights reserved.
 //
+// swiftlint:disable all
 
 #import <XCTest/XCTest.h>
 #import "HNKDiskFetcher.h"

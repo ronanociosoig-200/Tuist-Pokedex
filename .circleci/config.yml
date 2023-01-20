@@ -17,11 +17,6 @@ parameters:
     default: "3.14.0"
 
 commands:
-  install_swiftlint:
-    steps:
-      - run:
-          name: Install SwiftLint
-          command: HOMEBREW_NO_AUTO_UPDATE=1 brew install swiftlint 
   install_other:
     steps: 
       - run:
@@ -68,6 +63,11 @@ commands:
       - run: 
           name: Build Pokedex App
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.4'
+  run_lint:
+    steps: 
+      - run:
+        name: Tuist Lint 
+        command: <<pipeline.parameters.tuist>> lint
   run_tests:
     steps:
       - run: 
@@ -100,13 +100,12 @@ jobs:
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
     steps:
-      - checkout  
-      - install_swiftlint
+      - checkout
       - install_tuist 
       - restore_dependencies_cache
       - setup_tuist
       - save_dependencies_cache
-      # - build_project
+      - run_lint
       - run_tests
       - save_tuist_cache
 

@@ -17,6 +17,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+// swiftlint:disable all
 
 #import <HNKDiskCache.h>
 #import <CommonCrypto/CommonDigest.h> // For hnk_MD5String

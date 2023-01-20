@@ -12,16 +12,16 @@ import XCTest
 
 final class DetailWireframeTests: XCTestCase {
     func testViewController() {
-        let vc = PokemonDetailWireframe.makeViewController()
+        let viewController = PokemonDetailWireframe.makeViewController()
         
-        XCTAssertNotNil(vc)
+        XCTAssertNotNil(viewController
     }
     
     func testPrepare() {
-        let vc = PokemonDetailWireframe.makeViewController()
+        let viewController = PokemonDetailWireframe.makeViewController()
         let localPokemon = MockPokemonFactory.makeLocalPokemon()
-        PokemonDetailWireframe.prepare(vc, pokemon: localPokemon)
+        PokemonDetailWireframe.prepare(viewController, pokemon: localPokemon)
         
-        XCTAssertNotNil(vc.presenter)
+        XCTAssertNotNil(viewController.presenter)
     }
 }

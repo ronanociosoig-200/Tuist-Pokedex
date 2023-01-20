@@ -139,7 +139,6 @@ extension Coordinator {
         label.text = text
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.accessibilityIdentifier = text
         
         viewController.view.addSubview(label)
         viewController.view.accessibilityIdentifier = text

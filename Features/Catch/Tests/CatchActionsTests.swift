@@ -18,7 +18,7 @@ final class CatchActionsTests: XCTestCase {
         let dataProvider = DataProvider()
         actions.dataProvider = dataProvider
         dataProvider.appData.pokemon = pokemon
-        XCTAssertTrue(dataProvider.appData.pokemons.count == 0)
+        XCTAssertTrue(dataProvider.appData.pokemons.isEmpty)
         actions.catchPokemon()
         XCTAssertTrue(dataProvider.appData.pokemons.count == 1)
     }

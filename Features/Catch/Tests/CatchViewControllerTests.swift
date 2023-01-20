@@ -14,44 +14,44 @@ import UIKit
 
 final class CatchViewControllerTests: XCTestCase {
     func testViewController() {
-        let vc = CatchWireframe.makeViewController()
+        let viewController = CatchWireframe.makeViewController()
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        vc.backgroundImageView = imageView
-        vc.button = button
+        viewController.backgroundImageView = imageView
+        viewController.button = button
         
-        vc.viewDidLoad()
+        viewController.viewDidLoad()
         
-        XCTAssertNotNil(vc.backgroundImageView.image)
-        XCTAssertNotNil(vc.button.imageView?.image)
+        XCTAssertNotNil(viewController.backgroundImageView.image)
+        XCTAssertNotNil(viewController.button.imageView?.image)
     }
     
     func testViewControllerUpdateWithoutPresenter() {
-        let vc = CatchWireframe.makeViewController()
+        let viewController = CatchWireframe.makeViewController()
         
-        vc.update()
+        viewController.update()
         
-        XCTAssertNil(vc.pokemonView)
+        XCTAssertNil(viewController.pokemonView)
     }
     
     func testViewControllerUpdate() {
-        let vc = CatchWireframe.makeViewController()
+        let viewController = CatchWireframe.makeViewController()
         let presenter = MockCatchPresenter()
         
-        vc.presenter = presenter
-        vc.update()
+        viewController.presenter = presenter
+        viewController.update()
         
-        XCTAssertNotNil(vc.presenter)
+        XCTAssertNotNil(viewController.presenter)
     }
     
     func testViewControllerAlerts() {
-        let vc = CatchWireframe.makeViewController()
+        let viewController = CatchWireframe.makeViewController()
         
-        let leaveItAlert = vc.makeLeaveItAlert()
+        let leaveItAlert = viewController.makeLeaveItAlert()
         
         XCTAssertNotNil(leaveItAlert)
         
-        let leaveOrCatchAlert = vc.makeLeaveOrCatchAlert()
+        let leaveOrCatchAlert = viewController.makeLeaveOrCatchAlert()
         
         XCTAssertNotNil(leaveOrCatchAlert)
         
@@ -61,20 +61,20 @@ final class CatchViewControllerTests: XCTestCase {
     }
     
     func testViewControllerBallActionWithoutPresenter() {
-        let vc = CatchWireframe.makeViewController()
+        let viewController = CatchWireframe.makeViewController()
         let presenter = MockCatchPresenter()
         
-        vc.ballAction()
+        viewController.ballAction()
         
         XCTAssertFalse(presenter.catchPokemonActionCalled)
     }
     
     func testViewControllerBallActionWithPresenter() {
-        let vc = CatchWireframe.makeViewController()
+        let viewController = CatchWireframe.makeViewController()
         let presenter = MockCatchPresenter()
         
-        vc.presenter = presenter
-        vc.ballAction()
+        viewController.presenter = presenter
+        viewController.ballAction()
         
         XCTAssertTrue(presenter.catchPokemonActionCalled)
     }

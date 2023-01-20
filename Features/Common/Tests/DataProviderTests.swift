@@ -28,7 +28,7 @@ final class DataProviderTests: XCTestCase {
         let dataProvider = DataProvider()
         dataProvider.appData = mockAppData
         
-        let _ = dataProvider.newSpecies()
+        _ = dataProvider.newSpecies()
         
         XCTAssertTrue(mockAppData.newSpeciesCalled)
     }

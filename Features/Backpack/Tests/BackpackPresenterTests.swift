@@ -46,4 +46,3 @@ final class BackpackPresenterTests: XCTestCase {
         XCTAssertTrue(view.setDataSourceCalled)
     }
 }
-
