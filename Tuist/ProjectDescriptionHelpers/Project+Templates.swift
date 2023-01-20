@@ -71,35 +71,39 @@ extension Project {
         
         targets += moduleTargets.flatMap({ makeFrameworkTargets(module: $0, platform: platform) })
         
-//        targets += moduleTargets.compactMap({
-//            if $0.targets.contains(.uiTests) {
-//                return makeUITestTarget(module: $0, platform: platform)
-//            }
-//            return nil
-//        })
-        
-        let schemes = makeSchemes(targetName: name)
+        /// These schemes were previously used for testing specific UI test cases but not needed now.
+        // let schemes = makeSchemes(targetName: name)
         
         /// Add custom schemes with code coverage enabled
-        //schemes += moduleTargets.flatMap({ makeSchemeWithCodeCoverage(targetName: $0.name) })
+        // schemes += moduleTargets.flatMap({ makeSchemeWithCodeCoverage(targetName: $0.name) })
         
-        let automaticSchemesOptions = Options.AutomaticSchemesOptions.enabled(targetSchemesGrouping: .byNameSuffix(build: ["Implementation", "Interface", "Mocks", "Testing"], test: ["Tests", "IntegrationTests", "UITests", "SnapshotTests"], run: ["App", "Demo"]),
-                                                                                      codeCoverageEnabled: true,
-                                                                                      testingOptions: TestingOptions())
-                
-                let options = Project.Options.options(automaticSchemesOptions: automaticSchemesOptions,
-                                                      developmentRegion: nil,
-                                                      disableBundleAccessors: false,
-                                                      disableShowEnvironmentVarsInScriptPhases: false,
-                                                      disableSynthesizedResourceAccessors: false,
-                                                      textSettings: Options.TextSettings.textSettings(),
-                                                      xcodeProjectName: nil)
+        let automaticSchemesOptions = Options.AutomaticSchemesOptions.enabled(
+            targetSchemesGrouping: .byNameSuffix(build: ["Implementation",
+                                                         "Interface",
+                                                         "Mocks",
+                                                         "Testing"],
+                                                 test: ["Tests",
+                                                        "IntegrationTests",
+                                                        "UITests",
+                                                        "SnapshotTests"],
+                                                 run: ["App", "Example"]),
+            codeCoverageEnabled: true,
+            testingOptions: TestingOptions()
+        )
         
+      let options = Project.Options.options(automaticSchemesOptions: automaticSchemesOptions,
+                                              developmentRegion: nil,
+                                              disableBundleAccessors: false,
+                                              disableShowEnvironmentVarsInScriptPhases: false,
+                                              disableSynthesizedResourceAccessors: false,
+                                              textSettings: Options.TextSettings.textSettings(),
+                                              xcodeProjectName: nil)
+
         return Project(name: name,
                        organizationName: organizationName,
                        options: options,
                        targets: targets,
-                       schemes: schemes)
+                       schemes: [])
     }
     
     public static func makeAppInfoPlist() -> InfoPlist {
@@ -117,15 +121,20 @@ extension Project {
     public static func makeFrameworkTargets(module: Module, platform: Platform) -> [Target] {
         let frameworkPath = "\(featuresPath)/\(module.path)"
         
-        let frameworkResourceFilePaths = module.frameworkResources.map { ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/" + $0), tags: [])}
+        let frameworkResourceFilePaths = module.frameworkResources.map {
+            ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/" + $0), tags: [])
+        }
         
-        let exampleResourceFilePaths = module.exampleResources.map { ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/\(examplePath)/" + $0), tags: [])}
+        let exampleResourceFilePaths = module.exampleResources.map {
+            ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/\(examplePath)/" + $0), tags: [])
+        }
         
-        let testResourceFilePaths = module.testResources.map { ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/Tests/" + $0), tags: [])}
+        let testResourceFilePaths = module.testResources.map {
+            ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/Tests/" + $0), tags: [])
+        }
         
         var exampleAppDependancies = module.exampleDependencies
         exampleAppDependancies.append(.target(name: module.name))
-        //exampleAppDependancies.append(.target(name: "\(module.name)UITests"))
         
         let exampleSourcesPath = "\(featuresPath)/\(module.path)/\(examplePath)/Sources"
         
@@ -146,7 +155,7 @@ extension Project {
                                   headers: headers,
                                   dependencies: module.frameworkDependancies))
         }
-        
+
         if module.targets.contains(.unitTests) {
             targets.append(Target(name: "\(module.name)Tests",
                                   platform: platform,
@@ -157,19 +166,7 @@ extension Project {
                                   resources: ResourceFileElements(resources: testResourceFilePaths),
                                   dependencies: [.target(name: module.name)]))
         }
-        
-        if module.targets.contains(.uiTests) {
-            targets.append(Target(name: "\(module.name)UITests",
-                          platform: platform,
-                          product: .uiTests,
-                          bundleId: "\(reverseOrganizationName).\(module.name)UITests",
-                          infoPlist: .default,
-                          sources: ["\(frameworkPath)/UITests/**"],
-                          resources: ResourceFileElements(resources: testResourceFilePaths),
-                          dependencies: [.target(name: exampleAppName)]))
-            // exampleAppDependancies.append(.target(name: "\(module.name)UITests"))
-        }
-        
+
         if module.targets.contains(.exampleApp) {
             targets.append(Target(name: exampleAppName,
                                   platform: platform,
@@ -180,29 +177,19 @@ extension Project {
                                   resources: ResourceFileElements(resources: exampleResourceFilePaths),
                                   dependencies: exampleAppDependancies))
         }
+
+        if module.targets.contains(.uiTests) {
+            targets.append(Target(name: "\(module.name)UITests",
+                                  platform: platform,
+                                  product: .uiTests,
+                                  bundleId: "\(reverseOrganizationName).\(module.name)UITests",
+                                  infoPlist: .default,
+                                  sources: ["\(frameworkPath)/UITests/**"],
+                                  resources: ResourceFileElements(resources: testResourceFilePaths),
+                                  dependencies: [.target(name: exampleAppName)]))
+        }
         
         return targets
-    }
-    
-    /// Helper function to create a UITest target for a framework
-    public static func makeUITestTarget(module: Module,
-                                        platform: Platform) -> Target {
-        let frameworkPath = "\(featuresPath)/\(module.path)"
-        
-        let frameworkResourceFilePaths = module.frameworkResources.map { ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/" + $0), tags: [])}
-        
-        let testResourceFilePaths = module.testResources.map { ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/Tests/" + $0), tags: [])}
-        
-        let exampleAppName = "\(module.name)\(exampleAppSuffix)"
-        
-        return Target(name: "\(module.name)UITests",
-                      platform: platform,
-                      product: .uiTests,
-                      bundleId: "\(reverseOrganizationName).\(module.name)UITests",
-                      infoPlist: .default,
-                      sources: ["\(frameworkPath)/UITests/**"],
-                      resources: ResourceFileElements(resources: testResourceFilePaths),
-                      dependencies: [.target(name: exampleAppName)])
     }
     
     /// Helper function to create the application target and the unit test target.
@@ -262,7 +249,7 @@ extension Project {
         let executable = mainTargetReference
         let asyncTestingLaunchArguments = Arguments(launchArguments: [LaunchArgument(name: "AsyncTesting", isEnabled: true)])
         let uiTestingLaunchArguments = Arguments(launchArguments: [LaunchArgument(name: "UITesting", isEnabled: true)])
-        
+
         let target = TestableTarget(stringLiteral: "\(targetName)UITests")
         let testAction =
         TestAction.targets([target],
@@ -274,7 +261,7 @@ extension Project {
                            postActions: [],
                            options: TestActionOptions.options(),
                            diagnosticsOptions: [])
-        
+
         let runActionOptions = RunActionOptions.options(language: nil,
                                                         storeKitConfigurationPath: nil, simulatedLocation: nil)
         let asyncRunAction = RunAction.runAction(configuration: debugConfiguration,
@@ -285,13 +272,13 @@ extension Project {
                                                  arguments: asyncTestingLaunchArguments,
                                                  options: runActionOptions,
                                                  diagnosticsOptions: [])
-        
+
         let asyncTestingScheme = Scheme(
             name: "\(targetName)AsyncNetworkTesting",
             shared: false,
             buildAction: buildAction,
             runAction: asyncRunAction)
-        
+
         let uiTestRunAction = RunAction.runAction(configuration: debugConfiguration,
                                                   attachDebugger: false,
                                                   preActions: [],
@@ -300,14 +287,14 @@ extension Project {
                                                   arguments: uiTestingLaunchArguments,
                                                   options: runActionOptions,
                                                   diagnosticsOptions: [])
-        
+
         let uiTestingScheme = Scheme(
             name: "\(targetName)UITesting",
             shared: false,
             buildAction: buildAction,
             testAction: testAction,
             runAction: uiTestRunAction)
-        
+
         return [asyncTestingScheme, uiTestingScheme]
     }
     
