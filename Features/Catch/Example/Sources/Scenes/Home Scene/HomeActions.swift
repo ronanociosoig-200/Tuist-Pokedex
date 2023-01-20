@@ -11,10 +11,20 @@ import Common
 
 protocol HomeActions {
     func catchButtonAction()
+    func catchFixedbuttonAction()
+    func catchErrorButtonAction()
 }
 
 extension Actions: HomeActions {
     func catchButtonAction() {
+        coordinator.showCatchScene()
+    }
+    
+    func catchFixedbuttonAction() {
+        coordinator.showCatchScene()
+    }
+    
+    func catchErrorButtonAction() {
         coordinator.showCatchScene()
     }
 }

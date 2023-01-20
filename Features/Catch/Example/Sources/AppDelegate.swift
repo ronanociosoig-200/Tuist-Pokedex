@@ -11,8 +11,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         
+        disableAnimations()
         appController.start()
-        
         return true
+    }
+    
+    func disableAnimations() {
+        let arguments = ProcessInfo.processInfo.arguments
+        UIView.setAnimationsEnabled(!arguments.contains("CatchUITesting"))
     }
 }

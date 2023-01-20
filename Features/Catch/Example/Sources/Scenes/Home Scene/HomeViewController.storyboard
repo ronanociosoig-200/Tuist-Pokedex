@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,13 +11,13 @@
         <!--Home View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="Y6W-OH-hqX" customClass="HomeViewController" customModule="Catch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="Y6W-OH-hqX" customClass="HomeViewController" customModule="CatchExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SC4-Jy-bPJ">
-                                <rect key="frame" x="20" y="350" width="374" height="30"/>
+                                <rect key="frame" x="20" y="354" width="374" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Q9m-EJ-2rG"/>
                                 </constraints>
@@ -26,15 +26,48 @@
                                     <action selector="catchButtonAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8NI-81-uNo"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOK-9T-fLT">
+                                <rect key="frame" x="20" y="419" width="374" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BfB-rt-F5L"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Catch Fixed Pokemon" titleAlignment="center"/>
+                                <connections>
+                                    <action selector="catchFixedButtonAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="QqG-2u-GW5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXT-bp-eMM">
+                                <rect key="frame" x="20" y="484" width="374" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="aKJ-wY-cdL"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Catch Error"/>
+                                <connections>
+                                    <action selector="catchErrorButtonAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="2rF-vT-lYH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bXT-bp-eMM" firstAttribute="top" secondItem="sOK-9T-fLT" secondAttribute="bottom" constant="35" id="2fn-pH-egB"/>
                             <constraint firstItem="SC4-Jy-bPJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="306" id="Dth-Gs-PxN"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bXT-bp-eMM" secondAttribute="trailing" constant="20" id="G8R-bG-gJd"/>
                             <constraint firstItem="SC4-Jy-bPJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Os9-1Q-Uaz"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sOK-9T-fLT" secondAttribute="trailing" constant="20" id="TGp-Mp-pkA"/>
+                            <constraint firstItem="sOK-9T-fLT" firstAttribute="top" secondItem="SC4-Jy-bPJ" secondAttribute="bottom" constant="35" id="oQb-Ta-SMn"/>
+                            <constraint firstItem="sOK-9T-fLT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="qmz-Iv-cZH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="SC4-Jy-bPJ" secondAttribute="trailing" constant="20" id="rbk-z2-ke0"/>
+                            <constraint firstItem="bXT-bp-eMM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="zHW-of-0il"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="catchButton" destination="SC4-Jy-bPJ" id="2Q2-Us-t3v"/>
+                        <outlet property="catchErrorButton" destination="bXT-bp-eMM" id="gz2-cq-gKa"/>
+                        <outlet property="catchFixedButton" destination="sOK-9T-fLT" id="Izz-jn-AWe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
