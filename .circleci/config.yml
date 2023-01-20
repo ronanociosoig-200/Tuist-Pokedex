@@ -66,8 +66,8 @@ commands:
   run_lint:
     steps: 
       - run:
-        name: Tuist Lint 
-        command: <<pipeline.parameters.tuist>> lint
+          name: Tuist Lint 
+          command: <<pipeline.parameters.tuist>> lint
   run_tests:
     steps:
       - run: 
