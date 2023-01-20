@@ -17,6 +17,7 @@ public protocol AppDataHandling {
     func save()
     func directory() -> Directory
     func sortByOrder()
+    func clean()
 }
 
 public class AppData: AppDataHandling {
@@ -55,6 +56,10 @@ public class AppData: AppDataHandling {
         storage.save(pokemons,
                      to: directory(),
                      as: AppData.pokemonFile)
+    }
+    
+    public func clean() {
+        storage.remove(AppData.pokemonFile, from: directory())
     }
     
     public func directory() -> Directory {

@@ -10,6 +10,12 @@ import XCTest
 
 @testable import Catch
 
+struct LaunchArguments {
+    static let uiTesting = "CatchUITesting"
+    static let error401 = "Error_401"
+    static let leaveIt = "LeaveIt"
+}
+
 class CatchSceneUITests: XCTestCase {
 
     let app = XCUIApplication()
@@ -20,7 +26,7 @@ class CatchSceneUITests: XCTestCase {
     }
     
     func testCatchPokemon() {
-        app.launchArguments += ["CatchUITesting"]
+        app.launchArguments += [LaunchArguments.uiTesting]
         app.launch()
         
         print(app.debugDescription)
@@ -31,7 +37,7 @@ class CatchSceneUITests: XCTestCase {
     }
     
     func testLeavePokemon() {
-        app.launchArguments += ["CatchUITesting"]
+        app.launchArguments += [LaunchArguments.uiTesting]
         app.launch()
         
         print(app.debugDescription)
@@ -42,7 +48,7 @@ class CatchSceneUITests: XCTestCase {
     }
     
     func testError401WhenCatchingPokemon() {
-        app.launchArguments += ["Error_401"]
+        app.launchArguments += [LaunchArguments.error401]
         
         print(app.debugDescription)
         app.launch()
@@ -52,11 +58,23 @@ class CatchSceneUITests: XCTestCase {
         
         app.alerts[CatchIdentifiers.alertError].scrollViews.otherElements.buttons["OK"].tap()
     }
-}
+    
+    func testCaseOfPokemonAlreadyCaught() {
+        app.launchArguments += [LaunchArguments.leaveIt]
+        
+        print(app.debugDescription)
+        app.launch()
+        
+        let catchStaticText = app.staticTexts[HomeIdentifiers.leaveItButton]
+        catchStaticText.tap()
 
+        app.alerts[CatchIdentifiers.leaveItAlertTitle].scrollViews.otherElements.buttons[CatchIdentifiers.leaveItButton].tap()
+    }
+}
 
 struct HomeIdentifiers {
     static let catchButton = "Catch"
     static let catchFixedButton = "Catch Fixed"
     static let catchErrorButton = "Catch Error"
+    static let leaveItButton = "Leave It"
 }

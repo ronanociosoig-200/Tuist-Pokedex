@@ -12,4 +12,5 @@ struct HomeIdentifiers {
     static let catchButton = "Catch"
     static let catchFixedButton = "Catch Fixed"
     static let catchErrorButton = "Catch Error"
+    static let leaveItButton = "Leave It"
 }

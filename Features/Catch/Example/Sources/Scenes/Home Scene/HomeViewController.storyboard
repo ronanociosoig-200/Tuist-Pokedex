@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SC4-Jy-bPJ">
-                                <rect key="frame" x="20" y="354" width="374" height="30"/>
+                                <rect key="frame" x="20" y="198" width="374" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Q9m-EJ-2rG"/>
                                 </constraints>
@@ -27,7 +27,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOK-9T-fLT">
-                                <rect key="frame" x="20" y="419" width="374" height="30"/>
+                                <rect key="frame" x="20" y="263" width="374" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="BfB-rt-F5L"/>
                                 </constraints>
@@ -38,7 +38,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXT-bp-eMM">
-                                <rect key="frame" x="20" y="484" width="374" height="30"/>
+                                <rect key="frame" x="20" y="328" width="374" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="aKJ-wY-cdL"/>
                                 </constraints>
@@ -48,15 +48,29 @@
                                     <action selector="catchErrorButtonAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="2rF-vT-lYH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOF-fO-X9U">
+                                <rect key="frame" x="20" y="393" width="374" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="dIR-rc-LcX"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Leave It"/>
+                                <connections>
+                                    <action selector="leaveItButtonAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="CPW-UD-Swq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bXT-bp-eMM" firstAttribute="top" secondItem="sOK-9T-fLT" secondAttribute="bottom" constant="35" id="2fn-pH-egB"/>
-                            <constraint firstItem="SC4-Jy-bPJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="306" id="Dth-Gs-PxN"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="LOF-fO-X9U" secondAttribute="trailing" constant="20" id="D1F-wA-5Ye"/>
+                            <constraint firstItem="SC4-Jy-bPJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="150" id="Dth-Gs-PxN"/>
+                            <constraint firstItem="LOF-fO-X9U" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Ea1-x5-Eub"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bXT-bp-eMM" secondAttribute="trailing" constant="20" id="G8R-bG-gJd"/>
                             <constraint firstItem="SC4-Jy-bPJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Os9-1Q-Uaz"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sOK-9T-fLT" secondAttribute="trailing" constant="20" id="TGp-Mp-pkA"/>
+                            <constraint firstItem="LOF-fO-X9U" firstAttribute="top" secondItem="bXT-bp-eMM" secondAttribute="bottom" constant="35" id="iSw-3e-Xdx"/>
                             <constraint firstItem="sOK-9T-fLT" firstAttribute="top" secondItem="SC4-Jy-bPJ" secondAttribute="bottom" constant="35" id="oQb-Ta-SMn"/>
                             <constraint firstItem="sOK-9T-fLT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="qmz-Iv-cZH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="SC4-Jy-bPJ" secondAttribute="trailing" constant="20" id="rbk-z2-ke0"/>
@@ -67,6 +81,7 @@
                         <outlet property="catchButton" destination="SC4-Jy-bPJ" id="2Q2-Us-t3v"/>
                         <outlet property="catchErrorButton" destination="bXT-bp-eMM" id="gz2-cq-gKa"/>
                         <outlet property="catchFixedButton" destination="sOK-9T-fLT" id="Izz-jn-AWe"/>
+                        <outlet property="leaveItButton" destination="LOF-fO-X9U" id="GUZ-eP-e6z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

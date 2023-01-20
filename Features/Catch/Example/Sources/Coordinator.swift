@@ -14,7 +14,14 @@ import NetworkKit
 
 public struct TestCasePokemonIdentifiers {
     static let fixedCase = 5
+    static let leaveItCase = 0
     static let errorCase = 950
+}
+
+struct LaunchArguments {
+    static let uiTesting = "CatchUITesting"
+    static let error401 = "Error_401"
+    static let leaveIt = "LeaveIt"
 }
 
 class Coordinator: Coordinating {
@@ -70,16 +77,24 @@ class Coordinator: Coordinating {
         var pokemonIdentifier: Int
         let externalIdentifier = identifier ?? 0
         
-        if arguments.contains("CatchUITesting")
+        dataProvider.clean()
+        
+        if arguments.contains(LaunchArguments.uiTesting)
             || externalIdentifier == TestCasePokemonIdentifiers.fixedCase {
             let session = URLSessionFactory.makeSession()
             searchService = PokemonSearchService(session: session)
             pokemonIdentifier = TestCasePokemonIdentifiers.fixedCase
-        } else if arguments.contains("Error_401")
+        } else if arguments.contains(LaunchArguments.error401)
                     || externalIdentifier == TestCasePokemonIdentifiers.errorCase {
             let session = URLSessionFactory.makeError401Session()
             searchService = PokemonSearchService(session: session)
             pokemonIdentifier = TestCasePokemonIdentifiers.errorCase
+        } else if arguments.contains(LaunchArguments.leaveIt)
+                    || externalIdentifier == TestCasePokemonIdentifiers.leaveItCase {
+            let session = URLSessionFactory.makeSession()
+            searchService = PokemonSearchService(session: session)
+            pokemonIdentifier = TestCasePokemonIdentifiers.fixedCase
+            dataProvider.addMockPokemon()
         } else {
             if let identifier {
                 pokemonIdentifier = identifier

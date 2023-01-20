@@ -13,4 +13,5 @@ struct CatchIdentifiers {
     static let catchButton = "CatchIt"
     static let leaveItButton = "LeaveIt"
     static let alertError = "Error"
+    static let leaveItAlertTitle = "Leave It Title"
 }

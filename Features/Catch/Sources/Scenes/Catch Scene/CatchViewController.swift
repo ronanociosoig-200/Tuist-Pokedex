@@ -95,7 +95,7 @@ extension CatchViewController: CatchView {
         let button = leaveButton(with: Constants.Translations.CatchScene.leaveItButtonTitle)
         button.accessibilityIdentifier = CatchIdentifiers.leaveItButton
         alertController.addAction(button)
-        alertController.view.accessibilityIdentifier = CatchIdentifiers.alertTitle
+        alertController.view.accessibilityIdentifier = CatchIdentifiers.leaveItAlertTitle
         return alertController
     }
     

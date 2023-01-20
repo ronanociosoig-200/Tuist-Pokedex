@@ -16,6 +16,7 @@ protocol HomePresenting: AnyObject {
     func catchButtonAction()
     func catchFixedButtonAction()
     func catchErrorButtonAction()
+    func leaveItButtonAction()
 }
 
 class HomePresenter: HomePresenting {
@@ -48,5 +49,9 @@ class HomePresenter: HomePresenting {
     
     func catchErrorButtonAction() {
         actions.catchErrorButtonAction()
+    }
+    
+    func leaveItButtonAction() {
+        actions.leaveItButtonAction()
     }
 }

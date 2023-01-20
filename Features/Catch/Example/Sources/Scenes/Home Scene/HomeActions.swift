@@ -13,6 +13,7 @@ protocol HomeActions {
     func catchButtonAction()
     func catchFixedbuttonAction()
     func catchErrorButtonAction()
+    func leaveItButtonAction()
 }
 
 extension Actions: HomeActions {
@@ -26,5 +27,9 @@ extension Actions: HomeActions {
     
     func catchErrorButtonAction() {
         coordinator.showCatchScene(identifier: TestCasePokemonIdentifiers.errorCase)
+    }
+    
+    func leaveItButtonAction() {
+        coordinator.showCatchScene(identifier: TestCasePokemonIdentifiers.leaveItCase)
     }
 }
