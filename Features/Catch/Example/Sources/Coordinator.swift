@@ -8,24 +8,16 @@
 
 import Foundation
 import JGProgressHUD
+import Catch
 import Common
 import NetworkKit
-import Catch
 
-protocol CoordinatingCatchTests {
-    func showCatchSceneWithFixedResponse()
-    func sohwCatchSceneWithError()
+public struct TestCasePokemonIdentifiers {
+    static let fixedCase = 5
+    static let errorCase = 950
 }
 
-class Coordinator: Coordinating, CoordinatingCatchTests {
-    func showCatchSceneWithFixedResponse() {
-        showCatchScene()
-    }
-    
-    func sohwCatchSceneWithError() {
-        showCatchScene()
-    }
-    
+class Coordinator: Coordinating {
     let window: UIWindow
     var dataProvider: DataProvider?
     var hud: JGProgressHUD?
@@ -52,7 +44,7 @@ class Coordinator: Coordinating, CoordinatingCatchTests {
         window.rootViewController = viewController
     }
     
-    func showCatchScene() {
+    func showCatchScene(identifier: Int?) {
         guard let dataProvider = dataProvider else { return }
         let viewController = CatchWireframe.makeViewController()
         
@@ -66,31 +58,38 @@ class Coordinator: Coordinating, CoordinatingCatchTests {
         
         currentViewController = viewController
         
-        searchNextPokemon()
+        searchNextPokemon(identifier: identifier)
         
         showLoading()
     }
     
-    func searchNextPokemon() {
+    func searchNextPokemon(identifier: Int?) {
         guard let dataProvider = dataProvider else { return }
         let searchService: SearchService
         let arguments = ProcessInfo.processInfo.arguments
-        var identifieer: Int
+        var pokemonIdentifier: Int
+        let externalIdentifier = identifier ?? 0
         
-        if arguments.contains("CatchUITesting") {
+        if arguments.contains("CatchUITesting")
+            || externalIdentifier == TestCasePokemonIdentifiers.fixedCase {
             let session = URLSessionFactory.makeSession()
             searchService = PokemonSearchService(session: session)
-            identifieer = 5
-        } else if arguments.contains("Error_401") {
+            pokemonIdentifier = TestCasePokemonIdentifiers.fixedCase
+        } else if arguments.contains("Error_401")
+                    || externalIdentifier == TestCasePokemonIdentifiers.errorCase {
             let session = URLSessionFactory.makeError401Session()
             searchService = PokemonSearchService(session: session)
-            identifieer = 950
+            pokemonIdentifier = TestCasePokemonIdentifiers.errorCase
         } else {
+            if let identifier {
+                pokemonIdentifier = identifier
+            } else {
+                pokemonIdentifier = Generator.nextIdentifier()
+            }
             searchService = PokemonSearchService()
-            identifieer = Generator.nextIdentifier()
         }
         
-        dataProvider.search(identifier: identifieer, networkService: searchService)
+        dataProvider.search(identifier: pokemonIdentifier, networkService: searchService)
     }
     
     func showBackpackScene() {
@@ -163,7 +162,7 @@ extension Coordinator: Notifier {
 
 struct URLSessionFactory {
     static func makeError401Session() -> URLSession {
-        let identifier = 900
+        let identifier = TestCasePokemonIdentifiers.errorCase
         let endpoint = PokemonSearchEndpoint.search(identifier: identifier)
         let url = endpoint.makeURL()
         return MockSessionFactory.make(url: url,
@@ -172,7 +171,7 @@ struct URLSessionFactory {
     }
     
     static func makeSession() -> URLSession {
-        let identifier = 5
+        let identifier = TestCasePokemonIdentifiers.fixedCase
         let endpoint = PokemonSearchEndpoint.search(identifier: identifier)
         let url = endpoint.makeURL()
         let data = try! MockData.loadResponse()

@@ -17,14 +17,14 @@ protocol HomeActions {
 
 extension Actions: HomeActions {
     func catchButtonAction() {
-        coordinator.showCatchScene()
+        coordinator.showCatchScene(identifier: nil)
     }
     
     func catchFixedbuttonAction() {
-        coordinator.showCatchScene()
+        coordinator.showCatchScene(identifier: TestCasePokemonIdentifiers.fixedCase)
     }
     
     func catchErrorButtonAction() {
-        coordinator.showCatchScene()
+        coordinator.showCatchScene(identifier: TestCasePokemonIdentifiers.errorCase)
     }
 }
