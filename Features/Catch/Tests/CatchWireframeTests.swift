@@ -21,13 +21,13 @@ final class CatchWireframeTests: XCTestCase {
     }
     
     func testViewControllerHasInjectedStructure() {
-        let vc = CatchWireframe.makeViewController()
+        let viewController = CatchWireframe.makeViewController()
         
-        XCTAssertNotNil(vc, "ViewController should not be nil")
+        XCTAssertNotNil(viewController, "ViewController should not be nil")
         
-        CatchWireframe.prepare(vc, actions: MockCatchActions(), dataProvider: MockCatchDataProvider())
+        CatchWireframe.prepare(viewController, actions: MockCatchActions(), dataProvider: MockCatchDataProvider())
         
-        let presenter = vc.presenter
+        let presenter = viewController.presenter
         
         XCTAssertNotNil(presenter, "Presenter must not be nil")
     }

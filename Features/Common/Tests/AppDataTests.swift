@@ -39,12 +39,12 @@ final class AppDataTests: XCTestCase {
         let storage = FileStorage()
         let appData = AppData(storage: storage)
         
-        XCTAssertTrue(appData.pokemons.count == 0)
+        XCTAssertTrue(appData.pokemons.isEmpty)
         appData.pokemons.append(MockPokemonFactory.makeLocalPokemon())
         XCTAssertTrue(appData.pokemons.count == 1)
         appData.save()
         appData.pokemons.removeLast()
-        XCTAssertTrue(appData.pokemons.count == 0)
+        XCTAssertTrue(appData.pokemons.isEmpty)
         appData.load()
         XCTAssertTrue(appData.pokemons.count == 1)
         

@@ -6,13 +6,13 @@ import XCTest
 
 final class BackpackWireframeTests: XCTestCase {
     func testViewControllerHasInjectedStructure() {
-        let vc = BackpackWireframe.makeViewController()
+        let viewController = BackpackWireframe.makeViewController()
         
-        XCTAssertNotNil(vc, "ViewController should not be nil")
+        XCTAssertNotNil(viewController, "ViewController should not be nil")
         
-        BackpackWireframe.prepare(vc, actions: MockBackpackActions(), dataProvider: MockBackpackDataProvider())
+        BackpackWireframe.prepare(viewController, actions: MockBackpackActions(), dataProvider: MockBackpackDataProvider())
         
-        let presenter = vc.presenter
+        let presenter = viewController.presenter
         
         XCTAssertNotNil(presenter, "Presenter must not be nil")
         

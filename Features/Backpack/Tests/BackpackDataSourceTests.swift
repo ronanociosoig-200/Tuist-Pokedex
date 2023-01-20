@@ -5,6 +5,7 @@
 //  Created by Ronan O Ciosoig on 24/11/22.
 //  Copyright © 2022 Sonomos.com. All rights reserved.
 //
+// swiftlint:disable force_unwrapping force_cast
 
 import XCTest
 

@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import Backpack
-//@testable import Common
 
 final class BackpackDelegateTests: XCTestCase {
     func testDelegateDidSelectItem() {
