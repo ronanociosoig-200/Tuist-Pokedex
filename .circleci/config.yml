@@ -8,7 +8,7 @@ orbs:
 parameters:
   xcode_version:
     type: string
-    default: "13.3.1"
+    default: "14.2.0"
   tuist: 
     type: string
     default: "~/.tuist/Versions/3.15.0/tuist"
@@ -45,12 +45,8 @@ commands:
             [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
   setup_tuist:          
     steps: 
-      #- run: 
-      #    name: Cloud Auth
-      #    command: |
-      #      <<pipeline.parameters.tuist>> cloud auth
       - run: 
-          name: Fetch Dependencies
+          name: Tuist Fetch Dependencies
           command: |
             [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run: 
@@ -72,13 +68,23 @@ commands:
   run_tests:
     steps:
       - run: 
-          name: Run Tuist Pokedex Tests  
+          name: Tuist Test
           command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> 
   check_test_output:
     steps:
       - run:
           name: List test output
           command: ls -la output/tests.xcresult
+  install_xcresult_parser:
+    steps:
+      - run:
+          name: Install XCResultParser
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcresultparser
+  run_xcresult_parser:
+    steps:
+      - run:
+          name: Convert XCResult to JUnit XML
+          command: xcresultparser -o junit output/tests.xcresult > output/junit.xml
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -114,8 +120,10 @@ jobs:
       - run_lint
       - run_tests
       - check_test_output
+      - install_xcresult_parser
+      - run_xcresult_parser
       - store_test_results:
-          path: <<pipeline.parameters.test_output_path>>.xcresult
+          path: output
       - save_tuist_cache
 
 workflows: 
