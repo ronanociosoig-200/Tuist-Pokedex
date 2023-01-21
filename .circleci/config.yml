@@ -109,7 +109,7 @@ jobs:
       - run_lint
       - run_tests
       - store_test_results:
-          path: <<pipeline.parameters.test_output_path>> 
+          path: <<pipeline.parameters.test_output_path>>.xcresult
       - save_tuist_cache
 
 workflows: 
