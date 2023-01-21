@@ -42,19 +42,13 @@ commands:
             [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
   setup_tuist:          
     steps: 
-      #- run: 
-      #    name: Cloud Auth
-      #    command: |
-      #      <<pipeline.parameters.tuist>> cloud auth
       - run: 
           name: Fetch Dependencies
           command: |
             [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run: 
           name: Tuist Cache Warm
-          command: <<pipeline.parameters.tuist>> cache warm -x
-          # TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN 
-          # disable Tuist cloud because it is failing due to a config error
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
       - run: 
           name: Tuist Generate Project
           command: <<pipeline.parameters.tuist>> generate -xn
