@@ -9,6 +9,12 @@ parameters:
   xcode_version:
     type: string
     default: "14.2.0"
+  device:
+    type: string
+    default: "iPhone 14"
+  ios_version:
+    type: string
+    default: "16.2"
   tuist: 
     type: string
     default: "~/.tuist/Versions/3.15.0/tuist"
@@ -59,7 +65,7 @@ commands:
     steps:
       - run: 
           name: Build Pokedex App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.4'
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2'
   run_lint:
     steps: 
       - run:
@@ -69,7 +75,7 @@ commands:
     steps:
       - run: 
           name: Tuist Test
-          command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> 
+          command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
   check_test_output:
     steps:
       - run:
@@ -87,7 +93,7 @@ commands:
     steps:
       - run:
           name: Convert XCResult to JUnit XML
-          command: xcresultparser -o junit output/tests.xcresult > output/test_results.xml
+          command: tools/xcresultparser -o junit output/tests.xcresult > output/test_results.xml
       - run:
           name: Clean up XCResult
           command: rm -r output/tests.xcresult 
@@ -126,7 +132,7 @@ jobs:
       - run_lint
       - run_tests
       - check_test_output
-      - install_xcresult_parser
+      # - install_xcresult_parser
       - run_xcresult_parser
       - store_test_results:
           path: output
