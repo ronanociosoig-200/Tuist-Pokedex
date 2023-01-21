@@ -11,10 +11,13 @@ parameters:
     default: "13.3.1"
   tuist: 
     type: string
-    default: "~/.tuist/Versions/3.14.0/tuist"
+    default: "~/.tuist/Versions/3.15.0/tuist"
   tuist_version:
     type: string
-    default: "3.14.0"
+    default: "3.15.0"
+  test_output_path:
+    type: string
+    default: "output/tests"
 
 commands:
   install_other:
@@ -52,9 +55,7 @@ commands:
             [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run: 
           name: Tuist Cache Warm
-          command: <<pipeline.parameters.tuist>> cache warm -x
-          # TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN 
-          # disable Tuist cloud because it is failing due to a config error
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
       - run: 
           name: Tuist Generate Project
           command: <<pipeline.parameters.tuist>> generate -xn
@@ -72,7 +73,7 @@ commands:
     steps:
       - run: 
           name: Run Tuist Pokedex Tests  
-          command: <<pipeline.parameters.tuist>> test
+          command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> 
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -107,6 +108,8 @@ jobs:
       - save_dependencies_cache
       - run_lint
       - run_tests
+      - store_test_results:
+          path: <<pipeline.parameters.test_output_path>> 
       - save_tuist_cache
 
 workflows: 
