@@ -77,6 +77,9 @@ commands:
           command: ls -la output/tests.xcresult
   install_xcresult_parser:
     steps:
+      - run: 
+          name: Brew Tap formulae 
+          command: brew tap a7ex/homebrew-formulae
       - run:
           name: Install XCResultParser
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcresultparser
