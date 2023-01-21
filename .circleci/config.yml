@@ -11,7 +11,7 @@ parameters:
     default: "14.2.0"
   device:
     type: string
-    default: "iPhone 14"
+    default: "\"iPhone 14\""
   ios_version:
     type: string
     default: "16.2"
