@@ -87,7 +87,10 @@ commands:
     steps:
       - run:
           name: Convert XCResult to JUnit XML
-          command: xcresultparser -o junit output/tests.xcresult > output/junit.xml
+          command: xcresultparser -o junit output/tests.xcresult > output/test_results.xml
+      - run:
+          name: Clean up XCResult
+          command: rm -r output/tests.xcresult 
   save_tuist_cache: 
     steps: 
       - save_cache:
