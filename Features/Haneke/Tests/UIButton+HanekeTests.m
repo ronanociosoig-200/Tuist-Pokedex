@@ -67,7 +67,7 @@
 
 - (void)testImageFormat_HNKScaleModeAspectFit
 {
-    const CGRect contentRect = [_sut contentRectForBounds:_sut.bounds];
+    const CGRect contentRect = _sut.bounds;
     const CGSize formatSize = contentRect.size;
 
     HNKCacheFormat *result = _sut.hnk_imageFormat;
@@ -81,7 +81,7 @@
 
 - (void)testImageFormat_HNKScaleModeAspectFit_UIControlContentHorizontalAlignmentFill
 {
-    const CGRect contentRect = [_sut contentRectForBounds:_sut.bounds];
+    const CGRect contentRect = _sut.bounds;
     const CGSize formatSize = contentRect.size;
     _sut.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     
@@ -97,7 +97,7 @@
 - (void)testImageFormat_HNKScaleModeAspectFit_imageEdgeInsets
 {
     _sut.imageEdgeInsets = UIEdgeInsetsMake(1, 2, 3, 4);
-    const CGRect contentRect = [_sut contentRectForBounds:_sut.bounds];
+    const CGRect contentRect = _sut.bounds;
     const CGSize formatSize = CGSizeMake(contentRect.size.width - _sut.imageEdgeInsets.left - _sut.imageEdgeInsets.right,
                                          contentRect.size.height - _sut.imageEdgeInsets.top - _sut.imageEdgeInsets.bottom);
     
@@ -112,7 +112,7 @@
 
 - (void)testImageFormat_HNKScaleModeFill
 {
-    const CGRect contentRect = [_sut contentRectForBounds:_sut.bounds];
+    const CGRect contentRect = _sut.bounds;
     const CGSize formatSize = contentRect.size;
     _sut.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     _sut.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
@@ -129,7 +129,7 @@
 - (void)testImageFormat_HNKScaleModeFill_imageEdgeInsets
 {
     _sut.imageEdgeInsets = UIEdgeInsetsMake(1, 2, 3, 4);
-    const CGRect contentRect = [_sut contentRectForBounds:_sut.bounds];
+    const CGRect contentRect = _sut.bounds;
     const CGSize formatSize = CGSizeMake(contentRect.size.width - _sut.imageEdgeInsets.left - _sut.imageEdgeInsets.right,
                                          contentRect.size.height - _sut.imageEdgeInsets.top - _sut.imageEdgeInsets.bottom);
     _sut.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
@@ -513,7 +513,7 @@
 
 - (void)testBackgroundImageFormat
 {
-    const CGRect contentRect = [_sut contentRectForBounds:_sut.bounds];
+    const CGRect contentRect = _sut.bounds;
     const CGSize formatSize = contentRect.size;
     
     HNKCacheFormat *result = _sut.hnk_backgroundImageFormat;
