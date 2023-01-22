@@ -16,8 +16,7 @@
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/ronanociosoig-200/Tuist-Pokedex/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/ronanociosoig-200/Tuist-Pokedex/tree/master)
 
-
-This simple 4-screen iOS app is a Swift code example to demonstrate a micro-feature approach to modularisation based on Tuist, that fetches data from an [API](https://pokeapi.co), parses the response, displays some of the data, stores it locally, and can retrieve it. The networking module has implementations for both Combine and Async/Await. The initial aim was to keep this as simple as possible but follow best practices and standard design patterns. 
+This simple 4-screen iOS app is a Swift code example to demonstrate a micro-feature approach to modularisation based on Tuist, that fetches data from an [API](https://pokeapi.co), parses the response, displays some of the data, stores it locally, and can retrieve it. The networking module has implementations for both Combine and Async/Await. The aim was to keep this as simple as possible but follow best practices and standard design patterns. 
 
 	- Home Scene
 	- Catch the Pokemon Scene 
@@ -34,28 +33,34 @@ Tapping on the lower button opens the Backpack scene, which displays all the cau
 
 ## Tuist
 
-Run the code in this repo requires the prior installation of [tuist.io](https://tuist.io) version 3.14.0. Generate the project and workspace by running [`tuist generate`](https://tuist.io/docs/usage/get-started/). It will automatically open the project in Xcode.
+Running the code in this repo requires the prior installation of [tuist.io](https://tuist.io) version 3.15.0 and Xcode 14.1. First fetch the dependencies with `tuist fetch` and then generate the project and workspace by running [`tuist generate`](https://tuist.io/docs/usage/get-started/). It will automatically open the project in Xcode.
 
 ## Modular Approach
 										     
 The project implements a simplified version of the micro-feature modular architectual pattern suggested by the Tuist team ([see here](https://docs.tuist.io/building-at-scale/microfeatures))							     
-Each feature module has 3 targets: The framework target, a unit test target and an example app target.
+Each feature module has 4 targets: The framework target, a unit test target, an example app target, and a UI test target.
 <p align="center">
     <img src="ModuleTargets.drawio.png" width="331” max-width="50%" alt="Feature Module Targets" />
 </p>
 
-The application target also has a unit test target and a UI testing target.
+The application target also has both unit test and UI testing targets.
 
 <p align="center">
     <img src="AppTargets.drawio.png" width="331” max-width="50%" alt="Application Targets" />
 </p>
 
-Each scene is definded as a separate feature module (Home, Catch, Backpack and Detail), along with additional modules for Common, Network, Haneke image library, and the main application. The project can focus on any one, or a combination of these modules, the testing target, or the example application that validates each module. 
+Each scene is definded as a separate feature module (Home, Catch, Backpack and Detail), along with additional core modules for Common, Network, Haneke image library, and the main application. The project can focus on any one, or a combination of these modules, the testing target, or the example application that validates each module. The module dependencies are defined in such a way that no feature module depends on another one, and none of the feature modules depend on external dependencies. The coordinator in the main application handles all the inter-feature module communications. 
 
 Run `tuist edit` and view the Project.swift manifest to see the structure and how dependencies are defined and linked.
 
 The dependency graph shows the example apps, the feature modules and the common shared module, along with the network and Haneke image library, as well as JGProgressHUD, which is loaded as an SPM.
  
+<p align="center">
+    <img src="simplifed-graph.png" width="800” max-width="100%" alt="Dependency Graph" />
+</p>
+
+The full graph includes all the testing targets. 
+
 <p align="center">
     <img src="graph.png" width="800” max-width="100%" alt="Dependency Graph" />
 </p>
