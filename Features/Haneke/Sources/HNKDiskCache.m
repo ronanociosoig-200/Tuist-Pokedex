@@ -340,9 +340,8 @@ NSString *const HNKExtendedFileAttributeKey = @"io.haneke.key";
 
 - (NSString*)hnk_stringByEscapingFilename
 {
-    // TODO: Add more characters to leave unescaped that are valid for paths but not for URLs
-    NSString *filename = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)self, CFSTR(" \\"), CFSTR("/:"), kCFStringEncodingUTF8));
-    return filename;
+    NSCharacterSet *allowed = [NSCharacterSet alphanumericCharacterSet];
+    return [self stringByAddingPercentEncodingWithAllowedCharacters: allowed];
 }
 
 - (NSString*)hnk_valueForExtendedFileAttribute:(NSString*)attribute
