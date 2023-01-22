@@ -20,7 +20,7 @@
 // swiftlint:disable all
 
 #import <Foundation/Foundation.h>
-#import <HNKCache.h>
+#import <Haneke/HNKCache.h>
 
 enum
 {
