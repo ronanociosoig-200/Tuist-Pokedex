@@ -20,14 +20,14 @@
 // swiftlint:disable all
 
 #import <HNKDiskCache.h>
-#import <CommonCrypto/CommonDigest.h> // For hnk_MD5String
+#import <CommonCrypto/CommonDigest.h> // For hnk_SHA256String
 #import <sys/xattr.h> // For hnk_setValue:forExtendedFileAttribute:
 
 NSString *const HNKExtendedFileAttributeKey = @"io.haneke.key";
 
 @interface NSString (hnk_utils)
 
-- (NSString*)hnk_MD5String;
+- (NSString*)hnk_SHA256String;
 - (BOOL)hnk_setValue:(NSString*)value forExtendedFileAttribute:(NSString*)attribute;
 - (NSString*)hnk_stringByEscapingFilename;
 - (NSString*)hnk_valueForExtendedFileAttribute:(NSString*)attribute;
@@ -217,9 +217,9 @@ NSString *const HNKExtendedFileAttributeKey = @"io.haneke.key";
     NSString *filename = [key hnk_stringByEscapingFilename];
     if (filename.length >= NAME_MAX)
     {
-        NSString *MD5 = [key hnk_MD5String];
+        NSString *SHA256 = [key hnk_SHA256String];
         NSString *pathExtension = key.pathExtension;
-        filename = pathExtension.length > 0 ? [MD5 stringByAppendingPathExtension:pathExtension] : MD5;
+        filename = pathExtension.length > 0 ? [SHA256 stringByAppendingPathExtension:pathExtension] : SHA256;
     }
     NSString *path = [_directory stringByAppendingPathComponent:filename];
     return path;
@@ -316,17 +316,17 @@ NSString *const HNKExtendedFileAttributeKey = @"io.haneke.key";
 
 @implementation NSString(hnk_utils)
 
-- (NSString*)hnk_MD5String
+- (NSString*)hnk_SHA256String
 {
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(data.bytes, (CC_LONG)data.length, result);
-    NSMutableString *MD5String = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+    unsigned char result[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(data.bytes, (CC_LONG)data.length, result);
+    NSMutableString *SHA256String = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+    for (int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++)
     {
-        [MD5String appendFormat:@"%02x",result[i]];
+        [SHA256String appendFormat:@"%02x",result[i]];
     }
-    return MD5String;
+    return SHA256String;
 }
 
 - (BOOL)hnk_setValue:(NSString*)value forExtendedFileAttribute:(NSString*)attribute
@@ -340,9 +340,8 @@ NSString *const HNKExtendedFileAttributeKey = @"io.haneke.key";
 
 - (NSString*)hnk_stringByEscapingFilename
 {
-    // TODO: Add more characters to leave unescaped that are valid for paths but not for URLs
-    NSString *filename = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)self, CFSTR(" \\"), CFSTR("/:"), kCFStringEncodingUTF8));
-    return filename;
+    NSCharacterSet *allowed = [NSCharacterSet alphanumericCharacterSet];
+    return [self stringByAddingPercentEncodingWithAllowedCharacters: allowed];
 }
 
 - (NSString*)hnk_valueForExtendedFileAttribute:(NSString*)attribute

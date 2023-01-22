@@ -20,7 +20,7 @@
 // swiftlint:disable all
 
 #import <UIKit/UIKit.h>
-#import <HNKCache.h>
+#import <Haneke/HNKCache.h>
 
 @interface UIButton (Haneke)
 

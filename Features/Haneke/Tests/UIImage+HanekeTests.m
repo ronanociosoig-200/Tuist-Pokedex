@@ -24,6 +24,7 @@
 #import "UIImage+HanekeTestUtils.h"
 @import ImageIO;
 @import MobileCoreServices;
+@import UniformTypeIdentifiers;
 
 typedef NS_ENUM(NSInteger, HNKExifOrientation) {
     HNKExifOrientationUp = 1,
@@ -193,7 +194,9 @@ typedef NS_ENUM(NSInteger, HNKExifOrientation) {
     // Use TIFF because PNG doesn't store EXIF orientation
     NSDictionary *exifProperties = @{(__bridge NSString*)kCGImagePropertyOrientation : @(orientation)};
     NSMutableData *data = [NSMutableData data];
-    CGImageDestinationRef imageDestinationRef = CGImageDestinationCreateWithData((__bridge  CFMutableDataRef)(data), kUTTypeTIFF, 1, NULL);
+    
+    CGImageDestinationRef imageDestinationRef = CGImageDestinationCreateWithData((__bridge  CFMutableDataRef)(data), (CFStringRef)UTTypeTIFF.identifier, 1, NULL);
+    
     CGImageDestinationAddImage(imageDestinationRef, gradientImage.CGImage, (__bridge CFDictionaryRef)exifProperties);
     CGImageDestinationFinalize(imageDestinationRef);
     CFRelease(imageDestinationRef);

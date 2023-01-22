@@ -124,7 +124,7 @@
     const CGRect bounds = self.bounds;
     NSAssert(bounds.size.width > 0 && bounds.size.height > 0, @"%s: UIButton size is zero. Set its frame, call sizeToFit or force layout first. You can also set a custom format with a defined size if you don't want to force layout.", __PRETTY_FUNCTION__);
     
-    const CGRect contentRect = [self contentRectForBounds:bounds];
+    const CGRect contentRect = self.bounds;
     // Ideally we would use imageRectForContentRect: but it requires the image to be set to work
     const CGSize contentSize = contentRect.size;
     const CGSize imageSize = CGSizeMake(contentSize.width, contentSize.height);
@@ -297,7 +297,7 @@
     const CGRect bounds = self.bounds;
     NSAssert(bounds.size.width > 0 && bounds.size.height > 0, @"%s: UIButton size is zero. Set its frame, call sizeToFit or force layout first. You can also set a custom format with a defined size if you don't want to force layout.", __PRETTY_FUNCTION__);
     
-    const CGRect backgroundRect = [self backgroundRectForBounds:bounds];
+    const CGRect backgroundRect = bounds;
     const CGSize imageSize = backgroundRect.size;
     
     format = [HNKCache sharedFormatWithSize:imageSize scaleMode:HNKScaleModeFill];
