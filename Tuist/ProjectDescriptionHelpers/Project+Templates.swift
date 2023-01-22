@@ -207,9 +207,6 @@ extension Project {
             resources: ["\(featuresPath)/\(name)/Resources/**"
                        ],
             scripts: [
-                .post(path: "scripts/swiftlint.sh",
-                      arguments: ["$SRCROOT", "$TARGETNAME"],
-                      name: "SwiftLint")
             ],
             dependencies: dependencies
         )
