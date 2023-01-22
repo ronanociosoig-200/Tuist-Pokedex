@@ -26,11 +26,6 @@ parameters:
     default: "output/tests"
 
 commands:
-  install_other:
-    steps: 
-      - run:
-          name: Test Echo
-          command: echo "Hello"
   install_tuist:
     steps:
       - run:
@@ -96,7 +91,7 @@ commands:
     steps:
       - run:
           name: Convert XCResult to JUnit XML
-          command: tools/xcresultparser -o junit output/tests.xcresult > output/test_results.xml
+          command: tools/xcresultparser -c -o junit output/tests.xcresult > output/test_results.xml
       - run:
           name: Clean up XCResult
           command: rm -r output/tests.xcresult 
@@ -126,6 +121,8 @@ jobs:
   build_and_test:
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
+    environment:
+      TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
       - checkout
       - install_tuist 
