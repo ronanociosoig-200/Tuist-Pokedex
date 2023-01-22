@@ -20,7 +20,7 @@
 // swiftlint:disable all
 
 #import <UIKit/UIKit.h>
-#import "HNKCache.h"
+#import <HNKCache.h>
 
 extern const CGFloat HNKViewFormatCompressionQuality;
 extern const unsigned long long HNKViewFormatDiskCapacity;

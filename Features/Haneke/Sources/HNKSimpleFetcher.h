@@ -20,7 +20,7 @@
 // swiftlint:disable all
 
 #import <Foundation/Foundation.h>
-#import "HNKCache.h"
+#import <HNKCache.h>
 
 /**
  Simple fetcher that represents a key-image pair.

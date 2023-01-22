@@ -20,7 +20,7 @@
 // swiftlint:disable all
 
 #import <UIKit/UIKit.h>
-#import "HNKCache.h"
+#import <HNKCache.h>
 
 @interface UIImageView (Haneke)
 

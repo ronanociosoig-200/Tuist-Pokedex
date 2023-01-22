@@ -17,6 +17,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+#pragma clang system_header
 
 #import "HNKCache.h"
 #import "HNKDiskFetcher.h"
