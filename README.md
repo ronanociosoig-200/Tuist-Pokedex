@@ -1,13 +1,6 @@
 <p align="center">
-    <img src="PokedexScreens.png"
+    <img src="Images/PokedexScreens.png"
       width=700>
-</p>
-
-<p align="center">
-  [Architecture](#architecture)
-  • [Implementation](#implementation)
-  • [Manual & Automated Testing](#manual-&-automated-testing)
-  • [Circle CI](#circle-ci)
 </p>
 
 # Pokedex
@@ -90,13 +83,10 @@ It also receives call backs from the data provider when a request has completed 
 
  
 ## Manual & Automated Testing
-The project has unit and UI tests. There are comprehensive unit tests both at the feature and at the application level.
+The project has unit and UI tests. There are comprehensive unit tests both at the feature and at the application level. Run `tuist test` to execute all the tests, or `tuist test <feature_name>` for running the tests on specific modules. The project also has 2 custom schemes to help with manual validation: "UITesting" and "AsyncNetworkTesting". Each of these have the launch argument added. 
 
-Run `tuist test` to execute all the tests, or `tuist test <feature_name>` for running the tests on specific modules.
+## Circle CI
 
-The project also has 2 custom schemes to help with manual validation: "UITesting" and "AsyncNetworkTesting". Each of these have the launch argument added. 
-
-## Circle CI 
 The project is integrated with Circle for continuous integration. Each push to a branch will trigger the build and test workflow. 
 
 The configuration takes advantage of extensive caching on Circle as well as Tuist Cloud. 
