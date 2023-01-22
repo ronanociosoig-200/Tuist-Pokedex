@@ -4,17 +4,15 @@
 </p>
 
 <p align="center">
-  <a href="#architecture">Architecture</a>
-  • <a href="#implementation">Implementation</a>
-  • <a href="#automated-testing">Automated Testing</a>
+  [Architecture](#architecture)
+  • [Implementation](#implementation)
+  • [Manual & Automated Testing](#manual-&-automated-testing)
+  • [Circle CI](#circle-ci)
 </p>
-
 
 # Pokedex
 
-[![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io) 
-
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/ronanociosoig-200/Tuist-Pokedex/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/ronanociosoig-200/Tuist-Pokedex/tree/master)
+[![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io) [![CircleCI](https://dl.circleci.com/status-badge/img/gh/ronanociosoig-200/Tuist-Pokedex/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/ronanociosoig-200/Tuist-Pokedex/tree/master)
 
 This simple 4-screen iOS app is a Swift code example to demonstrate a micro-feature approach to modularisation based on Tuist, that fetches data from an [API](https://pokeapi.co), parses the response, displays some of the data, stores it locally, and can retrieve it. The networking module has implementations for both Combine and Async/Await. The aim was to keep this as simple as possible but follow best practices and standard design patterns. 
 
@@ -35,51 +33,54 @@ Tapping on the lower button opens the Backpack scene, which displays all the cau
 
 Running the code in this repo requires the prior installation of [tuist.io](https://tuist.io) version 3.15.0 and Xcode 14.1. First fetch the dependencies with `tuist fetch` and then generate the project and workspace by running [`tuist generate`](https://tuist.io/docs/usage/get-started/). It will automatically open the project in Xcode.
 
-## Modular Approach
+## Micro-Feature Architecture
 										     
-The project implements a simplified version of the micro-feature modular architectual pattern suggested by the Tuist team ([see here](https://docs.tuist.io/building-at-scale/microfeatures))							     
+The project implements a simplified version of the micro-feature modular architectural pattern suggested by the Tuist team ([see here](https://docs.tuist.io/building-at-scale/microfeatures))							     
 Each feature module has 4 targets: The framework target, a unit test target, an example app target, and a UI test target.
 <p align="center">
-    <img src="ModuleTargets.drawio.png" width="331” max-width="50%" alt="Feature Module Targets" />
+    <img src="Images/ModuleTargets.drawio.png" width="331” max-width="50%" alt="Feature Module Targets" />
 </p>
 
 The application target also has both unit test and UI testing targets.
 
 <p align="center">
-    <img src="AppTargets.drawio.png" width="331” max-width="50%" alt="Application Targets" />
+    <img src="Images/AppTargets.drawio.png" width="331” max-width="50%" alt="Application Targets" />
 </p>
 
-Each scene is definded as a separate feature module (Home, Catch, Backpack and Detail), along with additional core modules for Common, Network, Haneke image library, and the main application. The project can focus on any one, or a combination of these modules, the testing target, or the example application that validates each module. The module dependencies are defined in such a way that no feature module depends on another one, and none of the feature modules depend on external dependencies. The coordinator in the main application handles all the inter-feature module communications. 
+Each scene is defined as a separate feature module (Home, Catch, Backpack and Detail), along with additional core modules for Common, Network, Haneke image library, and the main application. Tuist can generate a project that can focus on any one, or a combination of these modules, the testing target, or the example application that validates each module. For example: 
+`tuist generate Backpack BackpackTests BackpackExample BackpackUITests`
+
+The module dependencies are defined in such a way that no feature module depends on another one, and none of the feature modules depend on external dependencies. The coordinator in the main application handles all the inter-feature module communications. 
 
 Run `tuist edit` and view the Project.swift manifest to see the structure and how dependencies are defined and linked.
 
 The dependency graph shows the example apps, the feature modules and the common shared module, along with the network and Haneke image library, as well as JGProgressHUD, which is loaded as an SPM.
  
 <p align="center">
-    <img src="simplifed-graph.png" width="800” max-width="100%" alt="Dependency Graph" />
+    <img src="Images/simplifed-graph.png" width="800” max-width="100%" alt="Simplified Dependency Graph" />
 </p>
 
 The full graph includes all the testing targets. 
 
 <p align="center">
-    <img src="graph.png" width="800” max-width="100%" alt="Dependency Graph" />
+    <img src="Images/graph.png" width="800” max-width="100%" alt="Full Dependency Graph" />
 </p>
 
 ## Architecture 
 
 <p align="center">
-    <img src="AppArchitecture.png" width="500” max-width="90%" alt="App Architecture" />
+    <img src="Images/AppArchitecture.png" width="500” max-width="90%" alt="App Architecture" />
 </p>
 
 At the root level, the application employs the [coordinator pattern](http://khanlou.com/2015/01/the-coordinator/) to remove the dependency between screens, enabling better reusability and testability. 
 
-The presentation layer uses the well-known [Model-View-Presenter pattern](https://en.wikipedia.org/wiki/Model–view–presenter), giving a clean seperation of concerns between the view, state and the data.
+The presentation layer uses the well-known [Model-View-Presenter pattern](https://en.wikipedia.org/wiki/Model–view–presenter), giving a clean separation of concerns between the view, state and the data.
 
 A wireframe structure is used to manage the dependency injection in the view controller and presenter.
 
 The data provider class acts as a data access layer, which has extensions defined by protocols for each screen and the music player. This ensures that access to functions are restricted, and it facilitates unit and integration testing by mocking the data layer. It initiates calls to a networking service and receives a response.
 
-An AppData class is used to maintain global state across screens, with the data provider controling its access. View controllers have read-only access, and data must be updated via actions. This is a form of uni-directional data flow that helps prevent inconsistencies in the screens and the data presented. 
+An AppData class is used to maintain global state across screens, with the data provider controlling its access. View controllers have read-only access, and data must be updated via actions. This is a form of uni-directional data flow that helps prevent inconsistencies in the screens and the data presented. 
 
 ## Implementation 
 
@@ -94,3 +95,8 @@ The project has unit and UI tests. There are comprehensive unit tests both at th
 Run `tuist test` to execute all the tests, or `tuist test <feature_name>` for running the tests on specific modules.
 
 The project also has 2 custom schemes to help with manual validation: "UITesting" and "AsyncNetworkTesting". Each of these have the launch argument added. 
+
+## Circle CI 
+The project is integrated with Circle for continuous integration. Each push to a branch will trigger the build and test workflow. 
+
+The configuration takes advantage of extensive caching on Circle as well as Tuist Cloud. 
