@@ -11,7 +11,7 @@ import Foundation
 import JGProgressHUD
 import Catch
 import Common
-import NetworkKit
+import Network
 
 public struct TestCasePokemonIdentifiers {
     static let fixedCase = 5

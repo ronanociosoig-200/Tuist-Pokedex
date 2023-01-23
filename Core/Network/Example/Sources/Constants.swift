@@ -1,6 +1,6 @@
 //
 //  Constants.swift
-//  NetworkKit
+//  NetworkExample
 //
 //  Created by Ronan on 09/05/2019.
 //  Copyright © 2019 Sonomos. All rights reserved.
@@ -42,25 +42,35 @@ struct Constants {
             
         }
         
-        struct BackpackScene {
-            static let title = "Backpack"
-            static let closeButton = "Close"
-        }
-        
-        struct DetailScene {
-            static let weight = "Weight"
-            static let height = "Height"
-            static let date = "Date"
-            static let experience = "Experience"
-            static let types = "Types"
+        struct SimpleView {
+            
+            static let title = "Network Example"
+            static let labelText = "Choose a Pokemon"
+            
+            static let placeholder = "A number between 1 and 1000"
+            
+            struct Button {
+                static let search = "Search"
+            }
+            
+            struct Alert {
+                
+                static let found = "Pokemon found: "
+                
+                struct Error {
+                    static let enterVlidNumber = "Enter valid number"
+                    static let outOfRange = "Number out of range"
+                    static let nameNotFound = "Unknown"
+                }
+                
+            }
         }
         
         struct Error {
             static let jsonDecodingError = "Error: JSON decoding error."
             static let noDataError = "Error: No data received."
             static let noResultsFound = "No results were found for your search."
-            static let statusCode404 = "404"
-            static let notFound = "Error 401 Pokemon not found"
+            static let statusCode404 = "404 Not found"
         }
     }
     

@@ -3,6 +3,8 @@ import ProjectDescription
 let reverseOrganizationName = "com.sonomos"
 
 let featuresPath = "Features"
+let corePath = "Core"
+let appPath = "App"
 let exampleAppSuffix = "Example"
 let examplePath = "Example"
 
@@ -18,6 +20,23 @@ public enum uFeatureTarget {
     case exampleApp
 }
 
+public enum AppModuleType {
+    case core
+    case feature
+    case app
+
+    func path() -> String {
+        switch self {
+        case .core:
+            return corePath
+        case .feature:
+            return featuresPath
+        case .app:
+            return appPath
+        }
+    }
+}
+
 public struct Module {
     let name: String
     let path: String
@@ -27,8 +46,10 @@ public struct Module {
     let exampleResources: [String]
     let testResources: [String]
     let targets: Set<uFeatureTarget>
+    let moduleType: AppModuleType
     
     public init(name: String,
+                moduleType: AppModuleType,
                 path: String,
                 frameworkDependancies: [TargetDependency],
                 exampleDependencies: [TargetDependency],
@@ -37,6 +58,7 @@ public struct Module {
                 testResources: [String],
                 targets: Set<uFeatureTarget> = Set([.framework, .unitTests, .exampleApp])) {
         self.name = name
+        self.moduleType = moduleType
         self.path = path
         self.frameworkDependancies = frameworkDependancies
         self.exampleDependencies = exampleDependencies
@@ -119,24 +141,24 @@ extension Project {
     
     /// Helper function to create a framework target and an associated unit test target and example app
     public static func makeFrameworkTargets(module: Module, platform: Platform) -> [Target] {
-        let frameworkPath = "\(featuresPath)/\(module.path)"
+        let frameworkPath = "\(module.moduleType.path())/\(module.path)"
         
         let frameworkResourceFilePaths = module.frameworkResources.map {
-            ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/" + $0), tags: [])
+            ResourceFileElement.glob(pattern: Path("\(module.moduleType.path())/\(module.path)/" + $0), tags: [])
         }
         
         let exampleResourceFilePaths = module.exampleResources.map {
-            ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/\(examplePath)/" + $0), tags: [])
+            ResourceFileElement.glob(pattern: Path("\(module.moduleType.path())/\(module.path)/\(examplePath)/" + $0), tags: [])
         }
         
         let testResourceFilePaths = module.testResources.map {
-            ResourceFileElement.glob(pattern: Path("\(featuresPath)/\(module.path)/Tests/" + $0), tags: [])
+            ResourceFileElement.glob(pattern: Path("\(module.moduleType.path())/\(module.path)/Tests/" + $0), tags: [])
         }
         
         var exampleAppDependancies = module.exampleDependencies
         exampleAppDependancies.append(.target(name: module.name))
         
-        let exampleSourcesPath = "\(featuresPath)/\(module.path)/\(examplePath)/Sources"
+        let exampleSourcesPath = "\(module.moduleType.path())/\(module.path)/\(examplePath)/Sources"
         
         var targets = [Target]()
         
@@ -203,8 +225,8 @@ extension Project {
             product: .app,
             bundleId: "\(reverseOrganizationName).\(name)",
             infoPlist: makeAppInfoPlist(),
-            sources: ["\(featuresPath)/\(name)/Sources/**"],
-            resources: ["\(featuresPath)/\(name)/Resources/**"
+            sources: ["\(appPath)/\(name)/Sources/**"],
+            resources: ["\(appPath)/\(name)/Resources/**"
                        ],
             scripts: [
             ],
@@ -217,9 +239,9 @@ extension Project {
             product: .unitTests,
             bundleId: "\(reverseOrganizationName).\(name)Tests",
             infoPlist: .default,
-            sources: ["\(featuresPath)/\(name)/Tests/**"],
-            resources: ["\(featuresPath)/\(name)/Tests/**/*.json",
-                        "\(featuresPath)/\(name)/Tests/**/*.png"],
+            sources: ["\(appPath)/\(name)/Tests/**"],
+            resources: ["\(appPath)/\(name)/Tests/**/*.json",
+                        "\(appPath)/\(name)/Tests/**/*.png"],
             dependencies: [
                 .target(name: "\(name)")
             ])
@@ -230,7 +252,7 @@ extension Project {
             product: .uiTests,
             bundleId: "\(reverseOrganizationName).\(name)UITests",
             infoPlist: .default,
-            sources: ["\(featuresPath)/\(name)/UITests/**"],
+            sources: ["\(appPath)/\(name)/UITests/**"],
             resources: [],
             dependencies: [
                 .target(name: "\(name)")

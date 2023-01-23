@@ -1,5 +1,5 @@
 import UIKit
-import NetworkKit
+import Network
 import Common
 
 @main

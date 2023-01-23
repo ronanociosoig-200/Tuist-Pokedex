@@ -1,6 +1,6 @@
 //
 //  Log.swift
-//  NetworkKitExample
+//  NetworkExample
 //
 //  Created by Ronan O Ciosig on 9/5/21.
 //  Copyright © 2021 Sonomos. All rights reserved.

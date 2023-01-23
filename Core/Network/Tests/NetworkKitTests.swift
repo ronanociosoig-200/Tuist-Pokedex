@@ -1,6 +1,6 @@
 //
-//  NetworkKitTests.swift
-//  NetworkKitTests
+//  NetworkTests.swift
+//  NetworkTests
 //
 //  Created by Ronan on 09/05/2019.
 //  Copyright © 2019 Sonomos. All rights reserved.
@@ -8,11 +8,11 @@
 
 import XCTest
 import Combine
-@testable import NetworkKit
+@testable import Network
 
 // swiftlint:disable all
 
-class NetworkKitTests: XCTestCase {
+class NetworkTests: XCTestCase {
     var cancellables = Set<AnyCancellable>()
     
     func testEndpointReturnsData() {

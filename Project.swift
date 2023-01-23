@@ -18,6 +18,7 @@ let project = Project.app(name: "Pokedex",
                                          ])
 func makeHanekeModule() -> Module {
     return Module(name: "Haneke",
+                  moduleType: .core,
                   path: "Haneke",
                   frameworkDependancies: [],
                   exampleDependencies: [],
@@ -28,6 +29,7 @@ func makeHanekeModule() -> Module {
 
 func makeHomeModule() -> Module {
     return Module(name: "Home",
+                  moduleType: .feature,
                   path: "Home",
                   frameworkDependancies: [.target(name: "Common")],
                   exampleDependencies: [.external(name: "JGProgressHUD")],
@@ -39,6 +41,7 @@ func makeHomeModule() -> Module {
 
 func makeBackpackModule() -> Module {
     return Module(name: "Backpack",
+                  moduleType: .feature,
            path: "Backpack",
            frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
            exampleDependencies: [.target(name: "Detail")],
@@ -50,6 +53,7 @@ func makeBackpackModule() -> Module {
 
 func makeDetailModule() -> Module {
     return Module(name: "Detail",
+                  moduleType: .feature,
                   path: "Detail",
                   frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
                   exampleDependencies: [],
@@ -61,9 +65,10 @@ func makeDetailModule() -> Module {
 
 func makeCatchModule() -> Module {
     Module(name: "Catch",
+           moduleType: .feature,
            path: "Catch",
            frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
-           exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
+           exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "Network")],
            frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
            testResources: [],
@@ -72,6 +77,7 @@ func makeCatchModule() -> Module {
 
 func makeCommonModule() -> Module {
     return Module(name: "Common",
+                  moduleType: .core,
                   path: "Common",
                   frameworkDependancies: [],
                   exampleDependencies: [],
@@ -82,7 +88,8 @@ func makeCommonModule() -> Module {
 }
 
 func makeNetworkModule() -> Module {
-    return Module(name: "NetworkKit",
+    return Module(name: "Network",
+                  moduleType: .core,
                   path: "Network",
                   frameworkDependancies: [],
                   exampleDependencies: [.target(name: "Common")],

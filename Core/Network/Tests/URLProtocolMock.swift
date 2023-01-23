@@ -1,6 +1,6 @@
 //
 //  URLProtocolMock.swift
-//  NetworkKitTests
+//  NetworkTests
 //
 //  Created by Ronan on 02/01/2022.
 //  Copyright © 2022 Sonomos. All rights reserved.

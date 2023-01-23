@@ -9,7 +9,7 @@
 import Foundation
 import JGProgressHUD
 import Common
-import NetworkKit
+import Network
 import Backpack
 import Catch
 import Home
