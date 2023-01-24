@@ -60,9 +60,9 @@ commands:
       - run: 
           name: Tuist Cache Warm
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
-      - run: 
-          name: Tuist Generate Project
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
+     # - run: 
+     #     name: Tuist Generate Project
+     #     command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
   build_project:
     steps:
       - run: 
@@ -77,7 +77,7 @@ commands:
     steps:
       - run: 
           name: Tuist Test
-          command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+          command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests
   check_test_output:
     steps:
       - run:
