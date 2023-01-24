@@ -68,7 +68,7 @@ func makeCatchModule() -> Module {
            moduleType: .feature,
            path: "Catch",
            frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
-           exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "Network")],
+           exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
            frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
            testResources: [],
@@ -88,7 +88,7 @@ func makeCommonModule() -> Module {
 }
 
 func makeNetworkModule() -> Module {
-    return Module(name: "Network",
+    return Module(name: "NetworkKit",
                   moduleType: .core,
                   path: "Network",
                   frameworkDependancies: [],

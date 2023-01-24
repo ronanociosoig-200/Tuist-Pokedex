@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Network
+import NetworkKit
 import os.log
 import Common
 import Combine

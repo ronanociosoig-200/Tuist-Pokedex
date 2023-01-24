@@ -1,13 +1,13 @@
 //
 //  DataProviderExtension.swift
-//  NetworkExample
+//  NetworkKitExample
 //
 //  Created by Ronan O Ciosig on 5/6/21.
 //  Copyright © 2021 Sonomos. All rights reserved.
 //
 
 import Foundation
-import Network
+import NetworkKit
 import os.log
 import Common
 import Combine

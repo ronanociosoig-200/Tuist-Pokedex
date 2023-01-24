@@ -1,13 +1,13 @@
 //
 //  SimpleViewController.swift
-//  NetworkExample
+//  NetworkKitKitExample
 //
 //  Created by Ronan O Ciosig on 2/5/21.
 //  Copyright © 2021 Sonomos. All rights reserved.
 //
 
 import UIKit
-import Network
+import NetworkKit
 import Common
 
 class SimpleViewController: UIViewController {

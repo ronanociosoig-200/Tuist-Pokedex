@@ -1,6 +1,6 @@
 //
-//  NetworkTests.swift
-//  NetworkTests
+//  NetworkKitTests.swift
+//  NetworkKitTests
 //
 //  Created by Ronan on 09/05/2019.
 //  Copyright © 2019 Sonomos. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 import Combine
-@testable import Network
+@testable import NetworkKit
 
 // swiftlint:disable all
 

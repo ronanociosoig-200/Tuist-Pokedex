@@ -8,7 +8,7 @@
 // swiftlint:disable force_try force_unwrapping
 
 import Foundation
-import Network
+import NetworkKit
 import os.log
 import Common
 
