@@ -8,7 +8,7 @@ let template = Template(
         nameAttribute,
         .optional("platform", default: "ios")
     ],
-    files: [
+    items: [
         // Placeholder source file
         .file(path: "\(nameAttribute)/Sources/\(nameAttribute).swift", templatePath: "Framework.stencil"),
         
