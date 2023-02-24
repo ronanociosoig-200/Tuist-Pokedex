@@ -8,24 +8,15 @@ let project = Project.app(name: "Pokedex",
                           platform: .iOS,
                           externalDependencies: ["JGProgressHUD"],
                           targetDependancies: [],
-                          moduleTargets: [makeHanekeModule(),
-                                          makeHomeModule(),
+                          moduleTargets: [makeHomeModule(),
+                                          makeCatchModule(),
                                           makeBackpackModule(),
                                           makeDetailModule(),
-                                          makeCatchModule(),
                                           makeCommonModule(),
-                                          makeNetworkModule()
+                                          makeUIComponentsModule(),
+                                          makeNetworkModule(),
+                                          makeHanekeModule()
                                          ])
-func makeHanekeModule() -> Module {
-    return Module(name: "Haneke",
-                  moduleType: .core,
-                  path: "Haneke",
-                  frameworkDependancies: [],
-                  exampleDependencies: [],
-                  frameworkResources: [],
-                  exampleResources: ["Resources/**"],
-                  testResources: [])
-}
 
 func makeHomeModule() -> Module {
     return Module(name: "Home",
@@ -39,11 +30,23 @@ func makeHomeModule() -> Module {
                   targets: [.framework, .unitTests, .uiTests, .exampleApp])
 }
 
+func makeCatchModule() -> Module {
+    Module(name: "Catch",
+           moduleType: .feature,
+           path: "Catch",
+           frameworkDependancies: [.target(name: "Common"), .target(name: "UIComponents"), .target(name: "Haneke")],
+           exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
+           frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
+           exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
+           testResources: [],
+           targets: [.framework, .unitTests, .uiTests, .exampleApp])
+}
+
 func makeBackpackModule() -> Module {
     return Module(name: "Backpack",
                   moduleType: .feature,
            path: "Backpack",
-           frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
+           frameworkDependancies: [.target(name: "Common"), .target(name: "UIComponents"), .target(name: "Haneke")],
            exampleDependencies: [.target(name: "Detail")],
            frameworkResources: ["Resources/**", "Sources/**/*.xib", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
@@ -55,24 +58,12 @@ func makeDetailModule() -> Module {
     return Module(name: "Detail",
                   moduleType: .feature,
                   path: "Detail",
-                  frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
+                  frameworkDependancies: [.target(name: "Common"), .target(name: "UIComponents"), .target(name: "Haneke")],
                   exampleDependencies: [],
                   frameworkResources: ["Sources/**/*.storyboard"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
                   targets: [.framework, .unitTests, .uiTests, .exampleApp])
-}
-
-func makeCatchModule() -> Module {
-    Module(name: "Catch",
-           moduleType: .feature,
-           path: "Catch",
-           frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
-           exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
-           frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
-           exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
-           testResources: [],
-           targets: [.framework, .unitTests, .uiTests, .exampleApp])
 }
 
 func makeCommonModule() -> Module {
@@ -81,10 +72,22 @@ func makeCommonModule() -> Module {
                   path: "Common",
                   frameworkDependancies: [],
                   exampleDependencies: [],
-                  frameworkResources: ["Sources/**/*.xib"],
+                  frameworkResources: [],
                   exampleResources: ["Resources/**"],
                   testResources: [],
                   targets: [.framework, .unitTests])
+}
+
+func makeUIComponentsModule() -> Module {
+    Module(name: "UIComponents",
+           moduleType: .core,
+           path: "UIComponents",
+           frameworkDependancies: [],
+           exampleDependencies: [],
+           frameworkResources: ["Sources/**/*.xib"],
+           exampleResources: ["Resources/**"],
+           testResources: [],
+           targets: [.framework, .uiTests, .exampleApp])
 }
 
 func makeNetworkModule() -> Module {
@@ -95,5 +98,17 @@ func makeNetworkModule() -> Module {
                   exampleDependencies: [.target(name: "Common")],
                   frameworkResources: ["Resources/**"],
                   exampleResources: ["Resources/**"],
-                  testResources: ["**/*.json"])
+                  testResources: ["**/*.json"],
+                  targets: [.framework, .unitTests, .exampleApp])
+}
+
+func makeHanekeModule() -> Module {
+    return Module(name: "Haneke",
+                  moduleType: .core,
+                  path: "Haneke",
+                  frameworkDependancies: [],
+                  exampleDependencies: [],
+                  frameworkResources: [],
+                  exampleResources: ["Resources/**"],
+                  testResources: [])
 }
