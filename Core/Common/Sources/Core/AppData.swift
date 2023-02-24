@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// sourcery: AutoMockable
 public protocol AppDataHandling {
     var pokemon: Pokemon? { get set }
     var pokemons: [LocalPokemon] { get set }

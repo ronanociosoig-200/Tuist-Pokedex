@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// sourcery: AutoMockable
 public protocol Coordinating {
     var dataProvider: DataProvider? { get set }
     
