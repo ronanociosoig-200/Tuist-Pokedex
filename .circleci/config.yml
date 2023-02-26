@@ -38,7 +38,15 @@ commands:
             - source-tuist-{{ checksum ".tuist-version" }}
       - run: 
           name: List Installed versions
-          command: ls -la ~/.tuist/Versions/
+          command: |
+            VERSIONS_DIR="~/.tuist/Versions"
+            FULL_PATH=`eval echo "${VERSIONS_DIR}"`
+
+            if [ -d $FULL_PATH ]; then
+              ls -1FG $FULL_PATH
+            else
+              echo "Tuist versions not found at " $FULL_PATH
+            fi
       - run:
           name: Installing Tuist
           command: |
