@@ -38,7 +38,11 @@ commands:
             - source-tuist-{{ checksum ".tuist-version" }}
       - run: 
           name: List Installed versions
-          command: ls -la ~/.tuist/Versions/
+          command: |
+              DIR="~/.tuist/Versions/"
+              if [ -d "$DIR"]; then 
+                  ls -la $DIR
+              fi
       - run:
           name: Installing Tuist
           command: |
