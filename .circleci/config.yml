@@ -129,6 +129,16 @@ commands:
           keys: 
             - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
             - dependencies-tuist-
+  install_and_run_danger:
+    steps: 
+      - run:
+          working_directory: /Users/distiller/project/Packages/DangerDependencies
+          name: Installing Danger JS
+          command: npm install -g danger
+      - run:
+          working_directory: /Users/distiller/project/Packages/DangerDependencies
+          name: Compiling Danger
+          command: swift build
 jobs:    
   build_and_test:
     macos: 
@@ -137,6 +147,7 @@ jobs:
       TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
       - checkout
+      - install_and_run_danger
       - install_tuist 
       - restore_dependencies_cache
       - setup_tuist
