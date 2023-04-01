@@ -33,6 +33,7 @@ public struct HttpStatusCode {
     }
 }
 
+//sourcery: AutoMockable
 public protocol SearchService: AnyObject {
     func search(identifier: Int) -> AnyPublisher<Data, Error>
     func search(identifier: Int) async throws -> Data?

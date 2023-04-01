@@ -8,6 +8,7 @@
 
 import Foundation
 
+//sourcery: AutoMockable
 public protocol DataProviding {
     func catchPokemon()
     func newSpecies() -> Bool

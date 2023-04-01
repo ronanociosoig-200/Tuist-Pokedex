@@ -8,6 +8,7 @@
 
 import Foundation
 
+//sourcery: AutoMockable
 public protocol Updatable {
     func update()
     func showError(message: String)

@@ -8,6 +8,7 @@
 
 import Foundation
 
+//sourcery: AutoMockable
 public protocol Notifier {
     func dataReceived(errorMessage: String?, on queue: DispatchQueue?)
 }

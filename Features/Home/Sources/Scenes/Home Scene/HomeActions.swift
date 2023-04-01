@@ -8,6 +8,7 @@
 
 import Common
 
+//sourcery: AutoMockable
 public protocol HomeActions {
     func ballButtonAction()
     func backpackButtonAction()
