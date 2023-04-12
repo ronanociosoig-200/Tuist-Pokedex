@@ -92,6 +92,9 @@ commands:
       - run: 
           name: Check Build Products
           command: ls -lapFG /Users/distiller/
+      - run: 
+          name: Check Build Products
+          command: ls -lapFG /Users/distiller/Library/Developer/Xcode/DerivedData
   check_test_output:
     steps:
       - run:
