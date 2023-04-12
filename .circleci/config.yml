@@ -90,11 +90,8 @@ commands:
           name: Tuist Test
           command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
       - run: 
-          name: Check Build Products
-          command: ls -lapFG /Users/distiller/
-      - run: 
-          name: Check Build Products
-          command: ls -lapFG /Users/distiller/Library/Developer/Xcode/DerivedData
+          name: Find files
+          command: find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app"
   check_test_output:
     steps:
       - run:
