@@ -6,9 +6,12 @@ orbs:
   macos: circleci/macos@2.2.0
 
 parameters:
+  pokedex_resource_class:
+    type: string
+    default: macos.m1.large.gen1
   xcode_version:
     type: string
-    default: "14.2.0"
+    default: "14.3.0"
   device:
     type: string
     default: "\"iPhone 14\""
@@ -86,6 +89,9 @@ commands:
       - run: 
           name: Tuist Test
           command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+      - run: 
+          name: Check Build products
+          command: ls -lapFG
   check_test_output:
     steps:
       - run:
@@ -129,20 +135,11 @@ commands:
           keys: 
             - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
             - dependencies-tuist-
-  install_and_run_danger:
-    steps: 
-      - run:
-          working_directory: /Users/distiller/project/Packages/DangerDependencies
-          name: Installing Danger JS
-          command: npm install -g danger
-      - run:
-          working_directory: /Users/distiller/project/Packages/DangerDependencies
-          name: Compiling Danger
-          command: swift build
 jobs:    
   build_and_test:
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
+    resource_class: <<pipeline.parameters.pokedex_resource_class>>
     environment:
       TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
