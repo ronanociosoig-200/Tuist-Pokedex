@@ -8,13 +8,13 @@ orbs:
 parameters:
   xcode_version:
     type: string
-    default: "14.3.0"
+    default: "14.2.0"
   device:
     type: string
     default: "\"iPhone 14\""
   ios_version:
     type: string
-    default: "16.4"
+    default: "16.2"
   tuist: 
     type: string
     default: "~/.tuist/Versions/3.17.0/tuist"
