@@ -6,9 +6,6 @@ orbs:
   macos: circleci/macos@2.2.0
 
 parameters:
-  pokedex_resource_class:
-    type: string
-    default: macos.m1.large.gen1
   xcode_version:
     type: string
     default: "14.3.0"
@@ -17,13 +14,13 @@ parameters:
     default: "\"iPhone 14\""
   ios_version:
     type: string
-    default: "16.2"
+    default: "16.4"
   tuist: 
     type: string
-    default: "~/.tuist/Versions/3.15.0/tuist"
+    default: "~/.tuist/Versions/3.17.0/tuist"
   tuist_version:
     type: string
-    default: "3.15.0"
+    default: "3.17.0"
   test_output_path:
     type: string
     default: "output/tests"
@@ -139,7 +136,6 @@ jobs:
   build_and_test:
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    resource_class: <<pipeline.parameters.pokedex_resource_class>>
     environment:
       TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
