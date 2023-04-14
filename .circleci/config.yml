@@ -95,11 +95,11 @@ commands:
       - run: 
           name: Find And Compress .app Files Excluding Tests runners
           command: |
-          find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app" | grep -v "Tests-Runner" | while read in; do tar -cvzf "$in".tar.gz "$in"; done
-          find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz"
-          mkdir <<pipeline.parameters.simulator_apps_path>>
-          find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz" | while read in; do cp "$in" <<pipeline.parameters.simulator_apps_path>>
-          ls -l <<pipeline.parameters.simulator_apps_path>>
+            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app" | grep -v "Tests-Runner" | while read in; do tar -cvzf "$in".tar.gz "$in"; done
+            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz"
+            mkdir <<pipeline.parameters.simulator_apps_path>>
+            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz" | while read in; do cp "$in" <<pipeline.parameters.simulator_apps_path>>
+            ls -l <<pipeline.parameters.simulator_apps_path>>
   check_test_output:
     steps:
       - run:
