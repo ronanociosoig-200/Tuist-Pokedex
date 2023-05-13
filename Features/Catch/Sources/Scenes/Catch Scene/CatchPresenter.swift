@@ -8,7 +8,6 @@
 
 import Common
 
-//sourcery: AutoMockable
 protocol CatchView: AnyObject {
     func update()
     func showLeaveOrCatchAlert()
@@ -17,7 +16,6 @@ protocol CatchView: AnyObject {
     func showError(message: String)
 }
 
-//sourcery: AutoMockable
 public protocol CatchPresenting: AnyObject {
     func pokemon() -> ScreenPokemon?
     func catchPokemonAction()

@@ -9,7 +9,6 @@
 import Foundation
 import Common
 
-//sourcery: AutoMockable
 public protocol CatchDataProvider {
     func pokemon() -> ScreenPokemon?
     func newSpecies() -> Bool

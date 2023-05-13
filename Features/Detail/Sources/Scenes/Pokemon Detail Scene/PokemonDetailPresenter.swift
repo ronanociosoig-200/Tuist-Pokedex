@@ -9,12 +9,10 @@
 import Foundation
 import Common
 
-//sourcery: AutoMockable
 protocol PokemonDetailView: AnyObject {
     
 }
 
-//sourcery: AutoMockable
 protocol PokemonDetailPresenting: AnyObject {
     func weight() -> String
     func name() -> String

@@ -6,12 +6,10 @@
 //  Copyright © 2019 Sonomos. All rights reserved.
 //
 
-//sourcery: AutoMockable
 public protocol HomeView: AnyObject {
     
 }
 
-//sourcery: AutoMockable
 public protocol HomePresenting: AnyObject {
     func ballButtonAction()
     func backpackButtonAction()
