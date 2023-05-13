@@ -17,10 +17,10 @@ parameters:
     default: "16.2"
   tuist: 
     type: string
-    default: "~/.tuist/Versions/3.17.0/tuist"
+    default: "~/.tuist/Versions/3.19.0/tuist"
   tuist_version:
     type: string
-    default: "3.17.0"
+    default: "3.19.0"
   test_output_path:
     type: string
     default: "output/tests"
