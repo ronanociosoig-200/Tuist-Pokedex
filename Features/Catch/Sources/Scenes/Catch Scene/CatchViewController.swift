@@ -9,6 +9,7 @@
 import UIKit
 import Haneke
 import Common
+import UIComponents
 
 public class CatchViewController: UIViewController {
     @IBOutlet var backgroundImageView: UIImageView!

@@ -30,7 +30,7 @@ let template = Template(
         companyAttribute,
         .optional("platform", default: "ios")
     ],
-    files: [
+    items: [
         
         // Placeholder source file
         .file(
@@ -42,6 +42,12 @@ let template = Template(
         .file(
             path: "\(nameAttribute)/Tests/\(nameAttribute)Tests.swift",
             templatePath: "Tests.stencil"
+        ),
+        
+        // Placeholder UITest
+        .file(
+            path: "\(nameAttribute)/UITests/\(nameAttribute)UITests.swift",
+            templatePath: "UITests.stencil"
         ),
         
         // Example App Icons and Launch Screen
