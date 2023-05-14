@@ -1,5 +1,5 @@
-<UIView; frame = (0 0; 393 852); autoresize = W+H; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>>
-   | <Common.PokemonView; frame = (34 0; 325 352); autoresize = W+H; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>>
+<UIView; frame = (0 0; 390 844); autoresize = W+H; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>>
+   | <Common.PokemonView; frame = (32.5 0; 325 352); autoresize = W+H; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>>
    |    | <UILabel; frame = (16 15; 293 21); text = 'Name'; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <UILabel; frame = (16 146; 138 21); text = 'Height'; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <UIImageView; frame = (114.667 30; 96 96); clipsToBounds = YES; autoresize = RM+BM; userInteractionEnabled = NO; layer = <CALayer>>
