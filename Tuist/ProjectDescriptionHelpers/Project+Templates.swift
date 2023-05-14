@@ -16,6 +16,7 @@ let examplePath = "Example"
 public enum uFeatureTarget {
     case framework
     case unitTests
+    case snapshotTests
     case uiTests
     case exampleApp
 }
@@ -42,6 +43,7 @@ public struct Module {
     let path: String
     let frameworkDependancies: [TargetDependency]
     let exampleDependencies: [TargetDependency]
+    let testingDependencies: [TargetDependency]
     let frameworkResources: [String]
     let exampleResources: [String]
     let testResources: [String]
@@ -53,6 +55,7 @@ public struct Module {
                 path: String,
                 frameworkDependancies: [TargetDependency],
                 exampleDependencies: [TargetDependency],
+                testingDependencies: [TargetDependency],
                 frameworkResources: [String],
                 exampleResources: [String],
                 testResources: [String],
@@ -62,6 +65,7 @@ public struct Module {
         self.path = path
         self.frameworkDependancies = frameworkDependancies
         self.exampleDependencies = exampleDependencies
+        self.testingDependencies = testingDependencies
         self.frameworkResources = frameworkResources
         self.exampleResources = exampleResources
         self.testResources = testResources
@@ -209,6 +213,19 @@ extension Project {
                                   sources: ["\(frameworkPath)/UITests/**"],
                                   resources: ResourceFileElements(resources: testResourceFilePaths),
                                   dependencies: [.target(name: exampleAppName)]))
+        }
+        
+        if module.targets.contains(.snapshotTests) {
+            var dependencies = module.testingDependencies
+            dependencies.append(.target(name: module.name))
+            targets.append(Target(name: "\(module.name)SnapshotTests",
+                                  platform: platform,
+                                  product: .unitTests,
+                                  bundleId: "\(reverseOrganizationName).\(module.name)SnapshotTests",
+                                  infoPlist: .default,
+                                  sources: ["\(frameworkPath)/SnapshotTests/**"],
+                                  resources: ResourceFileElements(resources: testResourceFilePaths),
+                                  dependencies: dependencies))
         }
         
         return targets
