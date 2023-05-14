@@ -76,7 +76,7 @@ func makeCommonModule() -> Module {
                   frameworkDependancies: [],
                   exampleDependencies: [],
                   testingDependencies: [],
-                  frameworkResources: ["Sources/**/*.xib"],
+                  frameworkResources: [],
                   exampleResources: ["Resources/**"],
                   testResources: [],
                   targets: [.framework, .unitTests])
