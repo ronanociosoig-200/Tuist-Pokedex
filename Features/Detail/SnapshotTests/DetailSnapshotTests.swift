@@ -1,6 +1,6 @@
 //
-//  HomeSnapshotTests.swift
-//  HomeSnapshotTests
+//  DetailSnapshotTests.swift
+//  DetailSnapshotTests
 //
 //  Created by ronan.ociosoig on 14/05/2023.
 //  Copyright © 2023 Sonomos.com. All rights reserved.
@@ -8,12 +8,12 @@
 
 import XCTest
 import SnapshotTesting
-@testable import Home
+@testable import Detail
 
-final class HomeSnapshotTests: XCTestCase {
-    
-    func testHomeViewController() throws {
-        let viewController = HomeWireframe.makeViewController()
+final class DetailSnapshotTests: XCTestCase {
+
+    func testDetailViewController() throws {
+        let viewController = PokemonDetailWireframe.makeViewController()
         
         assertSnapshot(matching: viewController, as: .image)
         assertSnapshot(matching: viewController, as: .recursiveDescription)

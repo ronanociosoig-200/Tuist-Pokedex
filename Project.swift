@@ -37,7 +37,7 @@ func makeHomeModule() -> Module {
                   frameworkResources: ["Sources/**/*.storyboard", "Resources/**"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .uiTests, .exampleApp, .snapshotTests])
+                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeBackpackModule() -> Module {
@@ -46,11 +46,11 @@ func makeBackpackModule() -> Module {
            path: "Backpack",
            frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
                   exampleDependencies: [.target(name: "Detail")],
-                  testingDependencies: [],
+                  testingDependencies: [.external(name: "SnapshotTesting")],
            frameworkResources: ["Resources/**", "Sources/**/*.xib", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeDetailModule() -> Module {
@@ -58,11 +58,12 @@ func makeDetailModule() -> Module {
                   moduleType: .feature,
                   path: "Detail",
                   frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
-                  exampleDependencies: [], testingDependencies: [],
+                  exampleDependencies: [],
+                  testingDependencies: [.external(name: "SnapshotTesting")],
                   frameworkResources: ["Sources/**/*.storyboard"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeCatchModule() -> Module {
@@ -71,11 +72,11 @@ func makeCatchModule() -> Module {
            path: "Catch",
            frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
            exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
-           testingDependencies: [],
+           testingDependencies: [.external(name: "SnapshotTesting")],
            frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
            testResources: [],
-           targets: [.framework, .unitTests, .uiTests, .exampleApp])
+           targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeCommonModule() -> Module {
