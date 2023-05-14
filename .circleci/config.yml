@@ -17,13 +17,16 @@ parameters:
     default: "16.2"
   tuist: 
     type: string
-    default: "~/.tuist/Versions/3.15.0/tuist"
+    default: "~/.tuist/Versions/3.19.0/tuist"
   tuist_version:
     type: string
-    default: "3.15.0"
+    default: "3.19.0"
   test_output_path:
     type: string
     default: "output/tests"
+  simulator_apps_path: 
+    type: string
+    default: "simulatorApps"
 
 commands:
   install_tuist:
@@ -84,8 +87,19 @@ commands:
   run_tests:
     steps:
       - run: 
+          name: Get Current Dir
+          command: pwd
+      - run: 
           name: Tuist Test
           command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+      - run: 
+          name: Find And Compress .app Files Excluding Tests runners
+          command: |
+            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app" | grep -v "Tests-Runner" | while read in; do tar -cvzf "$in".tar.gz -C "$in" .; done
+            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz"
+            mkdir <<pipeline.parameters.simulator_apps_path>>
+            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz" | while read in; do cp "$in" <<pipeline.parameters.simulator_apps_path>>; done
+            ls -l <<pipeline.parameters.simulator_apps_path>>
   check_test_output:
     steps:
       - run:
@@ -150,6 +164,8 @@ jobs:
           path: output
       - store_artifacts:
           path: output
+      - store_artifacts:
+          path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
 
 workflows: 

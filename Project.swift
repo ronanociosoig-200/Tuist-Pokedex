@@ -6,7 +6,7 @@ import ProjectDescriptionHelpers
 // Creates our project using a helper function defined in ProjectDescriptionHelpers
 let project = Project.app(name: "Pokedex",
                           platform: .iOS,
-                          externalDependencies: ["JGProgressHUD"],
+                          externalDependencies: ["JGProgressHUD", "SnapshotTesting"],
                           targetDependancies: [],
                           moduleTargets: [makeHomeModule(),
                                           makeCatchModule(),
@@ -23,35 +23,24 @@ func makeHomeModule() -> Module {
                   moduleType: .feature,
                   path: "Home",
                   frameworkDependancies: [.target(name: "Common")],
-                  exampleDependencies: [.external(name: "JGProgressHUD")],
+                  exampleDependencies: [.external(name: "JGProgressHUD")], testingDependencies: [.external(name: "SnapshotTesting")],
                   frameworkResources: ["Sources/**/*.storyboard", "Resources/**"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .uiTests, .exampleApp])
-}
-
-func makeCatchModule() -> Module {
-    Module(name: "Catch",
-           moduleType: .feature,
-           path: "Catch",
-           frameworkDependancies: [.target(name: "Common"), .target(name: "UIComponents"), .target(name: "Haneke")],
-           exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
-           frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
-           exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
-           testResources: [],
-           targets: [.framework, .unitTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeBackpackModule() -> Module {
     return Module(name: "Backpack",
                   moduleType: .feature,
            path: "Backpack",
-           frameworkDependancies: [.target(name: "Common"), .target(name: "UIComponents"), .target(name: "Haneke")],
-           exampleDependencies: [.target(name: "Detail")],
+           frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
+                  exampleDependencies: [.target(name: "Detail")],
+                  testingDependencies: [.external(name: "SnapshotTesting")],
            frameworkResources: ["Resources/**", "Sources/**/*.xib", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeDetailModule() -> Module {
@@ -60,10 +49,24 @@ func makeDetailModule() -> Module {
                   path: "Detail",
                   frameworkDependancies: [.target(name: "Common"), .target(name: "UIComponents"), .target(name: "Haneke")],
                   exampleDependencies: [],
+                  testingDependencies: [.external(name: "SnapshotTesting")],
                   frameworkResources: ["Sources/**/*.storyboard"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
+}
+
+func makeCatchModule() -> Module {
+    Module(name: "Catch",
+           moduleType: .feature,
+           path: "Catch",
+           frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
+           exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
+           testingDependencies: [.external(name: "SnapshotTesting")],
+           frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
+           exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
+           testResources: [],
+           targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeCommonModule() -> Module {
@@ -72,7 +75,8 @@ func makeCommonModule() -> Module {
                   path: "Common",
                   frameworkDependancies: [],
                   exampleDependencies: [],
-                  frameworkResources: [],
+                  testingDependencies: [],
+                  frameworkResources: ["Sources/**/*.xib"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
                   targets: [.framework, .unitTests])
@@ -84,6 +88,7 @@ func makeUIComponentsModule() -> Module {
            path: "UIComponents",
            frameworkDependancies: [],
            exampleDependencies: [],
+           testingDependencies: [.external(name: "SnapshotTesting")],
            frameworkResources: ["Sources/**/*.xib"],
            exampleResources: ["Resources/**"],
            testResources: [],
@@ -96,6 +101,7 @@ func makeNetworkModule() -> Module {
                   path: "Network",
                   frameworkDependancies: [],
                   exampleDependencies: [.target(name: "Common")],
+                  testingDependencies: [],
                   frameworkResources: ["Resources/**"],
                   exampleResources: ["Resources/**"],
                   testResources: ["**/*.json"],
@@ -108,6 +114,7 @@ func makeHanekeModule() -> Module {
                   path: "Haneke",
                   frameworkDependancies: [],
                   exampleDependencies: [],
+                  testingDependencies: [],
                   frameworkResources: [],
                   exampleResources: ["Resources/**"],
                   testResources: [])
