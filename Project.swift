@@ -60,7 +60,7 @@ func makeCatchModule() -> Module {
     Module(name: "Catch",
            moduleType: .feature,
            path: "Catch",
-           frameworkDependancies: [.target(name: "Common"), .target(name: "Haneke")],
+           frameworkDependancies: [.target(name: "Common"),  .target(name: "UIComponents"), .target(name: "Haneke")],
            exampleDependencies: [.external(name: "JGProgressHUD"), .target(name: "NetworkKit")],
            testingDependencies: [.external(name: "SnapshotTesting")],
            frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
