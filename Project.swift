@@ -87,7 +87,7 @@ func makeUIComponentsModule() -> Module {
            moduleType: .core,
            path: "UIComponents",
            frameworkDependancies: [],
-           exampleDependencies: [],
+           exampleDependencies: [.target(name: "Common")],
            testingDependencies: [.external(name: "SnapshotTesting")],
            frameworkResources: ["Sources/**/*.xib"],
            exampleResources: ["Resources/**"],
