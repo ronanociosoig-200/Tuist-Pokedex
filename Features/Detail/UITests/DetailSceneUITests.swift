@@ -8,6 +8,7 @@
 
 import XCTest
 import Common
+import UIComponents
 @testable import Detail
 
 class DetailSceneUITests: XCTestCase {
@@ -25,17 +26,17 @@ class DetailSceneUITests: XCTestCase {
     }
     
     func testPokemonDetails() {
-        let heightLabel = app.staticTexts[Common.PokemonViewIdentifiers.height]
+        let heightLabel = app.staticTexts[UIComponents.PokemonViewIdentifiers.height]
         XCTAssertTrue(heightLabel.isHittable)
-        let weightLabel = app.staticTexts[Common.PokemonViewIdentifiers.weight]
+        let weightLabel = app.staticTexts[UIComponents.PokemonViewIdentifiers.weight]
         XCTAssertTrue(weightLabel.isHittable)
-        let dateLabel = app.staticTexts[Common.PokemonViewIdentifiers.date]
+        let dateLabel = app.staticTexts[UIComponents.PokemonViewIdentifiers.date]
         XCTAssertTrue(dateLabel.isHittable)
-        let typesLabel = app.staticTexts[Common.PokemonViewIdentifiers.types]
+        let typesLabel = app.staticTexts[UIComponents.PokemonViewIdentifiers.types]
         XCTAssertTrue(typesLabel.isHittable)
-        let experienceLabel = app.staticTexts[Common.PokemonViewIdentifiers.experience]
+        let experienceLabel = app.staticTexts[UIComponents.PokemonViewIdentifiers.experience]
         XCTAssertTrue(experienceLabel.isHittable)
-        let imageView = app.images[Common.PokemonViewIdentifiers.imageView]
+        let imageView = app.images[UIComponents.PokemonViewIdentifiers.imageView]
         XCTAssertTrue(imageView.isHittable)
         
         let navigationBar = app.navigationBars.firstMatch
