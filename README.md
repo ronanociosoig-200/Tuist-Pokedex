@@ -24,7 +24,7 @@ Tapping on the lower button opens the Backpack scene, which displays all the cau
 
 ## Tuist
 
-Running the code in this repo requires the prior installation of [tuist.io](https://tuist.io) version 3.15.0 and Xcode 14.1. First fetch the dependencies with `tuist fetch` and then generate the project and workspace by running [`tuist generate`](https://tuist.io/docs/usage/get-started/). It will automatically open the project in Xcode.
+Running the code in this repo requires the prior installation of [tuist.io](https://tuist.io) version 3.19.0 and Xcode 14.2. First fetch the dependencies with `tuist fetch` and then generate the project and workspace by running [`tuist generate`](https://tuist.io/docs/usage/get-started/). It will automatically open the project in Xcode.
 
 ## Micro-Feature Architecture
 										     
