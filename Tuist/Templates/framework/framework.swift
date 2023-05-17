@@ -11,7 +11,7 @@ let template = Template(
     items: [
         // Placeholder source file
         .file(path: "\(nameAttribute)/Sources/\(nameAttribute).swift", templatePath: "Framework.stencil"),
-        
+
         // Placeholder UnitTest
         .file(path: "\(nameAttribute)/Tests/\(nameAttribute)Tests.swift", templatePath: "UnitTests.stencil")
     ]

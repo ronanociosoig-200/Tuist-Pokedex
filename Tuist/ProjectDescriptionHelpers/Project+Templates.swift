@@ -263,6 +263,18 @@ extension Project {
                 .target(name: "\(name)")
             ])
         
+        let snapshotTestsTarget = Target(
+            name: "\(name)SnapshotTests",
+            platform: platform,
+            product: .unitTests,
+            bundleId: "\(reverseOrganizationName).\(name)SnapshotTests",
+            infoPlist: .default,
+            sources: ["\(appPath)/\(name)/SnapshotTests/**"],
+            resources: [],
+            dependencies: [
+                .target(name: "\(name)")
+            ])
+        
         let uiTestTarget = Target(
             name: "\(name)UITests",
             platform: platform,
@@ -275,7 +287,7 @@ extension Project {
                 .target(name: "\(name)")
             ])
         
-        return [mainTarget, testTarget, uiTestTarget]
+        return [mainTarget, testTarget, snapshotTestsTarget, uiTestTarget]
     }
     
     public static func makeSchemes(targetName: String) -> [Scheme] {

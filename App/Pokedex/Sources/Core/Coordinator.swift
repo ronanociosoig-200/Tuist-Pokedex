@@ -59,14 +59,19 @@ class Coordinator: Coordinating {
         
         currentViewController = viewController
         
-        searchNextPokemon()
+        searchNextPokemon(identifier: identifier)
         
         showLoading()
     }
     
-    func searchNextPokemon() {
+    func searchNextPokemon(identifier: Int?) {
         guard let dataProvider = dataProvider else { return }
-        dataProvider.search(identifier: Generator.nextIdentifier(), networkService: PokemonSearchService())
+        let networkService = PokemonSearchService()
+        if let identifier = identifier {
+            dataProvider.search(identifier: identifier, networkService: networkService)
+        } else {
+            dataProvider.search(identifier: Generator.nextIdentifier(), networkService: networkService)
+        }
     }
     
     func showBackpackScene() {

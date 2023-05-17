@@ -6,9 +6,10 @@
 //  Copyright © 2021 Sonomos. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public protocol Coordinating {
+    var window: UIWindow { get }
     var dataProvider: DataProvider? { get set }
     
     func start()
