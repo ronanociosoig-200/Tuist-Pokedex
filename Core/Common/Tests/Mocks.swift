@@ -6,7 +6,7 @@
 //  Copyright © 2022 Sonomos.com. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 @testable import Common
 
@@ -50,9 +50,15 @@ class MockAppData: AppDataHandling {
 }
 
 class MockCoordinator: Coordinating {
+    var window: UIWindow
+    
     var showPokemonDetailSceneCalled = false
     
     var dataProvider: Common.DataProvider?
+    
+    init() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+    }
     
     func start() {
         

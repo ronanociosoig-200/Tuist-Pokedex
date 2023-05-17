@@ -81,6 +81,8 @@ class MockCatchPresenter: CatchPresenting {
 let typeElement = TypeElement(slot: 1, type: Species(name: "fire", url: "https://pokeapi.co/api/v2/type/10/"))
 
 class MockCoordinator: Coordinating {
+    var window: UIWindow
+    
     func showCatchScene(identifier: Int?) {
         
     }
@@ -88,6 +90,10 @@ class MockCoordinator: Coordinating {
     var showPokemonDetailSceneCalled = false
     
     var dataProvider: Common.DataProvider?
+    
+    init() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+    }
     
     func start() {
         

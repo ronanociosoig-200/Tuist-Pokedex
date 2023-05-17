@@ -106,9 +106,14 @@ class MockBackpackPresenter: BackpackPresenting {
 }
 
 class MockCoordinator: Coordinating {
+    var window: UIWindow
     var showPokemonDetailSceneCalled = false
     
     var dataProvider: Common.DataProvider?
+    
+    init() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+    }
     
     func start() {
         
