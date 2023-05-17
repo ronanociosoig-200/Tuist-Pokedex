@@ -6,7 +6,7 @@
 //  Copyright © 2022 Sonomos.com. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 @testable import Common
 @testable import Home
@@ -46,10 +46,16 @@ class MockHomePresenter: HomePresenting {
 }
 
 class MockCoordinator: Coordinating {
+    var window: UIWindow
+    
     var dataProvider: Common.DataProvider?
     
     var showCatchSceneCalled = false
     var showBackpackSceneCalled = false
+    
+    init() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+    }
     
     func start() {
         
