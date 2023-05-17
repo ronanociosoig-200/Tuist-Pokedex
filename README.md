@@ -24,12 +24,12 @@ Tapping on the lower button opens the Backpack scene, which displays all the cau
 
 ## Tuist
 
-Running the code in this repo requires the prior installation of [tuist.io](https://tuist.io) version 3.15.0 and Xcode 14.1. First fetch the dependencies with `tuist fetch` and then generate the project and workspace by running [`tuist generate`](https://tuist.io/docs/usage/get-started/). It will automatically open the project in Xcode.
+Running the code in this repo requires the prior installation of [tuist.io](https://tuist.io) version 3.19.0 and Xcode 14.2. First fetch the dependencies with `tuist fetch` and then generate the project and workspace by running [`tuist generate`](https://tuist.io/docs/usage/get-started/). It will automatically open the project in Xcode.
 
 ## Micro-Feature Architecture
 										     
 The project implements a simplified version of the micro-feature modular architectural pattern suggested by the Tuist team ([see here](https://docs.tuist.io/building-at-scale/microfeatures))							     
-Each feature module has 4 targets: The framework target, a unit test target, an example app target, and a UI test target.
+Each feature module has 5 targets: The framework target, a unit testing target, a snapshot testing target, an example app target, and a UI testing target.
 <p align="center">
     <img src="Images/ModuleTargets.drawio.png" width="331” max-width="50%" alt="Feature Module Targets" />
 </p>
@@ -40,10 +40,10 @@ The application target also has both unit test and UI testing targets.
     <img src="Images/AppTargets.drawio.png" width="331” max-width="50%" alt="Application Targets" />
 </p>
 
-Each scene is defined as a separate feature module (Home, Catch, Backpack and Detail), along with additional core modules for Common, Network, Haneke image library, and the main application. Tuist can generate a project that can focus on any one, or a combination of these modules, the testing target, or the example application that validates each module. For example: 
-`tuist generate Backpack BackpackTests BackpackExample BackpackUITests`
+Each scene is defined as a separate feature module (Home, Catch, Backpack and Detail), along with additional core modules for Common, UIComponents, Network, Haneke image library, and the main application. Tuist can generate a project that can focus on any one, or a combination of these modules, the testing targets, or the example application that validates each module. For example: 
+`tuist generate Backpack BackpackTests BackpackSnapshotTests BackpackExample BackpackUITests`
 
-The module dependencies are defined in such a way that no feature module depends on another one, and none of the feature modules depend on external dependencies. The coordinator in the main application handles all the inter-feature module communications. 
+The module dependencies are defined in such a way that no feature module depends on another, and none of the feature modules depend on external dependencies. The coordinator in the main application handles all the inter-feature module communications and the dependency inversion. 
 
 Run `tuist edit` and view the Project.swift manifest to see the structure and how dependencies are defined and linked.
 
@@ -80,13 +80,21 @@ An AppData class is used to maintain global state across screens, with the data 
 The coordinator is in charge of what is displayed on the screen. It contains the code to display the screens, show loading HUD, or an alert message. 
 
 It also receives call backs from the data provider when a request has completed its job, or an error has occurred. This in turn notifies the current scene to update or display an alert. 
-
  
 ## Manual & Automated Testing
-The project has unit and UI tests. There are comprehensive unit tests both at the feature and at the application level. Run `tuist test` to execute all the tests, or `tuist test <feature_name>` for running the tests on specific modules. The project also has 2 custom schemes to help with manual validation: "UITesting" and "AsyncNetworkTesting". Each of these have the launch argument added. 
+The project has unit, snapshot and UI tests. There are comprehensive unit tests both at the feature and at the application level. Run `tuist test` to execute all the tests, or `tuist test <feature_name>` for running the tests on specific modules. The project also has 2 custom schemes (currently disabled) to help with manual validation: "UITesting" and "AsyncNetworkTesting". Each of these have the launch argument added. 
+
+The [Snapshot Testing library](https://github.com/pointfreeco/swift-snapshot-testing) from PointFree is used for the main app, and feature modules. It is only a rudmentary implementation here to show how it can be done. 
 
 ## Circle CI
-
 The project is integrated with Circle for continuous integration. Each push to a branch will trigger the build and test workflow. 
 
-The configuration takes advantage of extensive caching on Circle as well as Tuist Cloud. 
+The configuration takes advantage of extensive caching on Circle as well as Tuist Cloud. It generates a checksum file and uses this as a key to access cached folders. 
+
+### Testing
+The output of the tests can be viewed by checking the artefacts section on a seccessful workflow. It uses XCResultParser to convert the output of the tests (XCResult - binary format) to the standard JUnit XML file format. The XCResultParser binary is added to the repo to save time downloading and compiling it every time because Homebrew can be quite slow even when the NO_AUTO_UPDATE=1. (It's painfully slow without that) 
+
+### Downloadable Simulator Builds
+Also the simulator application builds are there for download in the artefacts. The workflow does this by compressing the .app folder found in derived data but skipts the test runners. 
+
+
