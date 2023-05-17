@@ -45,6 +45,12 @@ Each scene is defined as a separate feature module (Home, Catch, Backpack and De
 
 The module dependencies are defined in such a way that no feature module depends on another, and none of the feature modules depend on external dependencies. The coordinator in the main application handles all the inter-feature module communications and the dependency inversion. 
 
+Here's the graph for the Backpack feature module. 
+
+<p align="center">
+    <img src="Images/backpack-graph.png" width="500” max-width="50%" alt="Simplified Dependency Graph" />
+</p>
+
 Run `tuist edit` and view the Project.swift manifest to see the structure and how dependencies are defined and linked.
 
 The dependency graph shows the example apps, the feature modules and the common shared module, along with the network and Haneke image library, as well as JGProgressHUD, which is loaded as an SPM.
