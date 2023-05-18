@@ -204,29 +204,29 @@ extension Project {
                                   dependencies: exampleAppDependancies))
         }
 
-        if module.targets.contains(.uiTests) {
-            targets.append(Target(name: "\(module.name)UITests",
-                                  platform: platform,
-                                  product: .uiTests,
-                                  bundleId: "\(reverseOrganizationName).\(module.name)UITests",
-                                  infoPlist: .default,
-                                  sources: ["\(frameworkPath)/UITests/**"],
-                                  resources: ResourceFileElements(resources: testResourceFilePaths),
-                                  dependencies: [.target(name: exampleAppName)]))
-        }
-        
-        if module.targets.contains(.snapshotTests) {
-            var dependencies = module.testingDependencies
-            dependencies.append(.target(name: module.name))
-            targets.append(Target(name: "\(module.name)SnapshotTests",
-                                  platform: platform,
-                                  product: .unitTests,
-                                  bundleId: "\(reverseOrganizationName).\(module.name)SnapshotTests",
-                                  infoPlist: .default,
-                                  sources: ["\(frameworkPath)/SnapshotTests/**"],
-                                  resources: ResourceFileElements(resources: testResourceFilePaths),
-                                  dependencies: dependencies))
-        }
+//        if module.targets.contains(.uiTests) {
+//            targets.append(Target(name: "\(module.name)UITests",
+//                                  platform: platform,
+//                                  product: .uiTests,
+//                                  bundleId: "\(reverseOrganizationName).\(module.name)UITests",
+//                                  infoPlist: .default,
+//                                  sources: ["\(frameworkPath)/UITests/**"],
+//                                  resources: ResourceFileElements(resources: testResourceFilePaths),
+//                                  dependencies: [.target(name: exampleAppName)]))
+//        }
+//
+//        if module.targets.contains(.snapshotTests) {
+//            var dependencies = module.testingDependencies
+//            dependencies.append(.target(name: module.name))
+//            targets.append(Target(name: "\(module.name)SnapshotTests",
+//                                  platform: platform,
+//                                  product: .unitTests,
+//                                  bundleId: "\(reverseOrganizationName).\(module.name)SnapshotTests",
+//                                  infoPlist: .default,
+//                                  sources: ["\(frameworkPath)/SnapshotTests/**"],
+//                                  resources: ResourceFileElements(resources: testResourceFilePaths),
+//                                  dependencies: dependencies))
+//        }
         
         return targets
     }

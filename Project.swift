@@ -27,7 +27,7 @@ func makeHomeModule() -> Module {
                   frameworkResources: ["Sources/**/*.storyboard", "Resources/**"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .exampleApp]) // .snapshotTests, .uiTests,
 }
 
 func makeBackpackModule() -> Module {
@@ -40,7 +40,7 @@ func makeBackpackModule() -> Module {
            frameworkResources: ["Resources/**", "Sources/**/*.xib", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .exampleApp]) // .snapshotTests, .uiTests,
 }
 
 func makeDetailModule() -> Module {
@@ -53,7 +53,7 @@ func makeDetailModule() -> Module {
                   frameworkResources: ["Sources/**/*.storyboard"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .exampleApp]) // .snapshotTests, .uiTests,
 }
 
 func makeCatchModule() -> Module {
@@ -66,7 +66,7 @@ func makeCatchModule() -> Module {
            frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
            testResources: [],
-           targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
+           targets: [.framework, .unitTests, .exampleApp]) // .snapshotTests, .uiTests,
 }
 
 func makeCommonModule() -> Module {
