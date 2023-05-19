@@ -103,31 +103,31 @@ extension Project {
         /// Add custom schemes with code coverage enabled
         // schemes += moduleTargets.flatMap({ makeSchemeWithCodeCoverage(targetName: $0.name) })
         
-        let automaticSchemesOptions = Options.AutomaticSchemesOptions.enabled(
-            targetSchemesGrouping: .byNameSuffix(build: ["Implementation",
-                                                         "Interface",
-                                                         "Mocks",
-                                                         "Testing"],
-                                                 test: ["Tests",
-                                                        "IntegrationTests",
-                                                        "UITests",
-                                                        "SnapshotTests"],
-                                                 run: ["App", "Example"]),
-            codeCoverageEnabled: true,
-            testingOptions: TestingOptions()
-        )
-        
-      let options = Project.Options.options(automaticSchemesOptions: automaticSchemesOptions,
-                                              developmentRegion: nil,
-                                              disableBundleAccessors: false,
-                                              disableShowEnvironmentVarsInScriptPhases: false,
-                                              disableSynthesizedResourceAccessors: false,
-                                              textSettings: Options.TextSettings.textSettings(),
-                                              xcodeProjectName: nil)
+//        let automaticSchemesOptions = Options.AutomaticSchemesOptions.enabled(
+//            targetSchemesGrouping: .byNameSuffix(build: ["Implementation",
+//                                                         "Interface",
+//                                                         "Mocks",
+//                                                         "Testing"],
+//                                                 test: ["Tests",
+//                                                        "IntegrationTests",
+//                                                        "UITests",
+//                                                        "SnapshotTests"],
+//                                                 run: ["App", "Example"]),
+//            codeCoverageEnabled: true,
+//            testingOptions: []
+//        )
+//
+//      let options = Project.Options.options(automaticSchemesOptions: automaticSchemesOptions,
+//                                              developmentRegion: nil,
+//                                              disableBundleAccessors: false,
+//                                              disableShowEnvironmentVarsInScriptPhases: false,
+//                                              disableSynthesizedResourceAccessors: false,
+//                                              textSettings: Options.TextSettings.textSettings(),
+//                                              xcodeProjectName: nil)
 
+        // options: options,
         return Project(name: name,
                        organizationName: organizationName,
-                       options: options,
                        targets: targets,
                        schemes: [])
     }
@@ -204,29 +204,29 @@ extension Project {
                                   dependencies: exampleAppDependancies))
         }
 
-//        if module.targets.contains(.uiTests) {
-//            targets.append(Target(name: "\(module.name)UITests",
-//                                  platform: platform,
-//                                  product: .uiTests,
-//                                  bundleId: "\(reverseOrganizationName).\(module.name)UITests",
-//                                  infoPlist: .default,
-//                                  sources: ["\(frameworkPath)/UITests/**"],
-//                                  resources: ResourceFileElements(resources: testResourceFilePaths),
-//                                  dependencies: [.target(name: exampleAppName)]))
-//        }
-//
-//        if module.targets.contains(.snapshotTests) {
-//            var dependencies = module.testingDependencies
-//            dependencies.append(.target(name: module.name))
-//            targets.append(Target(name: "\(module.name)SnapshotTests",
-//                                  platform: platform,
-//                                  product: .unitTests,
-//                                  bundleId: "\(reverseOrganizationName).\(module.name)SnapshotTests",
-//                                  infoPlist: .default,
-//                                  sources: ["\(frameworkPath)/SnapshotTests/**"],
-//                                  resources: ResourceFileElements(resources: testResourceFilePaths),
-//                                  dependencies: dependencies))
-//        }
+        if module.targets.contains(.uiTests) {
+            targets.append(Target(name: "\(module.name)UITests",
+                                  platform: platform,
+                                  product: .uiTests,
+                                  bundleId: "\(reverseOrganizationName).\(module.name)UITests",
+                                  infoPlist: .default,
+                                  sources: ["\(frameworkPath)/UITests/**"],
+                                  resources: ResourceFileElements(resources: testResourceFilePaths),
+                                  dependencies: [.target(name: exampleAppName)]))
+        }
+
+        if module.targets.contains(.snapshotTests) {
+            var dependencies = module.testingDependencies
+            dependencies.append(.target(name: module.name))
+            targets.append(Target(name: "\(module.name)SnapshotTests",
+                                  platform: platform,
+                                  product: .unitTests,
+                                  bundleId: "\(reverseOrganizationName).\(module.name)SnapshotTests",
+                                  infoPlist: .default,
+                                  sources: ["\(frameworkPath)/SnapshotTests/**"],
+                                  resources: ResourceFileElements(resources: testResourceFilePaths),
+                                  dependencies: dependencies))
+        }
         
         return targets
     }
@@ -263,31 +263,31 @@ extension Project {
                 .target(name: "\(name)")
             ])
         
-        let snapshotTestsTarget = Target(
-            name: "\(name)SnapshotTests",
-            platform: platform,
-            product: .unitTests,
-            bundleId: "\(reverseOrganizationName).\(name)SnapshotTests",
-            infoPlist: .default,
-            sources: ["\(appPath)/\(name)/SnapshotTests/**"],
-            resources: [],
-            dependencies: [
-                .target(name: "\(name)")
-            ])
+//        let snapshotTestsTarget = Target(
+//            name: "\(name)SnapshotTests",
+//            platform: platform,
+//            product: .unitTests,
+//            bundleId: "\(reverseOrganizationName).\(name)SnapshotTests",
+//            infoPlist: .default,
+//            sources: ["\(appPath)/\(name)/SnapshotTests/**"],
+//            resources: [],
+//            dependencies: [
+//                .target(name: "\(name)")
+//            ])
+//
+//        let uiTestTarget = Target(
+//            name: "\(name)UITests",
+//            platform: platform,
+//            product: .uiTests,
+//            bundleId: "\(reverseOrganizationName).\(name)UITests",
+//            infoPlist: .default,
+//            sources: ["\(appPath)/\(name)/UITests/**"],
+//            resources: [],
+//            dependencies: [
+//                .target(name: "\(name)")
+//            ])
         
-        let uiTestTarget = Target(
-            name: "\(name)UITests",
-            platform: platform,
-            product: .uiTests,
-            bundleId: "\(reverseOrganizationName).\(name)UITests",
-            infoPlist: .default,
-            sources: ["\(appPath)/\(name)/UITests/**"],
-            resources: [],
-            dependencies: [
-                .target(name: "\(name)")
-            ])
-        
-        return [mainTarget, testTarget, snapshotTestsTarget, uiTestTarget]
+        return [mainTarget, testTarget] // snapshotTestsTarget, uiTestTarget
     }
     
     public static func makeSchemes(targetName: String) -> [Scheme] {

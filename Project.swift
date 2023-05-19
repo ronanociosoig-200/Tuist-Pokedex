@@ -92,7 +92,7 @@ func makeUIComponentsModule() -> Module {
            frameworkResources: ["Sources/**/*.xib"],
            exampleResources: ["Resources/**"],
            testResources: [],
-           targets: [.framework, .uiTests, .exampleApp])
+           targets: [.framework, .exampleApp]) // .uiTests,
 }
 
 func makeNetworkModule() -> Module {
