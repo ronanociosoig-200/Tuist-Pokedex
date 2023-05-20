@@ -27,6 +27,9 @@ parameters:
   simulator_apps_path: 
     type: string
     default: "simulatorApps"
+  devived_data_path:
+    type: string
+    default: "/Users/distiller/Library/Developer/Xcode/DerivedData"
 
 commands:
   install_tuist:
@@ -95,10 +98,11 @@ commands:
       - run: 
           name: Find And Compress .app Files Excluding Tests runners
           command: |
-            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app" | grep -v "Tests-Runner" | while read in; do tar -cvzf "$in".tar.gz -C "$in" .; done
-            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz"
+            [ -d <<pipeline.parameters.devived_data_path>> ] && echo "Derived data exists." || mkdir <<pipeline.parameters.devived_data_path>>
+            find <<pipeline.parameters.devived_data_path>> -name "*.app" | grep -v "Tests-Runner" | while read in; do tar -cvzf "$in".tar.gz -C "$in" .; done
+            find <<pipeline.parameters.devived_data_path>> -name "*.app.tar.gz"
             mkdir <<pipeline.parameters.simulator_apps_path>>
-            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz" | while read in; do cp "$in" <<pipeline.parameters.simulator_apps_path>>; done
+            find <<pipeline.parameters.devived_data_path>> -name "*.app.tar.gz" | while read in; do cp "$in" <<pipeline.parameters.simulator_apps_path>>; done
             ls -l <<pipeline.parameters.simulator_apps_path>>
   run_xcode_build_test:
     steps:
@@ -162,6 +166,7 @@ jobs:
       - save_dependencies_cache
       - run_lint
       - run_tests
+      - run_xcode_build_test
       - check_test_output
       # - install_xcresult_parser
       - run_xcresult_parser
