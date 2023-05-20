@@ -109,7 +109,8 @@ commands:
     steps:
       - run:
           name: List test output
-          command: ls -la output/tests.xcresult
+          command: |
+            [ -f output/tests.xcresult] && ls -la output/tests.xcresult || echo "No test results available"
   install_xcresult_parser:
     steps:
       - run: 
