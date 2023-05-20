@@ -110,7 +110,7 @@ commands:
       - run:
           name: List test output
           command: |
-            [ -f output/tests.xcresult] && ls -la output/tests.xcresult || echo "No test results available"
+            [ -d output/tests.xcresult] && ls -la output/tests.xcresult || echo "No test results available"
   install_xcresult_parser:
     steps:
       - run: 
@@ -121,9 +121,13 @@ commands:
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcresultparser
   run_xcresult_parser:
     steps:
+      - run: 
+          name: List output
+          command: ls -lFG output
       - run:
           name: Convert XCResult to JUnit XML
-          command: tools/xcresultparser -c -o junit output/tests.xcresult > output/test_results.xml
+          command: |
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o junit output/tests.xcresult > output/test_results.xml || echo "Nothing to parse in output dir"
       - run:
           name: Clean up XCResult
           command: rm -r output/tests.xcresult 
