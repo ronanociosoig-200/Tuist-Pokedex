@@ -27,7 +27,7 @@ parameters:
   simulator_apps_path: 
     type: string
     default: "simulatorApps"
-  devived_data_path:
+  derived_data_path:
     type: string
     default: "/Users/distiller/Library/Developer/Xcode/DerivedData"
 
@@ -98,8 +98,8 @@ commands:
   compress_simulator_apps:
     steps:
       - run: 
-        name: Find And Compress .app Files Excluding Tests runners
-        command: sh scripts/compressSimulatorBuilds.sh
+          name: Find And Compress .app Files Excluding Tests runners
+          command: sh scripts/compressSimulatorBuilds.sh
   run_xcode_build_test:
     steps:
       - run :
