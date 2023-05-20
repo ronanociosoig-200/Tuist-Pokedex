@@ -104,7 +104,7 @@ commands:
     steps:
       - run :
           name: xcodebuild test
-          command: time xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" test
+          command: time xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=16.2" test
   check_test_output:
     steps:
       - run:
