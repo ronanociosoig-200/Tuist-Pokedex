@@ -98,7 +98,7 @@ commands:
       - run: 
           name: Find And Compress .app Files Excluding Tests runners
           command: |
-            [ -d <<pipeline.parameters.devived_data_path>> ] && echo "Derived data exists." || mkdir <<pipeline.parameters.devived_data_path>>
+            [ -d <<pipeline.parameters.devived_data_path>> ] && echo "Derived data exists." || mkdir -p <<pipeline.parameters.devived_data_path>>
             find <<pipeline.parameters.devived_data_path>> -name "*.app" | grep -v "Tests-Runner" | while read in; do tar -cvzf "$in".tar.gz -C "$in" .; done
             find <<pipeline.parameters.devived_data_path>> -name "*.app.tar.gz"
             mkdir <<pipeline.parameters.simulator_apps_path>>
