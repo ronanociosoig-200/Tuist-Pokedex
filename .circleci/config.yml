@@ -91,7 +91,7 @@ commands:
           command: pwd
       - run: 
           name: Tuist Test
-          command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+          command: time <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
       - run: 
           name: Find And Compress .app Files Excluding Tests runners
           command: |
@@ -100,6 +100,11 @@ commands:
             mkdir <<pipeline.parameters.simulator_apps_path>>
             find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz" | while read in; do cp "$in" <<pipeline.parameters.simulator_apps_path>>; done
             ls -l <<pipeline.parameters.simulator_apps_path>>
+  run_xcode_build_test:
+    steps:
+      - run :
+          name: xcodebuild test
+          command: time xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" test
   check_test_output:
     steps:
       - run:
