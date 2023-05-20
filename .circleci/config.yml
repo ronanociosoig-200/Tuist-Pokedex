@@ -125,10 +125,10 @@ commands:
           name: Convert XCResult to JUnit XML
           command: |
             [ -d output/tests.xcresult ] && tools/xcresultparser -c -o junit output/tests.xcresult > output/test_results.xml || echo "Nothing to parse in output dir"
-      - run:
-          name: Clean up XCResult
-          command: |
-            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult 
+      #- run:
+      #    name: Clean up XCResult
+      #    command: |
+      #      [ -d output/tests.xcresult ] && rm -r output/tests.xcresult 
   save_tuist_cache: 
     steps: 
       - save_cache:
