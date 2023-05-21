@@ -24,7 +24,7 @@ func makeHomeModule() -> Module {
                   path: "Home",
                   frameworkDependancies: [.target(name: "Common")],
                   exampleDependencies: [.external(name: "JGProgressHUD")], testingDependencies: [.external(name: "SnapshotTesting")],
-                  frameworkResources: ["Sources/**/*.storyboard", "Resources/**"],
+                  frameworkResources: ["Sources/**/*.storyboard", "Resources/**", "*.md"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
                   targets: [.framework, .unitTests, .exampleApp]) // .snapshotTests, .uiTests,
