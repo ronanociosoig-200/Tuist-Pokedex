@@ -2,19 +2,19 @@
 
 version: 2.1
 
-orbs:
-  macos: circleci/macos@2.2.0
+#orbs:
+#  macos: circleci/macos@2.2.0
 
 parameters:
   xcode_version:
     type: string
-    default: "14.2.0"
+    default: "14.3.0"
   device:
     type: string
     default: "\"iPhone 14\""
   ios_version:
     type: string
-    default: "16.2"
+    default: "16.4"
   tuist: 
     type: string
     default: "~/.tuist/Versions/3.19.0/tuist"
@@ -81,7 +81,7 @@ commands:
     steps:
       - run: 
           name: Build Pokedex App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2'
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4'
   run_lint:
     steps: 
       - run:
