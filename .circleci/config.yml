@@ -155,6 +155,7 @@ jobs:
   build_and_test:
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
+    resource_class: macos.x86.medium.gen2
     environment:
       TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
