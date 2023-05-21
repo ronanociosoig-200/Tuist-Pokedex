@@ -104,7 +104,7 @@ commands:
     steps:
       - run:
           name: Generate full project (this is needed if only some targets are updated previously)
-          command: <<pipeline.parameters.tuist>> generate 
+          command: <<pipeline.parameters.tuist>> generate -xn
       - run:
           name: xcodebuild test
           command: time xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=16.2" test
