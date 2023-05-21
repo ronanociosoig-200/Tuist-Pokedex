@@ -90,9 +90,6 @@ commands:
   run_tests:
     steps:
       - run: 
-          name: Get Current Dir
-          command: pwd
-      - run: 
           name: Tuist Test
           command: time <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
   compress_simulator_apps:
@@ -128,10 +125,10 @@ commands:
           name: Convert XCResult to JUnit XML
           command: |
             [ -d output/tests.xcresult ] && tools/xcresultparser -c -o junit output/tests.xcresult > output/test_results.xml || echo "Nothing to parse in output dir"
-      #- run:
-      #    name: Clean up XCResult
-      #    command: |
-      #      [ -d output/tests.xcresult ] && rm -r output/tests.xcresult 
+      - run:
+          name: Clean up XCResult
+          command: |
+            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult 
   save_tuist_cache: 
     steps: 
       - save_cache:
