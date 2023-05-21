@@ -8,4 +8,5 @@ The coordinator injects the dependcencies such that Home has no knowledge of oth
 
 There are unit, snapshot and UI tests defined for this module. 
  
+UI tests are the slowest. 
  
