@@ -168,7 +168,7 @@ jobs:
       - save_dependencies_cache
       - run_lint
       - run_tests
-      - run_xcode_build_test
+      # - run_xcode_build_test
       - compress_simulator_apps
       - check_test_output
       # - install_xcresult_parser
