@@ -243,7 +243,8 @@ extension Project {
             bundleId: "\(reverseOrganizationName).\(name)",
             infoPlist: makeAppInfoPlist(),
             sources: ["\(appPath)/\(name)/Sources/**"],
-            resources: ["\(appPath)/\(name)/Resources/**"
+            resources: ["\(appPath)/\(name)/Resources/**",
+                        "\(appPath)/\(name)/*.md"
                        ],
             scripts: [
             ],
