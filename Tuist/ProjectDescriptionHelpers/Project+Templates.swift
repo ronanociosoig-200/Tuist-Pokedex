@@ -129,7 +129,8 @@ extension Project {
         return Project(name: name,
                        organizationName: organizationName,
                        targets: targets,
-                       schemes: [])
+                       schemes: [],
+        additionalFiles: ["*.md"])
     }
     
     public static func makeAppInfoPlist() -> InfoPlist {
