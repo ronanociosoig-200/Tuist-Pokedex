@@ -64,7 +64,7 @@ struct Constants {
         }
     }
     
-    struct PokemonAPI {
+    enum PokemonAPI {
         static let minIdentifier = 1
         static let maxIdentifier = 1000
     }
