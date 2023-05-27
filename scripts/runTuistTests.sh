@@ -1,4 +1,4 @@
 #!/bin/sh
 
-tuist test --device "iPhone 14" --os "16.4"
+tuist test --result-bundle-path output/tests --device "iPhone 14" --os "16.4"
 
