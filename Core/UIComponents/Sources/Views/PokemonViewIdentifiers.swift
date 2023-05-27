@@ -16,4 +16,6 @@ public struct PokemonViewIdentifiers {
     public static let date = "Date"
     public static let types = "Types"
     public static let experience = "Experience"
+
 }
+
