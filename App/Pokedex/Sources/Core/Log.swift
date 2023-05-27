@@ -14,3 +14,5 @@ public struct Log {
     public static var network = OSLog(subsystem: "com.sonomos.pokedex", category: "network")
     public static var data = OSLog(subsystem: "com.sonomos.pokedex", category: "data")
 }
+
+
