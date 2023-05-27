@@ -12,6 +12,8 @@ import os.log
 import Common
 import Combine
 
+
+
 public protocol DataSearchProviding {
     func search(identifier: Int, networkService: SearchService, queue: DispatchQueue)
 }
