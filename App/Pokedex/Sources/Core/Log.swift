@@ -15,4 +15,3 @@ public struct Log {
     public static var data = OSLog(subsystem: "com.sonomos.pokedex", category: "data")
 }
 
-

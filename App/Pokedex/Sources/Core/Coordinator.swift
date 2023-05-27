@@ -7,16 +7,16 @@
 //
 
 import Foundation
-import JGProgressHUD
-import Common
-import NetworkKit
-import Backpack
-import Catch
-import Home
-import Detail
 import os.log
 
+import Home
+import Catch
+import Backpack
+import Detail
 
+import JGProgressHUD
+import NetworkKit
+import Common
 
 class Coordinator: Coordinating {
     let window: UIWindow
