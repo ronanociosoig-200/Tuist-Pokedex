@@ -16,6 +16,8 @@ import Home
 import Detail
 import os.log
 
+
+
 class Coordinator: Coordinating {
     let window: UIWindow
     var dataProvider: DataProvider?
