@@ -90,8 +90,11 @@ commands:
   run_tests:
     steps:
       - run: 
+          name: Clean Tuist Tests Cache
+          command: <<pipeline.parameters.tuist>> clean tests
+      - run: 
           name: Tuist Test
-          command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --verbose
+          command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
   compress_simulator_apps:
     steps:
       - run: 
