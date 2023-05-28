@@ -36,7 +36,10 @@ commands:
     steps:
       - run:
           name: Create tuist checksum file
-          command: find Project.swift Tuist App Core Features -type f | xargs -P 2 shasum > Tuist.lock
+          command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
+      - run: 
+          name: Create sources checksum file
+          command: find App Core Features -type f | xargs -P 2 shasum > TuistSources.lock
       - restore_cache:
           name: Restore ~/.tuist
           keys:
@@ -135,7 +138,11 @@ commands:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
           paths:
-            - ~/.tuist/Cache
+            - ~/.tuist/Cache/Projects
+            - ~/.tuist/Cache/BuildCache
+            - ~/.tuist/Cache/Plugins
+            - ~/.tuist/Cache/Manifests
+            - ~/.tuist/Cache/ProjectDescriptionHelpers
             - ~/.tuist/Versions
   save_dependencies_cache:
     steps:
@@ -151,6 +158,20 @@ commands:
           keys: 
             - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
             - dependencies-tuist-
+  save_tests_cache: 
+    steps:
+      - save_cache:
+          name: Save Tests Cache
+          key: tests-tuist-{{ checksum "TuistSources.lock" }}
+          paths: 
+            - ~/.tuist/Cache/TestsCache
+  restore_tests_cache: 
+    steps:
+      - restore_cache:
+          name: Restore Tests Cache
+          keys: 
+            - tests-tuist-{{ checksum "TuistSources.lock" }}
+            - tests-tuist-
 jobs:    
   build_and_test:
     macos: 
@@ -162,6 +183,7 @@ jobs:
       - checkout
       - install_tuist 
       - restore_dependencies_cache
+      - restore_tests_cache
       - setup_tuist
       - save_dependencies_cache
       - run_lint
@@ -178,6 +200,7 @@ jobs:
       - store_artifacts:
           path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
+      - save_tests_cache
 
 workflows: 
   build_and_test_workflow:
