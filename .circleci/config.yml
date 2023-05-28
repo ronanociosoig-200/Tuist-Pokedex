@@ -125,9 +125,12 @@ commands:
   run_xcresult_parser:
     steps:
       - run:
-          name: Convert XCResult to JUnit XML
+          name: Convert XCResult to HTML
           command: |
-            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o junit output/tests.xcresult > output/test_results.xml || echo "Nothing to parse in output dir"
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o html output/tests.xcresult > output/test_results.html || echo "Nothing to parse in output dir"
+      - run: 
+          name: Extract code coverage data to text file 
+          command: sh scripts/extractCodeCoverageData.sh
       - run:
           name: Clean up XCResult
           command: |
