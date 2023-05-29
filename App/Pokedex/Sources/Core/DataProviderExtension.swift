@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import NetworkKit
-import os.log
-import Common
 import Combine
+import os.log
 
-
+import NetworkKit
+import Common
 
 public protocol DataSearchProviding {
     func search(identifier: Int, networkService: SearchService, queue: DispatchQueue)

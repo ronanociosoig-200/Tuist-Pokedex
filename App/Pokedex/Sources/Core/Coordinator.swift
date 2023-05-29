@@ -42,7 +42,9 @@ class Coordinator: Coordinating {
         let viewController = HomeWireframe.makeViewController()
         HomeWireframe.prepare(viewController, actions: actions as HomeActions, dataProvider: dataProvider as HomeDataProvider)
         
-        window.rootViewController = viewController
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
+        window.rootViewController = navigationController
         
         os_log("Info: %s", log: Log.general, type: .info, "showHomeScene")
     }
@@ -53,10 +55,10 @@ class Coordinator: Coordinating {
         
         CatchWireframe.prepare(viewController, actions: actions as CatchActions, dataProvider: dataProvider as CatchDataProvider)
         
-        guard let topViewController = window.rootViewController else { return }
+        guard let topViewController = window.rootViewController as? UINavigationController else { return }
         
         topViewController.present(viewController, animated: true, completion: nil)
-        
+        //topViewController.pushViewController(viewController, animated: false)
         presenter = viewController.presenter as? Updatable
         
         currentViewController = viewController

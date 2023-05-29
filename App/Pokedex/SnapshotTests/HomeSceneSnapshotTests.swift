@@ -8,7 +8,31 @@
 
 import XCTest
 import SnapshotTesting
+import NetworkKit
+import Common
 @testable import Pokedex
+
+// This is supposed to be a fix for Snapshot testing modal screens but it isn't working.
+// Snapshots work fine for push screen transitions.
+// https://github.com/pointfreeco/swift-snapshot-testing/issues/279
+extension Snapshotting where Value: UIViewController, Format == UIImage {
+    static var windowedImage: Snapshotting {
+        return Snapshotting<UIImage, UIImage>.image.asyncPullback { vc in
+            Async<UIImage> { callback in
+                UIView.setAnimationsEnabled(false)
+                let window = UIApplication.shared.windows[0]
+                window.rootViewController = vc
+                DispatchQueue.main.async {
+                    let image = UIGraphicsImageRenderer(bounds: window.bounds).image { ctx in
+                        window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
+                    }
+                    callback(image)
+                    UIView.setAnimationsEnabled(true)
+                }
+            }
+        }
+    }
+}
 
 final class HomeSceneSnapshotTests: XCTestCase {
     let appController = AppController()
@@ -16,6 +40,8 @@ final class HomeSceneSnapshotTests: XCTestCase {
     override func setUp() {
         UIView.setAnimationsEnabled(false)
         appController.start()
+        
+        
     }
     
     func testShowCatchScene() throws {
@@ -29,16 +55,17 @@ final class HomeSceneSnapshotTests: XCTestCase {
         }
         
         assertSnapshot(matching: viewController, as: .image)
-        
-        coordinator.showCatchScene(identifier: nil)
+
+        coordinator.showCatchScene(identifier: 101)
         
         let expectation = self.expectation(description: "wait")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
           expectation.fulfill()
         }
-        self.wait(for: [expectation], timeout: 0.5)
+        self.wait(for: [expectation], timeout: 1.0)
 
-        assertSnapshot(matching: viewController, as: .image)
+        // This isn't a fix
+        assertSnapshot(matching: viewController, as: .windowedImage)
     }
     
     func testShowBackpackScene() throws {
@@ -57,5 +84,4 @@ final class HomeSceneSnapshotTests: XCTestCase {
         
         assertSnapshot(matching: viewController, as: .image)
     }
-
 }
