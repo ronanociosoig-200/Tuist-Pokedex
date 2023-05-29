@@ -20,3 +20,8 @@ extension Actions: CatchActions {
     }
 }
 
+struct Dummy {
+    static let someValue = "dummy"
+}
+
+
