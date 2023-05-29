@@ -54,7 +54,7 @@ final class HomeSceneSnapshotTests: XCTestCase {
             return
         }
         
-        assertSnapshot(matching: viewController, as: .image)
+        assertSnapshot(matching: viewController, as: .image(on: .iPhone13))
 
         coordinator.showCatchScene(identifier: 101)
         
@@ -65,7 +65,7 @@ final class HomeSceneSnapshotTests: XCTestCase {
         self.wait(for: [expectation], timeout: 1.0)
 
         // This isn't a fix
-        assertSnapshot(matching: viewController, as: .windowedImage)
+        assertSnapshot(matching: viewController, as: .image(on: .iPhone13))
     }
     
     func testShowBackpackScene() throws {
@@ -78,10 +78,10 @@ final class HomeSceneSnapshotTests: XCTestCase {
             return
         }
         
-        assertSnapshot(matching: viewController, as: .image)
+        assertSnapshot(matching: viewController, as: .image(on: .iPhone13))
         
         coordinator.showBackpackScene()
         
-        assertSnapshot(matching: viewController, as: .image)
+        assertSnapshot(matching: viewController, as: .image(on: .iPhone13))
     }
 }
