@@ -127,7 +127,8 @@ commands:
             [ -d output/tests.xcresult ] && tools/xcresultparser -c -o html output/tests.xcresult > output/test_results.html || echo "Nothing to parse in output dir"
       - run: 
           name: Extract code coverage data to text file 
-          command: sh scripts/extractCodeCoverageData.sh
+          command: |
+            [ -d output/tests.xcresult ] && sh scripts/extractCodeCoverageData.sh || echo "No data to extract"
       - run:
           name: Clean up XCResult
           command: |
