@@ -9,8 +9,6 @@
 import UIKit
 import Common
 
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
