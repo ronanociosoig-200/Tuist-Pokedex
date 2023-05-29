@@ -12,6 +12,8 @@ public protocol CatchActions {
     func catchPokemon()
 }
 
+
+
 extension Actions: CatchActions {
     public func catchPokemon() {
         dataProvider?.catchPokemon()
