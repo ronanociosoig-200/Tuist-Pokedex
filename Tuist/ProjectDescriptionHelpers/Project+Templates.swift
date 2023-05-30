@@ -103,31 +103,32 @@ extension Project {
         /// Add custom schemes with code coverage enabled
         // schemes += moduleTargets.flatMap({ makeSchemeWithCodeCoverage(targetName: $0.name) })
         
-//        let automaticSchemesOptions = Options.AutomaticSchemesOptions.enabled(
-//            targetSchemesGrouping: .byNameSuffix(build: ["Implementation",
-//                                                         "Interface",
-//                                                         "Mocks",
-//                                                         "Testing"],
-//                                                 test: ["Tests",
-//                                                        "IntegrationTests",
-//                                                        "UITests",
-//                                                        "SnapshotTests"],
-//                                                 run: ["App", "Example"]),
-//            codeCoverageEnabled: true,
-//            testingOptions: []
-//        )
-//
-//      let options = Project.Options.options(automaticSchemesOptions: automaticSchemesOptions,
-//                                              developmentRegion: nil,
-//                                              disableBundleAccessors: false,
-//                                              disableShowEnvironmentVarsInScriptPhases: false,
-//                                              disableSynthesizedResourceAccessors: false,
-//                                              textSettings: Options.TextSettings.textSettings(),
-//                                              xcodeProjectName: nil)
+        let automaticSchemesOptions = Options.AutomaticSchemesOptions.enabled(
+            targetSchemesGrouping: .byNameSuffix(build: ["Implementation",
+                                                         "Interface",
+                                                         "Mocks",
+                                                         "Testing"],
+                                                 test: ["Tests",
+                                                        "IntegrationTests",
+                                                        "UITests",
+                                                        "SnapshotTests"],
+                                                 run: ["App", "Example"]),
+            codeCoverageEnabled: true,
+            testingOptions: []
+        )
 
-        // options: options,
+      let options = Project.Options.options(automaticSchemesOptions: automaticSchemesOptions,
+                                              developmentRegion: nil,
+                                              disableBundleAccessors: false,
+                                              disableShowEnvironmentVarsInScriptPhases: false,
+                                              disableSynthesizedResourceAccessors: false,
+                                              textSettings: Options.TextSettings.textSettings(),
+                                              xcodeProjectName: nil)
+
+        
         return Project(name: name,
                        organizationName: organizationName,
+                       options: options,
                        targets: targets,
                        schemes: [],
         additionalFiles: ["*.md"])
