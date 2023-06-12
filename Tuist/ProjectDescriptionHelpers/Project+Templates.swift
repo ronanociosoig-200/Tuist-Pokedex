@@ -266,31 +266,31 @@ extension Project {
                 .target(name: "\(name)")
             ])
         
-//        let snapshotTestsTarget = Target(
-//            name: "\(name)SnapshotTests",
-//            platform: platform,
-//            product: .unitTests,
-//            bundleId: "\(reverseOrganizationName).\(name)SnapshotTests",
-//            infoPlist: .default,
-//            sources: ["\(appPath)/\(name)/SnapshotTests/**"],
-//            resources: [],
-//            dependencies: [
-//                .target(name: "\(name)")
-//            ])
-//
-//        let uiTestTarget = Target(
-//            name: "\(name)UITests",
-//            platform: platform,
-//            product: .uiTests,
-//            bundleId: "\(reverseOrganizationName).\(name)UITests",
-//            infoPlist: .default,
-//            sources: ["\(appPath)/\(name)/UITests/**"],
-//            resources: [],
-//            dependencies: [
-//                .target(name: "\(name)")
-//            ])
+        let snapshotTestsTarget = Target(
+            name: "\(name)SnapshotTests",
+            platform: platform,
+            product: .unitTests,
+            bundleId: "\(reverseOrganizationName).\(name)SnapshotTests",
+            infoPlist: .default,
+            sources: ["\(appPath)/\(name)/SnapshotTests/**"],
+            resources: [],
+            dependencies: [
+                .target(name: "\(name)")
+            ])
+
+        let uiTestTarget = Target(
+            name: "\(name)UITests",
+            platform: platform,
+            product: .uiTests,
+            bundleId: "\(reverseOrganizationName).\(name)UITests",
+            infoPlist: .default,
+            sources: ["\(appPath)/\(name)/UITests/**"],
+            resources: [],
+            dependencies: [
+                .target(name: "\(name)")
+            ])
         
-        return [mainTarget, testTarget] // snapshotTestsTarget, uiTestTarget
+        return [mainTarget, testTarget, snapshotTestsTarget, uiTestTarget]
     }
     
     public static func makeSchemes(targetName: String) -> [Scheme] {
