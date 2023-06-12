@@ -27,7 +27,7 @@ func makeHomeModule() -> Module {
                   frameworkResources: ["Sources/**/*.storyboard", "Resources/**", "*.md"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .exampleApp]) // .snapshotTests, .uiTests,
+                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeBackpackModule() -> Module {
@@ -41,7 +41,7 @@ func makeBackpackModule() -> Module {
            frameworkResources: ["Resources/**", "Sources/**/*.xib", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .exampleApp]) // .snapshotTests, .uiTests,
+                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeDetailModule() -> Module {
@@ -56,7 +56,7 @@ func makeDetailModule() -> Module {
                   frameworkResources: ["Sources/**/*.storyboard"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .exampleApp]) // .snapshotTests, .uiTests,
+                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeCatchModule() -> Module {
@@ -72,7 +72,7 @@ func makeCatchModule() -> Module {
            frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
            testResources: [],
-           targets: [.framework, .unitTests, .exampleApp]) // .snapshotTests, .uiTests,
+           targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
 }
 
 func makeCommonModule() -> Module {
@@ -98,7 +98,7 @@ func makeUIComponentsModule() -> Module {
            frameworkResources: ["Sources/**/*.xib"],
            exampleResources: ["Resources/**"],
            testResources: [],
-           targets: [.framework, .exampleApp]) // .uiTests,
+           targets: [.framework, .uiTests, .exampleApp])
 }
 
 func makeNetworkModule() -> Module {
