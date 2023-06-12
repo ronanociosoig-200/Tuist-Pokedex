@@ -64,8 +64,8 @@ commands:
   setup_tuist:          
     steps: 
       - run: 
-         name: Clean Tuist (Temporary)
-         command: tuist clean
+          name: Clean Tuist (Temporary)
+          command: tuist clean tests
       - run: 
           name: Tuist Fetch Dependencies
           command: <<pipeline.parameters.tuist>> fetch
