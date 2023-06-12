@@ -65,7 +65,7 @@ commands:
     steps: 
       - run: 
           name: Clean Tuist (Temporary)
-          command: tuist clean tests
+          command: <<pipeline.parameters.tuist>> clean tests
       - run: 
           name: Tuist Fetch Dependencies
           command: <<pipeline.parameters.tuist>> fetch
@@ -103,9 +103,6 @@ commands:
           name: Generate full project (this is needed if only some targets are updated previously)
           command: <<pipeline.parameters.tuist>> generate -xn
       - run:
-          name: xcodebuild test Pokedex
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=16.2" test
-            - run:
           name: xcodebuild test Pokedex
           command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=16.2" test
   check_test_output:
