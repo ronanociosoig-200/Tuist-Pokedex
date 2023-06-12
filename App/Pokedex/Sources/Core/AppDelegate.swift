@@ -9,7 +9,9 @@
 import UIKit
 import Common
 
-
+struct Dummy {
+    static let value = 100
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
