@@ -14,7 +14,9 @@ parameters:
     default: "16.2"
   tuist: 
     type: string
-    default: "~/.tuist/Versions/3.19.0/tuist"
+    default: ".tuist-bin/tuist"
+    # disable version in cache and use bundled version instead
+    # ~/.tuist/Versions/3.19.0/tuist
   tuist_version:
     type: string
     default: "3.19.0"
@@ -53,14 +55,15 @@ commands:
             else
               echo "Tuist versions not found at " $FULL_PATH
             fi
-      - run:
-          name: Installing Tuist
-          command: |
-            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
-      - run:
-          name: Install Tuist specific version
-          command: |
-            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
+      # Disable tuist install because it will use the bundled version instead
+      #- run:
+      #    name: Installing Tuist
+      #    command: |
+      #      [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
+      #- run:
+      #    name: Install Tuist specific version
+      #    command: |
+      #      [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
   setup_tuist:          
     steps: 
       - run: 
