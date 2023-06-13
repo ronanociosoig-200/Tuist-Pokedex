@@ -149,9 +149,10 @@ commands:
     steps:
       - save_cache:
           name: Save Dependencies
-          key: dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
+          key: dependencies-tuist-{{ checksum "Tuist/Dependencies/Lockfiles/Package.resolved" }}
           paths: 
-            - Tuist/Dependencies
+            - Tuist/Dependencies/SwiftPackageManager
+            - Tuist/Dependencies/graph.json
   restore_dependencies_cache:
     steps:
       - restore_cache:
