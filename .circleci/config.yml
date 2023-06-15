@@ -66,9 +66,9 @@ commands:
       #      [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
   setup_tuist:          
     steps: 
-      - run: 
-          name: Clean Tuist (Temporary)
-          command: <<pipeline.parameters.tuist>> clean tests
+      #- run: 
+      #    name: Clean Tuist (Temporary)
+      #    command: <<pipeline.parameters.tuist>> clean tests
       - run: 
           name: Tuist Fetch Dependencies
           command: <<pipeline.parameters.tuist>> fetch
@@ -76,7 +76,8 @@ commands:
           #  [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run: 
           name: Tuist Cache Warm
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
+          command: <<pipeline.parameters.tuist>> cache warm -x
+          # command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
      # - run: 
      #     name: Tuist Generate Project
      #     command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
