@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
 // swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ProjectDescription
 import Foundation
 import Swift
@@ -9,8 +9,8 @@ public struct AnalyzeAction : Swift.Equatable, Swift.Codable {
   public let configuration: ProjectDescription.ConfigurationName
   public static func analyzeAction(configuration: ProjectDescription.ConfigurationName) -> ProjectDescription.AnalyzeAction
   public static func == (a: ProjectDescription.AnalyzeAction, b: ProjectDescription.AnalyzeAction) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct ArchiveAction : Swift.Equatable, Swift.Codable {
   public let configuration: ProjectDescription.ConfigurationName
@@ -20,16 +20,16 @@ public struct ArchiveAction : Swift.Equatable, Swift.Codable {
   public let postActions: [ProjectDescription.ExecutionAction]
   public static func archiveAction(configuration: ProjectDescription.ConfigurationName, revealArchiveInOrganizer: Swift.Bool = true, customArchiveName: Swift.String? = nil, preActions: [ProjectDescription.ExecutionAction] = [], postActions: [ProjectDescription.ExecutionAction] = []) -> ProjectDescription.ArchiveAction
   public static func == (a: ProjectDescription.ArchiveAction, b: ProjectDescription.ArchiveAction) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Arguments : Swift.Equatable, Swift.Codable {
   public let environment: [Swift.String : Swift.String]
   public let launchArguments: [ProjectDescription.LaunchArgument]
   public init(environment: [Swift.String : Swift.String] = [:], launchArguments: [ProjectDescription.LaunchArgument] = [])
   public static func == (a: ProjectDescription.Arguments, b: ProjectDescription.Arguments) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct BuildAction : Swift.Equatable, Swift.Codable {
   public let targets: [ProjectDescription.TargetReference]
@@ -39,8 +39,8 @@ public struct BuildAction : Swift.Equatable, Swift.Codable {
   public init(targets: [ProjectDescription.TargetReference], preActions: [ProjectDescription.ExecutionAction] = [], postActions: [ProjectDescription.ExecutionAction] = [], runPostActionsOnFailure: Swift.Bool = false)
   public static func buildAction(targets: [ProjectDescription.TargetReference], preActions: [ProjectDescription.ExecutionAction] = [], postActions: [ProjectDescription.ExecutionAction] = [], runPostActionsOnFailure: Swift.Bool = false) -> ProjectDescription.BuildAction
   public static func == (a: ProjectDescription.BuildAction, b: ProjectDescription.BuildAction) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.BuildRule {
   public enum CompilerSpec : Swift.Codable {
@@ -96,11 +96,11 @@ extension ProjectDescription.BuildRule {
     case customScript
     public static func == (a: ProjectDescription.BuildRule.CompilerSpec, b: ProjectDescription.BuildRule.CompilerSpec) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 extension ProjectDescription.BuildRule {
@@ -153,11 +153,11 @@ extension ProjectDescription.BuildRule {
     case sourceFilesWithNamesMatching
     public static func == (a: ProjectDescription.BuildRule.FileType, b: ProjectDescription.BuildRule.FileType) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
-    public func encode(to encoder: Swift.Encoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
       get
     }
-    public init(from decoder: Swift.Decoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 public struct BuildRule : Swift.Codable, Swift.Equatable {
@@ -172,8 +172,8 @@ public struct BuildRule : Swift.Codable, Swift.Equatable {
   public let runOncePerArchitecture: Swift.Bool?
   public init(name: Swift.String? = nil, fileType: ProjectDescription.BuildRule.FileType, filePatterns: Swift.String? = nil, compilerSpec: ProjectDescription.BuildRule.CompilerSpec, inputFiles: [Swift.String] = [], outputFiles: [Swift.String] = [], outputFilesCompilerFlags: [Swift.String] = [], script: Swift.String? = nil, runOncePerArchitecture: Swift.Bool = false)
   public static func == (a: ProjectDescription.BuildRule, b: ProjectDescription.BuildRule) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Cache : Swift.Codable, Swift.Equatable {
   public struct Profile : Swift.Codable, Swift.Equatable {
@@ -183,15 +183,15 @@ public struct Cache : Swift.Codable, Swift.Equatable {
     public let os: Swift.String?
     public static func profile(name: Swift.String, configuration: Swift.String, device: Swift.String? = nil, os: Swift.String? = nil) -> ProjectDescription.Cache.Profile
     public static func == (a: ProjectDescription.Cache.Profile, b: ProjectDescription.Cache.Profile) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public let profiles: [ProjectDescription.Cache.Profile]
   public let path: ProjectDescription.Path?
   public static func cache(profiles: [ProjectDescription.Cache.Profile] = [], path: ProjectDescription.Path? = nil) -> ProjectDescription.Cache
   public static func == (a: ProjectDescription.Cache, b: ProjectDescription.Cache) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Cloud : Swift.Codable, Swift.Equatable {
   public enum Option : Swift.String, Swift.Codable, Swift.Equatable {
@@ -210,8 +210,8 @@ public struct Cloud : Swift.Codable, Swift.Equatable {
   public let options: [ProjectDescription.Cloud.Option]
   public static func cloud(projectId: Swift.String, url: Swift.String, options: [ProjectDescription.Cloud.Option] = []) -> ProjectDescription.Cloud
   public static func == (a: ProjectDescription.Cloud, b: ProjectDescription.Cloud) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public enum CompatibleXcodeVersions : Swift.ExpressibleByArrayLiteral, Swift.ExpressibleByStringInterpolation, Swift.Codable, Swift.Equatable {
   case all
@@ -228,8 +228,8 @@ public enum CompatibleXcodeVersions : Swift.ExpressibleByArrayLiteral, Swift.Exp
   public typealias StringInterpolation = Swift.DefaultStringInterpolation
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Config : Swift.Codable, Swift.Equatable {
   public let generationOptions: ProjectDescription.Config.GenerationOptions
@@ -240,8 +240,8 @@ public struct Config : Swift.Codable, Swift.Equatable {
   public let swiftVersion: ProjectDescription.Version?
   public init(compatibleXcodeVersions: ProjectDescription.CompatibleXcodeVersions = .all, cloud: ProjectDescription.Cloud? = nil, cache: ProjectDescription.Cache? = nil, swiftVersion: ProjectDescription.Version? = nil, plugins: [ProjectDescription.PluginLocation] = [], generationOptions: ProjectDescription.Config.GenerationOptions = .options())
   public static func == (a: ProjectDescription.Config, b: ProjectDescription.Config) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.Config {
   public struct GenerationOptions : Swift.Codable, Swift.Equatable {
@@ -249,8 +249,8 @@ extension ProjectDescription.Config {
     public let disablePackageVersionLocking: Swift.Bool
     public static func options(resolveDependenciesWithSystemScm: Swift.Bool = false, disablePackageVersionLocking: Swift.Bool = false) -> ProjectDescription.Config.GenerationOptions
     public static func == (a: ProjectDescription.Config.GenerationOptions, b: ProjectDescription.Config.GenerationOptions) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 public struct ConfigurationName : Swift.ExpressibleByStringLiteral, Swift.Codable, Swift.Equatable {
@@ -267,8 +267,8 @@ public struct ConfigurationName : Swift.ExpressibleByStringLiteral, Swift.Codabl
   public typealias ExtendedGraphemeClusterLiteralType = Swift.StringLiteralType
   public typealias StringLiteralType = Swift.StringLiteralType
   public typealias UnicodeScalarLiteralType = Swift.StringLiteralType
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct CopyFilesAction : Swift.Codable, Swift.Equatable {
   public var name: Swift.String
@@ -303,23 +303,23 @@ public struct CopyFilesAction : Swift.Codable, Swift.Equatable {
   public static func sharedSupport(name: Swift.String, subpath: Swift.String? = nil, files: [ProjectDescription.FileElement]) -> ProjectDescription.CopyFilesAction
   public static func plugins(name: Swift.String, subpath: Swift.String? = nil, files: [ProjectDescription.FileElement]) -> ProjectDescription.CopyFilesAction
   public static func == (a: ProjectDescription.CopyFilesAction, b: ProjectDescription.CopyFilesAction) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct CoreDataModel : Swift.Codable, Swift.Equatable {
   public let path: ProjectDescription.Path
   public let currentVersion: Swift.String?
   public init(_ path: ProjectDescription.Path, currentVersion: Swift.String? = nil)
   public static func == (a: ProjectDescription.CoreDataModel, b: ProjectDescription.CoreDataModel) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct CarthageDependencies : Swift.Codable, Swift.Equatable {
   public let dependencies: [ProjectDescription.CarthageDependencies.Dependency]
   public init(_ dependencies: [ProjectDescription.CarthageDependencies.Dependency])
   public static func == (a: ProjectDescription.CarthageDependencies, b: ProjectDescription.CarthageDependencies) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.CarthageDependencies : Swift.ExpressibleByArrayLiteral {
   public init(arrayLiteral elements: ProjectDescription.CarthageDependencies.Dependency...)
@@ -331,8 +331,8 @@ extension ProjectDescription.CarthageDependencies {
     case git(path: Swift.String, requirement: ProjectDescription.CarthageDependencies.Requirement)
     case binary(path: Swift.String, requirement: ProjectDescription.CarthageDependencies.Requirement)
     public static func == (a: ProjectDescription.CarthageDependencies.Dependency, b: ProjectDescription.CarthageDependencies.Dependency) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public enum Requirement : Swift.Codable, Swift.Equatable {
     case exact(ProjectDescription.Version)
@@ -341,8 +341,8 @@ extension ProjectDescription.CarthageDependencies {
     case branch(Swift.String)
     case revision(Swift.String)
     public static func == (a: ProjectDescription.CarthageDependencies.Requirement, b: ProjectDescription.CarthageDependencies.Requirement) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 public struct Dependencies : Swift.Codable, Swift.Equatable {
@@ -351,8 +351,8 @@ public struct Dependencies : Swift.Codable, Swift.Equatable {
   public let platforms: Swift.Set<ProjectDescription.Platform>
   public init(carthage: ProjectDescription.CarthageDependencies? = nil, swiftPackageManager: ProjectDescription.SwiftPackageManagerDependencies? = nil, platforms: Swift.Set<ProjectDescription.Platform> = Set(Platform.allCases))
   public static func == (a: ProjectDescription.Dependencies, b: ProjectDescription.Dependencies) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct SwiftPackageManagerDependencies : Swift.Codable, Swift.Equatable {
   public let packages: [ProjectDescription.Package]
@@ -362,8 +362,8 @@ public struct SwiftPackageManagerDependencies : Swift.Codable, Swift.Equatable {
   public let projectOptions: [Swift.String : ProjectDescription.Project.Options]
   public init(_ packages: [ProjectDescription.Package], productTypes: [Swift.String : ProjectDescription.Product] = [:], baseSettings: ProjectDescription.Settings = .settings(), targetSettings: [Swift.String : ProjectDescription.SettingsDictionary] = [:], projectOptions: [Swift.String : ProjectDescription.Project.Options] = [:])
   public static func == (a: ProjectDescription.SwiftPackageManagerDependencies, b: ProjectDescription.SwiftPackageManagerDependencies) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.SwiftPackageManagerDependencies : Swift.ExpressibleByArrayLiteral {
   public init(arrayLiteral elements: ProjectDescription.Package...)
@@ -389,11 +389,11 @@ public enum DeploymentTarget : Swift.Codable, Swift.Hashable {
   }
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: ProjectDescription.DeploymentTarget, b: ProjectDescription.DeploymentTarget) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @dynamicMemberLookup public enum Environment {
   public enum Value : Swift.Equatable {
@@ -415,8 +415,8 @@ public struct ExecutionAction : Swift.Equatable, Swift.Codable {
   public let shellPath: Swift.String?
   public init(title: Swift.String = "Run Script", scriptText: Swift.String, target: ProjectDescription.TargetReference? = nil, shellPath: Swift.String? = nil)
   public static func == (a: ProjectDescription.ExecutionAction, b: ProjectDescription.ExecutionAction) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public enum FileCodeGen : Swift.String, Swift.Codable, Swift.Equatable {
   case `public`
@@ -433,8 +433,8 @@ public enum FileElement : Swift.Codable, Swift.Equatable {
   case glob(pattern: ProjectDescription.Path)
   case folderReference(path: ProjectDescription.Path)
   public static func == (a: ProjectDescription.FileElement, b: ProjectDescription.FileElement) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.FileElement : Swift.ExpressibleByStringInterpolation {
   public init(stringLiteral value: Swift.String)
@@ -462,15 +462,15 @@ public enum FileHeaderTemplate : Swift.Codable, Swift.Equatable, Swift.Expressib
   public typealias StringInterpolation = Swift.DefaultStringInterpolation
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct FileList : Swift.Codable, Swift.Equatable {
   public let globs: [ProjectDescription.FileListGlob]
   public static func list(_ globs: [ProjectDescription.FileListGlob]) -> ProjectDescription.FileList
   public static func == (a: ProjectDescription.FileList, b: ProjectDescription.FileList) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.FileList : Swift.ExpressibleByStringInterpolation {
   public init(stringLiteral value: Swift.String)
@@ -489,8 +489,8 @@ public struct FileListGlob : Swift.Codable, Swift.Equatable {
   public static func glob(_ glob: ProjectDescription.Path, excluding: [ProjectDescription.Path] = []) -> ProjectDescription.FileListGlob
   public static func glob(_ glob: ProjectDescription.Path, excluding: ProjectDescription.Path?) -> ProjectDescription.FileListGlob
   public static func == (a: ProjectDescription.FileListGlob, b: ProjectDescription.FileListGlob) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.FileListGlob : Swift.ExpressibleByStringInterpolation {
   public init(stringLiteral value: Swift.String)
@@ -518,8 +518,8 @@ public struct Headers : Swift.Codable, Swift.Equatable {
   public static func allHeaders(from list: ProjectDescription.FileList, umbrella: ProjectDescription.Path, private privateHeaders: ProjectDescription.FileList? = nil) -> ProjectDescription.Headers
   public static func onlyHeaders(from list: ProjectDescription.FileList, umbrella: ProjectDescription.Path, private privateHeaders: ProjectDescription.FileList? = nil) -> ProjectDescription.Headers
   public static func == (a: ProjectDescription.Headers, b: ProjectDescription.Headers) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public enum InfoPlist : Swift.Codable, Swift.Equatable {
   indirect public enum Value : Swift.Codable, Swift.Equatable {
@@ -530,8 +530,8 @@ public enum InfoPlist : Swift.Codable, Swift.Equatable {
     case dictionary([Swift.String : ProjectDescription.InfoPlist.Value])
     case array([ProjectDescription.InfoPlist.Value])
     public static func == (a: ProjectDescription.InfoPlist.Value, b: ProjectDescription.InfoPlist.Value) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   case file(path: ProjectDescription.Path)
   case dictionary([Swift.String : ProjectDescription.InfoPlist.Value])
@@ -546,8 +546,8 @@ public enum InfoPlist : Swift.Codable, Swift.Equatable {
     get
   }
   public static func == (a: ProjectDescription.InfoPlist, b: ProjectDescription.InfoPlist) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.InfoPlist : Swift.ExpressibleByStringInterpolation {
   public init(stringLiteral value: Swift.String)
@@ -589,15 +589,15 @@ public struct LaunchArgument : Swift.Equatable, Swift.Codable {
   public let isEnabled: Swift.Bool
   public init(name: Swift.String, isEnabled: Swift.Bool)
   public static func == (a: ProjectDescription.LaunchArgument, b: ProjectDescription.LaunchArgument) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public enum Package : Swift.Equatable, Swift.Codable {
   case remote(url: Swift.String, requirement: ProjectDescription.Package.Requirement)
   case local(path: ProjectDescription.Path)
   public static func == (a: ProjectDescription.Package, b: ProjectDescription.Package) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.Package {
   public enum Requirement : Swift.Codable, Swift.Equatable {
@@ -608,8 +608,8 @@ extension ProjectDescription.Package {
     case branch(Swift.String)
     case revision(Swift.String)
     public static func == (a: ProjectDescription.Package.Requirement, b: ProjectDescription.Package.Requirement) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 extension ProjectDescription.Package {
@@ -654,11 +654,11 @@ public struct Path : Swift.ExpressibleByStringInterpolation, Swift.Codable, Swif
   public typealias StringInterpolation = Swift.DefaultStringInterpolation
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public enum Platform : Swift.String, Swift.Codable, Swift.Equatable, Swift.CaseIterable {
   case iOS
@@ -679,8 +679,8 @@ public struct Plugin : Swift.Codable, Swift.Equatable {
   public let name: Swift.String
   public init(name: Swift.String)
   public static func == (a: ProjectDescription.Plugin, b: ProjectDescription.Plugin) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct PluginLocation : Swift.Codable, Swift.Equatable {
   public let type: ProjectDescription.PluginLocation.LocationType
@@ -688,8 +688,8 @@ public struct PluginLocation : Swift.Codable, Swift.Equatable {
   public static func git(url: Swift.String, tag: Swift.String, directory: Swift.String? = nil, releaseUrl: Swift.String? = nil) -> ProjectDescription.PluginLocation
   public static func git(url: Swift.String, sha: Swift.String, directory: Swift.String? = nil) -> ProjectDescription.PluginLocation
   public static func == (a: ProjectDescription.PluginLocation, b: ProjectDescription.PluginLocation) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.PluginLocation {
   public enum LocationType : Swift.Codable, Swift.Equatable {
@@ -697,8 +697,8 @@ extension ProjectDescription.PluginLocation {
     case gitWithTag(url: Swift.String, tag: Swift.String, directory: Swift.String?, releaseUrl: Swift.String?)
     case gitWithSha(url: Swift.String, sha: Swift.String, directory: Swift.String?)
     public static func == (a: ProjectDescription.PluginLocation.LocationType, b: ProjectDescription.PluginLocation.LocationType) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 public enum Product : Swift.String, Swift.Codable, Swift.Equatable {
@@ -720,6 +720,7 @@ public enum Product : Swift.String, Swift.Codable, Swift.Equatable {
   case stickerPackExtension
   case xpc
   case systemExtension
+  case extensionKitExtension
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
@@ -734,8 +735,8 @@ public struct ProfileAction : Swift.Equatable, Swift.Codable {
   public let arguments: ProjectDescription.Arguments?
   public static func profileAction(configuration: ProjectDescription.ConfigurationName = .release, preActions: [ProjectDescription.ExecutionAction] = [], postActions: [ProjectDescription.ExecutionAction] = [], executable: ProjectDescription.TargetReference? = nil, arguments: ProjectDescription.Arguments? = nil) -> ProjectDescription.ProfileAction
   public static func == (a: ProjectDescription.ProfileAction, b: ProjectDescription.ProfileAction) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Project : Swift.Codable, Swift.Equatable {
   public let name: Swift.String
@@ -750,8 +751,8 @@ public struct Project : Swift.Codable, Swift.Equatable {
   public let resourceSynthesizers: [ProjectDescription.ResourceSynthesizer]
   public init(name: Swift.String, organizationName: Swift.String? = nil, options: ProjectDescription.Project.Options = .options(), packages: [ProjectDescription.Package] = [], settings: ProjectDescription.Settings? = nil, targets: [ProjectDescription.Target] = [], schemes: [ProjectDescription.Scheme] = [], fileHeaderTemplate: ProjectDescription.FileHeaderTemplate? = nil, additionalFiles: [ProjectDescription.FileElement] = [], resourceSynthesizers: [ProjectDescription.ResourceSynthesizer] = .default)
   public static func == (a: ProjectDescription.Project, b: ProjectDescription.Project) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.Project {
   public struct Options : Swift.Codable, Swift.Equatable {
@@ -765,8 +766,8 @@ extension ProjectDescription.Project {
     public let xcodeProjectName: Swift.String?
     public static func options(automaticSchemesOptions: ProjectDescription.Project.Options.AutomaticSchemesOptions = .enabled(), defaultKnownRegions: [Swift.String]? = nil, developmentRegion: Swift.String? = nil, disableBundleAccessors: Swift.Bool = false, disableShowEnvironmentVarsInScriptPhases: Swift.Bool = false, disableSynthesizedResourceAccessors: Swift.Bool = false, textSettings: ProjectDescription.Project.Options.TextSettings = .textSettings(), xcodeProjectName: Swift.String? = nil) -> ProjectDescription.Project.Options
     public static func == (a: ProjectDescription.Project.Options, b: ProjectDescription.Project.Options) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 extension ProjectDescription.Project.Options {
@@ -776,8 +777,8 @@ extension ProjectDescription.Project.Options {
       case byNameSuffix(build: Swift.Set<Swift.String>, test: Swift.Set<Swift.String>, run: Swift.Set<Swift.String>)
       case notGrouped
       public static func == (a: ProjectDescription.Project.Options.AutomaticSchemesOptions.TargetSchemesGrouping, b: ProjectDescription.Project.Options.AutomaticSchemesOptions.TargetSchemesGrouping) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
-      public init(from decoder: Swift.Decoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     case enabled(targetSchemesGrouping: ProjectDescription.Project.Options.AutomaticSchemesOptions.TargetSchemesGrouping = .byNameSuffix(
                 build: ["Implementation", "Interface", "Mocks", "Testing"],
@@ -786,8 +787,8 @@ extension ProjectDescription.Project.Options {
             ), codeCoverageEnabled: Swift.Bool = false, testingOptions: ProjectDescription.TestingOptions = [], testLanguage: ProjectDescription.SchemeLanguage? = nil, testRegion: Swift.String? = nil, runLanguage: ProjectDescription.SchemeLanguage? = nil, runRegion: Swift.String? = nil)
     case disabled
     public static func == (a: ProjectDescription.Project.Options.AutomaticSchemesOptions, b: ProjectDescription.Project.Options.AutomaticSchemesOptions) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct TextSettings : Swift.Codable, Swift.Equatable {
     public let usesTabs: Swift.Bool?
@@ -796,16 +797,16 @@ extension ProjectDescription.Project.Options {
     public let wrapsLines: Swift.Bool?
     public static func textSettings(usesTabs: Swift.Bool? = nil, indentWidth: Swift.UInt? = nil, tabWidth: Swift.UInt? = nil, wrapsLines: Swift.Bool? = nil) -> ProjectDescription.Project.Options.TextSettings
     public static func == (a: ProjectDescription.Project.Options.TextSettings, b: ProjectDescription.Project.Options.TextSettings) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 public enum ResourceFileElement : Swift.Codable, Swift.Equatable {
   case glob(pattern: ProjectDescription.Path, excluding: [ProjectDescription.Path] = [], tags: [Swift.String] = [])
   case folderReference(path: ProjectDescription.Path, tags: [Swift.String] = [])
   public static func == (a: ProjectDescription.ResourceFileElement, b: ProjectDescription.ResourceFileElement) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.ResourceFileElement : Swift.ExpressibleByStringInterpolation {
   public init(stringLiteral value: Swift.String)
@@ -818,8 +819,8 @@ public struct ResourceFileElements : Swift.Codable, Swift.Equatable {
   public let resources: [ProjectDescription.ResourceFileElement]
   public init(resources: [ProjectDescription.ResourceFileElement])
   public static func == (a: ProjectDescription.ResourceFileElements, b: ProjectDescription.ResourceFileElements) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.ResourceFileElements : Swift.ExpressibleByStringInterpolation {
   public init(stringLiteral value: Swift.String)
@@ -840,8 +841,8 @@ public struct ResourceSynthesizer : Swift.Codable, Swift.Equatable {
     case plugin(name: Swift.String, resourceName: Swift.String)
     case defaultTemplate(resourceName: Swift.String)
     public static func == (a: ProjectDescription.ResourceSynthesizer.TemplateType, b: ProjectDescription.ResourceSynthesizer.TemplateType) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public enum Parser : Swift.String, Swift.Codable {
     case strings
@@ -880,8 +881,8 @@ public struct ResourceSynthesizer : Swift.Codable, Swift.Equatable {
   public static func custom(plugin: Swift.String, parser: ProjectDescription.ResourceSynthesizer.Parser, extensions: Swift.Set<Swift.String>, resourceName: Swift.String) -> ProjectDescription.ResourceSynthesizer
   public static func custom(name: Swift.String, parser: ProjectDescription.ResourceSynthesizer.Parser, extensions: Swift.Set<Swift.String>) -> ProjectDescription.ResourceSynthesizer
   public static func == (a: ProjectDescription.ResourceSynthesizer, b: ProjectDescription.ResourceSynthesizer) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension Swift.Array where Element == ProjectDescription.ResourceSynthesizer {
   public static var `default`: Swift.Array<ProjectDescription.ResourceSynthesizer> {
@@ -900,8 +901,8 @@ public struct RunAction : Swift.Equatable, Swift.Codable {
   public let diagnosticsOptions: [ProjectDescription.SchemeDiagnosticsOption]
   public static func runAction(configuration: ProjectDescription.ConfigurationName = .debug, attachDebugger: Swift.Bool = true, customLLDBInitFile: ProjectDescription.Path? = nil, preActions: [ProjectDescription.ExecutionAction] = [], postActions: [ProjectDescription.ExecutionAction] = [], executable: ProjectDescription.TargetReference? = nil, arguments: ProjectDescription.Arguments? = nil, options: ProjectDescription.RunActionOptions = .options(), diagnosticsOptions: [ProjectDescription.SchemeDiagnosticsOption] = [.mainThreadChecker]) -> ProjectDescription.RunAction
   public static func == (a: ProjectDescription.RunAction, b: ProjectDescription.RunAction) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct RunActionOptions : Swift.Equatable, Swift.Codable {
   public let language: ProjectDescription.SchemeLanguage?
@@ -911,8 +912,8 @@ public struct RunActionOptions : Swift.Equatable, Swift.Codable {
   public let enableGPUFrameCaptureMode: ProjectDescription.RunActionOptions.GPUFrameCaptureMode
   public static func options(language: ProjectDescription.SchemeLanguage? = nil, storeKitConfigurationPath: ProjectDescription.Path? = nil, simulatedLocation: ProjectDescription.RunActionOptions.SimulatedLocation? = nil, enableGPUFrameCaptureMode: ProjectDescription.RunActionOptions.GPUFrameCaptureMode = GPUFrameCaptureMode.default) -> ProjectDescription.RunActionOptions
   public static func == (a: ProjectDescription.RunActionOptions, b: ProjectDescription.RunActionOptions) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.RunActionOptions {
   public struct SimulatedLocation : Swift.Codable, Swift.Equatable {
@@ -956,8 +957,8 @@ extension ProjectDescription.RunActionOptions {
       get
     }
     public static func == (a: ProjectDescription.RunActionOptions.SimulatedLocation, b: ProjectDescription.RunActionOptions.SimulatedLocation) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 extension ProjectDescription.RunActionOptions {
@@ -988,8 +989,8 @@ public struct Scheme : Swift.Equatable, Swift.Codable {
   public let analyzeAction: ProjectDescription.AnalyzeAction?
   public init(name: Swift.String, shared: Swift.Bool = true, hidden: Swift.Bool = false, buildAction: ProjectDescription.BuildAction? = nil, testAction: ProjectDescription.TestAction? = nil, runAction: ProjectDescription.RunAction? = nil, archiveAction: ProjectDescription.ArchiveAction? = nil, profileAction: ProjectDescription.ProfileAction? = nil, analyzeAction: ProjectDescription.AnalyzeAction? = nil)
   public static func == (a: ProjectDescription.Scheme, b: ProjectDescription.Scheme) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public enum SchemeDiagnosticsOption : Swift.String, Swift.Equatable, Swift.Codable {
   case mainThreadChecker
@@ -1008,8 +1009,8 @@ public struct SchemeLanguage : Swift.Codable, Swift.Equatable, Swift.Expressible
   public typealias ExtendedGraphemeClusterLiteralType = Swift.String
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.SchemeLanguage {
   public static var doubleLengthPseudoLanguage: ProjectDescription.SchemeLanguage {
@@ -1043,8 +1044,8 @@ public enum SettingValue : Swift.ExpressibleByStringInterpolation, Swift.Express
   public typealias StringInterpolation = Swift.DefaultStringInterpolation
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Configuration : Swift.Equatable, Swift.Codable {
   public enum Variant : Swift.String, Swift.Codable {
@@ -1063,16 +1064,16 @@ public struct Configuration : Swift.Equatable, Swift.Codable {
   public static func debug(name: ProjectDescription.ConfigurationName, settings: ProjectDescription.SettingsDictionary = [:], xcconfig: ProjectDescription.Path? = nil) -> ProjectDescription.Configuration
   public static func release(name: ProjectDescription.ConfigurationName, settings: ProjectDescription.SettingsDictionary = [:], xcconfig: ProjectDescription.Path? = nil) -> ProjectDescription.Configuration
   public static func == (a: ProjectDescription.Configuration, b: ProjectDescription.Configuration) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public enum DefaultSettings : Swift.Codable, Swift.Equatable {
   case recommended(excluding: Swift.Set<Swift.String> = [])
   case essential(excluding: Swift.Set<Swift.String> = [])
   case none
   public static func == (a: ProjectDescription.DefaultSettings, b: ProjectDescription.DefaultSettings) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.DefaultSettings {
   public static var recommended: ProjectDescription.DefaultSettings {
@@ -1089,8 +1090,8 @@ public struct Settings : Swift.Equatable, Swift.Codable {
   public static func settings(base: ProjectDescription.SettingsDictionary = [:], debug: ProjectDescription.SettingsDictionary = [:], release: ProjectDescription.SettingsDictionary = [:], defaultSettings: ProjectDescription.DefaultSettings = .recommended) -> ProjectDescription.Settings
   public static func settings(base: ProjectDescription.SettingsDictionary = [:], configurations: [ProjectDescription.Configuration], defaultSettings: ProjectDescription.DefaultSettings = .recommended) -> ProjectDescription.Settings
   public static func == (a: ProjectDescription.Settings, b: ProjectDescription.Settings) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension Swift.Dictionary where Key == Swift.String, Value == ProjectDescription.SettingValue {
   public mutating func merge(_ other: ProjectDescription.SettingsDictionary)
@@ -1157,8 +1158,8 @@ public struct SourceFileGlob : Swift.Codable, Swift.Equatable {
   public static func glob(_ glob: ProjectDescription.Path, excluding: [ProjectDescription.Path] = [], compilerFlags: Swift.String? = nil, codeGen: ProjectDescription.FileCodeGen? = nil) -> ProjectDescription.SourceFileGlob
   public static func glob(_ glob: ProjectDescription.Path, excluding: ProjectDescription.Path?, compilerFlags: Swift.String? = nil, codeGen: ProjectDescription.FileCodeGen? = nil) -> ProjectDescription.SourceFileGlob
   public static func == (a: ProjectDescription.SourceFileGlob, b: ProjectDescription.SourceFileGlob) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.SourceFileGlob : Swift.ExpressibleByStringInterpolation {
   public init(stringLiteral value: Swift.String)
@@ -1173,8 +1174,8 @@ public struct SourceFilesList : Swift.Codable, Swift.Equatable {
   public init(globs: [Swift.String])
   public static func paths(_ paths: [ProjectDescription.Path]) -> ProjectDescription.SourceFilesList
   public static func == (a: ProjectDescription.SourceFilesList, b: ProjectDescription.SourceFilesList) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.SourceFilesList : Swift.ExpressibleByStringInterpolation {
   public init(stringLiteral value: Swift.String)
@@ -1210,8 +1211,8 @@ public struct Target : Swift.Codable, Swift.Equatable {
   public let buildRules: [ProjectDescription.BuildRule]
   public init(name: Swift.String, platform: ProjectDescription.Platform, product: ProjectDescription.Product, productName: Swift.String? = nil, bundleId: Swift.String, deploymentTarget: ProjectDescription.DeploymentTarget? = nil, infoPlist: ProjectDescription.InfoPlist? = .default, sources: ProjectDescription.SourceFilesList? = nil, resources: ProjectDescription.ResourceFileElements? = nil, copyFiles: [ProjectDescription.CopyFilesAction]? = nil, headers: ProjectDescription.Headers? = nil, entitlements: ProjectDescription.Path? = nil, scripts: [ProjectDescription.TargetScript] = [], dependencies: [ProjectDescription.TargetDependency] = [], settings: ProjectDescription.Settings? = nil, coreDataModels: [ProjectDescription.CoreDataModel] = [], environment: [Swift.String : Swift.String] = [:], launchArguments: [ProjectDescription.LaunchArgument] = [], additionalFiles: [ProjectDescription.FileElement] = [], buildRules: [ProjectDescription.BuildRule] = [])
   public static func == (a: ProjectDescription.Target, b: ProjectDescription.Target) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public enum SDKStatus : Swift.String, Swift.Codable, Swift.Hashable {
   case required
@@ -1248,11 +1249,11 @@ public enum TargetDependency : Swift.Codable, Swift.Hashable {
   }
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: ProjectDescription.TargetDependency, b: ProjectDescription.TargetDependency) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct TargetReference : Swift.Hashable, Swift.Codable, Swift.ExpressibleByStringInterpolation {
   public var projectPath: ProjectDescription.Path?
@@ -1266,11 +1267,11 @@ public struct TargetReference : Swift.Hashable, Swift.Codable, Swift.Expressible
   public typealias StringInterpolation = Swift.DefaultStringInterpolation
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct TargetScript : Swift.Codable, Swift.Equatable {
   public enum Order : Swift.String, Swift.Codable, Swift.Equatable {
@@ -1287,8 +1288,8 @@ public struct TargetScript : Swift.Codable, Swift.Equatable {
     case scriptPath(path: ProjectDescription.Path, args: [Swift.String])
     case embedded(Swift.String)
     public static func == (a: ProjectDescription.TargetScript.Script, b: ProjectDescription.TargetScript.Script) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public let name: Swift.String
   public let script: ProjectDescription.TargetScript.Script
@@ -1312,8 +1313,8 @@ public struct TargetScript : Swift.Codable, Swift.Equatable {
   public static func pre(script: Swift.String, name: Swift.String, inputPaths: [ProjectDescription.Path] = [], inputFileListPaths: [ProjectDescription.Path] = [], outputPaths: [ProjectDescription.Path] = [], outputFileListPaths: [ProjectDescription.Path] = [], basedOnDependencyAnalysis: Swift.Bool? = nil, runForInstallBuildsOnly: Swift.Bool = false, shellPath: Swift.String = "/bin/sh", dependencyFile: ProjectDescription.Path? = nil) -> ProjectDescription.TargetScript
   public static func post(script: Swift.String, name: Swift.String, inputPaths: [ProjectDescription.Path] = [], inputFileListPaths: [ProjectDescription.Path] = [], outputPaths: [ProjectDescription.Path] = [], outputFileListPaths: [ProjectDescription.Path] = [], basedOnDependencyAnalysis: Swift.Bool? = nil, runForInstallBuildsOnly: Swift.Bool = false, shellPath: Swift.String = "/bin/sh", dependencyFile: ProjectDescription.Path? = nil) -> ProjectDescription.TargetScript
   public static func == (a: ProjectDescription.TargetScript, b: ProjectDescription.TargetScript) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Template : Swift.Codable, Swift.Equatable {
   public let description: Swift.String
@@ -1325,27 +1326,27 @@ public struct Template : Swift.Codable, Swift.Equatable {
     case file(ProjectDescription.Path)
     case directory(ProjectDescription.Path)
     public static func == (a: ProjectDescription.Template.Contents, b: ProjectDescription.Template.Contents) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public struct Item : Swift.Codable, Swift.Equatable {
     public let path: Swift.String
     public let contents: ProjectDescription.Template.Contents
     public init(path: Swift.String, contents: ProjectDescription.Template.Contents)
     public static func == (a: ProjectDescription.Template.Item, b: ProjectDescription.Template.Item) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public enum Attribute : Swift.Codable, Swift.Equatable {
     case required(Swift.String)
     case optional(Swift.String, default: Swift.String)
     public static func == (a: ProjectDescription.Template.Attribute, b: ProjectDescription.Template.Attribute) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
   public static func == (a: ProjectDescription.Template, b: ProjectDescription.Template) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.Template.Item {
   public static func string(path: Swift.String, contents: Swift.String) -> ProjectDescription.Template.Item
@@ -1357,8 +1358,8 @@ extension Swift.DefaultStringInterpolation {
 }
 public struct TemplateString : Swift.Encodable, Swift.Decodable, Swift.Equatable {
   public static func == (a: ProjectDescription.TemplateString, b: ProjectDescription.TemplateString) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.TemplateString : Swift.ExpressibleByStringLiteral {
   public init(stringLiteral: Swift.String)
@@ -1404,8 +1405,8 @@ public struct TestAction : Swift.Equatable, Swift.Codable {
   public static func targets(_ targets: [ProjectDescription.TestableTarget], arguments: ProjectDescription.Arguments? = nil, configuration: ProjectDescription.ConfigurationName = .debug, attachDebugger: Swift.Bool = true, expandVariableFromTarget: ProjectDescription.TargetReference? = nil, preActions: [ProjectDescription.ExecutionAction] = [], postActions: [ProjectDescription.ExecutionAction] = [], options: ProjectDescription.TestActionOptions = .options(), diagnosticsOptions: [ProjectDescription.SchemeDiagnosticsOption] = [.mainThreadChecker]) -> ProjectDescription.TestAction
   public static func testPlans(_ testPlans: [ProjectDescription.Path], configuration: ProjectDescription.ConfigurationName = .debug, attachDebugger: Swift.Bool = true, preActions: [ProjectDescription.ExecutionAction] = [], postActions: [ProjectDescription.ExecutionAction] = []) -> ProjectDescription.TestAction
   public static func == (a: ProjectDescription.TestAction, b: ProjectDescription.TestAction) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct TestActionOptions : Swift.Equatable, Swift.Codable {
   public let language: ProjectDescription.SchemeLanguage?
@@ -1414,8 +1415,8 @@ public struct TestActionOptions : Swift.Equatable, Swift.Codable {
   public let codeCoverageTargets: [ProjectDescription.TargetReference]
   public static func options(language: ProjectDescription.SchemeLanguage? = nil, region: Swift.String? = nil, coverage: Swift.Bool = false, codeCoverageTargets: [ProjectDescription.TargetReference] = []) -> ProjectDescription.TestActionOptions
   public static func == (a: ProjectDescription.TestActionOptions, b: ProjectDescription.TestActionOptions) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct TestableTarget : Swift.Equatable, Swift.Codable, Swift.ExpressibleByStringInterpolation {
   public let target: ProjectDescription.TargetReference
@@ -1429,8 +1430,8 @@ public struct TestableTarget : Swift.Equatable, Swift.Codable, Swift.Expressible
   public typealias StringInterpolation = Swift.DefaultStringInterpolation
   public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public struct TestingOptions : Swift.OptionSet, Swift.Codable, Swift.Equatable {
   public let rawValue: Swift.Int
@@ -1450,11 +1451,11 @@ public struct Version : Swift.Hashable, Swift.Codable {
   public init(_ major: Swift.Int, _ minor: Swift.Int, _ patch: Swift.Int, prereleaseIdentifiers: [Swift.String] = [], buildMetadataIdentifiers: [Swift.String] = [])
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: ProjectDescription.Version, b: ProjectDescription.Version) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.Version : Swift.Comparable {
   public static func < (lhs: ProjectDescription.Version, rhs: ProjectDescription.Version) -> Swift.Bool
@@ -1492,8 +1493,8 @@ public struct Workspace : Swift.Codable, Swift.Equatable {
   public let generationOptions: ProjectDescription.Workspace.GenerationOptions
   public init(name: Swift.String, projects: [ProjectDescription.Path], schemes: [ProjectDescription.Scheme] = [], fileHeaderTemplate: ProjectDescription.FileHeaderTemplate? = nil, additionalFiles: [ProjectDescription.FileElement] = [], generationOptions: ProjectDescription.Workspace.GenerationOptions = .options())
   public static func == (a: ProjectDescription.Workspace, b: ProjectDescription.Workspace) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 extension ProjectDescription.Workspace {
   public struct GenerationOptions : Swift.Codable, Swift.Equatable {
@@ -1504,14 +1505,14 @@ extension ProjectDescription.Workspace {
         case targets([ProjectDescription.TargetReference])
         case disabled
         public static func == (a: ProjectDescription.Workspace.GenerationOptions.AutogeneratedWorkspaceSchemes.CodeCoverageMode, b: ProjectDescription.Workspace.GenerationOptions.AutogeneratedWorkspaceSchemes.CodeCoverageMode) -> Swift.Bool
-        public func encode(to encoder: Swift.Encoder) throws
-        public init(from decoder: Swift.Decoder) throws
+        public func encode(to encoder: any Swift.Encoder) throws
+        public init(from decoder: any Swift.Decoder) throws
       }
       case disabled
       case enabled(codeCoverageMode: ProjectDescription.Workspace.GenerationOptions.AutogeneratedWorkspaceSchemes.CodeCoverageMode = .disabled, testingOptions: ProjectDescription.TestingOptions = [], testLanguage: ProjectDescription.SchemeLanguage? = nil, testRegion: Swift.String? = nil)
       public static func == (a: ProjectDescription.Workspace.GenerationOptions.AutogeneratedWorkspaceSchemes, b: ProjectDescription.Workspace.GenerationOptions.AutogeneratedWorkspaceSchemes) -> Swift.Bool
-      public func encode(to encoder: Swift.Encoder) throws
-      public init(from decoder: Swift.Decoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
+      public init(from decoder: any Swift.Decoder) throws
     }
     public let enableAutomaticXcodeSchemes: Swift.Bool?
     public let autogeneratedWorkspaceSchemes: ProjectDescription.Workspace.GenerationOptions.AutogeneratedWorkspaceSchemes
@@ -1519,8 +1520,8 @@ extension ProjectDescription.Workspace {
     public let renderMarkdownReadme: Swift.Bool
     public static func options(enableAutomaticXcodeSchemes: Swift.Bool? = false, autogeneratedWorkspaceSchemes: ProjectDescription.Workspace.GenerationOptions.AutogeneratedWorkspaceSchemes = .enabled(), lastXcodeUpgradeCheck: ProjectDescription.Version? = nil, renderMarkdownReadme: Swift.Bool = false) -> ProjectDescription.Workspace.GenerationOptions
     public static func == (a: ProjectDescription.Workspace.GenerationOptions, b: ProjectDescription.Workspace.GenerationOptions) -> Swift.Bool
-    public func encode(to encoder: Swift.Encoder) throws
-    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
   }
 }
 extension ProjectDescription.BuildRule.CompilerSpec : Swift.Equatable {}

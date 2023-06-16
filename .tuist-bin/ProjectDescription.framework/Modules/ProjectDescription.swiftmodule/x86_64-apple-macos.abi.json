@@ -22848,6 +22848,46 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "extensionKitExtension",
+            "printedName": "extensionKitExtension",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(ProjectDescription.Product.Type) -> ProjectDescription.Product",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Product",
+                    "printedName": "ProjectDescription.Product",
+                    "usr": "s:18ProjectDescription7ProductO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "ProjectDescription.Product.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Product",
+                        "printedName": "ProjectDescription.Product",
+                        "usr": "s:18ProjectDescription7ProductO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18ProjectDescription7ProductO21extensionKitExtensionyA2CmF",
+            "mangledName": "$s18ProjectDescription7ProductO21extensionKitExtensionyA2CmF",
+            "moduleName": "ProjectDescription",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init(rawValue:)",
@@ -51940,1414 +51980,2499 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
       "kind": "BooleanLiteral",
       "offset": 860,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
       "kind": "Array",
       "offset": 948,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
       "kind": "Array",
       "offset": 993,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
       "kind": "BooleanLiteral",
       "offset": 1887,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
       "kind": "Array",
       "offset": 1975,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ArchiveAction.swift",
       "kind": "Array",
       "offset": 2020,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Arguments.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Arguments.swift",
       "kind": "Dictionary",
       "offset": 274,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Arguments.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Arguments.swift",
       "kind": "Array",
       "offset": 323,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
       "kind": "Array",
       "offset": 729,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
       "kind": "Array",
       "offset": 774,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
       "kind": "BooleanLiteral",
       "offset": 818,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
       "kind": "Array",
       "offset": 1585,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
       "kind": "Array",
       "offset": 1630,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildAction.swift",
       "kind": "BooleanLiteral",
       "offset": 1674,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildRule.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildRule.swift",
       "kind": "Array",
       "offset": 1119,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildRule.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildRule.swift",
       "kind": "Array",
       "offset": 1155,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildRule.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildRule.swift",
       "kind": "Array",
       "offset": 1204,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/BuildRule.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/BuildRule.swift",
       "kind": "BooleanLiteral",
       "offset": 1278,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Cache.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Cache.swift",
       "kind": "Array",
       "offset": 2213,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Cloud.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Cloud.swift",
       "kind": "Array",
       "offset": 1352,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Config.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Config.swift",
       "kind": "Array",
       "offset": 2561,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ConfigGenerationOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ConfigGenerationOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 659,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ConfigGenerationOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ConfigGenerationOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 715,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Dependencies\/SwiftPackageManagerDependencies.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ConfigurationName.swift",
+      "kind": "StringLiteral",
+      "offset": 1160,
+      "length": 7,
+      "value": "\"Debug\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ConfigurationName.swift",
+      "kind": "StringLiteral",
+      "offset": 1301,
+      "length": 9,
+      "value": "\"Release\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Dependencies\/SwiftPackageManagerDependencies.swift",
       "kind": "Dictionary",
       "offset": 1866,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Dependencies\/SwiftPackageManagerDependencies.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Dependencies\/SwiftPackageManagerDependencies.swift",
       "kind": "Dictionary",
       "offset": 1972,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Dependencies\/SwiftPackageManagerDependencies.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Dependencies\/SwiftPackageManagerDependencies.swift",
       "kind": "Dictionary",
       "offset": 2048,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
       "kind": "IntegerLiteral",
       "offset": 230,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
       "kind": "IntegerLiteral",
       "offset": 235,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
       "kind": "IntegerLiteral",
       "offset": 318,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
       "kind": "IntegerLiteral",
       "offset": 323,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
       "kind": "IntegerLiteral",
       "offset": 403,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/DeploymentDevice.swift",
       "kind": "IntegerLiteral",
       "offset": 408,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/DeploymentTarget.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/DeploymentTarget.swift",
       "kind": "BooleanLiteral",
       "offset": 375,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ExecuteAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Dump.swift",
+      "kind": "IntegerLiteral",
+      "offset": 95,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Dump.swift",
+      "kind": "StringLiteral",
+      "offset": 139,
+      "length": 14,
+      "value": "\"--tuist-dump\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Dump.swift",
+      "kind": "StringLiteral",
+      "offset": 356,
+      "length": 22,
+      "value": "\"TUIST_MANIFEST_START\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Dump.swift",
+      "kind": "StringLiteral",
+      "offset": 410,
+      "length": 20,
+      "value": "\"TUIST_MANIFEST_END\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "StringLiteral",
+      "offset": 745,
+      "length": 24,
+      "value": "\"TUIST_\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "StringLiteral",
+      "offset": 768,
+      "length": 22,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "Array",
+      "offset": 1601,
+      "length": 35,
+      "value": "[\"1\", \"true\", \"TRUE\", \"yes\", \"YES\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1674,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "Array",
+      "offset": 1697,
+      "length": 35,
+      "value": "[\"0\", \"false\", \"FALSE\", \"no\", \"NO\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1770,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "Array",
+      "offset": 2159,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "Array",
+      "offset": 2769,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "Array",
+      "offset": 3136,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Environment.swift",
+      "kind": "StringLiteral",
+      "offset": 4627,
+      "length": 3,
+      "value": "\"_\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ExecuteAction.swift",
       "kind": "StringLiteral",
       "offset": 437,
       "length": 12,
       "value": "\"Run Script\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/FileListGlob.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/FileListGlob.swift",
       "kind": "Array",
       "offset": 472,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Headers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/FileListGlob.swift",
+      "kind": "Array",
+      "offset": 826,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/FileListGlob.swift",
+      "kind": "Array",
+      "offset": 1002,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Headers.swift",
       "kind": "IntegerLiteral",
       "offset": 1183,
       "length": 31,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Headers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Headers.swift",
       "kind": "IntegerLiteral",
       "offset": 1183,
       "length": 31,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Headers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Headers.swift",
       "kind": "IntegerLiteral",
       "offset": 1183,
       "length": 31,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Platform.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Headers.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3811,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Headers.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4576,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/InfoPlist.swift",
+      "kind": "Dictionary",
+      "offset": 1381,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Package.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4242,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Path.swift",
+      "kind": "StringLiteral",
+      "offset": 1204,
+      "length": 15,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Path.swift",
+      "kind": "StringLiteral",
+      "offset": 1218,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Path.swift",
+      "kind": "StringLiteral",
+      "offset": 2012,
+      "length": 4,
+      "value": "\"\/\/\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Path.swift",
+      "kind": "StringLiteral",
+      "offset": 2081,
+      "length": 4,
+      "value": "\"\/\/\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Path.swift",
+      "kind": "StringLiteral",
+      "offset": 2093,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Platform.swift",
       "kind": "StringLiteral",
       "offset": 186,
       "length": 5,
       "value": "\"ios\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Platform.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Platform.swift",
       "kind": "StringLiteral",
       "offset": 236,
       "length": 7,
       "value": "\"macos\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Platform.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Platform.swift",
       "kind": "StringLiteral",
       "offset": 292,
       "length": 9,
       "value": "\"watchos\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Platform.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Platform.swift",
       "kind": "StringLiteral",
       "offset": 344,
       "length": 6,
       "value": "\"tvos\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Platform.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Platform.swift",
       "kind": "StringLiteral",
       "offset": 186,
       "length": 5,
       "value": "\"ios\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Platform.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Platform.swift",
       "kind": "StringLiteral",
       "offset": 236,
       "length": 7,
       "value": "\"macos\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Platform.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Platform.swift",
       "kind": "StringLiteral",
       "offset": 292,
       "length": 9,
       "value": "\"watchos\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Platform.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Platform.swift",
       "kind": "StringLiteral",
       "offset": 344,
       "length": 6,
       "value": "\"tvos\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 186,
       "length": 16,
       "value": "\"static_library\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 256,
       "length": 17,
       "value": "\"dynamic_library\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 425,
       "length": 12,
       "value": "\"unit_tests\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 484,
       "length": 10,
       "value": "\"ui_tests\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 781,
       "length": 15,
       "value": "\"app_extension\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 1167,
       "length": 24,
       "value": "\"sticker_pack_extension\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "kind": "StringLiteral",
+      "offset": 1512,
+      "length": 25,
+      "value": "\"extension_kit_extension\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 186,
       "length": 16,
       "value": "\"static_library\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 256,
       "length": 17,
       "value": "\"dynamic_library\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 425,
       "length": 12,
       "value": "\"unit_tests\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 484,
       "length": 10,
       "value": "\"ui_tests\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 781,
       "length": 15,
       "value": "\"app_extension\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
       "kind": "StringLiteral",
       "offset": 1167,
       "length": 24,
       "value": "\"sticker_pack_extension\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProfileAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Product.swift",
+      "kind": "StringLiteral",
+      "offset": 1512,
+      "length": 25,
+      "value": "\"extension_kit_extension\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProfileAction.swift",
       "kind": "Array",
       "offset": 873,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProfileAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProfileAction.swift",
       "kind": "Array",
       "offset": 918,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProfileAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProfileAction.swift",
       "kind": "Array",
       "offset": 1888,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProfileAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProfileAction.swift",
       "kind": "Array",
       "offset": 1933,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Project.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Project.swift",
       "kind": "Array",
       "offset": 3417,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Project.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Project.swift",
       "kind": "Array",
       "offset": 3484,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Project.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Project.swift",
       "kind": "Array",
       "offset": 3516,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Project.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Project.swift",
       "kind": "Array",
       "offset": 3616,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 1244,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 1312,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 1375,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
       "kind": "Array",
       "offset": 2961,
       "length": 51,
       "value": "[\"Implementation\", \"Interface\", \"Mocks\", \"Testing\"]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
       "kind": "Array",
       "offset": 3036,
       "length": 57,
       "value": "[\"Tests\", \"IntegrationTests\", \"UITests\", \"SnapshotTests\"]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
       "kind": "Array",
       "offset": 3116,
       "length": 15,
       "value": "[\"App\", \"Demo\"]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 3187,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ProjectOptions.swift",
       "kind": "Array",
       "offset": 3239,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ResourceFileElement.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceFileElement.swift",
       "kind": "Array",
       "offset": 540,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ResourceFileElement.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceFileElement.swift",
       "kind": "Array",
       "offset": 561,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/ResourceFileElement.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceFileElement.swift",
       "kind": "Array",
       "offset": 703,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 1923,
+      "length": 9,
+      "value": "\"Strings\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 2160,
+      "length": 9,
+      "value": "\"Strings\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "Array",
+      "offset": 2380,
+      "length": 26,
+      "value": "[\"strings\", \"stringsdict\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 2611,
+      "length": 8,
+      "value": "\"Assets\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 2844,
+      "length": 8,
+      "value": "\"Assets\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "Array",
+      "offset": 3061,
+      "length": 12,
+      "value": "[\"xcassets\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 3275,
+      "length": 7,
+      "value": "\"Fonts\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 3504,
+      "length": 7,
+      "value": "\"Fonts\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "Array",
+      "offset": 3718,
+      "length": 21,
+      "value": "[\"otf\", \"ttc\", \"ttf\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 3944,
+      "length": 8,
+      "value": "\"Plists\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 4177,
+      "length": 8,
+      "value": "\"Plists\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "Array",
+      "offset": 4394,
+      "length": 9,
+      "value": "[\"plist\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 4642,
+      "length": 10,
+      "value": "\"CoreData\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 4861,
+      "length": 10,
+      "value": "\"CoreData\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "Array",
+      "offset": 5062,
+      "length": 16,
+      "value": "[\"xcdatamodeld\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 5341,
+      "length": 18,
+      "value": "\"InterfaceBuilder\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 5600,
+      "length": 18,
+      "value": "\"InterfaceBuilder\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "Array",
+      "offset": 5825,
+      "length": 14,
+      "value": "[\"storyboard\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 6070,
+      "length": 6,
+      "value": "\"JSON\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 6281,
+      "length": 6,
+      "value": "\"JSON\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "Array",
+      "offset": 6470,
+      "length": 8,
+      "value": "[\"json\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 6705,
+      "length": 6,
+      "value": "\"YAML\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 6920,
+      "length": 6,
+      "value": "\"YAML\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "Array",
+      "offset": 7109,
+      "length": 7,
+      "value": "[\"yml\"]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 7371,
+      "length": 7,
+      "value": "\"Files\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/ResourceSynthesizer.swift",
+      "kind": "StringLiteral",
+      "offset": 7645,
+      "length": 7,
+      "value": "\"Files\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
       "kind": "BooleanLiteral",
       "offset": 1222,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
       "kind": "Array",
       "offset": 1309,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
       "kind": "Array",
       "offset": 1354,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
       "kind": "BooleanLiteral",
       "offset": 2843,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
       "kind": "Array",
       "offset": 2930,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunAction.swift",
       "kind": "Array",
       "offset": 2975,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Scheme.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 4604,
+      "length": 17,
+      "value": "\"London, England\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 4724,
+      "length": 28,
+      "value": "\"Johannesburg, South Africa\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 4849,
+      "length": 16,
+      "value": "\"Moscow, Russia\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 4962,
+      "length": 15,
+      "value": "\"Mumbai, India\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 5073,
+      "length": 14,
+      "value": "\"Tokyo, Japan\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 5184,
+      "length": 19,
+      "value": "\"Sydney, Australia\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 5302,
+      "length": 18,
+      "value": "\"Hong Kong, China\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 5419,
+      "length": 19,
+      "value": "\"Honolulu, HI, USA\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 5541,
+      "length": 24,
+      "value": "\"San Francisco, CA, USA\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 5666,
+      "length": 21,
+      "value": "\"Mexico City, Mexico\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 5785,
+      "length": 19,
+      "value": "\"New York, NY, USA\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/RunActionOptions.swift",
+      "kind": "StringLiteral",
+      "offset": 5907,
+      "length": 24,
+      "value": "\"Rio De Janeiro, Brazil\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Scheme.swift",
       "kind": "BooleanLiteral",
       "offset": 1738,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Scheme.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Scheme.swift",
       "kind": "BooleanLiteral",
       "offset": 1767,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SchemeLanguage.swift",
+      "kind": "StringLiteral",
+      "offset": 759,
+      "length": 47,
+      "value": "\"IDELaunchSchemeLanguageDoubleLocalizedStrings\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SchemeLanguage.swift",
+      "kind": "StringLiteral",
+      "offset": 916,
+      "length": 51,
+      "value": "\"IDELaunchSchemeLanguageRightToLeftLayoutDirection\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SchemeLanguage.swift",
+      "kind": "StringLiteral",
+      "offset": 1074,
+      "length": 38,
+      "value": "\"IDELaunchSchemeLanguageAccentedLatin\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SchemeLanguage.swift",
+      "kind": "StringLiteral",
+      "offset": 1224,
+      "length": 38,
+      "value": "\"IDELaunchSchemeLanguageBoundedString\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SchemeLanguage.swift",
+      "kind": "StringLiteral",
+      "offset": 1383,
+      "length": 28,
+      "value": "\"IDELaunchSchemeLanguageRLO\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "kind": "StringLiteral",
+      "offset": 643,
+      "length": 5,
+      "value": "\"YES\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "kind": "StringLiteral",
+      "offset": 651,
+      "length": 4,
+      "value": "\"NO\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
       "kind": "Dictionary",
       "offset": 1934,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
       "kind": "Dictionary",
       "offset": 2562,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
       "kind": "Array",
       "offset": 3359,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
       "kind": "Array",
       "offset": 3665,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "kind": "Array",
+      "offset": 3874,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "kind": "Array",
+      "offset": 3966,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
       "kind": "Dictionary",
       "offset": 5325,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
       "kind": "Dictionary",
       "offset": 5366,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
       "kind": "Dictionary",
       "offset": 5409,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Settings.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Settings.swift",
       "kind": "Dictionary",
       "offset": 6513,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
       "kind": "StringLiteral",
       "offset": 641,
       "length": 17,
       "value": "\"dwarf-with-dsym\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
       "kind": "StringLiteral",
       "offset": 641,
       "length": 17,
       "value": "\"dwarf-with-dsym\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
       "kind": "StringLiteral",
       "offset": 720,
       "length": 4,
       "value": "\"-O\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
       "kind": "StringLiteral",
       "offset": 742,
       "length": 8,
       "value": "\"-Onone\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
       "kind": "StringLiteral",
       "offset": 768,
       "length": 8,
       "value": "\"-Osize\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
       "kind": "StringLiteral",
       "offset": 720,
       "length": 4,
       "value": "\"-O\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
       "kind": "StringLiteral",
       "offset": 742,
       "length": 8,
       "value": "\"-Onone\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
       "kind": "StringLiteral",
       "offset": 768,
       "length": 8,
       "value": "\"-Osize\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/SourceFilesList.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "Dictionary",
+      "offset": 1179,
+      "length": 29,
+      "value": "[(\"CODE_SIGN_STYLE\", \"Manual\")]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 1235,
+      "length": 32,
+      "value": "\"PROVISIONING_PROFILE_SPECIFIER\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 1753,
+      "length": 18,
+      "value": "\"DEVELOPMENT_TEAM\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 1975,
+      "length": 19,
+      "value": "\"Apple Development\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 2147,
+      "length": 20,
+      "value": "\"CODE_SIGN_IDENTITY\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 2380,
+      "length": 25,
+      "value": "\"CURRENT_PROJECT_VERSION\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 2579,
+      "length": 19,
+      "value": "\"MARKETING_VERSION\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "Dictionary",
+      "offset": 2774,
+      "length": 38,
+      "value": "[(\"VERSIONING_SYSTEM\", \"apple-generic\")]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 3160,
+      "length": 21,
+      "value": "\"VERSION_INFO_STRING\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 3230,
+      "length": 21,
+      "value": "\"VERSION_INFO_PREFIX\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 3311,
+      "length": 21,
+      "value": "\"VERSION_INFO_SUFFIX\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 3591,
+      "length": 15,
+      "value": "\"SWIFT_VERSION\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 3824,
+      "length": 19,
+      "value": "\"OTHER_SWIFT_FLAGS\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 3882,
+      "length": 3,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 4081,
+      "length": 37,
+      "value": "\"SWIFT_ACTIVE_COMPILATION_CONDITIONS\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 4162,
+      "length": 3,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 4450,
+      "length": 24,
+      "value": "\"SWIFT_COMPILATION_MODE\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 4736,
+      "length": 26,
+      "value": "\"SWIFT_OPTIMIZATION_LEVEL\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 4965,
+      "length": 32,
+      "value": "\"SWIFT_OPTIMIZE_OBJECT_LIFETIME\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 5254,
+      "length": 28,
+      "value": "\"SWIFT_OBJC_BRIDGING_HEADER\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 5517,
+      "length": 14,
+      "value": "\"OTHER_CFLAGS\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 5715,
+      "length": 15,
+      "value": "\"OTHER_LDFLAGS\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 5921,
+      "length": 16,
+      "value": "\"ENABLE_BITCODE\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SettingsTransformers.swift",
+      "kind": "StringLiteral",
+      "offset": 6191,
+      "length": 26,
+      "value": "\"DEBUG_INFORMATION_FORMAT\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SourceFilesList.swift",
       "kind": "Array",
       "offset": 1024,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Target.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SourceFilesList.swift",
+      "kind": "Array",
+      "offset": 1446,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/SourceFilesList.swift",
+      "kind": "Array",
+      "offset": 1713,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Target.swift",
       "kind": "Array",
       "offset": 2701,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Target.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Target.swift",
       "kind": "Array",
       "offset": 2748,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Target.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Target.swift",
       "kind": "Array",
       "offset": 2829,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Target.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Target.swift",
       "kind": "Dictionary",
       "offset": 2873,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Target.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Target.swift",
       "kind": "Array",
       "offset": 2922,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Target.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Target.swift",
       "kind": "Array",
       "offset": 2967,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Target.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Target.swift",
       "kind": "Array",
       "offset": 3005,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetDependency.swift",
+      "kind": "StringLiteral",
+      "offset": 3455,
+      "length": 8,
+      "value": "\"target\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetDependency.swift",
+      "kind": "StringLiteral",
+      "offset": 3506,
+      "length": 9,
+      "value": "\"project\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetDependency.swift",
+      "kind": "StringLiteral",
+      "offset": 3560,
+      "length": 11,
+      "value": "\"framework\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetDependency.swift",
+      "kind": "StringLiteral",
+      "offset": 3614,
+      "length": 9,
+      "value": "\"library\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetDependency.swift",
+      "kind": "StringLiteral",
+      "offset": 3666,
+      "length": 9,
+      "value": "\"package\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetDependency.swift",
+      "kind": "StringLiteral",
+      "offset": 3714,
+      "length": 5,
+      "value": "\"sdk\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetDependency.swift",
+      "kind": "StringLiteral",
+      "offset": 3766,
+      "length": 13,
+      "value": "\"xcframework\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetDependency.swift",
+      "kind": "StringLiteral",
+      "offset": 3821,
+      "length": 8,
+      "value": "\"xctest\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetDependency.swift",
+      "kind": "StringLiteral",
+      "offset": 3873,
+      "length": 10,
+      "value": "\"external\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 3009,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 3065,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 3106,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 3140,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 3182,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 3274,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 3309,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 4945,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 4986,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 5020,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 5062,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 5154,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 5189,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 6867,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 6908,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 6942,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 6984,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 7076,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 7111,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 8790,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 8831,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 8865,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 8907,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 8999,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 9034,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 10713,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 10754,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 10788,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 10830,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 10922,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 10957,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 12719,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 12760,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 12794,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 12836,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 12928,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 12963,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 14690,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 14731,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 14765,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 14807,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 14899,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 14934,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 16662,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 16703,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 16737,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 16779,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 16871,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 16906,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 18634,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 18675,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 18709,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 18751,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 18843,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 18878,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 20590,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 20631,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 20665,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 20707,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 20799,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 20834,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 22410,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 22451,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 22485,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "Array",
       "offset": 22527,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "BooleanLiteral",
       "offset": 22619,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TargetScript.swift",
       "kind": "StringLiteral",
       "offset": 22654,
       "length": 9,
       "value": "\"\/bin\/sh\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Template\/Template.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Template\/Template.swift",
       "kind": "Array",
       "offset": 381,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Template\/Template.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Template\/Template.swift",
       "kind": "Array",
       "offset": 409,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TemplateString.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Template\/Template.swift",
+      "kind": "StringLiteral",
+      "offset": 3213,
+      "length": 15,
+      "value": "\"{{ \""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Template\/Template.swift",
+      "kind": "StringLiteral",
+      "offset": 3224,
+      "length": 1,
+      "value": "\" }}\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TemplateString.swift",
       "kind": "StringLiteral",
       "offset": 1285,
       "length": 17,
       "value": "\"${project_name}\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TemplateString.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TemplateString.swift",
       "kind": "StringLiteral",
       "offset": 1285,
       "length": 17,
       "value": "\"${project_name}\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
       "kind": "BooleanLiteral",
       "offset": 3299,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
       "kind": "Array",
       "offset": 3403,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
       "kind": "Array",
       "offset": 3448,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
       "kind": "BooleanLiteral",
       "offset": 4636,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
       "kind": "Array",
       "offset": 4682,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
       "kind": "Array",
       "offset": 4727,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestActionOptions.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1400,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestActionOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
       "kind": "Array",
-      "offset": 1456,
+      "offset": 4815,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestableTarget.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestAction.swift",
+      "kind": "Array",
+      "offset": 5115,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestActionOptions.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1407,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestActionOptions.swift",
+      "kind": "Array",
+      "offset": 1463,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestableTarget.swift",
       "kind": "BooleanLiteral",
       "offset": 334,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestableTarget.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestableTarget.swift",
       "kind": "BooleanLiteral",
       "offset": 372,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestableTarget.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestableTarget.swift",
       "kind": "BooleanLiteral",
       "offset": 419,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestingOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestingOptions.swift",
       "kind": "IntegerLiteral",
       "offset": 343,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestingOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestingOptions.swift",
       "kind": "IntegerLiteral",
       "offset": 348,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestingOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestingOptions.swift",
       "kind": "IntegerLiteral",
       "offset": 462,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/TestingOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/TestingOptions.swift",
       "kind": "IntegerLiteral",
       "offset": 467,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
       "kind": "Array",
       "offset": 756,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
       "kind": "Array",
       "offset": 805,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Workspace.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 846,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 860,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 874,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 877,
+      "length": 33,
+      "value": "\"Negative versioning is invalid.\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1676,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1704,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1821,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1849,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2646,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2736,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2786,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3008,
+      "length": 28,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3017,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3026,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3035,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3101,
+      "length": 3,
+      "value": "\"-\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3147,
+      "length": 3,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3229,
+      "length": 3,
+      "value": "\"+\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3278,
+      "length": 3,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3550,
+      "length": 3,
+      "value": "\"-\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3610,
+      "length": 3,
+      "value": "\"+\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 3862,
+      "length": 3,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3878,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3908,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3983,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4086,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4133,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4156,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4161,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4207,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4230,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4235,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "Array",
+      "offset": 4368,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 4494,
+      "length": 3,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 4999,
+      "length": 33,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 5008,
+      "length": 2,
+      "value": "\" is not a valid version\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 5348,
+      "length": 53,
+      "value": "\"contains(_:) is unavailable, use contains(version:)\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "StringLiteral",
+      "offset": 5649,
+      "length": 53,
+      "value": "\"contains(_:) is unavailable, use contains(version:)\""
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6135,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Version.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6440,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Workspace.swift",
       "kind": "Array",
       "offset": 1739,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/Workspace.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/Workspace.swift",
       "kind": "Array",
       "offset": 1839,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/WorkspaceGenerationOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/WorkspaceGenerationOptions.swift",
       "kind": "Array",
       "offset": 1195,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/WorkspaceGenerationOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/WorkspaceGenerationOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 2383,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/runner\/work\/tuist\/tuist\/Sources\/ProjectDescription\/WorkspaceGenerationOptions.swift",
+      "filePath": "\/Users\/ronan.ociosoig\/Projects\/tuist\/Sources\/ProjectDescription\/WorkspaceGenerationOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 2569,
       "length": 5,
