@@ -74,13 +74,13 @@ commands:
           command: <<pipeline.parameters.tuist>> fetch
           #command: |
           #  [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
-      - run: 
+      - run:
           name: Tuist Cache Warm
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x --verbose
-      - run: 
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
+      - run:
           name: Check for XCFrameworks in the restored caches post-cache-warm
           command: find ~/.tuist -name "*.xcframework"
-      - run: 
+      - run:
           name: Check for compiled frameworks in the restored caches post-cache-warm
           command: find ~/.tuist -name "*.framework"
       - run: 
@@ -95,6 +95,12 @@ commands:
           name: Build Pokedex App
           command: <<pipeline.parameters.tuist>> build --generate --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
           #  xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4'
+      - run:
+          name: Check for XCFrameworks in the build cache post-build
+          command: find ~/.tuist -name "*.xcframework"
+      - run:
+          name: Check for compiled frameworks in the build cache post-build
+          command: find ~/.tuist -name "*.framework"
   run_lint:
     steps: 
       - run:
