@@ -31,19 +31,16 @@ parameters:
     default: "/Users/distiller/Library/Developer/Xcode/DerivedData"
 
 commands:
-  install_tuist:
-    steps:
+  generate_lock_files: 
+    steps: 
       - run:
           name: Create tuist checksum file
           command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
       - run: 
           name: Create sources checksum file
-          command: find App Core Features -type f | xargs -P 2 shasum > TuistSources.lock
-      - restore_cache:
-          name: Restore ~/.tuist
-          keys:
-            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
-            - source-tuist-{{ checksum ".tuist-version" }}
+          command: find App Core Features -type f | xargs -P 2 shasum > TuistSources.lock 
+  install_tuist:
+    steps:
       - run: 
           name: List Installed versions
           command: |
@@ -55,6 +52,9 @@ commands:
             else
               echo "Tuist versions not found at " $FULL_PATH
             fi
+      - run: 
+          name: Check for XCFrameworks in the restored caches
+          command: find ~/.tuist -name "*.xcframework"
       # Disable tuist install because it will use the bundled version instead
       #- run:
       #    name: Installing Tuist
@@ -77,6 +77,9 @@ commands:
       - run: 
           name: Tuist Cache Warm
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
+      - run: 
+          name: Check for XCFrameworks in the restored caches post-cache-warm
+          command: find ~/.tuist -name "*.xcframework"
      # - run: 
      #     name: Tuist Generate Project
      #     command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
@@ -152,6 +155,13 @@ commands:
             - ~/.tuist/Cache/Manifests
             - ~/.tuist/Cache/ProjectDescriptionHelpers
             - ~/.tuist/Versions
+  restore_tuist_cache:
+    steps:
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum ".tuist-version" }}
   save_dependencies_cache:
     steps:
       - save_cache:
@@ -190,9 +200,11 @@ jobs:
       TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
       - checkout
-      - install_tuist 
+      - generate_lock_files
+      - restore_tuist_cache
       - restore_dependencies_cache
       - restore_tests_cache
+      - install_tuist 
       - setup_tuist
       - save_dependencies_cache
       - build_project
