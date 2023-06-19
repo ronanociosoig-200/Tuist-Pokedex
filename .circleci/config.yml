@@ -194,6 +194,7 @@ jobs:
       - restore_tests_cache
       - setup_tuist
       - save_dependencies_cache
+      - build_project
       - run_lint
       - run_tests
       # - run_xcode_build_test
