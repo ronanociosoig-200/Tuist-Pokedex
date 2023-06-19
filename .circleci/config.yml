@@ -80,6 +80,12 @@ commands:
       - run: 
           name: Check for XCFrameworks in the restored caches post-cache-warm
           command: find ~/.tuist -name "*.xcframework"
+      - run: 
+          name: Check for compiled frameworks in the restored caches post-cache-warm
+          command: find ~/.tuist -name "*.framework"
+      - run: 
+          name: Check for anything in the build cache 
+          command: ls -l ~/.tuist/Cache/BuildCache/
      # - run: 
      #     name: Tuist Generate Project
      #     command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
