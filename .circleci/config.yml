@@ -84,7 +84,8 @@ commands:
     steps:
       - run: 
           name: Build Pokedex App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4'
+          command: tuist build --generate --device "iPhone 14" --os 16.4
+          #  xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4'
   run_lint:
     steps: 
       - run:
