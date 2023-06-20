@@ -86,9 +86,9 @@ commands:
       - run: 
           name: Check for anything in the build cache 
           command: ls -l ~/.tuist/Cache/BuildCache/
-     # - run: 
-     #     name: Tuist Generate Project
-     #     command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
+      - run: 
+          name: Tuist Generate Project
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
   build_project:
     steps:
       - run: 
