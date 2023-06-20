@@ -76,7 +76,7 @@ commands:
           #  [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run:
           name: Tuist Cache Warm
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CONFIG_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
+          command: TUIST_CONFIG_CLOUD_TOKEN="vCQ1yj6X" <<pipeline.parameters.tuist>> cache warm -x
       - run:
           name: Check for XCFrameworks in the restored caches post-cache-warm
           command: find ~/.tuist -name "*.xcframework"
