@@ -76,7 +76,7 @@ commands:
           #  [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
       - run:
           name: Tuist Cache Warm
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CONFIG_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
       - run:
           name: Check for XCFrameworks in the restored caches post-cache-warm
           command: find ~/.tuist -name "*.xcframework"
@@ -113,7 +113,7 @@ commands:
           command: <<pipeline.parameters.tuist>> version
       - run: 
           name: Tuist Test
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CONFIG_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
   compress_simulator_apps:
     steps:
       - run: 
