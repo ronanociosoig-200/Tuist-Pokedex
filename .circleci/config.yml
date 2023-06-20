@@ -88,7 +88,7 @@ commands:
           command: ls -l ~/.tuist/Cache/BuildCache/
       - run: 
           name: Tuist Generate Project
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
+          command: TUIST_CONFIG_CLOUD_TOKEN="vCQ1yj6X" <<pipeline.parameters.tuist>> generate -xn
   build_project:
     steps:
       - run: 
