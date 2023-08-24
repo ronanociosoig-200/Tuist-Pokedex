@@ -15,3 +15,4 @@ struct CatchIdentifiers {
     static let alertError = "Error"
     static let leaveItAlertTitle = "Leave It Title"
 }
+

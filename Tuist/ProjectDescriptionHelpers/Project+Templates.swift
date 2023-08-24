@@ -114,9 +114,9 @@ extension Project {
                                                         "SnapshotTests"],
                                                  run: ["App", "Example"]),
             codeCoverageEnabled: true,
-            testingOptions: TestingOptions()
+            testingOptions: []
         )
-        
+
       let options = Project.Options.options(automaticSchemesOptions: automaticSchemesOptions,
                                               developmentRegion: nil,
                                               disableBundleAccessors: false,
@@ -125,11 +125,13 @@ extension Project {
                                               textSettings: Options.TextSettings.textSettings(),
                                               xcodeProjectName: nil)
 
+        
         return Project(name: name,
                        organizationName: organizationName,
                        options: options,
                        targets: targets,
-                       schemes: [])
+                       schemes: [],
+        additionalFiles: ["*.md"])
     }
     
     public static func makeAppInfoPlist() -> InfoPlist {
@@ -214,7 +216,7 @@ extension Project {
                                   resources: ResourceFileElements(resources: testResourceFilePaths),
                                   dependencies: [.target(name: exampleAppName)]))
         }
-        
+
         if module.targets.contains(.snapshotTests) {
             var dependencies = module.testingDependencies
             dependencies.append(.target(name: module.name))
@@ -243,7 +245,8 @@ extension Project {
             bundleId: "\(reverseOrganizationName).\(name)",
             infoPlist: makeAppInfoPlist(),
             sources: ["\(appPath)/\(name)/Sources/**"],
-            resources: ["\(appPath)/\(name)/Resources/**"
+            resources: ["\(appPath)/\(name)/Resources/**",
+                        "\(appPath)/\(name)/*.md"
                        ],
             scripts: [
             ],
@@ -274,7 +277,7 @@ extension Project {
             dependencies: [
                 .target(name: "\(name)")
             ])
-        
+
         let uiTestTarget = Target(
             name: "\(name)UITests",
             platform: platform,

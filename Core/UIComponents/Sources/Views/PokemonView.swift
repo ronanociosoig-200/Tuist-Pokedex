@@ -22,7 +22,9 @@ public class PokemonView: UIView {
         name.accessibilityIdentifier = PokemonViewIdentifiers.name
         weight.accessibilityIdentifier = PokemonViewIdentifiers.weight
         height.accessibilityIdentifier = PokemonViewIdentifiers.height
+
         imageView.accessibilityIdentifier = PokemonViewIdentifiers.imageView
+
         date.accessibilityIdentifier = PokemonViewIdentifiers.date
         types.accessibilityIdentifier = PokemonViewIdentifiers.types
         experience.accessibilityIdentifier = PokemonViewIdentifiers.experience

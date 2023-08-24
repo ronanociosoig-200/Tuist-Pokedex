@@ -54,7 +54,7 @@ public struct Constants {
             public static let types = "Types"
         }
         
-        public struct Error {
+        public enum Error {
             public static let jsonDecodingError = "Error: JSON decoding error."
             public static let noDataError = "Error: No data received."
             public static let noResultsFound = "No results were found for your search."
