@@ -5,13 +5,13 @@ version: 2.1
 parameters:
   xcode_version:
     type: string
-    default: "14.2.0"
+    default: "14.3.1"
   device:
     type: string
     default: "\"iPhone 14\""
   ios_version:
     type: string
-    default: "16.2"
+    default: "16.4"
   tuist: 
     type: string
     # default: ".tuist-bin/tuist"
