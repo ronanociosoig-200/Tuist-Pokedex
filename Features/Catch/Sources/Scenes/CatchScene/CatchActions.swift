@@ -18,7 +18,3 @@ extension Actions: CatchActions {
     }
 }
 
-private struct DummyData {
-    let value = "Dummy"
-} 
-

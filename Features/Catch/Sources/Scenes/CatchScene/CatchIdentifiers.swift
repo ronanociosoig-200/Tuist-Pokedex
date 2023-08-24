@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct CatchIdentifiers {
     static let alertTitle = "CatchOrLeaveIt"
     static let catchButton = "CatchIt"
@@ -16,5 +15,4 @@ struct CatchIdentifiers {
     static let alertError = "Error"
     static let leaveItAlertTitle = "Leave It Title"
 }
-
 

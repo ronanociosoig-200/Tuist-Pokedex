@@ -8,10 +8,6 @@
 
 import Common
 
-private struct Dummy {
-    static let value = 100
-}
-
 public protocol HomeActions {
     func ballButtonAction()
     func backpackButtonAction()

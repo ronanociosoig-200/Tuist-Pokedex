@@ -92,8 +92,6 @@ extension CatchViewController: CatchView {
     
     }
 
-
-    
     func makeLeaveItAlert() -> UIAlertController {
         let alertController = alert(with: Constants.Translations.CatchScene.alreadyHaveItAlertMessageTitle)
         let button = leaveButton(with: Constants.Translations.CatchScene.leaveItButtonTitle)

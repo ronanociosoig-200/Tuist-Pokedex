@@ -85,12 +85,6 @@ commands:
           name: Build Pokedex App
           command: <<pipeline.parameters.tuist>> build --generate --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
           #  xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4'
-      - run:
-          name: Check for XCFrameworks in the build cache post-build
-          command: find ~/.tuist -name "*.xcframework"
-      - run:
-          name: Check for compiled frameworks in the build cache post-build
-          command: find ~/.tuist -name "*.framework"
   run_lint:
     steps: 
       - run:

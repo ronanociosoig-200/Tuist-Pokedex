@@ -40,8 +40,6 @@ final class HomeSceneSnapshotTests: XCTestCase {
     override func setUp() {
         UIView.setAnimationsEnabled(false)
         appController.start()
-        
-        
     }
     
     func testShowCatchScene() throws {
