@@ -14,12 +14,12 @@ parameters:
     default: "16.2"
   tuist: 
     type: string
-    default: ".tuist-bin/tuist"
+    # default: ".tuist-bin/tuist"
     # disable version in cache and use bundled version instead
-    # ~/.tuist/Versions/3.19.0/tuist
+    default: ~/.tuist/Versions/3.21.1/tuist
   tuist_version:
     type: string
-    default: "3.19.0"
+    default: "3.21.1"
   test_output_path:
     type: string
     default: "output/tests"
@@ -55,15 +55,14 @@ commands:
       - run: 
           name: Check for XCFrameworks in the restored caches
           command: find ~/.tuist -name "*.xcframework"
-      # Disable tuist install because it will use the bundled version instead
-      #- run:
-      #    name: Installing Tuist
-      #    command: |
-      #      [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
-      #- run:
-      #    name: Install Tuist specific version
-      #    command: |
-      #      [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
+      - run:
+         name: Installing Tuist
+         command: |
+           [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
+      - run:
+         name: Install Tuist specific version
+         command: |
+           [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
   setup_tuist:          
     steps: 
       #- run: 
@@ -77,15 +76,6 @@ commands:
       - run:
           name: Tuist Cache Warm
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm
-      - run:
-          name: Check for XCFrameworks in the restored caches post-cache-warm
-          command: find ~/.tuist -name "*.xcframework"
-      - run:
-          name: Check for compiled frameworks in the restored caches post-cache-warm
-          command: find ~/.tuist -name "*.framework"
-      - run: 
-          name: Check for anything in the build cache 
-          command: ls -l ~/.tuist/Cache/BuildCache/
       - run: 
           name: Tuist Generate Project
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -n Pokedex
