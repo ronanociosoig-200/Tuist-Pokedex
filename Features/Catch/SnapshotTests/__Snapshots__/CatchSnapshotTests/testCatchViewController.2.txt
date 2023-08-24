@@ -1,4 +1,0 @@
-<UIView; frame = (0 0; 390 844); autoresize = W+H; backgroundColor = UIExtendedGrayColorSpace 1 1; layer = <CALayer>>
-   | <UIImageView; frame = (0 0; 390 844); clipsToBounds = YES; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <CALayer>>
-   | <UIButton; frame = (135 678; 120 120); opaque = NO; autoresize = RM+BM; layer = <CALayer>>
-   |    | <UIImageView; frame = (0 0; 120 120); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>

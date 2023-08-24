@@ -1,7 +1,0 @@
-<UIView; frame = (0 0; 390 844); autoresize = W+H; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>>
-   | <UIButton; frame = (120 108; 150 150); opaque = NO; autoresize = RM+BM; layer = <CALayer>>
-   |    | <UIImageView; frame = (0 0; 150 150); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>
-   | <UILabel; frame = (99.6667 266; 191 21); text = 'Catch a Pokemon'; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   | <UILabel; frame = (86 787; 218 21); text = 'Backpack'; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   | <UIButton; frame = (105 586; 180 180); opaque = NO; autoresize = RM+BM; layer = <CALayer>>
-   |    | <UIImageView; frame = (0 0; 180 180); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>

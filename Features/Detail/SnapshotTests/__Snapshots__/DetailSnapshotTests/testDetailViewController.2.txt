@@ -1,9 +1,0 @@
-<UIView; frame = (0 0; 390 844); autoresize = W+H; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>>
-   | <UIComponents.PokemonView; frame = (32.5 0; 325 352); autoresize = W+H; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>>
-   |    | <UILabel; frame = (16 15; 293 21); text = 'Name'; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <UILabel; frame = (16 146; 138 21); text = 'Height'; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <UIImageView; frame = (114.667 30; 96 96); clipsToBounds = YES; autoresize = RM+BM; userInteractionEnabled = NO; layer = <CALayer>>
-   |    | <UILabel; frame = (16 184; 293 21); text = 'Base experience'; hidden = YES; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <UILabel; frame = (16 213; 293 21); text = 'Date'; hidden = YES; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <UILabel; frame = (16 242; 293 21); text = 'Types'; hidden = YES; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <UILabel; frame = (168 146; 141 21); text = 'Weight'; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <_UILabelLayer>>
