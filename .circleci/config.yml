@@ -2,6 +2,9 @@
 
 version: 2.1
 
+orbs:
+  sonarcloud: sonarsource/sonarcloud@2.0.0
+
 parameters:
   xcode_version:
     type: string
@@ -184,7 +187,14 @@ commands:
           keys: 
             - tests-tuist-{{ checksum "TuistSources.lock" }}
             - tests-tuist-
-jobs:    
+jobs:  
+  sonar: 
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - sonarcloud/scan
+
   build_and_test:
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
@@ -220,4 +230,5 @@ jobs:
 workflows: 
   build_and_test_workflow:
     jobs: 
+      - sonar
       - build_and_test
