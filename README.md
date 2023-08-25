@@ -6,6 +6,7 @@
 # Pokedex
 
 [![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io) [![CircleCI](https://dl.circleci.com/status-badge/img/gh/ronanociosoig-200/Tuist-Pokedex/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/ronanociosoig-200/Tuist-Pokedex/tree/master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ronanociosoig-200_Tuist-Pokedex&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ronanociosoig-200_Tuist-Pokedex)
 
 This simple 4-screen iOS app is a Swift code example to demonstrate a micro-feature approach to modularisation based on Tuist, that fetches data from an [API](https://pokeapi.co), parses the response, displays some of the data, stores it locally, and can retrieve it. The networking module has implementations for both Combine and Async/Await. The aim was to keep this as simple as possible but follow best practices and standard design patterns. 
 
