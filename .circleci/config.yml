@@ -254,7 +254,6 @@ workflows:
   build_and_test_workflow:
     jobs: 
       - build_and_test
-      - sonar
+      - sonar:
           requires:
             - build_and_test
-
