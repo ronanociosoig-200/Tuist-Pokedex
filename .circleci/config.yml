@@ -155,10 +155,6 @@ commands:
           command: |
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
             xcrun swift scripts/xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
-      - persist_to_workspace:
-          root: .
-          paths:
-            - output/tests/
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -216,7 +212,7 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run:
-          name: Attach workspace
+          name: Move the attached workspace to the working directory 
           command: |
               mv /tmp/workspace/* .
       - sonarcloud/scan
@@ -245,14 +241,18 @@ jobs:
       # - install_xcresult_parser
       - run_xcresult_parser
       #- run_xcresult_to_xml
-      - store_test_results:
-          path: output
+      #- store_test_results:
+      #    path: output
       - store_artifacts:
           path: output
       - store_artifacts:
           path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
       - save_tests_cache
+      - persist_to_workspace:
+          root: .
+          paths:
+            - output/tests/
 
 workflows: 
   build_and_test_workflow:
