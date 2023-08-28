@@ -243,8 +243,8 @@ jobs:
       #- run_xcresult_to_xml
       #- store_test_results:
       #    path: output
-      #- store_artifacts:
-      #    path: output
+      - store_artifacts:
+          path: output
       - store_artifacts:
           path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
@@ -252,7 +252,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - output/tests/
+            - output/
 
 workflows: 
   build_and_test_workflow:
