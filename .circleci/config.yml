@@ -131,6 +131,10 @@ commands:
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcresultparser
   run_xcresult_parser:
     steps:
+      - run: 
+          name: Convert XCResult to XML
+          command: |
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o xml output/tests.xcresult > output/coverage.xml || echo "Nothing to parse in output dir"
       - run:
           name: Convert XCResult to HTML
           command: |
@@ -239,8 +243,8 @@ jobs:
       - compress_simulator_apps
       - check_test_output
       # - install_xcresult_parser
-      #- run_xcresult_parser
-      - run_xcresult_to_xml
+      - run_xcresult_parser
+      #- run_xcresult_to_xml
       - store_test_results:
           path: output
       - store_artifacts:
