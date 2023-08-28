@@ -153,8 +153,8 @@ commands:
             xcrun swift xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
         - persist_to_workspace:
           root: .
-            paths:
-              - output/tests
+          paths:
+            - output/tests/
   save_tuist_cache: 
     steps: 
       - save_cache:
