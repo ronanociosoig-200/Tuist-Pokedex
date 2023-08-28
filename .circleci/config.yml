@@ -145,13 +145,13 @@ commands:
             [ -d output/tests.xcresult ] && unlink output/tests || "No linked file found"
             [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult dir not found"
   run_xcresult_to_xml: 
-      steps:
-        - run:
+    steps:
+      - run:
           name: Convert XCResult to SonarCloud XML
           command: |
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
             xcrun swift xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
-        - persist_to_workspace:
+      - persist_to_workspace:
           root: .
           paths:
             - output/tests/
