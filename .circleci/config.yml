@@ -150,7 +150,7 @@ commands:
           name: Convert XCResult to SonarCloud XML
           command: |
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
-            xcrun swift xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
+            xcrun swift scripts/xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
       - persist_to_workspace:
           root: .
           paths:
