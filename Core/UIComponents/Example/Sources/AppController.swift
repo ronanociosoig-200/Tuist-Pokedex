@@ -19,7 +19,7 @@ class AppController: AppControlling {
     func start() {
         let dataProvider = DataProvider()
 
-        if Configuration.uiTesting == true {
+        if Configuration.uiTesting {
             let storage = FileStorage()
             storage.remove(AppData.pokemonFile, from: dataProvider.appData.directory())
         }
