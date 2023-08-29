@@ -241,8 +241,8 @@ jobs:
       # - install_xcresult_parser
       - run_xcresult_parser
       #- run_xcresult_to_xml
-      #- store_test_results:
-      #    path: output
+      - store_test_results:
+          path: output
       - store_artifacts:
           path: output
       - store_artifacts:

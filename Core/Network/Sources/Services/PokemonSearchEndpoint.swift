@@ -16,7 +16,7 @@ extension PokemonSearchEndpoint {
     
     public var baseURL: URL {
         // swiftlint:disable force_unwrapping
-        return URL(string: Constants.Network.baseUrlPath)!
+        return URL(string: "\(Constants.Network.transport)\(Constants.Network.baseDomain)\(Constants.Network.baseAPI)" )!
         // swiftlint:enable force_unwrapping
     }
     

@@ -63,7 +63,7 @@ public class AppData: AppDataHandling {
     }
     
     public func directory() -> Directory {
-        if Configuration.uiTesting == true {
+        if Configuration.uiTesting {
             return .caches
         }
         return .documents

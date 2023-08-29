@@ -11,13 +11,7 @@ import Foundation
 // swiftlint:disable nesting identifier_name
 
 public struct Constants {
-    
-    public struct Network {
-        public static let baseUrlPath = "https://pokeapi.co/api/v2/"
-        public static let searchPath = "pokemon"
-    }
-    
-    public struct Image {
+    public enum Image {
         public static let pokemonPlaceholder = "PokemonPlaceholder"
     }
     
