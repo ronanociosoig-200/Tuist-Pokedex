@@ -73,12 +73,12 @@ commands:
           command: <<pipeline.parameters.tuist>> fetch
           #command: |
           #  [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
-      - run:
-          name: Tuist Cache Warm
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm
-      - run: 
-          name: Tuist Generate Project
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -n Pokedex
+      #- run:
+      #    name: Tuist Cache Warm
+      #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm
+      #- run: 
+      #    name: Tuist Generate Project
+      #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -n Pokedex
   build_project:
     steps:
       - run: 
@@ -98,6 +98,10 @@ commands:
       - run: 
           name: Tuist Test
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+      - run: 
+          name: Check post Tests run
+          command: |
+            [ -d output/tests.xcresult] && echo "Post test run" || echo "No test results"
   compress_simulator_apps:
     steps:
       - run: 
@@ -127,6 +131,10 @@ commands:
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcresultparser
   run_xcresult_parser:
     steps:
+      - run: 
+          name: Convert XCResult to XML
+          command: |
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o xml output/tests.xcresult > output/coverage.xml || echo "Nothing to parse in output dir"
       - run:
           name: Convert XCResult to HTML
           command: |
@@ -138,7 +146,15 @@ commands:
       - run:
           name: Clean up XCResult
           command: |
+            [ -d output/tests.xcresult ] && unlink output/tests || "No linked file found"
             [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult dir not found"
+  run_xcresult_to_xml: 
+    steps:
+      - run:
+          name: Convert XCResult to SonarCloud XML
+          command: |
+            xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
+            xcrun swift scripts/xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -193,6 +209,12 @@ jobs:
       - image: cimg/base:2021.04
     steps:
       - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Move the attached workspace to the working directory 
+          command: |
+              mv /tmp/workspace/* .
       - sonarcloud/scan
 
   build_and_test:
@@ -210,7 +232,7 @@ jobs:
       - install_tuist 
       - setup_tuist
       - save_dependencies_cache
-      - build_project
+      # - build_project
       - run_lint
       - run_tests
       # - run_xcode_build_test
@@ -218,17 +240,24 @@ jobs:
       - check_test_output
       # - install_xcresult_parser
       - run_xcresult_parser
-      - store_test_results:
-          path: output
+      #- run_xcresult_to_xml
+      #- store_test_results:
+      #    path: output
       - store_artifacts:
           path: output
       - store_artifacts:
           path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
       - save_tests_cache
+      - persist_to_workspace:
+          root: .
+          paths:
+            - output/
 
 workflows: 
   build_and_test_workflow:
     jobs: 
-      - sonar
       - build_and_test
+      - sonar:
+          requires:
+            - build_and_test
