@@ -134,7 +134,7 @@ commands:
       - run: 
           name: Convert XCResult to XML
           command: |
-            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o xml output/tests.xcresult > output/coverage.xml || echo "Nothing to parse in output dir"
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o junit output/tests.xcresult > output/junit_tests_coverage.xml || echo "Nothing to parse in output dir"
       - run:
           name: Convert XCResult to HTML
           command: |
