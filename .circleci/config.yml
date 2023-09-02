@@ -232,7 +232,7 @@ jobs:
       - generate_lock_files
       - restore_tuist_cache
       - restore_dependencies_cache
-      - restore_tests_cache
+      # - restore_tests_cache
       - install_tuist 
       - setup_tuist
       - save_dependencies_cache
