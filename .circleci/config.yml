@@ -134,7 +134,7 @@ commands:
       - run: 
           name: Convert XCResult to XML for SonarCloud
           command: |
-            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o xml output/tests.xcresult > output/sonar_tests_coverage.xml || echo "Nothing to parse in output dir"
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o xml output/tests.xcresult > sonar/tests_coverage.xml || echo "Nothing to parse in output dir"
       - run: 
           name: Convert XCResult to JUnit for CircleCI
           command: |
