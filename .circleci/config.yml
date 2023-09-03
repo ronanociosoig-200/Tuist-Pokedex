@@ -101,7 +101,7 @@ commands:
       - run: 
           name: Check post Tests run
           command: |
-            [ -d output/tests.xcresult] && echo "Post test run" || echo "No test results"
+            [ -d output/tests.xcresult ] && echo "Post test run" || echo "No test results"
   compress_simulator_apps:
     steps:
       - run: 
@@ -120,7 +120,7 @@ commands:
       - run:
           name: List test output
           command: |
-            [ -d output/tests.xcresult] && ls -la output/tests.xcresult || echo "No test results available"
+            [ -d output/tests.xcresult ] && ls -la output/tests.xcresult || echo "No test results available"
   install_xcresult_parser:
     steps:
       - run: 
@@ -129,6 +129,11 @@ commands:
       - run:
           name: Install XCResultParser
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcresultparser
+  install_xcc_parser:
+    steps:
+      - run: 
+          name: Brew Install XcodeCoverageConverter
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew install twittemb/formulae/Xcodecoverageconverter
   run_xcresult_parser:
     steps:
       - run:  
@@ -155,11 +160,6 @@ commands:
           name: Extract code coverage data to text file 
           command: |
             [ -d output/tests.xcresult ] && sh scripts/extractCodeCoverageData.sh || echo "No data to extract"
-      - run:
-          name: Clean up XCResult
-          command: |
-            [ -d output/tests.xcresult ] && unlink output/tests || "No linked file found"
-            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult dir not found"
   run_xcresult_to_xml: 
     steps:
       - run:
@@ -167,6 +167,21 @@ commands:
           command: |
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
             xcrun swift scripts/xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
+  run_xcresult_to_sonar_xml:
+    steps: 
+      - run: 
+          name: Convert JSON to SonarQube XML with XCC
+          command: |
+            xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
+            xcc generate output/coverage.json . sonarqube-xml
+            mv sonarqube.xml output/sonar/sonarqube.xml
+  cleanup_xcresults:
+    steps:
+      - run:
+          name: Clean up XCResult
+          command: |
+            [ -d output/tests.xcresult ] && unlink output/tests || "No linked file found"
+            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult dir not found"
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -251,8 +266,11 @@ jobs:
       - compress_simulator_apps
       - check_test_output
       # - install_xcresult_parser
+      - install_xcc_parser
       - run_xcresult_parser
+      - run_xcresult_to_sonar_xml
       #- run_xcresult_to_xml
+      - cleanup_xcresults
       - store_test_results:
           path: output/circle
       - store_artifacts:
