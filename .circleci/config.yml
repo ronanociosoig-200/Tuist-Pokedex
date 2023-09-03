@@ -3,42 +3,47 @@
 version: 2.1
 
 orbs:
-  macos: circleci/macos@2.2.0
+  sonarcloud: sonarsource/sonarcloud@2.0.0
 
 parameters:
   xcode_version:
     type: string
-    default: "14.2.0"
+    default: "14.3.1"
   device:
     type: string
     default: "\"iPhone 14\""
   ios_version:
     type: string
-    default: "16.2"
+    default: "16.4"
   tuist: 
     type: string
-    default: "~/.tuist/Versions/3.19.0/tuist"
+    # default: ".tuist-bin/tuist"
+    # disable version in cache and use bundled version instead
+    default: ~/.tuist/Versions/3.21.1/tuist
   tuist_version:
     type: string
-    default: "3.19.0"
+    default: "3.21.1"
   test_output_path:
     type: string
     default: "output/tests"
   simulator_apps_path: 
     type: string
     default: "simulatorApps"
+  derived_data_path:
+    type: string
+    default: "/Users/distiller/Library/Developer/Xcode/DerivedData"
 
 commands:
-  install_tuist:
-    steps:
+  generate_lock_files: 
+    steps: 
       - run:
           name: Create tuist checksum file
           command: find Project.swift Tuist -type f | xargs -P 2 shasum > Tuist.lock
-      - restore_cache:
-          name: Restore ~/.tuist
-          keys:
-            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
-            - source-tuist-{{ checksum ".tuist-version" }}
+      - run: 
+          name: Create sources checksum file
+          command: find App Core Features -type f | xargs -P 2 shasum > TuistSources.lock 
+  install_tuist:
+    steps:
       - run: 
           name: List Installed versions
           command: |
@@ -51,34 +56,35 @@ commands:
               echo "Tuist versions not found at " $FULL_PATH
             fi
       - run:
-          name: Installing Tuist
-          command: |
-            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
+         name: Installing Tuist
+         command: |
+           [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || bash <(curl -Ls https://install.tuist.io)
       - run:
-          name: Install Tuist specific version
-          command: |
-            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
+         name: Install Tuist specific version
+         command: |
+           [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
   setup_tuist:          
     steps: 
       #- run: 
       #    name: Clean Tuist (Temporary)
-      #    command: tuist clean
+      #    command: <<pipeline.parameters.tuist>> clean tests
       - run: 
           name: Tuist Fetch Dependencies
           command: <<pipeline.parameters.tuist>> fetch
           #command: |
           #  [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
-      - run: 
-          name: Tuist Cache Warm
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
-     # - run: 
-     #     name: Tuist Generate Project
-     #     command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
+      #- run:
+      #    name: Tuist Cache Warm
+      #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm
+      #- run: 
+      #    name: Tuist Generate Project
+      #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -n Pokedex
   build_project:
     steps:
       - run: 
           name: Build Pokedex App
-          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2'
+          command: <<pipeline.parameters.tuist>> build --generate --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+          #  xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4'
   run_lint:
     steps: 
       - run:
@@ -87,24 +93,34 @@ commands:
   run_tests:
     steps:
       - run: 
-          name: Get Current Dir
-          command: pwd
+          name: Check Tuist version
+          command: <<pipeline.parameters.tuist>> version
       - run: 
           name: Tuist Test
-          command: <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+      - run: 
+          name: Check post Tests run
+          command: |
+            [ -d output/tests.xcresult] && echo "Post test run" || echo "No test results"
+  compress_simulator_apps:
+    steps:
       - run: 
           name: Find And Compress .app Files Excluding Tests runners
-          command: |
-            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app" | grep -v "Tests-Runner" | while read in; do tar -cvzf "$in".tar.gz -C "$in" .; done
-            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz"
-            mkdir <<pipeline.parameters.simulator_apps_path>>
-            find /Users/distiller/Library/Developer/Xcode/DerivedData -name "*.app.tar.gz" | while read in; do cp "$in" <<pipeline.parameters.simulator_apps_path>>; done
-            ls -l <<pipeline.parameters.simulator_apps_path>>
+          command: sh scripts/compressSimulatorBuilds.sh
+  run_xcode_build_test:
+    steps:
+      - run:
+          name: Generate full project (this is needed if only some targets are updated previously)
+          command: <<pipeline.parameters.tuist>> generate -xn
+      - run:
+          name: xcodebuild test Pokedex
+          command: xcodebuild -workspace Pokedex.xcworkspace -scheme Pokedex -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=16.2" test
   check_test_output:
     steps:
       - run:
           name: List test output
-          command: ls -la output/tests.xcresult
+          command: |
+            [ -d output/tests.xcresult] && ls -la output/tests.xcresult || echo "No test results available"
   install_xcresult_parser:
     steps:
       - run: 
@@ -115,27 +131,69 @@ commands:
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcresultparser
   run_xcresult_parser:
     steps:
+      - run:  
+          name: If directory for SonarCloud does not exist, make it
+          command: |
+            [ ! -d output/sonar ] && mkdir output/sonar || echo "Sonar directory exists"
+      - run:  
+          name: If directory for CircleCI does not exist, make it
+          command: |
+            [ ! -d output/circle ] && mkdir output/circle || echo "Circle directory exists"
+      - run:  
+          name: Convert XCResult to XML for SonarCloud
+          command: |
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o xml output/tests.xcresult > output/sonar/tests_coverage.xml || echo "Nothing to parse in output dir"
+      - run: 
+          name: Convert XCResult to JUnit for CircleCI
+          command: |
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o junit output/tests.xcresult > output/circle/junit_tests_coverage.xml || echo "Nothing to parse in output dir"
       - run:
-          name: Convert XCResult to JUnit XML
-          command: tools/xcresultparser -c -o junit output/tests.xcresult > output/test_results.xml
+          name: Convert XCResult to HTML
+          command: |
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o html output/tests.xcresult > output/test_results.html || echo "Nothing to parse in output dir"
+      - run: 
+          name: Extract code coverage data to text file 
+          command: |
+            [ -d output/tests.xcresult ] && sh scripts/extractCodeCoverageData.sh || echo "No data to extract"
       - run:
           name: Clean up XCResult
-          command: rm -r output/tests.xcresult 
+          command: |
+            [ -d output/tests.xcresult ] && unlink output/tests || "No linked file found"
+            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult dir not found"
+  run_xcresult_to_xml: 
+    steps:
+      - run:
+          name: Convert XCResult to SonarCloud XML
+          command: |
+            xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
+            xcrun swift scripts/xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
   save_tuist_cache: 
     steps: 
       - save_cache:
           name: Save ~/.tuist
           key: source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
           paths:
-            - ~/.tuist/Cache
+            - ~/.tuist/Cache/Projects
+            - ~/.tuist/Cache/BuildCache
+            - ~/.tuist/Cache/Plugins
+            - ~/.tuist/Cache/Manifests
+            - ~/.tuist/Cache/ProjectDescriptionHelpers
             - ~/.tuist/Versions
+  restore_tuist_cache:
+    steps:
+      - restore_cache:
+          name: Restore ~/.tuist
+          keys:
+            - source-tuist-{{ checksum ".tuist-version" }}-{{ checksum "Tuist.lock" }}
+            - source-tuist-{{ checksum ".tuist-version" }}
   save_dependencies_cache:
     steps:
       - save_cache:
           name: Save Dependencies
-          key: dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
+          key: dependencies-tuist-{{ checksum "Tuist/Dependencies/Lockfiles/Package.resolved" }}
           paths: 
-            - Tuist/Dependencies
+            - Tuist/Dependencies/SwiftPackageManager
+            - Tuist/Dependencies/graph.json
   restore_dependencies_cache:
     steps:
       - restore_cache:
@@ -143,32 +201,75 @@ commands:
           keys: 
             - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
             - dependencies-tuist-
-jobs:    
+  save_tests_cache: 
+    steps:
+      - save_cache:
+          name: Save Tests Cache
+          key: tests-tuist-{{ checksum "TuistSources.lock" }}
+          paths: 
+            - ~/.tuist/Cache/TestsCache
+  restore_tests_cache: 
+    steps:
+      - restore_cache:
+          name: Restore Tests Cache
+          keys: 
+            - tests-tuist-{{ checksum "TuistSources.lock" }}
+            - tests-tuist-
+jobs:  
+  sonar: 
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Move the attached workspace to the working directory 
+          command: |
+              mv /tmp/workspace/* .
+      - sonarcloud/scan
+
   build_and_test:
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
+    resource_class: macos.x86.medium.gen2
     environment:
       TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
       - checkout
-      - install_tuist 
+      - generate_lock_files
+      - restore_tuist_cache
       - restore_dependencies_cache
+      # - restore_tests_cache
+      - install_tuist 
       - setup_tuist
       - save_dependencies_cache
+      # - build_project
       - run_lint
       - run_tests
+      # - run_xcode_build_test
+      - compress_simulator_apps
       - check_test_output
       # - install_xcresult_parser
       - run_xcresult_parser
+      #- run_xcresult_to_xml
       - store_test_results:
-          path: output
+          path: output/circle
       - store_artifacts:
           path: output
       - store_artifacts:
           path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
+      - save_tests_cache
+      - persist_to_workspace:
+          root: .
+          paths:
+            - output/
 
 workflows: 
   build_and_test_workflow:
     jobs: 
       - build_and_test
+      - sonar:
+          requires:
+            - build_and_test

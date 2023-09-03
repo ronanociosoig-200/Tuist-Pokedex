@@ -15,10 +15,10 @@ import Combine
 class NetworkTests: XCTestCase {
     var cancellables = Set<AnyCancellable>()
     
-    func testEndpointReturnsData() {
+    func testEndpointReturnsData() throws {
         let expectation = self.expectation(description: "No results in response data")
         let pokemonIdentifier = 1
-        let data = try! MockData.loadResponse()!
+        let data = try MockData.loadResponse()!
         let searchService = buildSearchService(identifier: pokemonIdentifier,
                                                data: data,
                                                statusCode: 200)
@@ -76,7 +76,7 @@ class NetworkTests: XCTestCase {
     
     func testEndpointReturnsDataAsync() async throws {
         let pokemonIdentifier = 1
-        let data = try! MockData.loadResponse()!
+        let data = try MockData.loadResponse()!
         let searchService = buildSearchService(identifier: pokemonIdentifier,
                                                data: data,
                                                statusCode: 200)

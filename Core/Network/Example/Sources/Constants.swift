@@ -8,19 +8,7 @@
 
 import Foundation
 
-// swiftlint:disable nesting identifier_name
-
 struct Constants {
-    
-    struct Network {
-        static let baseUrlPath = "https://pokeapi.co/api/v2/"
-        static let searchPath = "pokemon"
-    }
-    
-    struct Image {
-        static let pokemonPlaceholder = "PokemonPlaceholder"
-    }
-    
     struct Translations {
         static let loading = "Loading"
         static let ok = "OK"
@@ -65,16 +53,9 @@ struct Constants {
                 
             }
         }
-        
-        struct Error {
-            static let jsonDecodingError = "Error: JSON decoding error."
-            static let noDataError = "Error: No data received."
-            static let noResultsFound = "No results were found for your search."
-            static let statusCode404 = "404 Not found"
-        }
     }
     
-    struct PokemonAPI {
+    enum PokemonAPI {
         static let minIdentifier = 1
         static let maxIdentifier = 1000
     }

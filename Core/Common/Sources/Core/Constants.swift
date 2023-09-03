@@ -11,13 +11,7 @@ import Foundation
 // swiftlint:disable nesting identifier_name
 
 public struct Constants {
-    
-    public struct Network {
-        public static let baseUrlPath = "https://pokeapi.co/api/v2/"
-        public static let searchPath = "pokemon"
-    }
-    
-    public struct Image {
+    public enum Image {
         public static let pokemonPlaceholder = "PokemonPlaceholder"
     }
     
@@ -54,7 +48,7 @@ public struct Constants {
             public static let types = "Types"
         }
         
-        public struct Error {
+        public enum Error {
             public static let jsonDecodingError = "Error: JSON decoding error."
             public static let noDataError = "Error: No data received."
             public static let noResultsFound = "No results were found for your search."

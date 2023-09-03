@@ -17,3 +17,4 @@ extension Actions: CatchActions {
         dataProvider?.catchPokemon()
     }
 }
+
