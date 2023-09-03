@@ -131,14 +131,22 @@ commands:
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcresultparser
   run_xcresult_parser:
     steps:
-      - run: 
+      - run:  
+          name: If directory for SonarCloud does not exist, make it
+          command: |
+            [ ! -d output/sonar ] && mkdir output/sonar || echo "Sonar directory exists"
+      - run:  
+          name: If directory for CircleCI does not exist, make it
+          command: |
+            [ ! -d output/circle ] && mkdir output/circle || echo "Circle directory exists"
+      - run:  
           name: Convert XCResult to XML for SonarCloud
           command: |
-            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o xml output/tests.xcresult > sonar/tests_coverage.xml || echo "Nothing to parse in output dir"
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o xml output/tests.xcresult > output/sonar/tests_coverage.xml || echo "Nothing to parse in output dir"
       - run: 
           name: Convert XCResult to JUnit for CircleCI
           command: |
-            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o junit output/tests.xcresult > output/junit_tests_coverage.xml || echo "Nothing to parse in output dir"
+            [ -d output/tests.xcresult ] && tools/xcresultparser -c -o junit output/tests.xcresult > output/circle/junit_tests_coverage.xml || echo "Nothing to parse in output dir"
       - run:
           name: Convert XCResult to HTML
           command: |
@@ -246,7 +254,7 @@ jobs:
       - run_xcresult_parser
       #- run_xcresult_to_xml
       - store_test_results:
-          path: output
+          path: output/circle
       - store_artifacts:
           path: output
       - store_artifacts:
