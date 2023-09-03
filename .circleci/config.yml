@@ -160,11 +160,6 @@ commands:
           name: Extract code coverage data to text file 
           command: |
             [ -d output/tests.xcresult ] && sh scripts/extractCodeCoverageData.sh || echo "No data to extract"
-      - run:
-          name: Clean up XCResult
-          command: |
-            [ -d output/tests.xcresult ] && unlink output/tests || "No linked file found"
-            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult dir not found"
   run_xcresult_to_xml: 
     steps:
       - run:
@@ -180,6 +175,13 @@ commands:
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
             xcc generate output/coverage.json . sonarqube-xml
             mv sonarqube.xml output/sonar/sonarqube.xml
+  cleanup_xcresults:
+    steps:
+      - run:
+          name: Clean up XCResult
+          command: |
+            [ -d output/tests.xcresult ] && unlink output/tests || "No linked file found"
+            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult dir not found"
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -268,6 +270,7 @@ jobs:
       - run_xcresult_parser
       - run_xcresult_to_sonar_xml
       #- run_xcresult_to_xml
+      - cleanup_xcresults
       - store_test_results:
           path: output/circle
       - store_artifacts:
