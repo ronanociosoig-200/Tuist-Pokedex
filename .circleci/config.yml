@@ -101,7 +101,7 @@ commands:
       - run: 
           name: Check post Tests run
           command: |
-            [ -d output/tests.xcresult] && echo "Post test run" || echo "No test results"
+            [ -d output/tests.xcresult ] && echo "Post test run" || echo "No test results"
   compress_simulator_apps:
     steps:
       - run: 
@@ -120,7 +120,7 @@ commands:
       - run:
           name: List test output
           command: |
-            [ -d output/tests.xcresult] && ls -la output/tests.xcresult || echo "No test results available"
+            [ -d output/tests.xcresult ] && ls -la output/tests.xcresult || echo "No test results available"
   install_xcresult_parser:
     steps:
       - run: 
