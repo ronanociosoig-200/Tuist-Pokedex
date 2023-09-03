@@ -129,6 +129,11 @@ commands:
       - run:
           name: Install XCResultParser
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcresultparser
+  install_xcc_parser:
+    steps:
+      - run: 
+          name: Brew Install XcodeCoverageConverter
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew install twittemb/formulae/Xcodecoverageconverter
   run_xcresult_parser:
     steps:
       - run:  
@@ -167,6 +172,14 @@ commands:
           command: |
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
             xcrun swift scripts/xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
+  run_xcresult_to_sonar_xml:
+    steps: 
+      - run: 
+          name: Convert JSON to SonarQube XML with XCC
+          command: |
+            xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
+            xcc generate output/coverage.json . sonarqube-xml
+            mv sonarqube.xml output/sonar/sonarqube.xml
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -251,7 +264,9 @@ jobs:
       - compress_simulator_apps
       - check_test_output
       # - install_xcresult_parser
+      - install_xcc_parser
       - run_xcresult_parser
+      - run_xcresult_to_sonar_xml
       #- run_xcresult_to_xml
       - store_test_results:
           path: output/circle
