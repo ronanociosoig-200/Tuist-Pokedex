@@ -184,6 +184,7 @@ commands:
     steps: 
       - run: 
           name: Convert Profdata to SonarQube XML with Slather
+          command: slather
   cleanup_xcresults:
     steps:
       - run:
