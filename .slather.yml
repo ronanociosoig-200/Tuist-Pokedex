@@ -1,0 +1,31 @@
+# .slather.yml
+
+coverage_service: sonarqube_xml
+workspace: Pokedex.xcworkspace
+xcodeproj: Pokedex.xcodeproj
+scheme: Pokedex-Workspace
+source_directory:
+  - App/Pokedex/Sources
+  - Features/Home/Sources
+  - Features/Catch/Sources
+  - Features/Backpack/Sources
+  - Features/Detail/Sources
+  - Core/Common/Sources
+  - Core/Haneke/Sources
+  - Core/Network/Sources
+output_directory: ./output
+binary_basename:
+  - Pokedex
+  - Home
+  - Catch
+  - Backpack
+  - Common
+  - Network
+  - Haneke
+  - Detail
+ignore:
+  - 'JGProgressHUD/*'
+  - "TuistAssets+*.swift"
+  - "TuistBundle+*.swift"
+  - "TuistAssets+Pokedex.swift"
+
