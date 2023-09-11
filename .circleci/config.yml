@@ -186,6 +186,9 @@ commands:
   run_slather:
     steps: 
       - run: 
+          name: Generate Xcode project for Slather
+          command: <<pipeline.parameters.tuist>> generate -xn
+      - run: 
           name: Convert Profdata to SonarQube XML with Slather
           command: slather
   cleanup_xcresults:
