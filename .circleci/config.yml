@@ -63,6 +63,11 @@ commands:
          name: Install Tuist specific version
          command: |
            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
+  install_slather:
+    steps:
+      - run: 
+          name: Install Slather
+          command: gem install slather
   setup_tuist:          
     steps: 
       #- run: 
@@ -175,6 +180,10 @@ commands:
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
             xcc generate output/coverage.json . sonarqube-xml
             mv sonarqube.xml output/sonar/sonarqube.xml
+  run_slather:
+    steps: 
+      - run: 
+          name: Convert Profdata to SonarQube XML with Slather
   cleanup_xcresults:
     steps:
       - run:
@@ -257,6 +266,7 @@ jobs:
       - restore_dependencies_cache
       # - restore_tests_cache
       - install_tuist 
+      - install_slather
       - setup_tuist
       - save_dependencies_cache
       # - build_project
@@ -269,6 +279,7 @@ jobs:
       - install_xcc_parser
       - run_xcresult_parser
       - run_xcresult_to_sonar_xml
+      - run_slather
       #- run_xcresult_to_xml
       - cleanup_xcresults
       - store_test_results:
