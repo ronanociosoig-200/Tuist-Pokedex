@@ -100,6 +100,7 @@ commands:
       - run: 
           name: Check Tuist version
           command: <<pipeline.parameters.tuist>> version
+      # xcodebuild test -workspace Pokedex.xcworkspace -scheme Pokedex-Workspace -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" -derivedDataPath ./DerivedDataTesting
       - run:
           name: Tuist Test With Default Derived data path
           command: <<pipeline.parameters.tuist>> test --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
@@ -188,6 +189,9 @@ commands:
       - run: 
           name: Generate Xcode project for Slather
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
+      - run:
+          name: Find the derived data path
+          command: xcodebuild -showBuildSettings -project Pokedex.xcodeproj | grep OBJROOT
       - run: 
           name: Convert Profdata to SonarQube XML with Slather
           command: slather
