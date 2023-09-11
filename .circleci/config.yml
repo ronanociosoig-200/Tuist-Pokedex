@@ -193,6 +193,9 @@ commands:
           name: Find the derived data path
           command: xcodebuild -showBuildSettings -project Pokedex.xcodeproj | grep OBJROOT
       - run: 
+          name: Find Coverage Profdata
+          command: find /Users/distiller/Library/Developer/Xcode/DerivedData -name Coverage.profdata
+      - run: 
           name: Convert Profdata to SonarQube XML with Slather
           command: slather
   cleanup_xcresults:
