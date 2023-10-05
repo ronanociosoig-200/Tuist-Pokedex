@@ -8,13 +8,13 @@ orbs:
 parameters:
   xcode_version:
     type: string
-    default: "14.3.1"
+    default: "15.0.0"
   device:
     type: string
-    default: "\"iPhone 14\""
+    default: "\"iPhone 15\""
   ios_version:
     type: string
-    default: "16.4"
+    default: "17.0"
   tuist: 
     type: string
     # default: ".tuist-bin/tuist"
@@ -103,7 +103,7 @@ commands:
       # xcodebuild test -workspace Pokedex.xcworkspace -scheme Pokedex-Workspace -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" -derivedDataPath ./DerivedDataTesting
       - run:
           name: Tuist Test With Default Derived data path
-          command: <<pipeline.parameters.tuist>> test --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --verbose --skip-ui-tests
+          command: <<pipeline.parameters.tuist>> test --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests
       - run: 
           name: Tuist Test
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
