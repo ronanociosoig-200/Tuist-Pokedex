@@ -1,4 +1,4 @@
-<UIView; frame = (0 0; 390 844); autoresize = W+H; backgroundColor = UIExtendedGrayColorSpace 1 1; layer = <CALayer>>
-   | <UIImageView; frame = (0 0; 390 844); clipsToBounds = YES; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; layer = <CALayer>>
-   | <UIButton; frame = (135 678; 120 120); opaque = NO; autoresize = RM+BM; layer = <CALayer>>
-   |    | <UIImageView; frame = (0 0; 120 120); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>
+<UIView; frame = (0 0; 393 852); autoresize = W+H; backgroundColor = UIExtendedGrayColorSpace 1 1; layer = <CALayer>>
+   | <UIImageView; frame = (0 0; 393 852); clipsToBounds = YES; opaque = NO; autoresize = RM+BM; userInteractionEnabled = NO; image = <UIImage CGImage anonymous; (800 480)@1>; layer = <CALayer>>
+   | <UIButton; frame = (136.667 686; 120 120); opaque = NO; autoresize = RM+BM; gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    | <UIImageView; frame = (0 0; 120 120); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; image = <UIImage CGImage anonymous; (600 600)@1>; layer = <CALayer>>

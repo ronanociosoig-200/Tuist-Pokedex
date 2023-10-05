@@ -1,6 +1,6 @@
-<UIView; frame = (0 0; 390 844); autoresize = W+H; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>>
-   | <UICollectionView; frame = (0 0; 390 844); clipsToBounds = YES; autoresize = RM+BM; gestureRecognizers = <NSArray>; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>; contentOffset: {0, 0}; contentSize: {0, 0}; adjustedContentInset: {0, 0, 0, 0}; layout: <UICollectionViewFlowLayout>; dataSource: (null)>
-   |    | <_UIScrollViewScrollIndicator; frame = (365 838; 7 3); alpha = 0; autoresize = TM; layer = <CALayer>>
+<UIView; frame = (0 0; 393 852); autoresize = W+H; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>>
+   | <UICollectionView; frame = (0 0; 393 852); clipsToBounds = YES; autoresize = RM+BM; gestureRecognizers = <NSArray>; backgroundColor = <UIDynamicSystemColor; name = systemBackgroundColor>; layer = <CALayer>; contentOffset: {0, 0}; contentSize: {0, 0}; adjustedContentInset: {0, 0, 0, 0}; layout: <UICollectionViewFlowLayout>; dataSource: (null)>
+   |    | <_UIScrollViewScrollIndicator; frame = (365 846; 7 3); alpha = 0; autoresize = TM; layer = <CALayer>>
    |    |    | <UIView; frame = (0 0; 7 3); backgroundColor = UIExtendedGrayColorSpace 0 0.35; layer = <CALayer>>
-   |    | <_UIScrollViewScrollIndicator; frame = (384 657; 3 7); alpha = 0; autoresize = LM; layer = <CALayer>>
+   |    | <_UIScrollViewScrollIndicator; frame = (387 657; 3 7); alpha = 0; autoresize = LM; layer = <CALayer>>
    |    |    | <UIView; frame = (0 0; 3 7); backgroundColor = UIExtendedGrayColorSpace 0 0.35; layer = <CALayer>>

@@ -27,18 +27,11 @@ class PokemonDetailPresenter: PokemonDetailPresenting {
     
     // MARK: Properties
     private let pokemon: LocalPokemon
-    private weak var view: PokemonDetailView?
-    
     let formatter = DateFormatter()
     let dateFormat = "dd/mm/yyyy HH:MM"
 
-    // MARK: Typealias
-    typealias View = PokemonDetailView
-    
-    required init(view: PokemonDetailView, pokemon: LocalPokemon) {
-        self.view = view
+    required init(pokemon: LocalPokemon) {
         self.pokemon = pokemon
-        
         formatter.dateFormat = dateFormat
     }
     
@@ -63,8 +56,6 @@ class PokemonDetailPresenter: PokemonDetailPresenting {
     }
     
     func date() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/mm/yyyy HH:MM"
         return formatter.string(from: pokemon.date)
     }
     

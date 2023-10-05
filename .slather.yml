@@ -13,6 +13,7 @@ source_directory:
   - Core/Common/Sources
   - Core/Haneke/Sources
   - Core/Network/Sources
+build_directory: /Users/ronan.ociosoig/Library/Developer/Xcode/DerivedData/Pokedex-fymastwcltphqmatpkppmomxhdyo
 output_directory: ./output
 binary_basename:
   - Pokedex

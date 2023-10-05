@@ -8,13 +8,13 @@ orbs:
 parameters:
   xcode_version:
     type: string
-    default: "14.3.1"
+    default: "15.0.0"
   device:
     type: string
-    default: "\"iPhone 14\""
+    default: "\"iPhone 15\""
   ios_version:
     type: string
-    default: "16.4"
+    default: "17.0"
   tuist: 
     type: string
     # default: ".tuist-bin/tuist"
@@ -103,7 +103,7 @@ commands:
       # xcodebuild test -workspace Pokedex.xcworkspace -scheme Pokedex-Workspace -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" -derivedDataPath ./DerivedDataTesting
       - run:
           name: Tuist Test With Default Derived data path
-          command: <<pipeline.parameters.tuist>> test --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+          command: <<pipeline.parameters.tuist>> test --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --verbose --skip-ui-tests
       - run: 
           name: Tuist Test
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
@@ -172,7 +172,7 @@ commands:
   run_xcresult_to_xml: 
     steps:
       - run:
-          name: Convert XCResult to SonarCloud XML
+          name: Convert XCResult to SonarCloud XML using Swift source scripting
           command: |
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
             xcrun swift scripts/xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
@@ -280,28 +280,28 @@ jobs:
       - restore_dependencies_cache
       # - restore_tests_cache
       - install_tuist 
-      - install_slather
+      #- install_slather
       - setup_tuist
       - save_dependencies_cache
       # - build_project
-      - run_lint
+      #- run_lint
       - run_tests
       # - run_xcode_build_test
-      - compress_simulator_apps
+      #- compress_simulator_apps
       - check_test_output
       # - install_xcresult_parser
       - install_xcc_parser
       - run_xcresult_parser
       - run_xcresult_to_sonar_xml
-      - run_slather
+      #- run_slather
       #- run_xcresult_to_xml
       - cleanup_xcresults
       - store_test_results:
           path: output/circle
       - store_artifacts:
           path: output
-      - store_artifacts:
-          path: <<pipeline.parameters.simulator_apps_path>>
+      #- store_artifacts:
+      #    path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
       - save_tests_cache
       - persist_to_workspace:

@@ -134,8 +134,52 @@ extension Project {
         additionalFiles: ["*.md"])
     }
     
+    public static func makeAppExtension(name: String) -> Target {
+        return Target(
+            name: "\(name)WidgetExtension",
+            platform: .iOS,
+            product: .appExtension,
+            bundleId: "\(reverseOrganizationName).\(name).WidgetExtension",
+            infoPlist: .extendingDefault(with: [
+                "CFBundleDisplayName": "$(PRODUCT_NAME)",
+                "NSExtension": [
+                    "NSExtensionPointIdentifier": "com.apple.widgetkit-extension",
+                ],
+            ]),
+            sources: "WidgetApp/Pokedex/Sources/**",
+            resources: "WidgetApp/Pokedex/Resources/**",
+            dependencies: []
+        )
+    }
+    
+    public static func makeWatchApp(name: String) -> Target {
+        return Target(
+            name: "\(name)WatchApp",
+            platform: .watchOS,
+            product: .app,
+            bundleId: "\(reverseOrganizationName).\(name).watchkitapp",
+            infoPlist: nil,
+            sources: "WatchApp/Pokedex/Sources/**",
+            resources: "WatchApp/Pokedex/Resources/**",
+            dependencies: [],
+            settings: .settings(
+                            base: [
+                                "GENERATE_INFOPLIST_FILE": true,
+                                "CURRENT_PROJECT_VERSION": "1.0",
+                                "MARKETING_VERSION": "1.0",
+                                "INFOPLIST_KEY_UISupportedInterfaceOrientations": [
+                                    "UIInterfaceOrientationPortrait",
+                                    "UIInterfaceOrientationPortraitUpsideDown",
+                                ],
+                                "INFOPLIST_KEY_WKCompanionAppBundleIdentifier": "\(reverseOrganizationName).\(name)",
+                                "INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp": false,
+                            ]
+                        )
+        )
+    }
+    
     public static func makeAppInfoPlist() -> InfoPlist {
-        let infoPlist: [String: InfoPlist.Value] = [
+        let infoPlist: [String: Plist.Value] = [
             "CFBundleShortVersionString": "1.0",
             "CFBundleVersion": "1",
             "UIMainStoryboardFile": "",
