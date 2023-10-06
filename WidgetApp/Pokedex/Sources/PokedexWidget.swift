@@ -42,11 +42,11 @@ struct PokedexWidgetEntryView : View {
 
     var body: some View {
         VStack {
-            Text("Time is now:")
-            Text(entry.date, style: .time)
-
-            Text("Pokedex Icon Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+            Image("Ball")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            Text("Pokedex")
+            Text("Catch them all")
         }
     }
 }
