@@ -9,7 +9,8 @@ let project = Project.app(name: "Pokedex",
                           platform: .iOS,
                           externalDependencies: makeExternalDependencies(),
                           moduleTargets: makeAllCoreModules() + makeAllFeatures(),
-                          testTargets: [.uiTests, .unitTests])
+                          testTargets: [.uiTests, .unitTests],
+                          additionalTargets: [.watchApp, .widgetExtension])
 
 func makeExternalDependencies() -> [String] {
     return ["JGProgressHUD", "SnapshotTesting"]

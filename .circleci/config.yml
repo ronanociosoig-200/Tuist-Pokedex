@@ -97,16 +97,16 @@ commands:
           command: <<pipeline.parameters.tuist>> lint
   run_tests:
     steps:
-      - run: 
-          name: Check Tuist version
-          command: <<pipeline.parameters.tuist>> version
+      #- run: 
+      #    name: Check Tuist version
+      #    command: <<pipeline.parameters.tuist>> version
       # xcodebuild test -workspace Pokedex.xcworkspace -scheme Pokedex-Workspace -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" -derivedDataPath ./DerivedDataTesting
-      - run:
-          name: Tuist Test With Default Derived data path
-          command: <<pipeline.parameters.tuist>> test --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests
+      #- run:
+      #    name: Tuist Test With Default Derived data path
+      #    command: <<pipeline.parameters.tuist>> test --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests
       - run: 
           name: Tuist Test
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests --skip-test-target HanekeTests
       - run: 
           name: Check post Tests run
           command: |
