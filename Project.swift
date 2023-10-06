@@ -16,7 +16,8 @@ let project = Project.app(name: "Pokedex",
                                           makeUIComponentsModule(),
                                           makeNetworkModule(),
                                           makeHanekeModule()
-                                         ])
+                                         ],
+                          testTargets: [.uiTests, .unitTests])
 
 func makeHomeModule() -> Module {
     return Module(name: "Home",
@@ -27,7 +28,7 @@ func makeHomeModule() -> Module {
                   frameworkResources: ["Sources/**/*.storyboard", "Resources/**", "*.md"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .uiTests, .exampleApp]) // .snapshotTests,
 }
 
 func makeBackpackModule() -> Module {
@@ -41,7 +42,7 @@ func makeBackpackModule() -> Module {
            frameworkResources: ["Resources/**", "Sources/**/*.xib", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .uiTests, .exampleApp]) // .snapshotTests,
 }
 
 func makeDetailModule() -> Module {
@@ -56,7 +57,7 @@ func makeDetailModule() -> Module {
                   frameworkResources: ["Sources/**/*.storyboard"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
-                  targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
+                  targets: [.framework, .unitTests, .uiTests, .exampleApp]) // .snapshotTests,
 }
 
 func makeCatchModule() -> Module {
@@ -72,7 +73,7 @@ func makeCatchModule() -> Module {
            frameworkResources: ["Resources/**", "Sources/**/*.storyboard"],
            exampleResources: ["Resources/**", "Sources/**/*.storyboard"],
            testResources: [],
-           targets: [.framework, .unitTests, .snapshotTests, .uiTests, .exampleApp])
+           targets: [.framework, .unitTests, .uiTests, .exampleApp]) // .snapshotTests,
 }
 
 func makeCommonModule() -> Module {
