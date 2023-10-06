@@ -4,20 +4,30 @@ import ProjectDescriptionHelpers
 // MARK: - Project
 
 // Creates our project using a helper function defined in ProjectDescriptionHelpers
-let project = Project.app(name: "Pokedex",
+let project = Project.app(name: "Pokedex", 
+                          organizationName: "sonomos.com",
                           platform: .iOS,
-                          externalDependencies: ["JGProgressHUD", "SnapshotTesting"],
-                          targetDependancies: [],
-                          moduleTargets: [makeHomeModule(),
-                                          makeCatchModule(),
-                                          makeBackpackModule(),
-                                          makeDetailModule(),
-                                          makeCommonModule(),
-                                          makeUIComponentsModule(),
-                                          makeNetworkModule(),
-                                          makeHanekeModule()
-                                         ],
+                          externalDependencies: makeExternalDependencies(),
+                          moduleTargets: makeAllCoreModules() + makeAllFeatures(),
                           testTargets: [.uiTests, .unitTests])
+
+func makeExternalDependencies() -> [String] {
+    return ["JGProgressHUD", "SnapshotTesting"]
+}
+
+func makeAllFeatures() -> [Module] {
+    return [makeHomeModule(),
+            makeCatchModule(),
+            makeBackpackModule(),
+            makeDetailModule()]
+}
+
+func makeAllCoreModules() -> [Module] {
+    return [makeCommonModule(),
+            makeUIComponentsModule(),
+            makeNetworkModule(),
+            makeHanekeModule()]
+}
 
 func makeHomeModule() -> Module {
     return Module(name: "Home",

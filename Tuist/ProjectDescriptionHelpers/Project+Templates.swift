@@ -31,7 +31,7 @@ public enum TestTarget {
 
 public enum AdditionalTarget {
     case watchApp
-    case widget
+    case widgetExtension
 }
 
 public enum ModuleType {
@@ -89,13 +89,15 @@ public struct Module {
 extension Project {
     /// Helper function to create the Project for this ExampleApp
     public static func app(name: String,
+                           organizationName: String,
                            platform: Platform,
                            externalDependencies: [String],
-                           targetDependancies: [TargetDependency],
+                           targetDependancies: [TargetDependency] = [],
                            moduleTargets: [Module],
-                           testTargets: Set<TestTarget> = Set([.unitTests, .snapshotTests, .uiTests])) -> Project {
+                           testTargets: Set<TestTarget> = Set([.unitTests, .snapshotTests, .uiTests]),
+                           additionalTargets: Set<AdditionalTarget> = Set([])) -> Project {
         
-        let organizationName = "Sonomos.com"
+        let organizationName = organizationName
         var dependencies = moduleTargets.map { TargetDependency.target(name: $0.name) }
         dependencies.append(contentsOf: targetDependancies)
         
@@ -103,16 +105,7 @@ extension Project {
             TargetDependency.external(name: $0)
         }
         
-        let appExtensionTarget = makeAppExtension(name: name)
-        let appExtensionTargetDependency = TargetDependency.target(name: appExtensionTarget.name)
-        
         dependencies.append(contentsOf: externalTargetDependencies)
-        dependencies.append(appExtensionTargetDependency)
-        
-        let watchApp = makeWatchApp(name: name)
-        let watchAppTargetDependency = TargetDependency.target(name: watchApp.name)
-        
-        dependencies.append(watchAppTargetDependency)
         
         var targets = makeAppTargets(name: name,
                                      platform: platform,
@@ -121,8 +114,18 @@ extension Project {
         
         targets += moduleTargets.flatMap({ makeFrameworkTargets(module: $0, platform: platform) })
         
-        targets.append(appExtensionTarget)
-        targets.append(watchApp)
+        // if additionalTargets.contains(.watchApp) {
+//            let watchApp = makeWatchApp(name: name)
+//            targets.append(watchApp)
+//            dependencies.append(TargetDependency.target(name: watchApp.name))
+        //}
+        
+        //if additionalTargets.contains(.widgetExtension) {
+//        let widgetExtensionTarget = makeWidgetExtension(name: name)
+//        let widgetTargetDependency = TargetDependency.target(name: widgetExtensionTarget.name)
+//        targets.append(widgetExtensionTarget)
+//        dependencies.append(widgetTargetDependency)
+        //}
         
         /// These schemes were previously used for testing specific UI test cases but not needed now.
         // let schemes = makeSchemes(targetName: name)
@@ -161,7 +164,7 @@ extension Project {
         additionalFiles: ["*.md"])
     }
     
-    public static func makeAppExtension(name: String) -> Target {
+    public static func makeWidgetExtension(name: String) -> Target {
         return Target(
             name: "\(name)WidgetExtension",
             platform: .iOS,
