@@ -105,27 +105,50 @@ extension Project {
             TargetDependency.external(name: $0)
         }
         
+        // dependencies.append(contentsOf: externalTargetDependencies)
+        
+//        var targets = makeAppTargets(name: name,
+//                                     platform: platform,
+//                                     dependencies: dependencies,
+//                                     testTargets: testTargets)
+//        
+//        targets += moduleTargets.flatMap({ makeFrameworkTargets(module: $0, platform: platform) })
+        
+        let appExtensionTarget = makeWidgetExtension(name: name)
+        let appExtensionTargetDependency = TargetDependency.target(name: appExtensionTarget.name)
+        
         dependencies.append(contentsOf: externalTargetDependencies)
+        dependencies.append(appExtensionTargetDependency)
         
+        let watchApp = makeWatchApp(name: name)
+        let watchAppTargetDependency = TargetDependency.target(name: watchApp.name)
+        
+        dependencies.append(watchAppTargetDependency)
+                 
         var targets = makeAppTargets(name: name,
-                                     platform: platform,
-                                     dependencies: dependencies,
-                                     testTargets: testTargets)
-        
+                                    platform: platform,
+                                    dependencies: dependencies,
+                                testTargets: testTargets)
+                 
         targets += moduleTargets.flatMap({ makeFrameworkTargets(module: $0, platform: platform) })
+                 
+        targets.append(appExtensionTarget)
+        targets.append(watchApp)
+
         
-        // if additionalTargets.contains(.watchApp) {
-//            let watchApp = makeWatchApp(name: name)
-//            targets.append(watchApp)
-//            dependencies.append(TargetDependency.target(name: watchApp.name))
-        //}
-        
-        //if additionalTargets.contains(.widgetExtension) {
-//        let widgetExtensionTarget = makeWidgetExtension(name: name)
-//        let widgetTargetDependency = TargetDependency.target(name: widgetExtensionTarget.name)
-//        targets.append(widgetExtensionTarget)
+//        // if additionalTargets.contains(.watchApp) {
+//        let watchApp = makeWatchApp(name: name)
+//        let watchAppTargetDependency = TargetDependency.target(name: watchApp.name)
+//        targets.append(watchApp)
+//        dependencies.append(watchAppTargetDependency)
+//        //}
+//        
+//        //if additionalTargets.contains(.widgetExtension) {
+//        let widgetTarget = makeWidgetExtension(name: name)
+//        let widgetTargetDependency = TargetDependency.target(name: widgetTarget.name)
+//        targets.append(widgetTarget)
 //        dependencies.append(widgetTargetDependency)
-        //}
+//        //}
         
         /// These schemes were previously used for testing specific UI test cases but not needed now.
         // let schemes = makeSchemes(targetName: name)
