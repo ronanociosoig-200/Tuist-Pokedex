@@ -5,10 +5,10 @@ let reverseOrganizationName = "com.sonomos"
 let featuresPath = "Features"
 let corePath = "Core"
 let appPath = "App"
-let exampleAppSuffix = "Example"
-let examplePath = "Example"
+let microAppSuffix = "App"
+let microAppPath = "App"
 let watchAppPath = "WatchApp"
-let widgetPath = "WidgetApp"
+let widgetAppPath = "WidgetApp"
 
 /// Project helpers are functions that simplify the way you define your project.
 /// Share code to create targets, settings, dependencies,
@@ -20,7 +20,7 @@ public enum uFeatureTarget {
     case unitTests
     case snapshotTests
     case uiTests
-    case exampleApp
+    case app
 }
 
 public enum TestTarget {
@@ -72,7 +72,7 @@ public struct Module {
                 frameworkResources: [String],
                 exampleResources: [String],
                 testResources: [String],
-                targets: Set<uFeatureTarget> = Set([.framework, .unitTests, .exampleApp])) {
+                targets: Set<uFeatureTarget> = Set([.framework, .unitTests, .app])) {
         self.name = name
         self.moduleType = moduleType
         self.path = path
@@ -232,7 +232,7 @@ extension Project {
         }
         
         let exampleResourceFilePaths = module.exampleResources.map {
-            ResourceFileElement.glob(pattern: Path("\(module.moduleType.path())/\(module.path)/\(examplePath)/" + $0), tags: [])
+            ResourceFileElement.glob(pattern: Path("\(module.moduleType.path())/\(module.path)/\(microAppPath)/" + $0), tags: [])
         }
         
         let testResourceFilePaths = module.testResources.map {
@@ -242,11 +242,11 @@ extension Project {
         var exampleAppDependancies = module.exampleDependencies
         exampleAppDependancies.append(.target(name: module.name))
         
-        let exampleSourcesPath = "\(module.moduleType.path())/\(module.path)/\(examplePath)/Sources"
+        let exampleSourcesPath = "\(module.moduleType.path())/\(module.path)/\(microAppPath)/Sources"
         
         var targets = [Target]()
         
-        let exampleAppName = "\(module.name)\(exampleAppSuffix)"
+        let microAppName = "\(module.name)\(microAppSuffix)"
         
         if module.targets.contains(.framework) {
             let headers = Headers.headers(public: ["\(frameworkPath)/Sources/**/*.h"])
@@ -273,11 +273,11 @@ extension Project {
                                   dependencies: [.target(name: module.name)]))
         }
 
-        if module.targets.contains(.exampleApp) {
-            targets.append(Target(name: exampleAppName,
+        if module.targets.contains(.app) {
+            targets.append(Target(name: microAppName,
                                   platform: platform,
                                   product: .app,
-                                  bundleId: "\(reverseOrganizationName).\(module.name)\(exampleAppSuffix)",
+                                  bundleId: "\(reverseOrganizationName).\(module.name)\(microAppSuffix)",
                                   infoPlist: makeAppInfoPlist(),
                                   sources: ["\(exampleSourcesPath)/**"],
                                   resources: ResourceFileElements(resources: exampleResourceFilePaths),
@@ -292,7 +292,7 @@ extension Project {
                                   infoPlist: .default,
                                   sources: ["\(frameworkPath)/UITests/**"],
                                   resources: ResourceFileElements(resources: testResourceFilePaths),
-                                  dependencies: [.target(name: exampleAppName)]))
+                                  dependencies: [.target(name: microAppName)]))
         }
 
         if module.targets.contains(.snapshotTests) {
