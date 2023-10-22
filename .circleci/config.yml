@@ -19,10 +19,10 @@ parameters:
     type: string
     # default: ".tuist-bin/tuist"
     # disable version in cache and use bundled version instead
-    default: ~/.tuist/Versions/3.28.0/tuist
+    default: ~/.tuist/Versions/3.30.0/tuist
   tuist_version:
     type: string
-    default: "3.28.0"
+    default: "3.30.0"
   test_output_path:
     type: string
     default: "output/tests"
@@ -111,7 +111,7 @@ commands:
           name: Check post Tests run
           command: |
             [ -d output/tests.xcresult ] && echo "Post test run" || echo "No test results"
-  compress_simulator_apps:
+  compress_simulator_apps: 
     steps:
       - run: 
           name: Find And Compress .app Files Excluding Tests runners
