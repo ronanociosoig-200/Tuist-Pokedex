@@ -25,6 +25,7 @@ public class AppData: AppDataHandling {
     
     public var pokemon: Pokemon?
     public var pokemons = [LocalPokemon]()
+    private let dummyValue = 3
     
     let storage: Storable
     
@@ -73,5 +74,9 @@ public class AppData: AppDataHandling {
         pokemons.sort(by: {
             $0.order < $1.order
         })
+    }
+    
+    public func getDummy() -> Int {
+        return dummyValue
     }
 }
