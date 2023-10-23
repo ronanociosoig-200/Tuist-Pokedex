@@ -79,4 +79,8 @@ public class AppData: AppDataHandling {
     public func getDummy() -> Int {
         return dummyValue
     }
+    
+    public func setDummy(value: Int) {
+        // Do nothing
+    }
 }
