@@ -158,14 +158,14 @@ extension Project {
                                               disableSynthesizedResourceAccessors: false,
                                               textSettings: Options.TextSettings.textSettings(),
                                               xcodeProjectName: nil)
-
         
         return Project(name: name,
                        organizationName: organizationName,
                        options: options,
                        targets: targets,
                        schemes: [],
-        additionalFiles: ["*.md"])
+        additionalFiles: ["*.md"],
+        resourceSynthesizers: [])
     }
     
     public static func makeWidgetExtension(name: String) -> Target {
