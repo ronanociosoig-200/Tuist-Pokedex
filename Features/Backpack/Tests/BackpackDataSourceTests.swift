@@ -49,4 +49,66 @@ final class BackpackDataSourceTests: XCTestCase {
         let cellName = cell.name.text?.lowercased()
         XCTAssertEqual(cellName, expectedName)
     }
+    
+    func testBackpackDataSourceReturnsCellIfPresenterNotDefined() {
+        let dataSource = BackpackDataSource()
+        let indexPath = IndexPath(item: 0, section: 0)
+        let layout = UICollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        dataSource.register(collectionView: collectionView)
+        
+        let cell = dataSource.collectionView(collectionView, cellForItemAt: indexPath)
+        XCTAssertNotNil(cell)
+    }
+    
+    func testNumberOfItemsIsZeroIfPresenterNotDefined() {
+        let dataSource = BackpackDataSource()
+        let layout = UICollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        dataSource.register(collectionView: collectionView)
+        let numberOfItems = dataSource.collectionView(collectionView,
+                                                      numberOfItemsInSection: 0)
+        
+        XCTAssertEqual(0, numberOfItems)
+    }
+    
+    func testBackpackDataSourceCellWithoutImageURL() {
+        let dataProvider = MockBackpackDataProviderWithoutImageURL()
+        let firstPokemon = dataProvider.pokemons().first
+        let presenter = BackpackPresenter(actions: MockBackpackActions(),
+                                          dataProvider: dataProvider,
+                                          view: MockBackpackView())
+        
+        let dataSource = BackpackDataSource()
+        dataSource.presenter = presenter
+        let indexPath = IndexPath(item: 0, section: 0)
+        let layout = UICollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        dataSource.register(collectionView: collectionView)
+        
+        let cell = dataSource.collectionView(collectionView, cellForItemAt: indexPath) as! PokemonCollectionViewCell
+        let expectedName = firstPokemon!.name
+        let cellName = cell.name.text?.lowercased()
+        XCTAssertEqual(cellName, expectedName)
+    }
+    
+    func testBackpackDataSourceCellWithInvalidImageURL() {
+        let dataProvider = MockBackpackDataProviderWithInvalidImageURL()
+        let firstPokemon = dataProvider.pokemons().first
+        let presenter = BackpackPresenter(actions: MockBackpackActions(),
+                                          dataProvider: dataProvider,
+                                          view: MockBackpackView())
+        
+        let dataSource = BackpackDataSource()
+        dataSource.presenter = presenter
+        let indexPath = IndexPath(item: 0, section: 0)
+        let layout = UICollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        dataSource.register(collectionView: collectionView)
+        
+        let cell = dataSource.collectionView(collectionView, cellForItemAt: indexPath) as! PokemonCollectionViewCell
+        let expectedName = firstPokemon!.name
+        let cellName = cell.name.text?.lowercased()
+        XCTAssertEqual(cellName, expectedName)
+    }
 }
