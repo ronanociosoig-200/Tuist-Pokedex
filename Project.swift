@@ -34,8 +34,10 @@ func makeHomeModule() -> Module {
     return Module(name: "Home",
                   moduleType: .feature,
                   path: "Home",
-                  frameworkDependancies: [.target(name: "Common")],
-                  exampleDependencies: [.external(name: "JGProgressHUD")], testingDependencies: [.external(name: "SnapshotTesting")],
+                  frameworkDependancies: [
+                    .target(name: "Common")],
+                  exampleDependencies: [.external(name: "JGProgressHUD")],
+                  testingDependencies: [.external(name: "SnapshotTesting")],
                   frameworkResources: ["Sources/**/*.storyboard", "Resources/**", "*.md"],
                   exampleResources: ["Resources/**"],
                   testResources: [],
