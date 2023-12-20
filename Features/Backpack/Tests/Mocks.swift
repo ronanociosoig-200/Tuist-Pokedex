@@ -20,9 +20,21 @@ class MockBackpackActions: BackpackActions {
     }
 }
 
-class MockBackpackDataProvider: BackpackDataProvider {
+struct MockBackpackDataProvider: BackpackDataProvider {
     func pokemons() -> [Common.LocalPokemon] {
         return MockDataFactory.makePokemons()
+    }
+}
+
+struct MockBackpackDataProviderWithoutImageURL: BackpackDataProvider {
+    func pokemons() -> [Common.LocalPokemon] {
+        return MockDataFactory.makePokemonWithoutImageURL()
+    }
+}
+
+struct MockBackpackDataProviderWithInvalidImageURL: BackpackDataProvider {
+    func pokemons() -> [Common.LocalPokemon] {
+        return MockDataFactory.makePokemonWithInvalidImageURL()
     }
 }
 
@@ -36,7 +48,6 @@ class MockBackpackView: BackpackView {
 
 struct MockDataFactory {
     static func makePokemons() -> [LocalPokemon] {
-        
         let pokemon1 = LocalPokemon(name: "cascoon",
                                     weight: 115,
                                     height: 7,
@@ -57,6 +68,32 @@ struct MockDataFactory {
                                     types: ["rock"])
         
         return [pokemon1, pokemon2]
+    }
+    
+    static func makePokemonWithoutImageURL() -> [LocalPokemon] {
+        let pokemon1 = LocalPokemon(name: "cascoon",
+                                    weight: 115,
+                                    height: 7,
+                                    order: 350,
+                                    spriteUrlString: nil,
+                                    date: Date(),
+                                    species: "cascoon",
+                                    baseExperience: 72,
+                                    types: ["bug"])
+        return [pokemon1]
+    }
+    
+    static func makePokemonWithInvalidImageURL() -> [LocalPokemon] {
+        let pokemon1 = LocalPokemon(name: "cascoon",
+                                    weight: 115,
+                                    height: 7,
+                                    order: 350,
+                                    spriteUrlString: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20068.png",
+                                    date: Date(),
+                                    species: "cascoon",
+                                    baseExperience: 72,
+                                    types: ["bug"])
+        return [pokemon1]
     }
 }
 

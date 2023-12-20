@@ -13,8 +13,7 @@ import XCTest
 
 final class DetailPresenterTests: XCTestCase {
     func testInit() {
-        let presenter = PokemonDetailPresenter(view: MockDetailView(),
-                                               pokemon: MockPokemonFactory.makeLocalPokemon())
+        let presenter = PokemonDetailPresenter(pokemon: MockPokemonFactory.makeLocalPokemon())
         
         XCTAssertNotNil(presenter)
     }
@@ -22,8 +21,7 @@ final class DetailPresenterTests: XCTestCase {
     func testWeight() {
         let localPokemon = MockPokemonFactory.makeLocalPokemon()
         let expectedWeight = "\(Constants.Translations.DetailScene.weight): \(localPokemon.weight)"
-        let presenter = PokemonDetailPresenter(view: MockDetailView(),
-                                               pokemon: localPokemon)
+        let presenter = PokemonDetailPresenter(pokemon: localPokemon)
         
         XCTAssertEqual(presenter.weight(), expectedWeight)
     }
@@ -31,8 +29,7 @@ final class DetailPresenterTests: XCTestCase {
     func testHeight() {
         let localPokemon = MockPokemonFactory.makeLocalPokemon()
         let expectedHeight = "\(Constants.Translations.DetailScene.height): \(localPokemon.height)"
-        let presenter = PokemonDetailPresenter(view: MockDetailView(),
-                                               pokemon: localPokemon)
+        let presenter = PokemonDetailPresenter(pokemon: localPokemon)
         
         XCTAssertEqual(presenter.height(), expectedHeight)
     }
@@ -40,8 +37,7 @@ final class DetailPresenterTests: XCTestCase {
     func testName() {
         let localPokemon = MockPokemonFactory.makeLocalPokemon()
         let expectedName = localPokemon.name
-        let presenter = PokemonDetailPresenter(view: MockDetailView(),
-                                               pokemon: localPokemon)
+        let presenter = PokemonDetailPresenter(pokemon: localPokemon)
         
         XCTAssertEqual(presenter.name(), expectedName)
     }
@@ -49,16 +45,14 @@ final class DetailPresenterTests: XCTestCase {
     func testImagePath() {
         let localPokemon = MockPokemonFactory.makeLocalPokemon()
         let expectedImagePath = localPokemon.spriteUrlString
-        let presenter = PokemonDetailPresenter(view: MockDetailView(),
-                                               pokemon: localPokemon)
+        let presenter = PokemonDetailPresenter(pokemon: localPokemon)
         
         XCTAssertEqual(presenter.imagePath(), expectedImagePath)
     }
     
     func testDate() {
         let localPokemon = MockPokemonFactory.makeLocalPokemon()
-        let presenter = PokemonDetailPresenter(view: MockDetailView(),
-                                               pokemon: localPokemon)
+        let presenter = PokemonDetailPresenter(pokemon: localPokemon)
         let expectedDate = presenter.formatter.string(from: localPokemon.date)
         XCTAssertEqual(presenter.date(), expectedDate)
     }

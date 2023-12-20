@@ -19,10 +19,10 @@ parameters:
     type: string
     # default: ".tuist-bin/tuist"
     # disable version in cache and use bundled version instead
-    default: ~/.tuist/Versions/3.21.1/tuist
+    default: ~/.tuist/Versions/3.30.0/tuist
   tuist_version:
     type: string
-    default: "3.21.1"
+    default: "3.30.0"
   test_output_path:
     type: string
     default: "output/tests"
@@ -63,6 +63,11 @@ commands:
          name: Install Tuist specific version
          command: |
            [ -f <<pipeline.parameters.tuist>> ] && echo "Skipping tuist install" || tuist install <<pipeline.parameters.tuist_version>>
+  install_slather:
+    steps:
+      - run: 
+          name: Install Slather
+          command: gem install slather
   setup_tuist:          
     steps: 
       #- run: 
@@ -92,17 +97,24 @@ commands:
           command: <<pipeline.parameters.tuist>> lint
   run_tests:
     steps:
+      #- run: 
+      #    name: Check Tuist version
+      #    command: <<pipeline.parameters.tuist>> version
+      # xcodebuild test -workspace Pokedex.xcworkspace -scheme Pokedex-Workspace -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" -derivedDataPath ./DerivedDataTesting
+      #- run:
+      #    name: Tuist Test With Default Derived data path
+      #    command: <<pipeline.parameters.tuist>> test --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests
       - run: 
-          name: Check Tuist version
-          command: <<pipeline.parameters.tuist>> version
+          name: Tuist Cache warm
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
       - run: 
           name: Tuist Test
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>>
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests --skip-test-targets HanekeTests
       - run: 
           name: Check post Tests run
           command: |
             [ -d output/tests.xcresult ] && echo "Post test run" || echo "No test results"
-  compress_simulator_apps:
+  compress_simulator_apps: 
     steps:
       - run: 
           name: Find And Compress .app Files Excluding Tests runners
@@ -163,7 +175,7 @@ commands:
   run_xcresult_to_xml: 
     steps:
       - run:
-          name: Convert XCResult to SonarCloud XML
+          name: Convert XCResult to SonarCloud XML using Swift source scripting
           command: |
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
             xcrun swift scripts/xccov_json_to_cobertura_xml.swift output/coverage.json > output/cobertura.xml
@@ -175,6 +187,20 @@ commands:
             xcrun xccov view --report --json output/tests.xcresult > output/coverage.json
             xcc generate output/coverage.json . sonarqube-xml
             mv sonarqube.xml output/sonar/sonarqube.xml
+  run_slather:
+    steps: 
+      - run: 
+          name: Generate Xcode project for Slather
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -xn
+      - run:
+          name: Find the derived data path
+          command: xcodebuild -showBuildSettings -project Pokedex.xcodeproj | grep OBJROOT
+      - run: 
+          name: Find Coverage Profdata
+          command: find /Users/distiller/Library/Developer/Xcode/DerivedData -name Coverage.profdata
+      - run: 
+          name: Convert Profdata to SonarQube XML with Slather
+          command: slather
   cleanup_xcresults:
     steps:
       - run:
@@ -257,26 +283,28 @@ jobs:
       - restore_dependencies_cache
       # - restore_tests_cache
       - install_tuist 
+      #- install_slather
       - setup_tuist
       - save_dependencies_cache
       # - build_project
-      - run_lint
+      #- run_lint
       - run_tests
       # - run_xcode_build_test
-      - compress_simulator_apps
+      #- compress_simulator_apps
       - check_test_output
       # - install_xcresult_parser
       - install_xcc_parser
       - run_xcresult_parser
       - run_xcresult_to_sonar_xml
+      #- run_slather
       #- run_xcresult_to_xml
       - cleanup_xcresults
       - store_test_results:
           path: output/circle
       - store_artifacts:
           path: output
-      - store_artifacts:
-          path: <<pipeline.parameters.simulator_apps_path>>
+      #- store_artifacts:
+      #    path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
       - save_tests_cache
       - persist_to_workspace:

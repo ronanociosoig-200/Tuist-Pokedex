@@ -17,7 +17,7 @@ public class PokemonDetailWireframe {
     }
     
     public static func prepare(_ viewController: PokemonDetailViewController, pokemon: LocalPokemon) {
-    	let presenter =  PokemonDetailPresenter(view: viewController, pokemon: pokemon)
+    	let presenter =  PokemonDetailPresenter(pokemon: pokemon)
         viewController.presenter = presenter
     }
 }

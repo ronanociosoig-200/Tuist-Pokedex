@@ -14,11 +14,8 @@ let workspace = Workspace(
                     "Common",
                     "Haneke",
                     "NetworkKit",
-                    "UIComponents"]),
-                         testingOptions: [])
+                    "UIComponents"
+                ]),
+                         testingOptions: [.randomExecutionOrdering])
     )
 )
-
-//testingOptions: [
-//   .parallelizable,
-//   .randomExecutionOrdering])

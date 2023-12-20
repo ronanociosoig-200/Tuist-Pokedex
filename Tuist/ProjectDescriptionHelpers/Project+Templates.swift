@@ -5,8 +5,10 @@ let reverseOrganizationName = "com.sonomos"
 let featuresPath = "Features"
 let corePath = "Core"
 let appPath = "App"
-let exampleAppSuffix = "Example"
-let examplePath = "Example"
+let microAppSuffix = "App"
+let microAppPath = "App"
+let watchAppPath = "WatchApp"
+let widgetAppPath = "WidgetApp"
 
 /// Project helpers are functions that simplify the way you define your project.
 /// Share code to create targets, settings, dependencies,
@@ -18,10 +20,21 @@ public enum uFeatureTarget {
     case unitTests
     case snapshotTests
     case uiTests
-    case exampleApp
+    case app
 }
 
-public enum AppModuleType {
+public enum TestTarget {
+    case unitTests
+    case snapshotTests
+    case uiTests
+}
+
+public enum AdditionalTarget {
+    case watchApp
+    case widgetExtension
+}
+
+public enum ModuleType {
     case core
     case feature
     case app
@@ -48,10 +61,10 @@ public struct Module {
     let exampleResources: [String]
     let testResources: [String]
     let targets: Set<uFeatureTarget>
-    let moduleType: AppModuleType
+    let moduleType: ModuleType
     
     public init(name: String,
-                moduleType: AppModuleType,
+                moduleType: ModuleType,
                 path: String,
                 frameworkDependancies: [TargetDependency],
                 exampleDependencies: [TargetDependency],
@@ -59,7 +72,7 @@ public struct Module {
                 frameworkResources: [String],
                 exampleResources: [String],
                 testResources: [String],
-                targets: Set<uFeatureTarget> = Set([.framework, .unitTests, .exampleApp])) {
+                targets: Set<uFeatureTarget> = Set([.framework, .unitTests, .app])) {
         self.name = name
         self.moduleType = moduleType
         self.path = path
@@ -76,12 +89,16 @@ public struct Module {
 extension Project {
     /// Helper function to create the Project for this ExampleApp
     public static func app(name: String,
+                           organizationName: String,
                            platform: Platform,
                            externalDependencies: [String],
-                           targetDependancies: [TargetDependency],
-                           moduleTargets: [Module]) -> Project {
+                           targetDependancies: [TargetDependency] = [],
+                           moduleTargets: [Module],
+                           testTargets: Set<TestTarget> = Set([.unitTests, .snapshotTests, .uiTests]),
+                           additionalTargets: Set<AdditionalTarget> = Set([])) -> Project {
         
-        let organizationName = "Sonomos.com"
+        let organizationName = organizationName
+        var targets = [Target]()
         var dependencies = moduleTargets.map { TargetDependency.target(name: $0.name) }
         dependencies.append(contentsOf: targetDependancies)
         
@@ -91,10 +108,27 @@ extension Project {
         
         dependencies.append(contentsOf: externalTargetDependencies)
         
-        var targets = makeAppTargets(name: name,
-                                     platform: platform,
-                                     dependencies: dependencies)
+        if additionalTargets.contains(.widgetExtension) {
+            let widgetExtensionTarget = makeWidgetExtension(name: name)
+            let widgetExtensionTargetDependency = TargetDependency.target(name: widgetExtensionTarget.name)
+            
+            dependencies.append(widgetExtensionTargetDependency)
+            targets.append(widgetExtensionTarget)
+        }
         
+        if additionalTargets.contains(.watchApp) {
+            let watchAppTarget = makeWatchApp(name: name)
+            let watchAppTargetDependency = TargetDependency.target(name: watchAppTarget.name)
+            
+            dependencies.append(watchAppTargetDependency)
+            targets.append(watchAppTarget)
+        }
+        
+        targets.append(contentsOf: makeAppTargets(name: name,
+                                    platform: platform,
+                                    dependencies: dependencies,
+                                testTargets: testTargets))
+                 
         targets += moduleTargets.flatMap({ makeFrameworkTargets(module: $0, platform: platform) })
         
         /// These schemes were previously used for testing specific UI test cases but not needed now.
@@ -124,18 +158,62 @@ extension Project {
                                               disableSynthesizedResourceAccessors: false,
                                               textSettings: Options.TextSettings.textSettings(),
                                               xcodeProjectName: nil)
-
         
         return Project(name: name,
                        organizationName: organizationName,
                        options: options,
                        targets: targets,
                        schemes: [],
-        additionalFiles: ["*.md"])
+        additionalFiles: ["*.md"],
+        resourceSynthesizers: [])
+    }
+    
+    public static func makeWidgetExtension(name: String) -> Target {
+        return Target(
+            name: "\(name)WidgetExtension",
+            platform: .iOS,
+            product: .appExtension,
+            bundleId: "\(reverseOrganizationName).\(name).WidgetExtension",
+            infoPlist: .extendingDefault(with: [
+                "CFBundleDisplayName": "$(PRODUCT_NAME)",
+                "NSExtension": [
+                    "NSExtensionPointIdentifier": "com.apple.widgetkit-extension",
+                ],
+            ]),
+            sources: "WidgetApp/Pokedex/Sources/**",
+            resources: "WidgetApp/Pokedex/Resources/**",
+            dependencies: []
+        )
+    }
+    
+    public static func makeWatchApp(name: String) -> Target {
+        return Target(
+            name: "\(name)WatchApp",
+            platform: .watchOS,
+            product: .app,
+            bundleId: "\(reverseOrganizationName).\(name).watchkitapp",
+            infoPlist: nil,
+            sources: "WatchApp/Pokedex/Sources/**",
+            resources: "WatchApp/Pokedex/Resources/**",
+            dependencies: [],
+            settings: .settings(
+                            base: [
+                                "GENERATE_INFOPLIST_FILE": true,
+                                "CURRENT_PROJECT_VERSION": "1.0",
+                                "MARKETING_VERSION": "1.0",
+                                "INFOPLIST_KEY_UISupportedInterfaceOrientations": [
+                                    "UIInterfaceOrientationPortrait",
+                                    "UIInterfaceOrientationPortraitUpsideDown",
+                                ],
+                                "INFOPLIST_KEY_WKCompanionAppBundleIdentifier": "\(reverseOrganizationName).\(name)",
+                                "INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp": false,
+                            ]
+                        )
+        )
     }
     
     public static func makeAppInfoPlist() -> InfoPlist {
-        let infoPlist: [String: InfoPlist.Value] = [
+        let infoPlist: [String: Plist.Value] = [
             "CFBundleShortVersionString": "1.0",
             "CFBundleVersion": "1",
             "UIMainStoryboardFile": "",
@@ -154,7 +232,7 @@ extension Project {
         }
         
         let exampleResourceFilePaths = module.exampleResources.map {
-            ResourceFileElement.glob(pattern: Path("\(module.moduleType.path())/\(module.path)/\(examplePath)/" + $0), tags: [])
+            ResourceFileElement.glob(pattern: Path("\(module.moduleType.path())/\(module.path)/\(microAppPath)/" + $0), tags: [])
         }
         
         let testResourceFilePaths = module.testResources.map {
@@ -164,11 +242,11 @@ extension Project {
         var exampleAppDependancies = module.exampleDependencies
         exampleAppDependancies.append(.target(name: module.name))
         
-        let exampleSourcesPath = "\(module.moduleType.path())/\(module.path)/\(examplePath)/Sources"
+        let exampleSourcesPath = "\(module.moduleType.path())/\(module.path)/\(microAppPath)/Sources"
         
         var targets = [Target]()
         
-        let exampleAppName = "\(module.name)\(exampleAppSuffix)"
+        let microAppName = "\(module.name)\(microAppSuffix)"
         
         if module.targets.contains(.framework) {
             let headers = Headers.headers(public: ["\(frameworkPath)/Sources/**/*.h"])
@@ -195,11 +273,11 @@ extension Project {
                                   dependencies: [.target(name: module.name)]))
         }
 
-        if module.targets.contains(.exampleApp) {
-            targets.append(Target(name: exampleAppName,
+        if module.targets.contains(.app) {
+            targets.append(Target(name: microAppName,
                                   platform: platform,
                                   product: .app,
-                                  bundleId: "\(reverseOrganizationName).\(module.name)\(exampleAppSuffix)",
+                                  bundleId: "\(reverseOrganizationName).\(module.name)\(microAppSuffix)",
                                   infoPlist: makeAppInfoPlist(),
                                   sources: ["\(exampleSourcesPath)/**"],
                                   resources: ResourceFileElements(resources: exampleResourceFilePaths),
@@ -214,7 +292,7 @@ extension Project {
                                   infoPlist: .default,
                                   sources: ["\(frameworkPath)/UITests/**"],
                                   resources: ResourceFileElements(resources: testResourceFilePaths),
-                                  dependencies: [.target(name: exampleAppName)]))
+                                  dependencies: [.target(name: microAppName)]))
         }
 
         if module.targets.contains(.snapshotTests) {
@@ -236,7 +314,9 @@ extension Project {
     /// Helper function to create the application target and the unit test target.
     public static func makeAppTargets(name: String,
                                       platform: Platform,
-                                      dependencies: [TargetDependency]) -> [Target] {
+                                      dependencies: [TargetDependency],
+                                      testTargets: Set<TestTarget>) -> [Target] {
+        var targets = [Target]()
         
         let mainTarget = Target(
             name: name,
@@ -253,44 +333,54 @@ extension Project {
             dependencies: dependencies
         )
         
-        let testTarget = Target(
-            name: "\(name)Tests",
-            platform: platform,
-            product: .unitTests,
-            bundleId: "\(reverseOrganizationName).\(name)Tests",
-            infoPlist: .default,
-            sources: ["\(appPath)/\(name)/Tests/**"],
-            resources: ["\(appPath)/\(name)/Tests/**/*.json",
-                        "\(appPath)/\(name)/Tests/**/*.png"],
-            dependencies: [
-                .target(name: "\(name)")
-            ])
+        targets.append(mainTarget)
         
-        let snapshotTestsTarget = Target(
-            name: "\(name)SnapshotTests",
-            platform: platform,
-            product: .unitTests,
-            bundleId: "\(reverseOrganizationName).\(name)SnapshotTests",
-            infoPlist: .default,
-            sources: ["\(appPath)/\(name)/SnapshotTests/**"],
-            resources: [],
-            dependencies: [
-                .target(name: "\(name)")
-            ])
+        if testTargets.contains(.unitTests) {
+            let target = Target(
+                name: "\(name)Tests",
+                platform: platform,
+                product: .unitTests,
+                bundleId: "\(reverseOrganizationName).\(name)Tests",
+                infoPlist: .default,
+                sources: ["\(appPath)/\(name)/Tests/**"],
+                resources: ["\(appPath)/\(name)/Tests/**/*.json",
+                            "\(appPath)/\(name)/Tests/**/*.png"],
+                dependencies: [
+                    .target(name: "\(name)")
+                ])
+            targets.append(target)
+        }
+        
+        if testTargets.contains(.snapshotTests) {
+            let target = Target(
+                name: "\(name)SnapshotTests",
+                platform: platform,
+                product: .unitTests,
+                bundleId: "\(reverseOrganizationName).\(name)SnapshotTests",
+                infoPlist: .default,
+                sources: ["\(appPath)/\(name)/SnapshotTests/**"],
+                resources: [],
+                dependencies: [
+                    .target(name: "\(name)")
+                ])
+            targets.append(target)
+        }
 
-        let uiTestTarget = Target(
-            name: "\(name)UITests",
-            platform: platform,
-            product: .uiTests,
-            bundleId: "\(reverseOrganizationName).\(name)UITests",
-            infoPlist: .default,
-            sources: ["\(appPath)/\(name)/UITests/**"],
-            resources: [],
-            dependencies: [
-                .target(name: "\(name)")
-            ])
-        
-        return [mainTarget, testTarget, snapshotTestsTarget, uiTestTarget]
+        if testTargets.contains(.uiTests) {
+            let target = Target(
+                name: "\(name)UITests",
+                platform: platform,
+                product: .uiTests,
+                bundleId: "\(reverseOrganizationName).\(name)UITests",
+                infoPlist: .default,
+                sources: ["\(appPath)/\(name)/UITests/**"],
+                resources: [],
+                dependencies: [
+                    .target(name: "\(name)")
+                ])
+            targets.append(target)
+        }
+        return targets
     }
     
     public static func makeSchemes(targetName: String) -> [Scheme] {
