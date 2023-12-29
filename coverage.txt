@@ -1,0 +1,9 @@
+Backpack.framework 95.08
+Catch.framework 80.75
+Common.framework 73.99
+Detail.framework 96.63
+Haneke.framework 86.98
+Home.framework 93.33
+NetworkKit.framework 63.91
+Pokedex.app 18.70
+UIComponents.framework 81.25
