@@ -97,9 +97,9 @@ commands:
           command: <<pipeline.parameters.tuist>> lint
   run_tests:
     steps:
-      #- run: 
-      #    name: Tuist Cache warm
-      #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
+      - run: 
+          name: Tuist Cache warm
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
       - run: 
           name: Tuist Test
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests --skip-test-targets HanekeTests
@@ -287,7 +287,6 @@ jobs:
       # - build_project
       #- run_lint
       - run_tests
-      - compare_test_coverage
       # - run_xcode_build_test
       #- compress_simulator_apps
       - check_test_output
@@ -298,6 +297,7 @@ jobs:
       #- run_slather
       #- run_xcresult_to_xml
       - cleanup_xcresults
+      - compare_test_coverage
       - store_test_results:
           path: output/circle
       - store_artifacts:
@@ -313,6 +313,8 @@ jobs:
 
 workflows: 
   build_and_test_workflow:
+    when:
+      equal: [master, << pipeline.git.branch >>]
     jobs: 
       - build_and_test
       - sonar:
