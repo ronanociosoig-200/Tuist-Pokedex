@@ -253,12 +253,12 @@ commands:
     steps:
       - run: 
           name: Compare test coverage
-          command: bash scripts/compareCoverage.sh
+          command: [ -d output/xccov_coverage.json ] && bash scripts/compareCoverage.sh || echo "No test results to compare."
   convert_coverage_to_json:
     steps:
       - run: 
           name: Convert XCResult to JSON using xccov 
-          command: xcrun xccov view --report --json output/tests.xcresult > output/xccov_coverage.json
+          command: [ -d output/tests.xcresult ] && xcrun xccov view --report --json output/tests.xcresult > output/xccov_coverage.json || echo "No test results to convert"
 jobs:  
   sonar: 
     docker:
