@@ -254,6 +254,11 @@ commands:
       - run: 
           name: Compare test coverage
           command: bash scripts/compareCoverage.sh
+  convert_coverage_to_json:
+    steps:
+      - run: 
+          name: Convert XCResult to JSON using xccov 
+          command: xcrun xccov view --report --json output/tests.xcresult > output/xccov_coverage.json
 jobs:  
   sonar: 
     docker:
@@ -283,6 +288,7 @@ jobs:
       - setup_tuist
       - save_dependencies_cache
       - run_tests
+      - convert_coverage_to_json
       - cleanup_xcresults
       - store_test_results:
           path: output/circle
@@ -315,6 +321,7 @@ jobs:
       # - build_project
       #- run_lint
       - run_tests
+      - convert_coverage_to_json
       # - run_xcode_build_test
       #- compress_simulator_apps
       - check_test_output
