@@ -19,10 +19,10 @@ parameters:
     type: string
     # default: ".tuist-bin/tuist"
     # disable version in cache and use bundled version instead
-    default: ~/.tuist/Versions/3.30.0/tuist
+    default: ~/.tuist/Versions/3.37.0/tuist
   tuist_version:
     type: string
-    default: "3.30.0"
+    default: "3.37.0"
   test_output_path:
     type: string
     default: "output/tests"
