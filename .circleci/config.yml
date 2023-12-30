@@ -253,7 +253,7 @@ commands:
     steps:
       - run: 
           name: Compare test coverage
-          command: [ -f output/xccov_coverage.json ] && bash scripts/compareCoverage.sh || echo "No test results to compare."
+          command: [ -f output/xccov_coverage.json ] && scripts/compareCoverage.sh || echo "No test results to compare."
   convert_coverage_to_json:
     steps:
       - run: 
