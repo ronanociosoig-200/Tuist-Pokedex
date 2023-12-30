@@ -78,9 +78,9 @@ commands:
           command: <<pipeline.parameters.tuist>> fetch
           #command: |
           #  [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
-      - run:
-          name: Tuist Cache Warm
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm
+      #- run:
+      #    name: Tuist Cache Warm
+      #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm
       #- run: 
       #    name: Tuist Generate Project
       #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -n Pokedex
