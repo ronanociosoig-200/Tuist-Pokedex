@@ -314,7 +314,8 @@ jobs:
 workflows: 
   build_and_test_workflow:
     when:
-      - equal: [master, << pipeline.git.branch >>]
+      and: 
+        - equal: [master, << pipeline.git.branch >>]
     jobs: 
       - build_and_test
       - sonar:
