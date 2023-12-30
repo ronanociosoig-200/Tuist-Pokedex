@@ -78,9 +78,9 @@ commands:
           command: <<pipeline.parameters.tuist>> fetch
           #command: |
           #  [ -d Tuist/Dependencies/SwiftPackageManager/.build ] && echo "Skipping fetch" || tuist fetch 
-      #- run:
-      #    name: Tuist Cache Warm
-      #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm
+      - run:
+          name: Tuist Cache Warm
+          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm
       #- run: 
       #    name: Tuist Generate Project
       #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> generate -n Pokedex
@@ -97,9 +97,9 @@ commands:
           command: <<pipeline.parameters.tuist>> lint
   run_tests:
     steps:
-      - run: 
-          name: Tuist Cache warm
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
+      #- run: 
+      #    name: Tuist Cache warm
+      #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
       - run: 
           name: Tuist Test
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests --skip-test-targets HanekeTests
@@ -224,7 +224,7 @@ commands:
     steps:
       - save_cache:
           name: Save Dependencies
-          key: dependencies-tuist-{{ checksum "Tuist/Dependencies/Lockfiles/Package.resolved" }}
+          key: dependencies-tuist-{{ checksum "Tuist/Dependencies/Package.resolved" }}
           paths: 
             - Tuist/Dependencies/SwiftPackageManager
             - Tuist/Dependencies/graph.json
@@ -268,6 +268,34 @@ jobs:
               mv /tmp/workspace/* .
       - sonarcloud/scan
 
+  build_main_and_test: 
+    macos: 
+      xcode: <<pipeline.parameters.xcode_version>>
+    resource_class: macos.x86.medium.gen2
+    environment:
+      TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
+    steps:
+      - checkout
+      - generate_lock_files
+      - restore_tuist_cache
+      - restore_dependencies_cache
+      - install_tuist
+      - setup_tuist
+      - save_dependencies_cache
+      - run_tests
+      - cleanup_xcresults
+      - store_test_results:
+          path: output/circle
+      - store_artifacts:
+          path: output
+      - store_artifacts:
+          path: <<pipeline.parameters.simulator_apps_path>>
+      - save_tuist_cache
+      - save_tests_cache
+      - persist_to_workspace:
+          root: .
+          paths:
+            - output/
   build_and_test:
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
@@ -302,8 +330,8 @@ jobs:
           path: output/circle
       - store_artifacts:
           path: output
-      #- store_artifacts:
-      #    path: <<pipeline.parameters.simulator_apps_path>>
+      - store_artifacts:
+          path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
       - save_tests_cache
       - persist_to_workspace:
@@ -312,10 +340,19 @@ jobs:
             - output/
 
 workflows: 
+  build_main_and_test:
+    when:
+      and: 
+        - equal: [master, << pipeline.git.branch >>]
+    jobs: 
+      - build_and_test
+      - sonar:
+          requires:
+            - build_and_test
   build_and_test_workflow:
     when:
       and: 
-        - not: 
+        - not:
             equal: [master, << pipeline.git.branch >>]
     jobs: 
       - build_and_test
