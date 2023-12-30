@@ -233,7 +233,7 @@ commands:
       - restore_cache:
           name: Restore Dependencies
           keys: 
-            - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
+            - dependencies-tuist-{{ checksum "Tuist/Package.swift" }}
             - dependencies-tuist-
   save_tests_cache: 
     steps:
