@@ -205,8 +205,8 @@ commands:
       - run:
           name: Clean up XCResult
           command: |
-            [ -d output/tests.xcresult ] && unlink output/tests || "No linked file found"
-            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult dir not found"
+            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult bundle not found"
+            [ -f output/tests ] && unlink output/tests || "No linked file found"
   save_tuist_cache: 
     steps: 
       - save_cache:
