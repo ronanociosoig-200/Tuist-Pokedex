@@ -17,7 +17,6 @@ parameters:
     default: "16.4"
   tuist: 
     type: string
-    # default: ".tuist-bin/tuist"
     # disable version in cache and use bundled version instead
     default: ~/.tuist/Versions/3.37.0/tuist
   tuist_version:
@@ -267,6 +266,11 @@ commands:
           name: Convert XCResult to JSON using xccov 
           command: |
             [ -d output/tests.xcresult ] && xcrun xccov view --report --json output/tests.xcresult > output/xccov_coverage.json || echo "No test results to convert"
+  add_dummy_file_if_needed:
+    steps: 
+      - run: 
+          name: Write dummy file if no tests are run
+          command: [ ! -d output/tests.xcresult ] && echo "No tests were run" > output/tests.txt || echo "We can skip this step"
 jobs:  
   sonar: 
     docker:
@@ -298,6 +302,7 @@ jobs:
       - run_tests
       - convert_coverage_to_json
       - run_sonarqube_script
+      - add_dummy_file_if_needed
       - cleanup_xcresults
       - store_test_results:
           path: output/circle
@@ -322,25 +327,14 @@ jobs:
       - generate_lock_files
       - restore_tuist_cache
       - restore_dependencies_cache
-      # - restore_tests_cache
       - install_tuist 
-      #- install_slather
       - setup_tuist
       - save_dependencies_cache
-      # - build_project
-      #- run_lint
       - run_tests
       - convert_coverage_to_json
       - run_sonarqube_script
-      # - run_xcode_build_test
-      #- compress_simulator_apps
       - check_test_output
-      # - install_xcresult_parser
-      #- install_xcc_parser
-      #- run_xcresult_parser
-      #- run_xcresult_to_sonar_xml
-      #- run_slather
-      #- run_xcresult_to_xml
+      - add_dummy_file_if_needed
       - cleanup_xcresults
       - compare_test_coverage
       - store_test_results:
