@@ -268,10 +268,14 @@ commands:
             [ -d output/tests.xcresult ] && xcrun xccov view --report --json output/tests.xcresult > output/xccov_coverage.json || echo "No test results to convert"
   add_dummy_file_if_needed:
     steps: 
-      - run: 
-          name: Write dummy file if no tests are run
+      - run:  
+          name: If directory for output does not exist, make it
           command: |
-            [ -d output/tests.xcresult ] && echo "We have tests, it's OK." || echo "No tests were run" > output/test.txt
+            [ ! -d output ] && mkdir output || echo "Output exists"
+      - run: 
+          name: Write dummy file if no tests resoults exist
+          command: |
+            [ ! -d output/tests.xcresult ] && echo "No tests were run" > output/test.txt || echo "We have tests, it's OK."
 jobs:  
   sonar: 
     docker:
