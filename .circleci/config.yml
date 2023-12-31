@@ -199,7 +199,7 @@ commands:
       - run: 
           name: Run XCCov to SonarQube Generic XML
           command: |
-          [ -d output/tests.xcresult ] && bash scripts/xccov_to_sonarqube_generic.sh output/tests.xcresult > output/sonarqube.xml
+            [ -d output/tests.xcresult ] && bash scripts/xccov_to_sonarqube_generic.sh output/tests.xcresult > output/sonarqube.xml
   cleanup_xcresults:
     steps:
       - run:
