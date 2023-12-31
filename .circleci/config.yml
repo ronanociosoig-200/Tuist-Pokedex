@@ -270,7 +270,7 @@ commands:
     steps: 
       - run: 
           name: Write dummy file if no tests are run
-          command: [ ! -d output/tests.xcresult ] && echo "No tests were run" > output/tests.txt || echo "We can skip this step"
+          command: [ -d output/tests.xcresult ] &&  echo "We have tests, it's OK." || echo "No tests were run" > output/tests.txt
 jobs:  
   sonar: 
     docker:
