@@ -206,7 +206,7 @@ commands:
           name: Clean up XCResult
           command: |
             [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult bundle not found"
-            [ -f output/tests ] && rm output/tests || "No linked file found"
+            [ -f output/tests ] && rm output/tests || echo "No linked file found"
   save_tuist_cache: 
     steps: 
       - save_cache:
