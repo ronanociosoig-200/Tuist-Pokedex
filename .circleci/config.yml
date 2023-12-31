@@ -194,6 +194,12 @@ commands:
       - run: 
           name: Convert Profdata to SonarQube XML with Slather
           command: slather
+  run_sonarqube_script:
+    steps:
+      - run: 
+          name: Run XCCov to SonarQube Generic XML
+          command: |
+          [ -d output/tests.xcresult ] && bash scripts/xccov_to_sonarqube_generic.sh output/tests.xcresult > output/sonarqube.xml
   cleanup_xcresults:
     steps:
       - run:
@@ -224,7 +230,7 @@ commands:
     steps:
       - save_cache:
           name: Save Dependencies
-          key: dependencies-tuist-{{ checksum "Tuist/Dependencies/Package.resolved" }}
+          key: dependencies-tuist-{{ checksum "Tuist/Package.swift" }}
           paths: 
             - Tuist/Dependencies/SwiftPackageManager
             - Tuist/Dependencies/graph.json
@@ -291,6 +297,7 @@ jobs:
       - save_dependencies_cache
       - run_tests
       - convert_coverage_to_json
+      - run_sonarqube_script
       - cleanup_xcresults
       - store_test_results:
           path: output/circle
@@ -324,13 +331,14 @@ jobs:
       #- run_lint
       - run_tests
       - convert_coverage_to_json
+      - run_sonarqube_script
       # - run_xcode_build_test
       #- compress_simulator_apps
       - check_test_output
       # - install_xcresult_parser
-      - install_xcc_parser
-      - run_xcresult_parser
-      - run_xcresult_to_sonar_xml
+      #- install_xcc_parser
+      #- run_xcresult_parser
+      #- run_xcresult_to_sonar_xml
       #- run_slather
       #- run_xcresult_to_xml
       - cleanup_xcresults
