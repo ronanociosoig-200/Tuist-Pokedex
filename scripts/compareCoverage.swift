@@ -65,12 +65,25 @@ decimalFormatter.maximumFractionDigits = 2
 
 var result = true
 
+let changedFeatures = shell("bash ./scripts/filterSourceChanges.sh")
+let trimmedFeatures = changedFeatures.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+
+if trimmedFeatures.isEmpty {
+    print("No source code has changed. Skipping coverage check.")
+    exit(0)
+}
+
+// Convert string to an array, and remove duplicates
+let allFeatureModules = Array(Set(trimmedFeatures.components(separatedBy: " ")))
+
+print("Feature modules that have changed: \(allFeatureModules)")
+
 for target in report.targets {
     let coveragePercent = roundDouble(input: target.coverage * 100.0)
     
     // find the value in the reference file
     for line in coverageReferenceValues {
-        if line.contains(target.name) {
+        if line.contains(target.name) && targetHasChanged(target: target.name, featureChanges: allFeatureModules) {
             let referenceCoverageInModuleString = (line.components(separatedBy: [" "]))[1]
             if let referenceCoverageInModule = Double(referenceCoverageInModuleString) {
                 if coveragePercent >= referenceCoverageInModule {
@@ -93,4 +106,34 @@ if result == false {
 func roundDouble(input: Double) -> Double {
     let printableCoverage = decimalFormatter.string(from: NSNumber(value: input)) ?? "0.0"
     return Double(printableCoverage) ?? 0.0
+}
+
+func shell(_ command: String) -> String {
+    let task = Process()
+    let pipe = Pipe()
+    
+    task.standardOutput = pipe
+    task.standardError = pipe
+    task.arguments = ["-c", command]
+    task.launchPath = "/bin/zsh"
+    task.standardInput = nil
+    task.launch()
+    
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    let output = String(data: data, encoding: .utf8)!
+    
+    return output
+}
+
+func targetHasChanged(target: String, featureChanges: [String]) -> Bool {
+    var matching = false
+    
+    for value in featureChanges {
+        if (value + ".framework") == target {
+            matching = true
+            break
+        }
+    }
+    
+    return matching
 }

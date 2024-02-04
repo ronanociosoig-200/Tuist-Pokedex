@@ -5,8 +5,8 @@ import ProjectDescriptionHelpers
 let dependencies = Dependencies(
     swiftPackageManager: .init(
         projectOptions: [
-            "LocalSwiftPackage": .options(disableSynthesizedResourceAccessors: false),
+            "LocalSwiftPackage": .options(disableSynthesizedResourceAccessors: true),
         ]
     ),
-    platforms: [.iOS, .watchOS]
+    platforms: [.iOS] 
 )

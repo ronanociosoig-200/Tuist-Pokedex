@@ -31,6 +31,9 @@ parameters:
   derived_data_path:
     type: string
     default: "/Users/distiller/Library/Developer/Xcode/DerivedData"
+  defualt_resource_class:
+    type: string
+    default: macos.x86.medium.gen2
 
 commands:
   generate_lock_files: 
@@ -293,7 +296,7 @@ jobs:
   build_main_and_test: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    resource_class: macos.x86.medium.gen2
+    resource_class: <<pipeline.parameters.defualt_resource_class>>
     environment:
       TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
@@ -324,7 +327,7 @@ jobs:
   build_and_test:
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    resource_class: macos.x86.medium.gen2
+    resource_class: <<pipeline.parameters.defualt_resource_class>>
     environment:
       TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
@@ -358,16 +361,16 @@ jobs:
 workflows: 
   build_main_and_test:
     when:
-      and: 
+      and:
         - equal: [master, << pipeline.git.branch >>]
-    jobs: 
+    jobs:
       - build_and_test
       - sonar:
           requires:
             - build_and_test
   build_and_test_workflow:
     when:
-      and: 
+      and:
         - not:
             equal: [master, << pipeline.git.branch >>]
     jobs: 
