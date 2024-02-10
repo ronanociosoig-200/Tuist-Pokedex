@@ -2,6 +2,8 @@
 
 import Foundation
 
+// Compares the code coverage of the current run to this reference file, and will fail if the % of code coverage is lower in the modules with changes
+//
 let referenceCoverage = "coverage.txt"
 
 struct CoverageReport: Codable {
@@ -65,7 +67,7 @@ decimalFormatter.maximumFractionDigits = 2
 
 var result = true
 
-let changedFeatures = shell("bash ./scripts/filterSourceChanges.sh")
+let changedFeatures = shell("bash ./scripts/filterModuleChanges.sh")
 let trimmedFeatures = changedFeatures.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
 
 if trimmedFeatures.isEmpty {
