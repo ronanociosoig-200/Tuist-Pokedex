@@ -108,6 +108,9 @@ commands:
           command: <<pipeline.parameters.tuist>> lint
   run_tests:
     steps:
+      - run: 
+          name: Move Workspace.swift so Tuist will use it for test coverage
+          command: mv Workspace_CI.swift Workspace.swift
       #- run: 
       #    name: Tuist Cache warm
       #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
