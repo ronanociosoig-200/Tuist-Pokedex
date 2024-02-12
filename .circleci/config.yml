@@ -34,6 +34,15 @@ parameters:
   defualt_resource_class:
     type: string
     default: macos.x86.medium.gen2
+  build-and-test-workflow:
+    default: true
+    type: boolean
+  build-main-and-test-workflow:
+    default: false
+    type: boolean
+  build-only-workflow:
+    default: false
+    type: boolean
 
 commands:
   generate_lock_files: 
@@ -357,10 +366,23 @@ jobs:
           root: .
           paths:
             - output/
+  build_only: 
+    macos: 
+      xcode: <<pipeline.parameters.xcode_version>>
+    resource_class: <<pipeline.parameters.defualt_resource_class>>
+    environment:
+      TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
+    steps:
+      - checkout
+      - generate_lock_files
+      - restore_tuist_cache
+      - restore_dependencies_cache
+      - install_tuist 
+      - setup_tuist
 
 workflows: 
   build_main_and_test:
-    when:
+    when: << pipeline.parameters.build-main-and-test-workflow >>
       and:
         - equal: [master, << pipeline.git.branch >>]
     jobs:
@@ -368,8 +390,8 @@ workflows:
       - sonar:
           requires:
             - build_and_test
-  build_and_test_workflow:
-    when:
+  build_and_test:
+    when: << pipeline.parameters.build-and-test-workflow >>
       and:
         - not:
             equal: [master, << pipeline.git.branch >>]
@@ -378,3 +400,7 @@ workflows:
       - sonar:
           requires:
             - build_and_test
+  build_only: 
+    when: << pipeline.parameters.build-only-workflow >>
+    jobs: 
+      - build_only
