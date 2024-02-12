@@ -37,6 +37,9 @@ Pods/
 *.xcodeproj
 *.xcworkspace
 
+## Circle CI token for running workflows
+personalToken.txt
+
 ### Tuist derived files ###
 graph.dot
 Derived/

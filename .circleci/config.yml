@@ -17,12 +17,11 @@ parameters:
     default: "16.4"
   tuist: 
     type: string
-    # default: ".tuist-bin/tuist"
     # disable version in cache and use bundled version instead
-    default: ~/.tuist/Versions/3.30.0/tuist
+    default: ~/.tuist/Versions/3.37.0/tuist
   tuist_version:
     type: string
-    default: "3.30.0"
+    default: "3.37.0"
   test_output_path:
     type: string
     default: "output/tests"
@@ -32,6 +31,18 @@ parameters:
   derived_data_path:
     type: string
     default: "/Users/distiller/Library/Developer/Xcode/DerivedData"
+  defualt_resource_class:
+    type: string
+    default: macos.x86.medium.gen2
+  build-and-test-workflow:
+    default: true
+    type: boolean
+  build-main-and-test-workflow:
+    default: false
+    type: boolean
+  build-only-workflow:
+    default: false
+    type: boolean
 
 commands:
   generate_lock_files: 
@@ -97,16 +108,12 @@ commands:
           command: <<pipeline.parameters.tuist>> lint
   run_tests:
     steps:
-      #- run: 
-      #    name: Check Tuist version
-      #    command: <<pipeline.parameters.tuist>> version
-      # xcodebuild test -workspace Pokedex.xcworkspace -scheme Pokedex-Workspace -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" -derivedDataPath ./DerivedDataTesting
-      #- run:
-      #    name: Tuist Test With Default Derived data path
-      #    command: <<pipeline.parameters.tuist>> test --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests
       - run: 
-          name: Tuist Cache warm
-          command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
+          name: Move Workspace.swift so Tuist will use it for test coverage
+          command: mv Workspace_CI.swift Workspace.swift
+      #- run: 
+      #    name: Tuist Cache warm
+      #    command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> cache warm -x
       - run: 
           name: Tuist Test
           command: TUIST_CONFIG_CLOUD_TOKEN=$TUIST_CLOUD_TOKEN <<pipeline.parameters.tuist>> test --result-bundle-path <<pipeline.parameters.test_output_path>> --device <<pipeline.parameters.device>> --os <<pipeline.parameters.ios_version>> --skip-ui-tests --skip-test-targets HanekeTests
@@ -201,13 +208,19 @@ commands:
       - run: 
           name: Convert Profdata to SonarQube XML with Slather
           command: slather
+  run_sonarqube_script:
+    steps:
+      - run: 
+          name: Run XCCov to SonarQube Generic XML
+          command: |
+            [ -d output/tests.xcresult ] && bash scripts/xccov_to_sonarqube_generic.sh output/tests.xcresult > output/sonarqube.xml || echo "No conversion to run"
   cleanup_xcresults:
     steps:
       - run:
           name: Clean up XCResult
           command: |
-            [ -d output/tests.xcresult ] && unlink output/tests || "No linked file found"
-            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult dir not found"
+            [ -d output/tests.xcresult ] && rm -r output/tests.xcresult || echo "XCResult bundle not found"
+            [ -f output/tests ] && rm output/tests || echo "No linked file found"
   save_tuist_cache: 
     steps: 
       - save_cache:
@@ -231,7 +244,7 @@ commands:
     steps:
       - save_cache:
           name: Save Dependencies
-          key: dependencies-tuist-{{ checksum "Tuist/Dependencies/Lockfiles/Package.resolved" }}
+          key: dependencies-tuist-{{ checksum "Tuist/Package.swift" }}
           paths: 
             - Tuist/Dependencies/SwiftPackageManager
             - Tuist/Dependencies/graph.json
@@ -240,7 +253,7 @@ commands:
       - restore_cache:
           name: Restore Dependencies
           keys: 
-            - dependencies-tuist-{{ checksum "Tuist/Dependencies.swift" }}
+            - dependencies-tuist-{{ checksum "Tuist/Package.swift" }}
             - dependencies-tuist-
   save_tests_cache: 
     steps:
@@ -256,6 +269,28 @@ commands:
           keys: 
             - tests-tuist-{{ checksum "TuistSources.lock" }}
             - tests-tuist-
+  compare_test_coverage:
+    steps:
+      - run: 
+          name: Compare test coverage
+          command: |
+            [ -f output/xccov_coverage.json ] && bash scripts/compareCoverage.sh || echo "No test results to compare."
+  convert_coverage_to_json:
+    steps:
+      - run: 
+          name: Convert XCResult to JSON using xccov 
+          command: |
+            [ -d output/tests.xcresult ] && xcrun xccov view --report --json output/tests.xcresult > output/xccov_coverage.json || echo "No test results to convert"
+  add_dummy_file_if_needed:
+    steps: 
+      - run:  
+          name: If directory for output does not exist, make it
+          command: |
+            [ ! -d output ] && mkdir output || echo "Output exists"
+      - run: 
+          name: Write dummy file if no tests resoults exist
+          command: |
+            [ ! -d output/tests.xcresult ] && echo "No tests were run" > output/test.txt || echo "We have tests, it's OK."
 jobs:  
   sonar: 
     docker:
@@ -270,10 +305,10 @@ jobs:
               mv /tmp/workspace/* .
       - sonarcloud/scan
 
-  build_and_test:
+  build_main_and_test: 
     macos: 
       xcode: <<pipeline.parameters.xcode_version>>
-    resource_class: macos.x86.medium.gen2
+    resource_class: <<pipeline.parameters.defualt_resource_class>>
     environment:
       TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
     steps:
@@ -281,41 +316,89 @@ jobs:
       - generate_lock_files
       - restore_tuist_cache
       - restore_dependencies_cache
-      # - restore_tests_cache
-      - install_tuist 
-      #- install_slather
+      - install_tuist
       - setup_tuist
       - save_dependencies_cache
-      # - build_project
-      #- run_lint
       - run_tests
-      # - run_xcode_build_test
-      #- compress_simulator_apps
-      - check_test_output
-      # - install_xcresult_parser
-      - install_xcc_parser
-      - run_xcresult_parser
-      - run_xcresult_to_sonar_xml
-      #- run_slather
-      #- run_xcresult_to_xml
+      - convert_coverage_to_json
+      - run_sonarqube_script
+      - add_dummy_file_if_needed
       - cleanup_xcresults
       - store_test_results:
           path: output/circle
       - store_artifacts:
           path: output
-      #- store_artifacts:
-      #    path: <<pipeline.parameters.simulator_apps_path>>
+      - store_artifacts:
+          path: <<pipeline.parameters.simulator_apps_path>>
       - save_tuist_cache
       - save_tests_cache
       - persist_to_workspace:
           root: .
           paths:
             - output/
+  build_and_test:
+    macos: 
+      xcode: <<pipeline.parameters.xcode_version>>
+    resource_class: <<pipeline.parameters.defualt_resource_class>>
+    environment:
+      TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
+    steps:
+      - checkout
+      - generate_lock_files
+      - restore_tuist_cache
+      - restore_dependencies_cache
+      - install_tuist 
+      - setup_tuist
+      - save_dependencies_cache
+      - run_tests
+      - convert_coverage_to_json
+      - run_sonarqube_script
+      - check_test_output
+      - add_dummy_file_if_needed
+      - cleanup_xcresults
+      - compare_test_coverage
+      - store_test_results:
+          path: output/circle
+      - store_artifacts:
+          path: output
+      - store_artifacts:
+          path: <<pipeline.parameters.simulator_apps_path>>
+      - save_tuist_cache
+      - save_tests_cache
+      - persist_to_workspace:
+          root: .
+          paths:
+            - output/
+  build_only: 
+    macos: 
+      xcode: <<pipeline.parameters.xcode_version>>
+    resource_class: <<pipeline.parameters.defualt_resource_class>>
+    environment:
+      TUIST_CONFIG_CLOUD_TOKEN: $TUIST_CLOUD_TOKEN
+    steps:
+      - checkout
+      - generate_lock_files
+      - restore_tuist_cache
+      - restore_dependencies_cache
+      - install_tuist 
+      - setup_tuist
 
 workflows: 
-  build_and_test_workflow:
+  build_main_and_test:
+    when: << pipeline.parameters.build-main-and-test-workflow >>
+    jobs:
+      - build_and_test
+      - sonar:
+          requires:
+            - build_and_test
+  build_and_test:
+    when: << pipeline.parameters.build-and-test-workflow >>
     jobs: 
       - build_and_test
       - sonar:
           requires:
             - build_and_test
+  build_only: 
+    when: << pipeline.parameters.build-only-workflow >>
+    jobs: 
+      - build_only

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script does not work, and it here for reference. 
+
 # Specify the path to your XCResult bundle
 xcresult_path=$1
 
