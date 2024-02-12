@@ -383,8 +383,6 @@ jobs:
 workflows: 
   build_main_and_test:
     when: << pipeline.parameters.build-main-and-test-workflow >>
-      and:
-        - equal: [master, << pipeline.git.branch >>]
     jobs:
       - build_and_test
       - sonar:
@@ -392,9 +390,6 @@ workflows:
             - build_and_test
   build_and_test:
     when: << pipeline.parameters.build-and-test-workflow >>
-      and:
-        - not:
-            equal: [master, << pipeline.git.branch >>]
     jobs: 
       - build_and_test
       - sonar:
